@@ -1,0 +1,237 @@
+{
+  "constraint_set_id": "home_care_copd_loop2_normal",
+  "name_ja": "在宅COPD管理_標準制約（退院1週間後）",
+  "description_ja": "退院1週間で想定外の困難が顕在化。妻の疲労蓄積、本人の拒否的態度、サービスの不足が明らかに。現実的な対応が求められる。",
+  "setting": "home_care",
+  "play_difficulty": "normal",
+
+  "constraints": {
+    "time": [
+      {
+        "type": "deadline",
+        "description_ja": "妻の介護継続可能期間",
+        "value": "1週間程度",
+        "severity": "firm",
+        "rationale": "睡眠不足と腰痛悪化で限界が近い"
+      },
+      {
+        "type": "availability",
+        "description_ja": "次の訪問診療まで",
+        "value": "3日後",
+        "severity": "firm",
+        "rationale": "第2水曜日の定期訪問"
+      },
+      {
+        "type": "sequence",
+        "description_ja": "サービス追加の手続き",
+        "value": "3-5日",
+        "severity": "firm",
+        "rationale": "ケアプラン変更と事業所調整"
+      },
+      {
+        "type": "duration_limit",
+        "description_ja": "本人が協力的でいられる時間",
+        "value": "午前中のみ",
+        "severity": "flexible",
+        "rationale": "午後は疲労と不機嫌"
+      }
+    ],
+
+    "economic": [
+      {
+        "type": "budget_limit",
+        "description_ja": "今月の残予算",
+        "amount": 20000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "copayment",
+        "description_ja": "臨時訪問看護の自己負担",
+        "amount": 3000,
+        "currency": "JPY",
+        "period": "per_visit",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "cost_sharing",
+        "description_ja": "妻の整形外科通院費",
+        "amount": 5000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "insurance_coverage",
+        "description_ja": "介護保険の残り単位",
+        "amount": 5000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      }
+    ],
+
+    "resources": [
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問看護の実際の対応",
+        "quantity": 2,
+        "unit": "回/週",
+        "availability_schedule": "火・金曜日、各30分",
+        "waiting_time": "本人の拒否で15分で切り上げることも"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "ヘルパーの導入検討",
+        "quantity": 2,
+        "unit": "回/週",
+        "availability_schedule": "月・木曜日空きあり",
+        "waiting_time": "本人の同意が必要"
+      },
+      {
+        "type": "facility_access",
+        "description_ja": "緊急ショートステイ",
+        "quantity": "limited",
+        "unit": "床",
+        "availability_schedule": "1床のみ、要介護3優先",
+        "waiting_time": "3日前までに予約"
+      },
+      {
+        "type": "transport",
+        "description_ja": "通院手段",
+        "quantity": 1,
+        "unit": "回/月",
+        "availability_schedule": "介護タクシー要予約",
+        "waiting_time": "前日まで"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "夜間対応",
+        "quantity": 0,
+        "unit": "回",
+        "availability_schedule": "対応なし",
+        "waiting_time": "救急車のみ"
+      },
+      {
+        "type": "equipment_capacity",
+        "description_ja": "在宅酸素（本人拒否継続）",
+        "quantity": 0,
+        "unit": "台",
+        "availability_schedule": "機器準備可能だが導入できず",
+        "waiting_time": "本人の同意待ち"
+      }
+    ],
+
+    "legal_policy": [
+      {
+        "type": "insurance_rule",
+        "description_ja": "介護保険単位数の逼迫",
+        "authority": "介護保険法",
+        "exceptions": ["医療保険への切り替え検討"],
+        "appeal_process": "区分変更申請中（結果1ヶ月後）"
+      },
+      {
+        "type": "certification_requirement",
+        "description_ja": "緊急時訪問看護加算",
+        "authority": "医療保険",
+        "exceptions": [],
+        "appeal_process": "24時間体制でないため算定不可"
+      },
+      {
+        "type": "professional_scope",
+        "description_ja": "訪問看護師の医療行為制限",
+        "authority": "保健師助産師看護師法",
+        "exceptions": [],
+        "appeal_process": "医師の具体的指示が必要"
+      }
+    ]
+  },
+
+  "presentation": {
+    "gm_script": "退院から1週間が経過しました。この間、夜間に2回SpO2が85%まで低下し、妻が不安で眠れない日が続いています。訪問看護は週2回来ていますが、本人が『大丈夫』と言い張り、十分な観察ができません。妻の腰痛は悪化し、『もう限界が近い』と訴えています。娘は先週来ましたが『また来週』と言われています。在宅酸素は相変わらず拒否。デイサービスも『行きたくない』の一点張りです。",
+
+    "visual_aids": [
+      {
+        "type": "table",
+        "content": "| この1週間の出来事 | 回数/状況 |\\n|---|---|\\n| 夜間SpO2低下 | 2回（85%） |\\n| 妻の睡眠時間 | 平均4時間 |\\n| 訪問看護 | 2回（各15分で終了） |\\n| 本人の入浴 | 0回（拒否） |\\n| 服薬状況 | 概ね良好 |"
+      },
+      {
+        "type": "timeline",
+        "content": "Day1-2: 何とか安定\\nDay3: 夜間SpO2低下（1回目）\\nDay4: 妻が腰痛で整形外科\\nDay5: 訪問看護を拒否的に\\nDay6: 夜間SpO2低下（2回目）\\nDay7(今日): 緊急カンファレンス"
+      }
+    ],
+
+    "emphasis_points": [
+      "妻の限界まで約1週間",
+      "夜間の医学的リスクが現実化",
+      "本人の拒否でサービスが機能不全",
+      "在宅酸素なしでの限界が見えた",
+      "家族の協力も限定的"
+    ]
+  },
+
+  "flexibility": {
+    "negotiable_constraints": [
+      "訪問看護の回数増加（自費なら可）",
+      "ヘルパー導入（本人同意が前提）",
+      "ショートステイ（空きがあれば）"
+    ],
+    "emergency_overrides": [
+      "医学的緊急時は救急搬送",
+      "妻が倒れた場合の緊急ショート"
+    ]
+  },
+
+  "tags_affected": ["safety", "family_burden", "time", "resources", "patient_preference"],
+
+  "flavor_text": "想定と現実のギャップが1週間で明らかに。制約の中で、悪化を防ぎながら持続可能な体制を模索する。",
+
+  "gm_effect_guide": {
+    "immediate_effects": [
+      "妻の介護疲労が限界に近づく",
+      "夜間リスクへの対応が急務",
+      "本人の拒否による支援の行き詰まり",
+      "在宅継続への疑問が浮上"
+    ],
+    "discussion_triggers": [
+      "妻の負担をどう軽減するか？",
+      "夜間の安全確保は可能か？",
+      "本人の拒否をどう乗り越えるか？",
+      "在宅酸素の再検討をすべきか？",
+      "入院や施設も視野に入れるか？"
+    ],
+    "constraint_modifiers": {
+      "crisis_level": "上昇中",
+      "decision_urgency": "1週間以内",
+      "available_options": "限定的",
+      "family_stress": "高"
+    }
+  },
+
+  "special_notes": {
+    "gm_guidance": "このループでは『想定外の現実』を体験させます。1週間前の計画がうまくいかない現実を示し、柔軟な対応と優先順位の見直しを促してください。",
+    "learning_focus": "計画の修正、危機の早期認識、家族支援の重要性、本人意向との調整"
+  },
+
+  "week1_specific_events": {
+    "actual_incidents": [
+      "Day3深夜: SpO2 85%、妻が様子見で対応",
+      "Day4: 妻が腰痛で鎮痛剤処方",
+      "Day5: 訪問看護師に『もう来なくていい』",
+      "Day6深夜: 再度SpO2低下、妻がパニック寸前"
+    ],
+    "failed_attempts": [
+      "デイサービス見学: 本人拒否",
+      "ヘルパー導入提案: 『他人は入れたくない』",
+      "在宅酸素再提案: 『死んでもつけない』"
+    ]
+  },
+
+  "versioning": {
+    "created_by": "浅井",
+    "version": "1.0.0",
+    "last_updated": "2025-01-15T18:00:00Z",
+    "notes": "時間経過型シナリオ用NORMAL難易度。ループ2（退院1週間後）用"
+  }
+}
