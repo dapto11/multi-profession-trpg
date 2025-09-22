@@ -1,0 +1,228 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/dispute_queue.schema.json",
+  "title": "Dispute Queue Schema",
+  "description": "Phase2の争点マーキング結果を保持し、Phase3での価値観表明に引き継ぐデータ構造",
+  "type": "object",
+  "required": ["loop_id", "phase", "timestamp", "session_id", "participants", "disputes"],
+  "properties": {
+    "loop_id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "ループ番号 1回目、2回目..."
+    },
+    "phase": {
+      "type": "integer",
+      "enum": [2],
+      "description": "Phase2で生成されることを明示"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "争点マーキング完了時刻"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "セッション識別子 複数卓管理用"
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["role", "player_id"],
+        "properties": {
+          "role": { "$ref": "#/$defs/role" },
+          "player_id": { "type": "string" },
+          "player_name": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 3,
+      "description": "参加者リスト"
+    },
+    "disputes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/dispute_item" },
+      "description": "特定された争点リスト"
+    },
+    "raw_statements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/raw_statement" },
+      "description": "Phase2での発言記録 争点抽出の根拠"
+    },
+    "gm_notes": {
+      "type": "string",
+      "description": "GMによる補足メモ"
+    },
+    "phase3_preparation": {
+      "type": "object",
+      "description": "Phase3進行用の準備データ",
+      "properties": {
+        "discussion_order": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^dispute_[0-9]+$" },
+          "uniqueItems": true,
+          "description": "争点を議論する順序"
+        },
+        "time_allocation": {
+          "type": "object",
+          "patternProperties": {
+            "^dispute_[0-9]+$": { "type": "number", "minimum": 0 }
+          },
+          "additionalProperties": false,
+          "description": "各争点の議論時間配分 秒"
+        },
+        "facilitator_prompts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Phase3でGMが使う誘導質問"
+        }
+      },
+      "additionalProperties": false
+    },
+    "metrics": {
+      "type": "object",
+      "description": "プロセス測定用メトリクス",
+      "properties": {
+        "total_statements": { "type": "integer", "minimum": 0 },
+        "unique_tags_identified": { "type": "integer", "minimum": 0 },
+        "cross_role_questions": { "type": "integer", "minimum": 0 },
+        "consensus_level": {
+          "$ref": "#/$defs/consensus_level",
+          "description": "争点の対立度合い"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "dispute_item": {
+      "type": "object",
+      "required": ["dispute_id", "primary_tag", "description_ja", "involved_roles"],
+      "properties": {
+        "dispute_id": {
+          "type": "string",
+          "pattern": "^dispute_[0-9]+$",
+          "description": "争点識別子 dispute_1, dispute_2..."
+        },
+        "primary_tag": { "$ref": "#/$defs/tag" },
+        "secondary_tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tag" },
+          "maxItems": 2,
+          "uniqueItems": true
+        },
+        "description_ja": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "争点の要約 Phase3で参照"
+        },
+        "involved_roles": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/role" },
+          "minItems": 2,
+          "uniqueItems": true,
+          "description": "この争点に関与する職種"
+        },
+        "conflict_positions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["role", "position_summary"],
+            "properties": {
+              "role": { "$ref": "#/$defs/role" },
+              "position_summary": { "type": "string", "maxLength": 100 },
+              "supporting_facts": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "各職種の立場・要求の要約"
+        },
+        "intensity": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "争点の激しさ・重要度"
+        },
+        "resolution_difficulty": {
+          "type": "string",
+          "enum": ["easy", "moderate", "hard", "very_hard"],
+          "description": "解決の困難度予測"
+        },
+        "related_constraints": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/constraint_ref" },
+          "description": "関連する制約要素 Phase4で参照"
+        }
+      },
+      "additionalProperties": false
+    },
+    "raw_statement": {
+      "type": "object",
+      "required": ["statement_id", "speaker_role", "statement_text", "timestamp_offset"],
+      "properties": {
+        "statement_id": {
+          "type": "string",
+          "pattern": "^st_[0-9]+$",
+          "description": "発言ID 参照用"
+        },
+        "speaker_role": { "$ref": "#/$defs/role" },
+        "player_id": { "type": "string" },
+        "statement_text": { "type": "string" },
+        "statement_type": {
+          "type": "string",
+          "enum": ["fact", "request", "question", "opinion", "clarification"]
+        },
+        "timestamp_offset": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Phase2開始からの経過秒数"
+        },
+        "tags_triggered": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tag" },
+          "description": "この発言が引き起こした争点タグ"
+        },
+        "response_to": {
+          "type": "string",
+          "pattern": "^st_[0-9]+$",
+          "description": "返答対象の発言ID あれば"
+        }
+      },
+      "additionalProperties": false
+    },
+    "tag": {
+      "type": "string",
+      "enum": ["safety", "time", "resources", "family_burden", "patient_preference", "function", "legal_policy", "coordination"]
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "physician", "nurse", "pharmacist", "pt", "ot", "st",
+        "care_manager", "home_helper", "msw", "social_worker",
+        "dietitian", "assistive_device_specialist", "public_health_nurse",
+        "school_staff", "admin_officer", "community_member",
+        "patient", "family", "gm", "other"
+      ]
+    },
+    "constraint_ref": {
+      "type": "object",
+      "required": ["set_id"],
+      "properties": {
+        "set_id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "category": { "type": "string", "enum": ["time", "economic", "resources", "legal_policy"] },
+        "index": { "type": "integer", "minimum": 0, "description": "当該カテゴリ配列内の添字 任意" },
+        "pointer": { "type": "string", "pattern": "^#/.+", "description": "JSON Pointer 任意" }
+      },
+      "additionalProperties": false
+    },
+    "consensus_level": {
+      "type": "string",
+      "enum": ["high_conflict", "moderate_disagreement", "partial_alignment", "broad_consensus"]
+    }
+  }
+}
