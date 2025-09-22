@@ -1,0 +1,233 @@
+{
+  "constraint_set_id": "home_care_copd_loop2_hard",
+  "name_ja": "在宅COPD管理_制約厳格（退院1週間後）",
+  "description_ja": "退院1週間で早くも破綻の兆候。予想以上の医学的悪化、妻の体調不良、サービスの機能不全が同時発生。",
+  "setting": "home_care",
+  "play_difficulty": "hard",
+
+  "constraints": {
+    "time": [
+      {
+        "type": "deadline",
+        "description_ja": "妻の介護継続限界まで",
+        "value": "48時間",
+        "severity": "absolute",
+        "rationale": "妻が昨日から発熱、これ以上の介護は不可能"
+      },
+      {
+        "type": "availability",
+        "description_ja": "次の訪問診療まで",
+        "value": "2週間後",
+        "severity": "absolute",
+        "rationale": "月1回の訪問診療、臨時往診は不可"
+      },
+      {
+        "type": "sequence",
+        "description_ja": "緊急サービス調整の時間",
+        "value": "本日中",
+        "severity": "firm",
+        "rationale": "明日以降は土日でサービス調整不可"
+      },
+      {
+        "type": "duration_limit",
+        "description_ja": "本人が起きていられる時間",
+        "value": "3時間/日",
+        "severity": "firm",
+        "rationale": "極度の倦怠感で臥床傾向"
+      }
+    ],
+
+    "economic": [
+      {
+        "type": "budget_limit",
+        "description_ja": "今月の残金",
+        "amount": 30000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "copayment",
+        "description_ja": "緊急往診費（保険適用外）",
+        "amount": 15000,
+        "currency": "JPY",
+        "period": "one_time",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "cost_sharing",
+        "description_ja": "妻の医療費（急性腰痛症）",
+        "amount": 5000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "income_limit",
+        "description_ja": "臨時支出対応能力",
+        "amount": 0,
+        "currency": "JPY",
+        "period": "one_time",
+        "flexibility": "fixed"
+      }
+    ],
+
+    "resources": [
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問看護の実際の対応",
+        "quantity": 1,
+        "unit": "回/週",
+        "availability_schedule": "水曜のみ、15分で退室",
+        "waiting_time": "本人が拒否的で十分なケア不可"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "ヘルパーの状況",
+        "quantity": 0,
+        "unit": "回/週",
+        "availability_schedule": "本人が完全拒否",
+        "waiting_time": "サービス中止"
+      },
+      {
+        "type": "facility_access",
+        "description_ja": "緊急ショートステイ",
+        "quantity": 0,
+        "unit": "床",
+        "availability_schedule": "満床",
+        "waiting_time": "最短2週間待ち"
+      },
+      {
+        "type": "transport",
+        "description_ja": "通院手段",
+        "quantity": "unavailable",
+        "unit": "回",
+        "availability_schedule": "妻は運転不可、娘は来られず",
+        "waiting_time": "なし"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "夜間対応",
+        "quantity": 0,
+        "unit": "回",
+        "availability_schedule": "対応サービスなし",
+        "waiting_time": "不可"
+      },
+      {
+        "type": "equipment_capacity",
+        "description_ja": "在宅酸素（本人拒否継続）",
+        "quantity": 0,
+        "unit": "台",
+        "availability_schedule": "機器はあるが本人拒否",
+        "waiting_time": "導入不可"
+      }
+    ],
+
+    "legal_policy": [
+      {
+        "type": "insurance_rule",
+        "description_ja": "緊急時訪問看護加算",
+        "authority": "医療保険",
+        "exceptions": [],
+        "appeal_process": "24時間対応体制なしのため算定不可"
+      },
+      {
+        "type": "institutional_policy",
+        "description_ja": "地域包括の緊急対応",
+        "authority": "地域包括支援センター",
+        "exceptions": ["虐待ケースのみ"],
+        "appeal_process": "通常ケースは月曜まで待機"
+      },
+      {
+        "type": "legal_restriction",
+        "description_ja": "成年後見制度",
+        "authority": "民法",
+        "exceptions": [],
+        "appeal_process": "申請から決定まで3-6ヶ月"
+      }
+    ]
+  },
+
+  "presentation": {
+    "gm_script": "退院から1週間。昨夜また呼吸困難でSpO2が82%まで低下、妻が救急車を呼ぼうとしましたが本人が拒否。妻は介護疲労に加え、昨日から発熱と腰痛悪化で動けません。娘に連絡しましたが『仕事で行けない』。訪問看護は週1回15分、本人の拒否的態度で十分なケアができていません。ヘルパーは『怖い』と言われ中止。夜間のSpO2低下は3回発生。このままでは48時間以内に破綻します。",
+
+    "visual_aids": [
+      {
+        "type": "table",
+        "content": "| 問題 | 深刻度 | 対応状況 |\\n|---|---|---|\\n| 夜間SpO2低下 | 危険 | 対応不可 |\\n| 妻の体調不良 | 緊急 | 介護不能 |\\n| サービス拒否 | 深刻 | 打開策なし |\\n| 経済的困窮 | 限界 | 残金3万 |\\n| 孤立無援 | 深刻 | 支援者なし |"
+      },
+      {
+        "type": "timeline",
+        "content": "Day1-3: 何とか妻が対応\\nDay4: 夜間SpO2 82%\\nDay5: ヘルパー中止\\nDay6: 妻が発熱・腰痛\\nDay7(今日): 緊急カンファレンス\\nDay8-9: 週末（サービス調整不可）"
+      }
+    ],
+
+    "emphasis_points": [
+      "妻が介護不能状態（48時間が限界）",
+      "夜間の医学的リスクが現実化",
+      "サービスが機能していない",
+      "週末を乗り切る方策が必要",
+      "経済的にも精神的にも限界"
+    ]
+  },
+
+  "flexibility": {
+    "negotiable_constraints": [],
+    "emergency_overrides": [
+      "救急搬送（本人同意が必要）",
+      "成人保護サービス介入（要件を満たす場合）"
+    ]
+  },
+
+  "tags_affected": ["safety", "family_burden", "time", "resources"],
+
+  "flavor_text": "理想と現実の乖離が、わずか1週間で露呈した。制度の隙間で、家族が潰れていく。今、何を優先し、何を諦めるのか。",
+
+  "gm_effect_guide": {
+    "immediate_effects": [
+      "妻の介護放棄寸前という危機的状況",
+      "医学的安全性が完全に損なわれている",
+      "サービス拒否により支援が機能不全",
+      "48時間以内の対応が必須"
+    ],
+    "discussion_triggers": [
+      "妻が倒れた後、誰が介護するのか？",
+      "本人の拒否を押し切って入院させるべきか？",
+      "成年後見の申請を開始すべきか？",
+      "このまま在宅で看取ることも視野に入れるか？",
+      "地域包括や行政の緊急介入を要請すべきか？"
+    ],
+    "constraint_modifiers": {
+      "crisis_level": "最大",
+      "decision_urgency": "48時間以内",
+      "available_options": "極限まで制限",
+      "ethical_dilemma": "本人意思vs生命の危機"
+    }
+  },
+
+  "special_notes": {
+    "gm_guidance": "このループでは『破綻寸前』を演出します。参加者に『もはや通常の対応では無理』という認識を持たせ、緊急避難的な決断や、苦渋の選択を迫ってください。",
+    "learning_focus": "危機管理、トリアージ、倫理的ジレンマ、限界設定"
+  },
+
+  "week1_specific_events": {
+    "actual_incidents": [
+      "Day4深夜2時: SpO2 82%、妻がパニック",
+      "Day5午前: ヘルパーが『怖い』と退散",
+      "Day6夕方: 妻が38.5度の発熱",
+      "Day7朝: 本人が『もう死にたい』と発言"
+    ],
+    "failed_attempts": [
+      "娘への連絡: 『仕事で無理』",
+      "訪問診療への連絡: 『予定外対応不可』",
+      "地域包括への相談: 『月曜に来所を』"
+    ]
+  },
+
+  "versioning": {
+    "created_by": "浅井",
+    "version": "1.0.0",
+    "last_updated": "2025-01-15T16:30:00Z",
+    "notes": "時間経過型シナリオ用HARD難易度。ループ2（退院1週間後）用。破綻寸前の危機的状況"
+  }
+}
