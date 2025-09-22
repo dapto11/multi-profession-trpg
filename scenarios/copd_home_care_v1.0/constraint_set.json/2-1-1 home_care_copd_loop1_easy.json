@@ -1,0 +1,236 @@
+{
+  "constraint_set_id": "home_care_copd_loop1_easy",
+  "name_ja": "在宅COPD管理_制約緩め（退院前日）",
+  "description_ja": "比較的恵まれた条件での退院調整。明日退院だが、家族のサポートも期待でき、サービス調整にも余裕がある。",
+  "setting": "home_care",
+  "play_difficulty": "easy",
+
+  "constraints": {
+    "time": [
+      {
+        "type": "deadline",
+        "description_ja": "退院予定日",
+        "value": "明日午後",
+        "severity": "flexible",
+        "rationale": "病床に余裕があり、必要なら2-3日延期可能"
+      },
+      {
+        "type": "sequence",
+        "description_ja": "サービス担当者会議",
+        "value": "本日実施予定",
+        "severity": "flexible",
+        "rationale": "明日午前でも対応可能"
+      },
+      {
+        "type": "availability",
+        "description_ja": "訪問看護の開始",
+        "value": "退院当日から",
+        "severity": "flexible",
+        "rationale": "ステーションに余裕あり、初回訪問を退院日に設定可"
+      },
+      {
+        "type": "duration_limit",
+        "description_ja": "退院カンファレンスの時間",
+        "value": "60分確保",
+        "severity": "flexible",
+        "rationale": "十分な議論時間を確保"
+      }
+    ],
+
+    "economic": [
+      {
+        "type": "income_limit",
+        "description_ja": "世帯年金収入",
+        "amount": 200000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "budget_limit",
+        "description_ja": "介護保険自己負担（1割負担）",
+        "amount": 15000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "negotiable"
+      },
+      {
+        "type": "copayment",
+        "description_ja": "在宅酸素療法の月額自己負担（導入した場合）",
+        "amount": 7500,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "negotiable"
+      },
+      {
+        "type": "cost_sharing",
+        "description_ja": "貯金からの支出可能額",
+        "amount": 20000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "negotiable"
+      }
+    ],
+
+    "resources": [
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問診療医の訪問頻度",
+        "quantity": 2,
+        "unit": "回/月",
+        "availability_schedule": "第2・4水曜日、時間調整可",
+        "waiting_time": "退院後1週間で初回"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問看護の対応可能回数",
+        "quantity": 3,
+        "unit": "回/週",
+        "availability_schedule": "月・水・金、必要時は増回可",
+        "waiting_time": "退院当日から"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "ケアマネジャーの対応",
+        "quantity": 60,
+        "unit": "分/月",
+        "availability_schedule": "随時対応可能",
+        "waiting_time": "即日"
+      },
+      {
+        "type": "facility_access",
+        "description_ja": "デイサービスの空き状況",
+        "quantity": 2,
+        "unit": "回/週",
+        "availability_schedule": "火・木曜日空きあり",
+        "waiting_time": "1週間後から利用可能"
+      },
+      {
+        "type": "equipment_capacity",
+        "description_ja": "在宅酸素機器の手配",
+        "quantity": "available",
+        "unit": "台",
+        "availability_schedule": "即日設置可能",
+        "waiting_time": "24時間以内"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "娘の支援可能頻度",
+        "quantity": 1,
+        "unit": "回/週",
+        "availability_schedule": "毎週土曜日",
+        "waiting_time": "確実に来訪"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "妻の状態",
+        "quantity": "good",
+        "unit": "健康状態",
+        "availability_schedule": "70歳、腰痛はあるが軽度",
+        "waiting_time": "介護可能"
+      }
+    ],
+
+    "legal_policy": [
+      {
+        "type": "insurance_rule",
+        "description_ja": "要介護3での支給限度額",
+        "authority": "介護保険法",
+        "exceptions": ["医療保険との併用で柔軟対応可"],
+        "appeal_process": "必要に応じて区分変更申請可"
+      },
+      {
+        "type": "certification_requirement",
+        "description_ja": "訪問看護指示書",
+        "authority": "医療保険",
+        "exceptions": [],
+        "appeal_process": "主治医がすでに準備済み"
+      },
+      {
+        "type": "institutional_policy",
+        "description_ja": "退院調整",
+        "authority": "病院規定",
+        "exceptions": ["患者・家族の希望で2-3日延期可"],
+        "appeal_process": "医療相談室が柔軟に対応"
+      }
+    ]
+  },
+
+  "presentation": {
+    "gm_script": "明日午後の退院予定ですが、必要なら2-3日延期も可能です。妻は70歳でまだ元気、娘も週1回は確実に来てくれます。世帯年金は月20万円あり、ある程度の経済的余裕があります。訪問看護は週3回まで対応可能、退院当日から開始できます。要介護3の認定も取れており、サービス利用枠に余裕があります。",
+
+    "visual_aids": [
+      {
+        "type": "timeline",
+        "content": "本日：退院カンファレンス（60分）\\n　　　サービス担当者会議\\n明日午後：退院\\n　　　　　訪問看護初回訪問\\n1週間後：訪問診療開始\\n　　　　デイサービス開始"
+      },
+      {
+        "type": "budget_breakdown",
+        "content": "月額収入：20万円\\n固定支出：\\n- 生活費 13万円\\n- 医療費 1万円\\n- 介護保険 1.5万円\\n- 在宅酸素（検討中）7,500円\\n余裕：3.5-4.5万円"
+      },
+      {
+        "type": "table",
+        "content": "| サービス | 利用可能回数 | 備考 |\\n|---|---|---|\\n| 訪問診療 | 月2回 | 時間調整可 |\\n| 訪問看護 | 週3回 | 必要時増回可 |\\n| 訪問リハ | 週2回 | 調整中 |\\n| デイサービス | 週2回 | 1週間後から |"
+      }
+    ],
+
+    "emphasis_points": [
+      "退院日の調整が可能",
+      "家族のサポート体制良好",
+      "経済的余裕あり",
+      "サービス利用枠に余裕",
+      "柔軟な対応が可能"
+    ]
+  },
+
+  "flexibility": {
+    "negotiable_constraints": [
+      "退院日を2-3日延期",
+      "サービス開始時期の調整",
+      "訪問回数の増減",
+      "費用負担の調整"
+    ],
+    "emergency_overrides": [
+      "緊急時は即入院可能",
+      "24時間電話相談対応"
+    ]
+  },
+
+  "tags_affected": ["time", "resources", "family_burden"],
+
+  "flavor_text": "恵まれた条件での在宅移行。時間的・経済的余裕があり、理想的な在宅療養体制を構築するチャンス。",
+
+  "gm_effect_guide": {
+    "immediate_effects": [
+      "時間的余裕による落ち着いた議論",
+      "選択肢の豊富さ",
+      "家族の前向きな姿勢",
+      "サービス調整の柔軟性"
+    ],
+    "discussion_triggers": [
+      "在宅酸素の導入をどう進めるか？",
+      "豊富なサービスをどう組み合わせるか？",
+      "本人の生活の質をどう高めるか？",
+      "家族の役割分担をどうするか？",
+      "将来を見据えた体制作りは？"
+    ],
+    "constraint_modifiers": {
+      "decision_pressure": "低",
+      "creative_space": "広い",
+      "negotiation_room": "十分",
+      "success_probability": "高"
+    }
+  },
+
+  "special_notes": {
+    "gm_guidance": "EASYモードは初心者向けです。成功体験を重視し、理想的な多職種連携を体験させてください。制約は提示しつつも、解決策を見出しやすいよう支援してください。",
+    "learning_focus": "基本的な多職種連携、各職種の役割理解、建設的な議論、成功体験"
+  },
+
+  "versioning": {
+    "created_by": "浅井",
+    "version": "1.0.0",
+    "last_updated": "2025-01-15T19:00:00Z",
+    "notes": "時間経過型シナリオ用EASY難易度。ループ1（退院前日）用。恵まれた初期条件"
+  }
+}
