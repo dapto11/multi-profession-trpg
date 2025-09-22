@@ -1,0 +1,461 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/event_card.schema.json",
+  "title": "Event Card Schema",
+  "description": "多職種連携ゲーム用イベントカードのJSONスキーマ - 汎用・シナリオ適用可能・タグ/影響/運用ヒント/生成支援付き",
+  "type": "object",
+  "required": ["event_id", "category", "subcategory", "title_ja", "body_ja", "tags"],
+  "properties": {
+    "event_id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "イベント一意ID"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["A_medical", "B_psych", "C_family", "D_services", "E_environment"],
+      "description": "主要カテゴリ"
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "カテゴリ内の細分類 - if/thenで制約"
+    },
+    "title_ja": {
+      "type": "string",
+      "maxLength": 120,
+      "description": "短い見出し - プレイヤー表示向け"
+    },
+    "body_ja": {
+      "type": "string",
+      "description": "本文。シナリオ適用のためのプレースホルダ{{変数名}}を含んでもよい"
+    },
+    "direction": {
+      "type": "string",
+      "enum": ["positive", "negative", "neutral", "mixed"],
+      "description": "影響方向 - ポジ/ネガ/ニュートラル/混合"
+    },
+    "urgency": {
+      "type": "string",
+      "enum": ["high", "medium", "low"],
+      "description": "緊急度"
+    },
+    "duration": {
+      "type": "string",
+      "enum": ["transient", "short_term", "long_term"],
+      "description": "影響の持続"
+    },
+    "settings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/setting" },
+      "uniqueItems": true,
+      "description": "想定される適用現場（複数可）"
+    },
+    "actors_primary": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/role" },
+      "uniqueItems": true,
+      "description": "主に関与・主導が想定される役割"
+    },
+    "actors_secondary": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/role" },
+      "uniqueItems": true,
+      "description": "第二義的に関与が想定される役割"
+    },
+    "tags": {
+      "type": "object",
+      "required": ["primary"],
+      "properties": {
+        "primary": { "$ref": "#/$defs/tag" },
+        "secondary": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tag" },
+          "maxItems": 2,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false,
+      "description": "争点タグ8タグ体系。Primaryは1つ必須、Secondaryは最大2つ"
+    },
+    "parameters": {
+      "type": "array",
+      "description": "シナリオに合わせて埋める可変パラメータ定義 - 本文プレースホルダと対応",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "例: spo2, bp_sys, delay_hours"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["integer", "number", "string", "boolean", "date", "time"]
+          },
+          "unit": {
+            "type": "string",
+            "description": "例: %, mmHg, mg/dL, h"
+          },
+          "min": { "type": "number" },
+          "max": { "type": "number" },
+          "enum": {
+            "type": "array",
+            "items": { "type": ["string", "number", "integer"] }
+          },
+          "examples": {
+            "type": "array",
+            "items": { "type": ["string", "number", "integer"] }
+          },
+          "notes": { "type": "string" }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": { "properties": { "type": { "enum": ["integer", "number"] } }, "required": ["type"] },
+            "then": { "required": ["name", "type", "unit"] }
+          },
+          {
+            "if": { "properties": { "type": { "enum": ["string", "boolean", "date", "time"] } }, "required": ["type"] },
+            "then": {
+              "not": {
+                "anyOf": [
+                  { "required": ["min"] },
+                  { "required": ["max"] },
+                  { "required": ["unit"] }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "impact_hints": {
+      "type": "object",
+      "description": "運用上の影響ヒント - GM解釈を助ける非決定的な示唆",
+      "properties": {
+        "state_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^/([A-Za-z0-9_\\-]+)(/[A-Za-z0-9_\\-]+)*$"
+          },
+          "description": "影響が出やすい状態フィールドのパス 例: /patient/vitals/spo2"
+        },
+        "constraints_hint": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "制約への影響ヒント 例: increase_time_pressure, reduce_resources"
+        },
+        "discussion_seeds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Phase2/3での争点化を促す論点の種"
+        },
+        "coordination_targets": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/role" },
+          "description": "連携を取りたい相手候補"
+        }
+      },
+      "additionalProperties": false
+    },
+    "gm_guidance": {
+      "type": "object",
+      "description": "GM向けの進行ヒント",
+      "properties": {
+        "narration_tips": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "probing_questions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "modifiers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "難易度や状況に応じた調整案"
+        }
+      },
+      "additionalProperties": false
+    },
+    "flavor_text": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "プレイヤー向け雰囲気描写・没入感を高めるフレーバーテキスト"
+    },
+    "gm_effect_guide": {
+      "type": "object",
+      "description": "GM用の構造化された効果ガイド",
+      "properties": {
+        "immediate_effects": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "即座に発生する影響"
+        },
+        "discussion_triggers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "議論を促すトピック"
+        },
+        "constraint_modifiers": {
+          "type": "object",
+          "description": "制約への影響",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "linkages": {
+      "type": "object",
+      "description": "他イベントとの関係 - 発動条件・排他など",
+      "properties": {
+        "depends_on_event_ids": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "uniqueItems": true
+        },
+        "excludes_event_ids": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "weights": {
+      "type": "object",
+      "description": "山札構成・確率調整のための重み",
+      "properties": {
+        "draw_weight": {
+          "type": "number",
+          "minimum": 0
+        },
+        "severity_score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        }
+      },
+      "additionalProperties": false
+    },
+    "generation_support": {
+      "type": "object",
+      "description": "AI生成支援のためのメタデータ（既存カードでは省略可）",
+      "properties": {
+        "is_master": {
+          "type": "boolean",
+          "description": "マスターテンプレートかどうか"
+        },
+        "derived_from": {
+          "type": ["integer", "null"],
+          "description": "派生元のイベントID"
+        },
+        "variant_ids": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "description": "派生バージョンのID群"
+        },
+        "setting_variants": {
+          "type": "object",
+          "description": "現場別バリエーション設定（拡張可能）",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "body_template": {
+                "type": "string",
+                "description": "本文テンプレート 例: {{trigger_observation}}を発見。{{actor_reaction}}"
+              },
+              "reality_anchors": {
+                "type": "array",
+                "items": { "type": "string" },
+                "minItems": 1,
+                "maxItems": 5,
+                "description": "現場らしさを保つ観点 例: 玄関での観察、家族の非言語的サイン"
+              },
+              "avoid_patterns": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "避けるべきパターン 例: 抽象的な心理描写、専門用語の羅列"
+              },
+              "actor_adjustments": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/role" },
+                "description": "主要関与職種の調整"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "severity_variants": {
+          "type": "object",
+          "description": "重症度別バリエーション（3段階）",
+          "properties": {
+            "mild": { "$ref": "#/$defs/severity_variant" },
+            "moderate": { "$ref": "#/$defs/severity_variant" },
+            "severe": { "$ref": "#/$defs/severity_variant" }
+          },
+          "additionalProperties": false
+        },
+        "parameter_presets": {
+          "type": "object",
+          "description": "パラメータプリセット集 - 命名規則: {病態}_{重症度}_{文脈}",
+          "patternProperties": {
+            "^[a-z_]+_(mild|moderate|severe)_[a-z_]+$": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "generation_instructions": {
+          "type": "object",
+          "description": "AI生成のためのガイド（構造化＋自由記述のハイブリッド）",
+          "properties": {
+            "quality_checklist": {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 1,
+              "maxItems": 5,
+              "description": "品質確認項目 例: 観察可能な具体的事象が含まれているか"
+            },
+            "reference_examples": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "参考にすべき既存イベント 例: event_id: 1-3の描写スタイルを参考に"
+            },
+            "emphasis_points": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "強調すべき点 例: 家族の非言語的サイン、時間制約"
+            },
+            "avoid_patterns": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "避けるべきパターン 例: 過度な専門用語、抽象的な心理描写"
+            },
+            "additional_notes": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "構造化できない微妙なニュアンスや特殊指示の自由記述"
+            }
+          },
+          "additionalProperties": false
+        },
+        "field_validation": {
+          "type": "object",
+          "description": "現場エキスパートによる検証記録（任意）",
+          "properties": {
+            "validated_by": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "検証者リスト 例: nurse_tanaka, doctor_suzuki"
+            },
+            "validation_date": {
+              "type": "string",
+              "format": "date",
+              "description": "検証日"
+            },
+            "authenticity_score": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5,
+              "description": "現実感スコア（5点満点）"
+            },
+            "field_notes": {
+              "type": "string",
+              "description": "現場からのフィードバック"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "versioning": {
+      "type": "object",
+      "properties": {
+        "created_by": { "type": "string" },
+        "version": { "type": "string" },
+        "last_updated": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": { "properties": { "category": { "const": "A_medical" } }, "required": ["category"] },
+      "then": { "properties": { "subcategory": { "enum": ["respiratory", "cardio", "metabolic", "gastrointestinal", "neuro", "musculoskeletal", "dermatology", "disease_generic", "accident_safety"] } } }
+    },
+    {
+      "if": { "properties": { "category": { "const": "B_psych" } }, "required": ["category"] },
+      "then": { "properties": { "subcategory": { "enum": ["dementia", "mental", "problem_behavior"] } } }
+    },
+    {
+      "if": { "properties": { "category": { "const": "C_family" } }, "required": ["category"] },
+      "then": { "properties": { "subcategory": { "enum": ["caregiver_family", "challenge_event", "complaint"] } } }
+    },
+    {
+      "if": { "properties": { "category": { "const": "D_services" } }, "required": ["category"] },
+      "then": { "properties": { "subcategory": { "enum": ["incident_accident", "policy_system", "science_option"] } } }
+    },
+    {
+      "if": { "properties": { "category": { "const": "E_environment" } }, "required": ["category"] },
+      "then": { "properties": { "subcategory": { "enum": ["local_life", "gov_admin", "weather_disaster"] } } }
+    }
+  ],
+  "$defs": {
+    "tag": {
+      "type": "string",
+      "enum": ["safety", "time", "resources", "family_burden", "patient_preference", "function", "legal_policy", "coordination"]
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "physician", "nurse", "pharmacist", "pt", "ot", "st",
+        "care_manager", "home_helper", "msw", "social_worker",
+        "dietitian", "assistive_device_specialist", "public_health_nurse",
+        "school_staff", "admin_officer", "community_member",
+        "patient", "family", "gm", "other"
+      ]
+    },
+    "setting": {
+      "type": "string",
+      "enum": [
+        "home_care", "acute_hospital", "chronic_ward", "rehab_hospital",
+        "long_term_care_facility", "outpatient", "day_care_rehab",
+        "hospice", "school", "community", "other"
+      ]
+    },
+    "severity_variant": {
+      "type": "object",
+      "properties": {
+        "urgency_override": {
+          "type": "string",
+          "enum": ["high", "medium", "low"],
+          "description": "緊急度の上書き"
+        },
+        "description_tone": {
+          "type": "string",
+          "description": "描写のトーン 例: 観察的・予防的、懸念・調整必要、緊急・即応必要"
+        },
+        "parameter_ranges": {
+          "type": "object",
+          "description": "パラメータ範囲の調整",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "min": { "type": "number" },
+              "max": { "type": "number" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
