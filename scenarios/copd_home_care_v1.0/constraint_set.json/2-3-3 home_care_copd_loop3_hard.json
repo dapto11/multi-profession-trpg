@@ -1,0 +1,255 @@
+{
+  "constraint_set_id": "home_care_copd_loop3_hard",
+  "name_ja": "在宅COPD管理_制約厳格（退院1ヶ月後）",
+  "description_ja": "限界を超えた在宅療養。妻は要介護認定申請、本人は心不全増悪で入退院を繰り返し、制度も経済も家族も完全に破綻。最終決断を迫られる。",
+  "setting": "home_care",
+  "play_difficulty": "hard",
+
+  "constraints": {
+    "time": [
+      {
+        "type": "deadline",
+        "description_ja": "妻の施設入所まで",
+        "value": "1週間",
+        "severity": "absolute",
+        "rationale": "妻が転倒骨折し要介護3認定、来週施設入所決定"
+      },
+      {
+        "type": "sequence",
+        "description_ja": "本人の次回入院まで",
+        "value": "数日以内",
+        "severity": "firm",
+        "rationale": "心不全増悪、BNP2000超え、浮腫著明"
+      },
+      {
+        "type": "availability",
+        "description_ja": "娘の来訪可能日",
+        "value": "2週間後",
+        "severity": "firm",
+        "rationale": "仕事の都合で早期来訪不可"
+      },
+      {
+        "type": "duration_limit",
+        "description_ja": "在宅継続可能期間",
+        "value": "現実的に不可能",
+        "severity": "absolute",
+        "rationale": "介護者不在、医学的にも限界"
+      }
+    ],
+
+    "economic": [
+      {
+        "type": "budget_limit",
+        "description_ja": "借金累積額",
+        "amount": -200000,
+        "currency": "JPY",
+        "period": "one_time",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "cost_sharing",
+        "description_ja": "今月の医療・介護費",
+        "amount": 85000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "copayment",
+        "description_ja": "妻の施設入所費用",
+        "amount": 150000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "income_limit",
+        "description_ja": "生活保護申請状況",
+        "amount": 0,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "negotiable"
+      }
+    ],
+
+    "resources": [
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問看護（中断中）",
+        "quantity": 0,
+        "unit": "回/週",
+        "availability_schedule": "本人が暴言で出入り禁止",
+        "waiting_time": "再開不可"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問診療（形骸化）",
+        "quantity": 1,
+        "unit": "回/月",
+        "availability_schedule": "5分で終了、実質機能せず",
+        "waiting_time": "なし"
+      },
+      {
+        "type": "facility_access",
+        "description_ja": "本人の施設入所",
+        "quantity": "limited",
+        "unit": "床",
+        "availability_schedule": "医療療養型は満床、特養は要介護3必要",
+        "waiting_time": "6ヶ月以上"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "息子の状況",
+        "quantity": "limited",
+        "unit": "回",
+        "availability_schedule": "部屋から声だけ、介護は不可",
+        "waiting_time": "変化なし"
+      },
+      {
+        "type": "transport",
+        "description_ja": "救急搬送",
+        "quantity": 3,
+        "unit": "回/月",
+        "availability_schedule": "この1ヶ月で3回搬送済み",
+        "waiting_time": "病院から受入困難の連絡"
+      },
+      {
+        "type": "equipment_capacity",
+        "description_ja": "在宅医療機器",
+        "quantity": 0,
+        "unit": "台",
+        "availability_schedule": "すべて本人拒否で撤去",
+        "waiting_time": "再導入不可"
+      }
+    ],
+
+    "legal_policy": [
+      {
+        "type": "insurance_rule",
+        "description_ja": "介護保険限度額超過",
+        "authority": "介護保険法",
+        "exceptions": [],
+        "appeal_process": "全額自己負担分が月5万円発生"
+      },
+      {
+        "type": "legal_restriction",
+        "description_ja": "措置入院の要件",
+        "authority": "精神保健福祉法",
+        "exceptions": [],
+        "appeal_process": "自傷他害の恐れなしと判定"
+      },
+      {
+        "type": "institutional_policy",
+        "description_ja": "病院の受入拒否",
+        "authority": "○○総合病院",
+        "exceptions": [],
+        "appeal_process": "頻回入院により他院紹介を推奨"
+      },
+      {
+        "type": "professional_scope",
+        "description_ja": "訪問看護ステーションの限界",
+        "authority": "事業所規定",
+        "exceptions": [],
+        "appeal_process": "暴言により安全配慮義務から撤退"
+      }
+    ]
+  },
+
+  "presentation": {
+    "gm_script": "退院から1ヶ月。この間、本人は3回救急搬送され、その都度数日で退院。妻は2週間前に転倒し大腿骨頸部骨折、現在入院中で要介護3認定、来週施設入所が決定。本人は昨日から両下肢の浮腫が悪化、呼吸困難も増強。訪問看護は本人の暴言で出入り禁止。娘は『もう限界、施設に入れて』と電話で泣いています。息子は相変わらず部屋から出ません。借金も20万円に達しました。",
+
+    "visual_aids": [
+      {
+        "type": "table",
+        "content": "| この1ヶ月の経過 | 回数/状態 |\\n|---|---|\\n| 救急搬送 | 3回 |\\n| 平均在院日数 | 3日 |\\n| 妻の状態 | 骨折→要介護3 |\\n| 訪問看護 | 中断 |\\n| 借金 | 20万円 |\\n| 本人のADL | 全介助レベル |"
+      },
+      {
+        "type": "timeline",
+        "content": "Week1: 救急搬送→3日で退院\\nWeek2: 妻が転倒骨折→入院\\nWeek3: 再度救急搬送→2日で退院\\nWeek4: 訪問看護出入り禁止\\n現在: 心不全増悪、介護者不在"
+      }
+    ],
+
+    "emphasis_points": [
+      "妻が来週施設入所で介護者完全不在",
+      "本人は医学的に入院レベル",
+      "しかし病院も施設も受入困難",
+      "経済的破綻（借金20万）",
+      "制度の隙間で完全に行き詰まり"
+    ]
+  },
+
+  "flexibility": {
+    "negotiable_constraints": [],
+    "emergency_overrides": [
+      "行政の職権による措置入所（極めて困難）",
+      "生活保護申請と同時の施設入所（要調整）"
+    ]
+  },
+
+  "tags_affected": ["safety", "family_burden", "resources", "legal_policy", "time"],
+
+  "flavor_text": "1ヶ月で、すべてが崩壊した。制度も、家族も、経済も、そして本人の生きる意欲も。残されたのは、誰も望まなかった現実だけ。",
+
+  "gm_effect_guide": {
+    "immediate_effects": [
+      "在宅療養の完全な破綻",
+      "家族システムの崩壊",
+      "制度の限界を超えた状況",
+      "倫理的ジレンマの極致"
+    ],
+    "discussion_triggers": [
+      "本人の意思を無視して強制入院させるか？",
+      "このまま在宅で看取ることは可能か？",
+      "生活保護申請をして施設入所を目指すか？",
+      "息子への介入を強行すべきか？",
+      "娘に仕事を辞めてもらうべきか？",
+      "もはや解決不可能と認めるか？"
+    ],
+    "constraint_modifiers": {
+      "system_failure": "完全",
+      "family_collapse": "確定",
+      "economic_ruin": "進行中",
+      "ethical_crisis": "最大",
+      "solution_possibility": "ほぼゼロ"
+    }
+  },
+
+  "special_notes": {
+    "gm_guidance": "このループは『システムの限界』を体験させます。どんなに努力しても救えないケースが存在することを認識させ、『最小限の被害で撤退する』『優先順位を決めて諦める』という苦渋の決断を学ばせてください。",
+    "learning_focus": "限界設定、撤退戦略、倫理的ジレンマの極限、システムの構造的問題"
+  },
+
+  "month1_cumulative_problems": {
+    "medical_deterioration": [
+      "BNP 2000超え（入院レベル）",
+      "下肢浮腫+++",
+      "労作時SpO2 80%未満",
+      "せん妄症状出現"
+    ],
+    "family_breakdown": [
+      "妻: 骨折→要介護3→施設入所",
+      "娘: 精神的限界、来訪拒否",
+      "息子: 変化なし、戦力外",
+      "本人: 生きる意欲喪失"
+    ],
+    "service_collapse": [
+      "訪問看護: 出入り禁止",
+      "ヘルパー: とっくに中止",
+      "デイサービス: 利用不可",
+      "病院: 受入困難通告"
+    ],
+    "economic_crisis": [
+      "借金20万円",
+      "医療費未払い3ヶ月",
+      "生活費枯渇",
+      "ライフライン停止リスク"
+    ]
+  },
+
+  "versioning": {
+    "created_by": "浅井",
+    "version": "1.0.0",
+    "last_updated": "2025-01-15T17:00:00Z",
+    "notes": "時間経過型シナリオ用HARD難易度。ループ3（退院1ヶ月後）用。完全崩壊状態"
+  }
+}
