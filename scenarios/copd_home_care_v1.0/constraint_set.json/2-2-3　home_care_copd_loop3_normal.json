@@ -1,0 +1,261 @@
+{
+  "constraint_set_id": "home_care_copd_loop3_normal",
+  "name_ja": "在宅COPD管理_標準制約（退院1ヶ月後）",
+  "description_ja": "退院1ヶ月で在宅療養の持続可能性が問われる。妻の介護限界、本人の心不全増悪傾向、サービス調整の限界。長期的視点での方針転換が必要。",
+  "setting": "home_care",
+  "play_difficulty": "normal",
+
+  "constraints": {
+    "time": [
+      {
+        "type": "deadline",
+        "description_ja": "妻の介護継続可能期間",
+        "value": "2-3週間",
+        "severity": "firm",
+        "rationale": "慢性的な睡眠不足と腰痛、精神的疲労の蓄積"
+      },
+      {
+        "type": "sequence",
+        "description_ja": "次回の要介護認定更新",
+        "value": "2ヶ月後",
+        "severity": "absolute",
+        "rationale": "区分変更申請は却下、次回更新まで待機"
+      },
+      {
+        "type": "availability",
+        "description_ja": "施設入所の待機",
+        "value": "3-6ヶ月",
+        "severity": "firm",
+        "rationale": "特養は要介護3以上、有料は経済的に困難"
+      },
+      {
+        "type": "duration_limit",
+        "description_ja": "在宅での安全確保期間",
+        "value": "1ヶ月程度",
+        "severity": "flexible",
+        "rationale": "現状のままでは再入院リスク高"
+      }
+    ],
+
+    "economic": [
+      {
+        "type": "budget_limit",
+        "description_ja": "貯金の取り崩し",
+        "amount": 50000,
+        "currency": "JPY",
+        "period": "total",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "cost_sharing",
+        "description_ja": "この1ヶ月の医療・介護費超過",
+        "amount": 45000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "copayment",
+        "description_ja": "入院した場合の自己負担",
+        "amount": 60000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "income_limit",
+        "description_ja": "追加支出能力",
+        "amount": 10000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "negotiable"
+      }
+    ],
+
+    "resources": [
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問看護（関係悪化）",
+        "quantity": 2,
+        "unit": "回/週",
+        "availability_schedule": "形式的な訪問のみ",
+        "waiting_time": "信頼関係の再構築困難"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問診療（定期のみ）",
+        "quantity": 2,
+        "unit": "回/月",
+        "availability_schedule": "第2・4水曜、各10分程度",
+        "waiting_time": "臨時対応は困難"
+      },
+      {
+        "type": "facility_access",
+        "description_ja": "デイサービス",
+        "quantity": 0,
+        "unit": "回",
+        "availability_schedule": "本人が完全拒否",
+        "waiting_time": "利用不可"
+      },
+      {
+        "type": "transport",
+        "description_ja": "救急搬送",
+        "quantity": 2,
+        "unit": "回",
+        "availability_schedule": "この1ヶ月で2回利用",
+        "waiting_time": "病院から頻回利用を指摘"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "娘の支援",
+        "quantity": 1,
+        "unit": "回/月",
+        "availability_schedule": "疲弊して頻度減少",
+        "waiting_time": "仕事との両立困難"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "息子の変化",
+        "quantity": "minimal",
+        "unit": "回",
+        "availability_schedule": "ドア越しの会話のみ",
+        "waiting_time": "介護参加は期待できず"
+      }
+    ],
+
+    "legal_policy": [
+      {
+        "type": "insurance_rule",
+        "description_ja": "介護保険限度額超過常態化",
+        "authority": "介護保険法",
+        "exceptions": [],
+        "appeal_process": "月2万円の自己負担発生"
+      },
+      {
+        "type": "institutional_policy",
+        "description_ja": "病院からの在宅療養継続懸念",
+        "authority": "○○総合病院",
+        "exceptions": [],
+        "appeal_process": "医療相談室から施設入所を推奨"
+      },
+      {
+        "type": "legal_restriction",
+        "description_ja": "成年後見制度の検討",
+        "authority": "民法",
+        "exceptions": [],
+        "appeal_process": "本人の判断能力はまだ保たれている"
+      },
+      {
+        "type": "professional_scope",
+        "description_ja": "ケアマネジャーの限界",
+        "authority": "介護保険法",
+        "exceptions": [],
+        "appeal_process": "これ以上のサービス調整困難"
+      }
+    ]
+  },
+
+  "presentation": {
+    "gm_script": "退院から1ヶ月が経過しました。この間、本人は2回救急搬送され、いずれも3-4日で退院。心不全の増悪傾向があり、両下肢の浮腫が目立ちます。妻は慢性的な睡眠不足で『いつまで続くか分からない』と涙ぐんでいます。訪問看護との関係は悪化し、形式的な訪問のみ。デイサービスは一度も利用できていません。娘は『施設を探した方が...』と提案していますが、本人は『家にいる』の一点張り。経済的にも限界が近づいています。",
+
+    "visual_aids": [
+      {
+        "type": "table",
+        "content": "| この1ヶ月の経過 | 回数/状況 |\\n|---|---|\\n| 救急搬送 | 2回 |\\n| 入院日数 | 計7日 |\\n| 夜間SpO2低下 | 週2-3回 |\\n| 訪問看護 | 形骸化 |\\n| デイ利用 | 0回 |\\n| 妻の体重減少 | 3kg |"
+      },
+      {
+        "type": "timeline",
+        "content": "Week1: 夜間不安定\\nWeek2: 1回目救急搬送（3日入院）\\nWeek3: 妻が精神科受診（不眠）\\nWeek4: 2回目救急搬送（4日入院）\\n現在: 浮腫増悪、妻は限界"
+      },
+      {
+        "type": "budget_breakdown",
+        "content": "収入：18万円\\n支出：\\n- 生活費 12万円\\n- 医療費 2万円\\n- 介護保険 4.5万円\\n- 臨時支出 2万円\\n赤字：2.5万円/月\\n貯金残：5万円"
+      }
+    ],
+
+    "emphasis_points": [
+      "妻の介護限界まで2-3週間",
+      "心不全増悪で医学的にも危険",
+      "サービスとの関係が機能不全",
+      "経済的に持続不可能",
+      "家族の意見も分かれている"
+    ]
+  },
+
+  "flexibility": {
+    "negotiable_constraints": [
+      "短期入所の緊急利用",
+      "医療保険での訪問看護増",
+      "娘の介護休暇取得"
+    ],
+    "emergency_overrides": [
+      "医学的理由での入院延長",
+      "地域包括による緊急介入"
+    ]
+  },
+
+  "tags_affected": ["safety", "family_burden", "resources", "time", "legal_policy"],
+
+  "flavor_text": "1ヶ月の積み重ねが、在宅療養の限界を明確にした。理想と現実の狭間で、持続可能な道を探る最後の機会。",
+
+  "gm_effect_guide": {
+    "immediate_effects": [
+      "在宅療養の持続可能性への疑問",
+      "妻の心身の限界が明確",
+      "医学的にも在宅困難な状況",
+      "経済的破綻への道筋"
+    ],
+    "discussion_triggers": [
+      "このまま在宅を続けることは可能か？",
+      "妻が倒れる前に対策を打つべきでは？",
+      "施設入所を本格的に検討すべきか？",
+      "本人の意向をどこまで尊重できるか？",
+      "家族会議を開いて方針を統一すべきか？"
+    ],
+    "constraint_modifiers": {
+      "sustainability": "困難",
+      "decision_urgency": "2-3週間以内",
+      "system_support": "限界",
+      "family_unity": "揺らぎ"
+    }
+  },
+
+  "special_notes": {
+    "gm_guidance": "このループでは『持続可能性の検討』がテーマです。1ヶ月の経験を踏まえ、理想的な在宅から現実的な選択へのシフトを促してください。完全な解決ではなく、最善の妥協点を見出すことが目標です。",
+    "learning_focus": "長期的視点、持続可能性、家族全体のQOL、困難な決断"
+  },
+
+  "month1_cumulative_problems": {
+    "medical_deterioration": [
+      "BNP上昇傾向（1500程度）",
+      "下肢浮腫++",
+      "労作時SpO2 85-88%",
+      "食欲低下"
+    ],
+    "family_breakdown": [
+      "妻：不眠症診断、抗不安薬処方",
+      "娘：月1回の訪問が限界",
+      "息子：わずかな変化はあるが介護力なし",
+      "家族間で方針の相違"
+    ],
+    "service_dysfunction": [
+      "訪問看護：信頼関係悪化",
+      "デイサービス：利用できず",
+      "ショートステイ：本人拒否",
+      "ケアマネ：調整に苦慮"
+    ],
+    "economic_pressure": [
+      "月2.5万円の赤字",
+      "貯金残5万円",
+      "介護保険超過分月2万円",
+      "今後の見通し立たず"
+    ]
+  },
+
+  "versioning": {
+    "created_by": "浅井",
+    "version": "1.0.0",
+    "last_updated": "2025-01-15T18:30:00Z",
+    "notes": "時間経過型シナリオ用NORMAL難易度。ループ3（退院1ヶ月後）用。持続可能性の岐路"
+  }
+}
