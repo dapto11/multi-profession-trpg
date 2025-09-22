@@ -1,0 +1,433 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/scenario_template.schema.json",
+  "title": "Scenario Template Schema",
+  "description": "多職種連携ゲームのシナリオテンプレート 患者設定・背景・初期状況・学習目標",
+  "type": "object",
+  "required": ["scenario_id", "title_ja", "patient", "setting", "initial_situation", "learning_objectives", "phase_flow"],
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "シナリオ識別子 例: copd_home_care_01, stroke_discharge_02"
+    },
+    "title_ja": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "シナリオタイトル"
+    },
+    "description_ja": {
+      "type": "string",
+      "description": "シナリオの概要説明"
+    },
+    "setting": {
+      "$ref": "#/$defs/setting",
+      "description": "実施現場"
+    },
+    "scenario_complexity": {
+      "type": "string",
+      "enum": ["beginner", "intermediate", "advanced"],
+      "description": "難易度レベル シナリオの複雑さ"
+    },
+    "difficulty_hint": {
+      "type": "string",
+      "enum": ["easy", "normal", "hard"],
+      "description": "制約セット・測定ログとの語彙統一用ヒント beginner→easy, intermediate→normal, advanced→hard"
+    },
+    "duration_minutes": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 180,
+      "description": "想定プレイ時間 分"
+    },
+    "target_participants": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          { "$ref": "#/$defs/role" },
+          { "not": { "const": "gm" } }
+        ]
+      },
+      "minItems": 3,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "description": "想定参加職種（GMは含めない）"
+    },
+    "phase_flow": {
+      "type": "array",
+      "const": [1, 2, 3, 4, 5],
+      "description": "フェーズ進行順序 固定[1,2,3,4,5]"
+    },
+    "patient": {
+      "type": "object",
+      "required": ["basic_info", "medical_condition"],
+      "properties": {
+        "basic_info": {
+          "type": "object",
+          "required": ["age", "gender", "living_situation"],
+          "properties": {
+            "age": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 120
+            },
+            "gender": {
+              "type": "string",
+              "enum": ["male", "female", "other", "not_specified"]
+            },
+            "name": {
+              "type": "string",
+              "description": "仮名 田中太郎等"
+            },
+            "living_situation": {
+              "type": "string",
+              "enum": ["alone", "with_spouse", "with_family", "facility", "other"]
+            },
+            "residence_type": {
+              "type": "string",
+              "enum": ["apartment", "house", "facility", "hospital", "other"]
+            },
+            "mobility": {
+              "type": "string",
+              "enum": ["independent", "assistive_device", "wheelchair", "bedridden"]
+            }
+          },
+          "additionalProperties": false
+        },
+        "medical_condition": {
+          "type": "object",
+          "required": ["primary_diagnosis"],
+          "properties": {
+            "primary_diagnosis": { "type": "string" },
+            "secondary_diagnoses": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "current_medications": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "dosage": { "type": "string" },
+                  "frequency": { "type": "string" },
+                  "adherence_issues": { "type": "boolean" }
+                },
+                "additionalProperties": false
+              }
+            },
+            "functional_status": {
+              "type": "object",
+              "properties": {
+                "adl_score": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "iadl_score": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "cognitive_status": {
+                  "type": "string",
+                  "enum": ["normal", "mild_impairment", "moderate_impairment", "severe_impairment"]
+                }
+              },
+              "additionalProperties": false
+            },
+            "recent_changes": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "最近の状態変化"
+            }
+          },
+          "additionalProperties": false
+        },
+        "psychosocial": {
+          "type": "object",
+          "properties": {
+            "personality_traits": { "type": "array", "items": { "type": "string" } },
+            "values_preferences": { "type": "array", "items": { "type": "string" } },
+            "concerns_fears": { "type": "array", "items": { "type": "string" } },
+            "goals_wishes": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "family_caregivers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["relationship", "involvement_level"],
+        "properties": {
+          "relationship": { "type": "string" },
+          "age": { "type": "integer" },
+          "gender": { "type": "string", "enum": ["male", "female", "other", "not_specified"] },
+          "involvement_level": { "type": "string", "enum": ["primary", "secondary", "minimal", "distant"] },
+          "availability": { "type": "string" },
+          "capabilities": { "type": "array", "items": { "type": "string" } },
+          "limitations": { "type": "array", "items": { "type": "string" } },
+          "concerns": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    },
+    "initial_situation": {
+      "type": "object",
+      "required": ["trigger_event", "current_services"],
+      "properties": {
+        "trigger_event": {
+          "type": "string",
+          "description": "ゲーム開始のきっかけとなる出来事"
+        },
+        "current_services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "service_type": { "type": "string" },
+              "provider": { "type": "string" },
+              "frequency": { "type": "string" },
+              "effectiveness": { "type": "string", "enum": ["effective", "partially_effective", "ineffective", "unknown"] }
+            },
+            "additionalProperties": false
+          }
+        },
+        "immediate_concerns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "開始時点での緊急課題"
+        },
+        "available_resources": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "environmental_factors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "住環境、地域資源等"
+        }
+      },
+      "additionalProperties": false
+    },
+    "learning_objectives": {
+      "type": "object",
+      "required": ["primary_objectives"],
+      "properties": {
+        "primary_objectives": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 3,
+          "description": "主要学習目標"
+        },
+        "secondary_objectives": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "副次的学習目標"
+        },
+        "target_tags": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tag" },
+          "uniqueItems": true,
+          "description": "体験してほしい争点タグ"
+        },
+        "competencies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "communication", "collaboration", "role_clarification",
+              "conflict_resolution", "shared_decision_making",
+              "patient_centered_care", "family_engagement",
+              "resource_coordination", "quality_improvement"
+            ]
+          },
+          "description": "多職種連携コンピテンシー"
+        }
+      },
+      "additionalProperties": false
+    },
+    "profession_cards_config": {
+      "type": "object",
+      "description": "職種カードの個別設定 拡張対応版",
+      "propertyNames": {
+        "enum": [
+          "physician", "nurse", "pharmacist", "pt", "ot", "st",
+          "care_manager", "home_helper", "msw", "social_worker",
+          "dietitian", "assistive_device_specialist", "public_health_nurse"
+        ]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "known_info_override": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "このシナリオ固有の既知情報"
+          },
+          "objectives": {
+            "type": "object",
+            "description": "この職種のゲーム内目的設定 実質的成果に基づく評価",
+            "properties": {
+              "primary_goal": {
+                "type": "string",
+                "maxLength": 200,
+                "description": "この職種の主要達成目標 実質的成果目標"
+              },
+              "success_criteria": {
+                "type": "array",
+                "items": { "type": "string" },
+                "maxItems": 5,
+                "description": "主要目標の達成度を測る基準 チーム方針・対応内容の質的評価"
+              },
+              "engagement_triggers": {
+                "type": "array",
+                "items": { "type": "string" },
+                "maxItems": 8,
+                "description": "積極的発言を促すトリガー条件・場面"
+              }
+            },
+            "additionalProperties": false
+          },
+          "unknown_info_override": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "このシナリオで不明とする情報"
+          },
+          "special_concerns": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "このシナリオ固有の関心事項"
+          },
+          "constraints_override": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "このシナリオ固有の制約"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "constraint_sets": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+      "description": "適用する制約セットID constraint_set.schema.json参照"
+    },
+    "event_pool": {
+      "type": "object",
+      "properties": {
+        "included_events": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "uniqueItems": true,
+          "description": "このシナリオで使用するイベントカードID"
+        },
+        "excluded_events": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "uniqueItems": true,
+          "description": "このシナリオで除外するイベントカードID"
+        },
+        "weighted_categories": {
+          "type": "object",
+          "properties": {
+            "A_medical": { "type": "number", "minimum": 0 },
+            "B_psych": { "type": "number", "minimum": 0 },
+            "C_family": { "type": "number", "minimum": 0 },
+            "D_services": { "type": "number", "minimum": 0 },
+            "E_environment": { "type": "number", "minimum": 0 }
+          },
+          "description": "カテゴリ別の出現重み",
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "success_criteria": {
+      "type": "object",
+      "description": "シナリオ終了時の達成度評価基準（質的評価重視）",
+      "properties": {
+        "experiential_outcomes": { "type": "array", "items": { "type": "string" }, "description": "期待する体験・気づきの内容" },
+        "process_indicators": { "type": "array", "items": { "type": "string" }, "description": "プロセス評価項目" },
+        "collaboration_quality": { "type": "array", "items": { "type": "string" }, "description": "連携品質の評価項目" }
+      },
+      "additionalProperties": false
+    },
+    "facilitator_notes": {
+      "type": "object",
+      "properties": {
+        "preparation_checklist": { "type": "array", "items": { "type": "string" } },
+        "common_pitfalls": { "type": "array", "items": { "type": "string" } },
+        "intervention_points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timing": { "type": "string" },
+              "situation": { "type": "string" },
+              "suggested_action": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "debrief_questions": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "versioning": {
+      "type": "object",
+      "properties": {
+        "created_by": { "type": "string" },
+        "version": { "type": "string" },
+        "last_updated": { "type": "string", "format": "date-time" },
+        "playtested": { "type": "boolean" },
+        "feedback_incorporated": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": { "properties": { "scenario_complexity": { "const": "beginner" } }, "required": ["scenario_complexity"] },
+      "then": { "properties": { "difficulty_hint": { "const": "easy" } } }
+    },
+    {
+      "if": { "properties": { "scenario_complexity": { "const": "intermediate" } }, "required": ["scenario_complexity"] },
+      "then": { "properties": { "difficulty_hint": { "const": "normal" } } }
+    },
+    {
+      "if": { "properties": { "scenario_complexity": { "const": "advanced" } }, "required": ["scenario_complexity"] },
+      "then": { "properties": { "difficulty_hint": { "const": "hard" } } }
+    }
+  ],
+  "$defs": {
+    "setting": {
+      "type": "string",
+      "enum": [
+        "home_care", "acute_hospital", "chronic_ward", "rehab_hospital",
+        "long_term_care_facility", "outpatient", "day_care_rehab",
+        "hospice", "school", "community", "other"
+      ]
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "physician", "nurse", "pharmacist", "pt", "ot", "st",
+        "care_manager", "home_helper", "msw", "social_worker",
+        "dietitian", "assistive_device_specialist", "public_health_nurse",
+        "school_staff", "admin_officer", "community_member",
+        "patient", "family", "gm", "other"
+      ]
+    },
+    "tag": {
+      "type": "string",
+      "enum": ["safety", "time", "resources", "family_burden", "patient_preference", "function", "legal_policy", "coordination"]
+    }
+  }
+}
