@@ -1,0 +1,239 @@
+{
+  "constraint_set_id": "home_care_copd_loop2_easy",
+  "name_ja": "在宅COPD管理_制約緩め（退院1週間後）",
+  "description_ja": "退院1週間で一部問題は出たが、対処可能な範囲。家族のサポートとサービスの柔軟な対応で、安定した在宅療養を維持。",
+  "setting": "home_care",
+  "play_difficulty": "easy",
+
+  "constraints": {
+    "time": [
+      {
+        "type": "deadline",
+        "description_ja": "妻の休息確保まで",
+        "value": "今週中",
+        "severity": "flexible",
+        "rationale": "娘が週末に泊まり込みで支援予定"
+      },
+      {
+        "type": "availability",
+        "description_ja": "次の訪問診療",
+        "value": "3日後",
+        "severity": "flexible",
+        "rationale": "必要なら臨時往診も可能"
+      },
+      {
+        "type": "sequence",
+        "description_ja": "サービス追加の調整",
+        "value": "2-3日で可能",
+        "severity": "flexible",
+        "rationale": "ケアマネが迅速に対応"
+      },
+      {
+        "type": "duration_limit",
+        "description_ja": "本人の活動時間",
+        "value": "午前と夕方",
+        "severity": "flexible",
+        "rationale": "昼は休息、でも機嫌は良好"
+      }
+    ],
+
+    "economic": [
+      {
+        "type": "budget_limit",
+        "description_ja": "今月の残予算",
+        "amount": 35000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "negotiable"
+      },
+      {
+        "type": "copayment",
+        "description_ja": "追加サービスの自己負担",
+        "amount": 5000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "negotiable"
+      },
+      {
+        "type": "cost_sharing",
+        "description_ja": "娘からの経済的支援",
+        "amount": 20000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "available"
+      },
+      {
+        "type": "insurance_coverage",
+        "description_ja": "介護保険の残り単位",
+        "amount": 10000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "sufficient"
+      }
+    ],
+
+    "resources": [
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問看護の対応",
+        "quantity": 3,
+        "unit": "回/週",
+        "availability_schedule": "月・水・金、各45分確保",
+        "waiting_time": "本人も協力的"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "ヘルパーの導入",
+        "quantity": 2,
+        "unit": "回/週",
+        "availability_schedule": "火・木曜日、買い物と掃除",
+        "waiting_time": "来週から開始"
+      },
+      {
+        "type": "facility_access",
+        "description_ja": "デイサービスの利用",
+        "quantity": 1,
+        "unit": "回/週",
+        "availability_schedule": "木曜日、見学済み",
+        "waiting_time": "本人も「行ってみようか」"
+      },
+      {
+        "type": "transport",
+        "description_ja": "通院手段",
+        "quantity": "available",
+        "unit": "回",
+        "availability_schedule": "娘の車または介護タクシー",
+        "waiting_time": "随時対応可"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "夜間対応",
+        "quantity": "limited",
+        "unit": "回",
+        "availability_schedule": "訪問看護の電話相談可",
+        "waiting_time": "24時間"
+      },
+      {
+        "type": "equipment_capacity",
+        "description_ja": "在宅酸素（検討中）",
+        "quantity": 1,
+        "unit": "台",
+        "availability_schedule": "小型の目立たない機種を提案中",
+        "waiting_time": "本人の気持ちが変わりつつある"
+      }
+    ],
+
+    "legal_policy": [
+      {
+        "type": "insurance_rule",
+        "description_ja": "介護保険の利用状況",
+        "authority": "介護保険法",
+        "exceptions": ["限度額内で調整可能"],
+        "appeal_process": "必要なら区分変更も検討"
+      },
+      {
+        "type": "certification_requirement",
+        "description_ja": "緊急時対応加算",
+        "authority": "医療保険",
+        "exceptions": [],
+        "appeal_process": "訪問看護で算定開始"
+      },
+      {
+        "type": "professional_scope",
+        "description_ja": "訪問看護師の対応範囲",
+        "authority": "保健師助産師看護師法",
+        "exceptions": [],
+        "appeal_process": "医師との連携良好"
+      }
+    ]
+  },
+
+  "presentation": {
+    "gm_script": "退院から1週間が経過しました。夜間に1回SpO2が88%まで低下しましたが、起座位で改善。妻は少し疲れていますが、娘が週末に泊まりで来てくれて助かっています。訪問看護は週3回順調に入っており、本人も徐々に慣れてきました。『デイサービスも行ってみようかな』と前向きな発言も。在宅酸素については、小型の目立たない機種があることを知り、少し興味を示し始めています。",
+
+    "visual_aids": [
+      {
+        "type": "table",
+        "content": "| この1週間の出来事 | 状況 |\\n|---|---|\\n| 夜間SpO2低下 | 1回（88%、自然回復） |\\n| 訪問看護 | 3回（順調） |\\n| 入浴 | 1回（清拭2回） |\\n| 娘の支援 | 2回（泊まり1回） |\\n| 本人の気分 | 概ね良好 |"
+      },
+      {
+        "type": "timeline",
+        "content": "Day1-2: 順調にスタート\\nDay3: 夜間SpO2低下も自然回復\\nDay4: 娘が泊まりで支援\\nDay5: デイサービス見学\\nDay6: 訪問看護で入浴成功\\nDay7(今日): 定期カンファレンス"
+      }
+    ],
+
+    "emphasis_points": [
+      "概ね安定した1週間",
+      "家族のサポート機能している",
+      "サービスとの関係良好",
+      "本人の前向きな変化の兆し",
+      "在宅酸素への抵抗感が軽減傾向"
+    ]
+  },
+
+  "flexibility": {
+    "negotiable_constraints": [
+      "サービスの増減は柔軟に対応",
+      "娘の支援頻度調整可能",
+      "費用面は娘が支援可能"
+    ],
+    "emergency_overrides": [
+      "24時間電話相談",
+      "必要時は臨時往診",
+      "緊急ショートステイ利用可"
+    ]
+  },
+
+  "tags_affected": ["safety", "family_burden", "resources", "patient_preference"],
+
+  "flavor_text": "想定内の問題は出たが、すべて対処可能。チームワークと家族の協力で、理想的な在宅療養が実現しつつある。",
+
+  "gm_effect_guide": {
+    "immediate_effects": [
+      "1週間の成功体験",
+      "チームの連携強化",
+      "本人の態度軟化",
+      "家族の自信向上"
+    ],
+    "discussion_triggers": [
+      "この調子を維持するには？",
+      "在宅酸素導入のタイミングは？",
+      "デイサービス利用を促進するには？",
+      "妻の負担をさらに軽減するには？",
+      "緊急時対応の確認は？"
+    ],
+    "constraint_modifiers": {
+      "crisis_level": "低",
+      "decision_urgency": "余裕あり",
+      "available_options": "豊富",
+      "team_morale": "高"
+    }
+  },
+
+  "special_notes": {
+    "gm_guidance": "このループでは『小さな成功の積み重ね』を体験させます。問題は出ても解決可能であることを示し、チームの自信を高めてください。",
+    "learning_focus": "問題の早期発見と対処、チーム連携の効果、家族支援の重要性"
+  },
+
+  "week1_specific_events": {
+    "positive_events": [
+      "Day3: 夜間低酸素も自己対処で改善",
+      "Day4: 娘の泊まり支援で妻がぐっすり睡眠",
+      "Day5: デイサービス見学で好印象",
+      "Day6: 訪問看護師との信頼関係構築"
+    ],
+    "successful_interventions": [
+      "起座位指導が功を奏す",
+      "服薬管理がうまくいく",
+      "小型酸素濃縮器の情報提供",
+      "娘との連携強化"
+    ]
+  },
+
+  "versioning": {
+    "created_by": "浅井",
+    "version": "1.0.0",
+    "last_updated": "2025-01-15T19:30:00Z",
+    "notes": "時間経過型シナリオ用EASY難易度。ループ2（退院1週間後）用。順調な経過"
+  }
+}
