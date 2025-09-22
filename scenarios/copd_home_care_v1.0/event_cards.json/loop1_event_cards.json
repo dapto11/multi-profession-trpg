@@ -1,0 +1,430 @@
+[
+  {
+    "event_id": 1,
+    "category": "A_medical",
+    "subcategory": "cardio",
+    "title_ja": "最終検査値の軽度悪化",
+    "body_ja": "朝の血液検査でBNPが前回の180から220に上昇。「高リスク心不全の範囲に入りましたが、急激な変化ではありません。在宅でも注意深く観察していきましょう」と医師。本人は「やっぱり悪くなってるじゃないか」と落ち込み、妻は「数値が上がったって...大丈夫なの？」と不安顔。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["physician", "nurse"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/medical_condition/heart_failure"],
+      "constraints_hint": ["increase_medical_monitoring"],
+      "discussion_seeds": ["BNP上昇の意味", "在宅観察体制強化"],
+      "coordination_targets": ["physician", "nurse", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "数値の重みを強調",
+        "医師の説明と家族の理解のギャップを描写"
+      ],
+      "probing_questions": [
+        "この上昇をどう解釈？",
+        "在宅での観察体制強化は？",
+        "今後の悪化予防策は？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "40という数字の重み。「急激ではない」という言葉が、かえって不安を煽る。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "BNP上昇による医学的懸念、でも退院は可能なレベル"
+      ],
+      "discussion_triggers": [
+        "この上昇をどう解釈？",
+        "在宅での観察体制強化は？",
+        "今後の悪化予防策は？"
+      ],
+      "constraint_modifiers": {
+        "medical_monitoring": "強化必要",
+        "family_anxiety": "上昇"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.0,
+      "severity_score": 3
+    }
+  },
+  {
+    "event_id": 2,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "在宅サービス開始の遅れ連絡",
+    "body_ja": "訪問看護ステーションから「すみません、明日の初回訪問を午後に変更していただけませんか？」と連絡。午前は本人一人になってしまう。妻は「いきなり一人は不安」と困惑。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "care_manager"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["time"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/services/schedule"],
+      "constraints_hint": ["create_service_gap"],
+      "discussion_seeds": ["空白時間への対処", "緊急時連絡体制"],
+      "coordination_targets": ["nurse", "care_manager", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "計画の綻びを強調",
+        "家族の不安を描写"
+      ],
+      "probing_questions": [
+        "空白時間への対処は？",
+        "緊急時連絡体制の確認は？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "計画という名の安心が、ほころび始める。最初の数時間が、一番長く感じられる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "退院直後の空白時間発生、サービス連携の綻び"
+      ],
+      "discussion_triggers": [
+        "空白時間への対処は？",
+        "緊急時連絡体制の確認は？"
+      ],
+      "constraint_modifiers": {
+        "service_continuity": "一時的中断",
+        "family_anxiety": "増大"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.0,
+      "severity_score": 2
+    }
+  },
+  {
+    "event_id": 3,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "本人からの感謝の言葉",
+    "body_ja": "「みんなにはお世話になった。家に帰れるのも、みなさんのおかげです」と本人が珍しく素直に感謝の気持ちを表す。スタッフも家族も、思わず涙ぐむ。「頑張って家で過ごします」",
+    "direction": "positive",
+    "urgency": "low",
+    "duration": "transient",
+    "settings": ["home_care"],
+    "actors_primary": ["patient", "family"],
+    "actors_secondary": ["nurse", "physician", "care_manager"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["coordination"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/psychosocial/mood"],
+      "constraints_hint": ["boost_team_morale"],
+      "discussion_seeds": ["この気持ちを大切にする方法", "期待に応えるプレッシャー"],
+      "coordination_targets": ["physician", "nurse", "care_manager", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "感動的な場面として演出",
+        "普段頑固な人の素直さを強調"
+      ],
+      "probing_questions": [
+        "この気持ちを大切にするには？",
+        "期待に応えるプレッシャーは？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "普段は頑固な人の、素直な言葉。その重みが、みんなの心に響く。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "チーム全体のモチベーション向上、前向きな雰囲気"
+      ],
+      "discussion_triggers": [
+        "この気持ちを大切にするには？",
+        "期待に応えるプレッシャーは？"
+      ],
+      "constraint_modifiers": {
+        "team_morale": "向上",
+        "patient_motivation": "高まる"
+      }
+    },
+    "weights": {
+      "draw_weight": 0.8,
+      "severity_score": 1
+    }
+  },
+  {
+    "event_id": 4,
+    "category": "A_medical",
+    "subcategory": "cardio",
+    "title_ja": "初回訪問看護での発見",
+    "body_ja": "訪問看護師が「足がむくんでいますね。体重は測っていますか？」と指摘。妻は「そう言えば靴がきつそうで...」。退院時より2kg増加していた。本人は「ちょっとくらい大丈夫」と軽視。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse"],
+    "actors_secondary": ["physician", "family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["coordination"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/medical_condition/heart_failure", "/patient/vitals/weight"],
+      "constraints_hint": ["require_medical_assessment"],
+      "discussion_seeds": ["浮腫の評価方法", "家族の観察ポイント"],
+      "coordination_targets": ["nurse", "physician", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "専門職の観察眼を強調",
+        "家族の見落としやすいサインを描写"
+      ],
+      "probing_questions": [
+        "この変化をどう評価？",
+        "訪問頻度の調整は？",
+        "家族の観察ポイントは？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "在宅生活3日目、早くも現れた変化のサイン。見逃しがちな日常の中の危険信号。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "心不全増悪の早期サイン発見、在宅観察の重要性"
+      ],
+      "discussion_triggers": [
+        "この変化をどう評価？",
+        "訪問頻度の調整は？",
+        "家族の観察ポイントは？"
+      ],
+      "constraint_modifiers": {
+        "medical_monitoring": "強化必要",
+        "family_education": "必要"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.2,
+      "severity_score": 3
+    }
+  },
+  {
+    "event_id": 5,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "夜間の不安パニック",
+    "body_ja": "退院2日目の深夜2時、本人が「息ができない！」と妻を起こす。SpO2は89%だが、本人は「死ぬ、死ぬ」とパニック状態。妻は救急車を呼ぼうとするが、本人は「病院は嫌だ」と拒否。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "transient",
+    "settings": ["home_care"],
+    "actors_primary": ["family", "nurse"],
+    "actors_secondary": ["physician"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["family_burden"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/psychosocial/anxiety", "/patient/vitals/spo2"],
+      "constraints_hint": ["require_night_support"],
+      "discussion_seeds": ["夜間対応体制", "不安への対処法"],
+      "coordination_targets": ["nurse", "physician", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "夜間の恐怖を強調",
+        "家族の困惑と対応の困難さを描写"
+      ],
+      "probing_questions": [
+        "夜間対応体制の構築は？",
+        "不安への対処法は？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "静寂な夜に響く、恐怖の声。在宅の現実が、最も辛い形で現れる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "夜間不安の現実化、家族の対応困難"
+      ],
+      "discussion_triggers": [
+        "夜間対応体制の構築は？",
+        "不安への対処法は？"
+      ],
+      "constraint_modifiers": {
+        "night_support": "緊急必要",
+        "family_stress": "急上昇"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.3,
+      "severity_score": 4
+    }
+  },
+  {
+    "event_id": 6,
+    "category": "A_medical",
+    "subcategory": "disease_generic",
+    "title_ja": "薬の飲み忘れ発覚",
+    "body_ja": "妻が薬の整理をしていて「あれ？利尿剤が1日分多い...」と気づく。本人に確認すると「昨日飲んだかどうか覚えてない」。実は2日間飲み忘れていた。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["family", "nurse"],
+    "actors_secondary": ["pharmacist"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["family_burden"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/medications/adherence"],
+      "constraints_hint": ["require_medication_management"],
+      "discussion_seeds": ["服薬管理体制", "家族の負担"],
+      "coordination_targets": ["nurse", "pharmacist", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "服薬管理の複雑さを強調",
+        "記憶の曖昧さと薬の重要性のギャップ"
+      ],
+      "probing_questions": [
+        "服薬管理体制の見直しは？",
+        "家族の負担は？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "小さなピルケースの中の混乱。記憶と現実の間で、薬が迷子になる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "服薬管理の破綻発覚、症状悪化のリスク"
+      ],
+      "discussion_triggers": [
+        "服薬管理体制の見直しは？",
+        "家族の負担は？"
+      ],
+      "constraint_modifiers": {
+        "medication_safety": "要強化",
+        "family_responsibility": "増大"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.1,
+      "severity_score": 3
+    }
+  },
+  {
+    "event_id": 7,
+    "category": "B_psych",
+    "subcategory": "problem_behavior",
+    "title_ja": "近所への挨拶回りでの疲労",
+    "body_ja": "妻が「退院の挨拶をしないと」と近所を回る。本人も「世話になったから」と一緒に歩くが、3軒目で息切れが著明に。「やっぱり弱くなった」と落ち込む。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["pt", "family"],
+    "actors_secondary": ["nurse"],
+    "tags": {
+      "primary": "function",
+      "secondary": ["patient_preference"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/functional_status/exercise_tolerance"],
+      "constraints_hint": ["require_activity_modification"],
+      "discussion_seeds": ["活動量の調整", "段階的な社会復帰"],
+      "coordination_targets": ["pt", "nurse", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "社会的義務感と体力の限界を対比",
+        "本人の落胆を描写"
+      ],
+      "probing_questions": [
+        "活動量の調整は？",
+        "段階的な社会復帰計画は？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "社会復帰への第一歩が、体力の限界を教えてくれる。善意の重さが、肩にのしかかる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "活動耐性の低下実感、社会復帰への不安"
+      ],
+      "discussion_triggers": [
+        "活動量の調整は？",
+        "段階的な社会復帰計画は？"
+      ],
+      "constraint_modifiers": {
+        "activity_tolerance": "制限必要",
+        "social_participation": "段階的"
+      }
+    },
+    "weights": {
+      "draw_weight": 0.9,
+      "severity_score": 2
+    }
+  },
+  {
+    "event_id": 8,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "家事分担の現実",
+    "body_ja": "妻が「買い物に行ってくる」と出かけようとすると、本人が「一人にしないで」と不安がる。結局、本人も一緒に近所のスーパーへ。レジで息切れし、他の客に心配される。",
+    "direction": "negative",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["family"],
+    "actors_secondary": ["pt", "care_manager"],
+    "tags": {
+      "primary": "function",
+      "secondary": ["patient_preference"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/independence", "/family/daily_activities"],
+      "constraints_hint": ["require_daily_life_adjustment"],
+      "discussion_seeds": ["家事分担の調整", "外出時の工夫"],
+      "coordination_targets": ["care_manager", "family", "pt"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "日常生活の困難さを強調",
+        "社会での居心地の悪さを描写"
+      ],
+      "probing_questions": [
+        "家事分担の調整は？",
+        "外出時の工夫は？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "日常という名の試練。スーパーまでの道のりが、こんなに遠く感じるとは。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "日常生活の困難さ実感、社会での居心地の悪さ"
+      ],
+      "discussion_triggers": [
+        "家事分担の調整は？",
+        "外出時の工夫は？"
+      ],
+      "constraint_modifiers": {
+        "daily_independence": "制限",
+        "social_comfort": "低下"
+      }
+    },
+    "weights": {
+      "draw_weight": 0.8,
+      "severity_score": 2
+    }
+  }
+]
