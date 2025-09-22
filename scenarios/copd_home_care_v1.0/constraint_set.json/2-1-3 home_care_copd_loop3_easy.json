@@ -1,0 +1,261 @@
+{
+  "constraint_set_id": "home_care_copd_loop3_easy",
+  "name_ja": "在宅COPD管理_制約緩め（退院1ヶ月後）",
+  "description_ja": "退院1ヶ月で安定した在宅療養体制が確立。小さな課題はあるが、チーム連携と家族協力で持続可能な状況を実現。",
+  "setting": "home_care",
+  "play_difficulty": "easy",
+
+  "constraints": {
+    "time": [
+      {
+        "type": "deadline",
+        "description_ja": "次回の定期評価まで",
+        "value": "3ヶ月後",
+        "severity": "flexible",
+        "rationale": "安定しており、定期的な見直しで十分"
+      },
+      {
+        "type": "sequence",
+        "description_ja": "要介護認定の更新",
+        "value": "6ヶ月後",
+        "severity": "flexible",
+        "rationale": "要介護3継続の見込み高い"
+      },
+      {
+        "type": "availability",
+        "description_ja": "レスパイトケアの利用",
+        "value": "月1回",
+        "severity": "flexible",
+        "rationale": "ショートステイを定期利用開始"
+      },
+      {
+        "type": "duration_limit",
+        "description_ja": "在宅療養の持続可能期間",
+        "value": "当面問題なし",
+        "severity": "flexible",
+        "rationale": "現体制で長期継続可能"
+      }
+    ],
+
+    "economic": [
+      {
+        "type": "budget_limit",
+        "description_ja": "月間収支",
+        "amount": 15000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "surplus"
+      },
+      {
+        "type": "copayment",
+        "description_ja": "在宅酸素導入（ついに同意）",
+        "amount": 7500,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "manageable"
+      },
+      {
+        "type": "cost_sharing",
+        "description_ja": "デイサービス利用料",
+        "amount": 8000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "affordable"
+      },
+      {
+        "type": "insurance_coverage",
+        "description_ja": "介護保険利用状況",
+        "amount": 80,
+        "currency": "percent",
+        "period": "monthly",
+        "flexibility": "余裕あり"
+      }
+    ],
+
+    "resources": [
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問看護（信頼関係確立）",
+        "quantity": 3,
+        "unit": "回/週",
+        "availability_schedule": "月・水・金、1時間確保",
+        "waiting_time": "本人が楽しみに"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問診療（安定）",
+        "quantity": 2,
+        "unit": "回/月",
+        "availability_schedule": "第2・4水曜、ゆっくり診察",
+        "waiting_time": "信頼関係良好"
+      },
+      {
+        "type": "facility_access",
+        "description_ja": "デイサービス利用",
+        "quantity": 2,
+        "unit": "回/週",
+        "availability_schedule": "火・木曜日、楽しく参加",
+        "waiting_time": "友人もできた"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問リハビリ",
+        "quantity": 1,
+        "unit": "回/週",
+        "availability_schedule": "金曜日、運動機能維持",
+        "waiting_time": "効果実感"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "娘の定期支援",
+        "quantity": 4,
+        "unit": "回/月",
+        "availability_schedule": "毎週土曜日定例化",
+        "waiting_time": "リズムができた"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "息子の変化",
+        "quantity": "emerging",
+        "unit": "関与",
+        "availability_schedule": "時々リビングに顔を出す",
+        "waiting_time": "少しずつ関わり始めた"
+      }
+    ],
+
+    "legal_policy": [
+      {
+        "type": "insurance_rule",
+        "description_ja": "介護保険の効率的利用",
+        "authority": "介護保険法",
+        "exceptions": [],
+        "appeal_process": "現状で十分対応可能"
+      },
+      {
+        "type": "institutional_policy",
+        "description_ja": "かかりつけ医機能",
+        "authority": "医療法",
+        "exceptions": [],
+        "appeal_process": "24時間対応体制確立"
+      },
+      {
+        "type": "legal_restriction",
+        "description_ja": "将来的な施設入所",
+        "authority": "介護保険法",
+        "exceptions": [],
+        "appeal_process": "特養申請は予防的に実施"
+      }
+    ]
+  },
+
+  "presentation": {
+    "gm_script": "退院から1ヶ月、在宅療養は予想以上に順調です。2週間前、ついに在宅酸素の導入に同意。『小さい機械なら恥ずかしくない』と。SpO2も安定し、夜間の不安も解消。妻の負担は大幅に軽減しました。デイサービスは週2回利用、『将棋仲間ができた』と楽しんでいます。娘は毎週土曜日に定期訪問、息子も最近はリビングに顔を出すようになりました。先週の定期受診では『このまま家で過ごしたい、でも今度は本当に大丈夫そうだ』と本人。経済的にも月1.5万円の黒字で安定しています。",
+
+    "visual_aids": [
+      {
+        "type": "table",
+        "content": "| この1ヶ月の成果 | 状況 |\\n|---|---|\\n| 在宅酸素 | 導入成功 |\\n| SpO2 | 92-95%で安定 |\\n| デイサービス | 週2回定着 |\\n| 入院 | 0回 |\\n| 妻の健康 | 良好維持 |\\n| 家族関係 | 改善傾向 |"
+      },
+      {
+        "type": "timeline",
+        "content": "Week1: 概ね安定\\nWeek2: 在宅酸素導入決断\\nWeek3: 酸素開始、劇的改善\\nWeek4: デイ週2回に増加\\n現在: 安定した在宅生活"
+      },
+      {
+        "type": "budget_breakdown",
+        "content": "収入：20万円\\n支出：\\n- 生活費 13万円\\n- 医療費 1.5万円\\n- 介護保険 2万円\\n- 在宅酸素 0.75万円\\n- デイ利用 0.8万円\\n黒字：1.5万円/月"
+      }
+    ],
+
+    "emphasis_points": [
+      "在宅酸素導入で安定化",
+      "妻の負担大幅軽減",
+      "社会参加（デイ）成功",
+      "家族関係の改善",
+      "経済的にも持続可能"
+    ]
+  },
+
+  "flexibility": {
+    "negotiable_constraints": [
+      "サービス内容の見直し",
+      "レスパイトケアの活用",
+      "将来計画の検討"
+    ],
+    "emergency_overrides": [
+      "24時間対応体制確立済み",
+      "緊急時の入院体制確保"
+    ]
+  },
+
+  "tags_affected": ["safety", "patient_preference", "family_burden", "function"],
+
+  "flavor_text": "1ヶ月の試行錯誤を経て、理想的な在宅療養を実現。本人の価値観を尊重しつつ、安全性も確保。これが多職種連携の成功例。",
+
+  "gm_effect_guide": {
+    "immediate_effects": [
+      "在宅療養の成功体験",
+      "チーム連携の成果実感",
+      "家族の満足度向上",
+      "本人のQOL向上"
+    ],
+    "discussion_triggers": [
+      "この成功要因は何か？",
+      "今後の課題は？",
+      "さらなるQOL向上の方法は？",
+      "息子の社会復帰支援は？",
+      "長期的な見通しは？"
+    ],
+    "constraint_modifiers": {
+      "stability": "高",
+      "sustainability": "良好",
+      "team_satisfaction": "高",
+      "family_wellbeing": "改善"
+    }
+  },
+
+  "special_notes": {
+    "gm_guidance": "このループでは『成功の振り返りと持続』がテーマです。1ヶ月の経験から学んだことを整理し、今後の展望を語らせてください。理想的な多職種連携の姿を体験させます。",
+    "learning_focus": "成功要因の分析、持続可能性、QOL重視、家族全体のウェルビーイング"
+  },
+
+  "month1_achievements": {
+    "medical_stability": [
+      "在宅酸素導入成功",
+      "SpO2安定（92-95%）",
+      "心不全コントロール良好",
+      "入院回避"
+    ],
+    "family_wellbeing": [
+      "妻：負担軽減、健康維持",
+      "娘：定期支援のリズム確立",
+      "息子：わずかだが前向きな変化",
+      "本人：QOL向上、生きがい獲得"
+    ],
+    "service_integration": [
+      "訪問看護：信頼関係確立",
+      "デイサービス：社会参加成功",
+      "訪問リハ：機能維持",
+      "チーム連携：円滑"
+    ],
+    "economic_stability": [
+      "収支黒字化",
+      "サービス利用最適化",
+      "将来への備え可能",
+      "家族の協力体制"
+    ]
+  },
+
+  "future_perspectives": {
+    "short_term": "現体制の維持と微調整",
+    "medium_term": "息子の社会参加支援も視野に",
+    "long_term": "看取りまで在宅で可能な見通し",
+    "contingency": "必要時の施設入所準備も並行"
+  },
+
+  "versioning": {
+    "created_by": "浅井",
+    "version": "1.0.0",
+    "last_updated": "2025-01-15T20:00:00Z",
+    "notes": "時間経過型シナリオ用EASY難易度。ループ3（退院1ヶ月後）用。理想的な在宅療養の実現"
+  }
+}
