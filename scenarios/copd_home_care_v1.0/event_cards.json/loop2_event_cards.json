@@ -1,0 +1,426 @@
+[
+  {
+    "event_id": 9,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "妻の通院キャンセル",
+    "body_ja": "妻の腰痛治療の通院日。「夫を一人にできない」と整形外科をキャンセルしようとする。本人は「俺のせいで治療を受けられないなんて」と自責の念。娘に連絡するか、ヘルパーを頼むか、悩んでいる。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["family"],
+    "actors_secondary": ["care_manager", "home_helper"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["resources"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/family/health_status", "/family/self_care"],
+      "constraints_hint": ["require_respite_support"],
+      "discussion_seeds": ["介護者の健康管理", "一時的な支援体制"],
+      "coordination_targets": ["care_manager", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "介護者の自己犠牲を強調",
+        "本人の自責の念も描写"
+      ],
+      "probing_questions": [
+        "妻の健康管理をどう優先？",
+        "一時的な支援をどう確保？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "介護者の健康が、後回しになる。支える人を、誰が支えるのか。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "介護者の健康悪化リスク、支援体制の見直し必要"
+      ],
+      "discussion_triggers": [
+        "妻の健康管理をどう優先？",
+        "一時的な支援をどう確保？"
+      ],
+      "constraint_modifiers": {
+        "caregiver_health": "悪化リスク",
+        "respite_need": "急務"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.1,
+      "severity_score": 3
+    }
+  },
+  {
+    "event_id": 10,
+    "category": "C_family",
+    "subcategory": "challenge_event",
+    "title_ja": "息子からの騒音苦情",
+    "body_ja": "息子が2階から「うるさい！夜中に咳するな！」と怒鳴り声。本人は「息苦しいのに咳を止められるか」と反発。妻は「息子も眠れないから...でも病気だから仕方ないし...」と板挟み状態。",
+    "direction": "negative",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["family"],
+    "actors_secondary": ["msw"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["patient_preference"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/family/internal_conflict"],
+      "constraints_hint": ["complicate_family_dynamics"],
+      "discussion_seeds": ["家族内の対立", "病気症状への理解"],
+      "coordination_targets": ["msw", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "家族内の摩擦を描写",
+        "妻の板挟み状況を強調"
+      ],
+      "probing_questions": [
+        "家族内の理解をどう促進？",
+        "息子への配慮は可能？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "同じ屋根の下で起きる、家族内の摩擦。病気の症状さえ、責められる対象になる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "家族内対立の表面化、妻の精神的負担増大"
+      ],
+      "discussion_triggers": [
+        "家族内の理解をどう促進？",
+        "息子への配慮は可能？"
+      ],
+      "constraint_modifiers": {
+        "family_harmony": "悪化",
+        "caregiver_stress": "増大"
+      }
+    },
+    "weights": {
+      "draw_weight": 0.8,
+      "severity_score": 2
+    }
+  },
+  {
+    "event_id": 11,
+    "category": "D_services",
+    "subcategory": "science_option",
+    "title_ja": "デイサービス見学での孤立感",
+    "body_ja": "デイサービスを見学に行くと、本人だけが酸素をつけておらず、他の利用者から「あなたは元気そうね」と声をかけられる。本人は複雑な表情で「俺だけ違うのか...」とつぶやく。帰り道で「やっぱり場違いだ」と落ち込む。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "pt"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["function"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/social_participation", "/patient/self_perception"],
+      "constraints_hint": ["affect_service_acceptance"],
+      "discussion_seeds": ["社会参加への障壁", "自己認識のギャップ"],
+      "coordination_targets": ["care_manager", "pt"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "見た目の健康さと内面の病気のギャップ",
+        "孤立感を丁寧に描写"
+      ],
+      "probing_questions": [
+        "この体験をどう活かす？",
+        "他の社会参加の方法は？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "健康に見えることの孤独。病気を隠して生きることの、重い代償。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "社会参加への抵抗感増大、自己認識の複雑化"
+      ],
+      "discussion_triggers": [
+        "この体験をどう活かす？",
+        "他の社会参加の方法は？"
+      ],
+      "constraint_modifiers": {
+        "social_acceptance": "困難",
+        "service_motivation": "低下"
+      }
+    },
+    "weights": {
+      "draw_weight": 0.9,
+      "severity_score": 2
+    }
+  },
+  {
+    "event_id": 12,
+    "category": "D_services",
+    "subcategory": "science_option",
+    "title_ja": "福祉用具レンタルの提案",
+    "body_ja": "「ベッドサイドの手すりとポータブルトイレはいかがですか？安全性が向上します」と福祉用具業者が提案。月額3000円。妻は「あった方が安心」だが、本人は「まだそんなもの必要ない！」と頑なに拒否。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference", "resources"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/safety_equipment", "/patient/independence"],
+      "constraints_hint": ["safety_vs_dignity"],
+      "discussion_seeds": ["安全性向上の方法", "本人のプライドへの配慮"],
+      "coordination_targets": ["care_manager", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "安全性と尊厳の対立を強調",
+        "家族の心配と本人の拒否を対比"
+      ],
+      "probing_questions": [
+        "安全性をどう確保？",
+        "本人の気持ちにどう配慮？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "便利な道具が、プライドを傷つける。安全と尊厳の、終わらない綱引き。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "安全性向上の機会提示、しかし本人の強い抵抗"
+      ],
+      "discussion_triggers": [
+        "安全性をどう確保？",
+        "本人の気持ちにどう配慮？"
+      ],
+      "constraint_modifiers": {
+        "safety_equipment": "導入困難",
+        "dignity_concern": "増大"
+      }
+    },
+    "weights": {
+      "draw_weight": 0.8,
+      "severity_score": 2
+    }
+  },
+  {
+    "event_id": 13,
+    "category": "A_medical",
+    "subcategory": "cardio",
+    "title_ja": "急な血圧上昇",
+    "body_ja": "朝の血圧測定で180/100を記録。本人は「頭が重い」と訴えるが「病院は嫌だ」と頑なに拒否。妻は「救急車を呼んだ方が...」と慌てるが、本人の拒否で躊躇している。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "transient",
+    "settings": ["home_care"],
+    "actors_primary": ["physician", "nurse"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/vitals/blood_pressure"],
+      "constraints_hint": ["require_immediate_assessment"],
+      "discussion_seeds": ["緊急受診の必要性", "本人意思の尊重限界"],
+      "coordination_targets": ["physician", "nurse", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "医学的緊急性を強調",
+        "本人の拒否と家族の困惑を描写"
+      ],
+      "probing_questions": [
+        "緊急受診は必要？",
+        "本人の拒否をどう扱う？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "数値が示す危険信号。それでも病院を拒む意志と、家族の板挟み。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "医学的緊急事態の発生、本人意思vs安全性の対立"
+      ],
+      "discussion_triggers": [
+        "緊急受診は必要？",
+        "本人の拒否をどう扱う？"
+      ],
+      "constraint_modifiers": {
+        "medical_emergency": "発生",
+        "decision_urgency": "最高"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.4,
+      "severity_score": 4
+    }
+  },
+  {
+    "event_id": 14,
+    "category": "E_environment",
+    "subcategory": "local_life",
+    "title_ja": "地域の民生委員からの訪問",
+    "body_ja": "民生委員が「地域で何かお手伝いできることは？」と訪問。妻は感謝するが、本人は「余計なお世話だ」と不機嫌。「プライバシーを詮索されたくない」と警戒心を露わにする。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["msw"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["patient_preference"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/community/support_network"],
+      "constraints_hint": ["potential_community_resource"],
+      "discussion_seeds": ["地域資源の活用", "プライバシーへの配慮"],
+      "coordination_targets": ["msw", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "善意と警戒心の対比",
+        "地域支援の可能性と限界"
+      ],
+      "probing_questions": [
+        "地域の善意をどう活かす？",
+        "本人の警戒心への対処は？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "善意の手が差し伸べられる。でも、その手を振り払いたくなる時もある。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "地域支援の可能性提示、しかし本人の強い拒否反応"
+      ],
+      "discussion_triggers": [
+        "地域の善意をどう活かす？",
+        "本人の警戒心への対処は？"
+      ],
+      "constraint_modifiers": {
+        "community_support": "利用困難",
+        "privacy_concern": "増大"
+      }
+    },
+    "weights": {
+      "draw_weight": 0.7,
+      "severity_score": 1
+    }
+  },
+  {
+    "event_id": 15,
+    "category": "A_medical",
+    "subcategory": "disease_generic",
+    "title_ja": "新型コロナ感染への不安",
+    "body_ja": "近所でコロナ感染者が出たとの噂。本人は「俺が感染したら死ぬ」と極度に不安がり、訪問サービスも「来ないで」と拒否し始める。妻も「でもサービスがないと...」と困惑。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "care_manager"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["resources"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/patient/infection_anxiety", "/services/access"],
+      "constraints_hint": ["service_access_restriction"],
+      "discussion_seeds": ["感染対策と必要なケア", "過度な不安への対処"],
+      "coordination_targets": ["nurse", "care_manager", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "感染への恐怖を強調",
+        "サービス拒否のジレンマ"
+      ],
+      "probing_questions": [
+        "適切な感染対策は？",
+        "過度な不安にどう対処？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "見えないウイルスへの恐怖が、必要な支援さえ遠ざける。安全と孤立の狭間で。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "感染不安によるサービス拒否、支援体制の危機"
+      ],
+      "discussion_triggers": [
+        "適切な感染対策は？",
+        "過度な不安にどう対処？"
+      ],
+      "constraint_modifiers": {
+        "service_access": "制限",
+        "infection_anxiety": "極度"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.0,
+      "severity_score": 3
+    }
+  },
+  {
+    "event_id": 16,
+    "category": "C_family",
+    "subcategory": "challenge_event",
+    "title_ja": "娘からの施設入所再提案",
+    "body_ja": "娘から再度電話「やっぱり施設を真剣に考えて。母の限界が見えてる」。今度は具体的な施設名も挙げて説得。妻は揺れ動き、本人は「絶対に嫌だ！」と激怒。家族会議が必要な状況に。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["family", "msw"],
+    "actors_secondary": ["care_manager"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["patient_preference", "resources"]
+    },
+    "parameters": [],
+    "impact_hints": {
+      "state_fields": ["/family/decision_pressure", "/placement/consideration"],
+      "constraints_hint": ["family_decision_crisis"],
+      "discussion_seeds": ["家族の意見調整", "本人意向vs現実"],
+      "coordination_targets": ["msw", "family", "care_manager"]
+    },
+    "gm_guidance": {
+      "narration_tips": [
+        "家族間の温度差を強調",
+        "本人の激しい拒否反応"
+      ],
+      "probing_questions": [
+        "家族会議をどう進める？",
+        "本人の気持ちをどう尊重？"
+      ],
+      "modifiers": []
+    },
+    "flavor_text": "遠くから見る現実と、近くで感じる現実。家族の意見が、再び衝突する。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "家族内の意見対立激化、根本的な方針見直しの必要性"
+      ],
+      "discussion_triggers": [
+        "家族会議をどう進める？",
+        "本人の気持ちをどう尊重？"
+      ],
+      "constraint_modifiers": {
+        "family_conflict": "激化",
+        "placement_pressure": "増大"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.2,
+      "severity_score": 3
+    }
+  }
+]
