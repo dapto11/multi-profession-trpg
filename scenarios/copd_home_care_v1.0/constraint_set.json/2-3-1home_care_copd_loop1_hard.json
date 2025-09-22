@@ -1,0 +1,225 @@
+{
+  "constraint_set_id": "home_care_copd_hard",
+  "name_ja": "在宅COPD管理_制約厳格（退院前）",
+  "description_ja": "厳しい条件下での退院調整。経済的困窮、家族支援限定的、サービス資源逼迫の三重苦。明日退院という時間的切迫。",
+  "setting": "home_care",
+  "play_difficulty": "hard",
+
+  "constraints": {
+    "time": [
+      {
+        "type": "deadline",
+        "description_ja": "明日午前中に退院確定",
+        "value": "16時間",
+        "severity": "absolute",
+        "rationale": "DPC期限切れ、ベッドコントロール上変更不可"
+      },
+      {
+        "type": "sequence",
+        "description_ja": "本日中にサービス担当者会議必須",
+        "value": "本日17時まで",
+        "severity": "absolute",
+        "rationale": "介護保険法上の必須要件、明日朝一で退院"
+      },
+      {
+        "type": "availability",
+        "description_ja": "訪問看護は最短で退院3日後から",
+        "value": "3日後",
+        "severity": "firm",
+        "rationale": "新規契約処理とスタッフ調整に時間要"
+      },
+      {
+        "type": "duration_limit",
+        "description_ja": "退院カンファレンスは30分以内",
+        "value": "30分",
+        "severity": "absolute",
+        "rationale": "病院の会議室使用制限"
+      }
+    ],
+
+    "economic": [
+      {
+        "type": "income_limit",
+        "description_ja": "世帯年金収入（老齢基礎年金のみ）",
+        "amount": 150000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "budget_limit",
+        "description_ja": "介護保険自己負担上限（2割負担）",
+        "amount": 20000,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "copayment",
+        "description_ja": "在宅酸素療法の月額自己負担",
+        "amount": 7500,
+        "currency": "JPY",
+        "period": "monthly",
+        "flexibility": "fixed"
+      },
+      {
+        "type": "cost_sharing",
+        "description_ja": "貯金なし、追加支出不可",
+        "amount": 0,
+        "currency": "JPY",
+        "period": "one_time",
+        "flexibility": "fixed"
+      }
+    ],
+
+    "resources": [
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問診療医の訪問頻度",
+        "quantity": 1,
+        "unit": "回/月",
+        "availability_schedule": "第3水曜日午後のみ",
+        "waiting_time": "初回は3週間後"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "訪問看護の対応可能回数",
+        "quantity": 1,
+        "unit": "回/週",
+        "availability_schedule": "水曜日午前のみ空き",
+        "waiting_time": "3日"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "ケアマネジャーの対応時間",
+        "quantity": 15,
+        "unit": "分/月",
+        "availability_schedule": "電話対応中心",
+        "waiting_time": "即日"
+      },
+      {
+        "type": "facility_access",
+        "description_ja": "デイサービスの空き状況",
+        "quantity": 0,
+        "unit": "回/週",
+        "availability_schedule": "3ヶ月待ち",
+        "waiting_time": "3ヶ月"
+      },
+      {
+        "type": "equipment_capacity",
+        "description_ja": "在宅酸素機器の手配",
+        "quantity": "limited",
+        "unit": "台",
+        "availability_schedule": "業者在庫なし",
+        "waiting_time": "1週間"
+      },
+      {
+        "type": "staff_availability",
+        "description_ja": "娘の支援可能頻度",
+        "quantity": 3,
+        "unit": "回/年",
+        "availability_schedule": "盆・正月・緊急時のみ",
+        "waiting_time": "要相談"
+      }
+    ],
+
+    "legal_policy": [
+      {
+        "type": "insurance_rule",
+        "description_ja": "要介護1での支給限度額",
+        "authority": "介護保険法",
+        "exceptions": ["医療保険優先サービスのみ例外"],
+        "appeal_process": "区分変更申請は却下済み"
+      },
+      {
+        "type": "certification_requirement",
+        "description_ja": "退院時共同指導の算定要件",
+        "authority": "診療報酬",
+        "exceptions": [],
+        "appeal_process": "要件満たさず算定不可"
+      },
+      {
+        "type": "institutional_policy",
+        "description_ja": "病院の退院基準",
+        "authority": "病院規定",
+        "exceptions": ["医学的理由での延長は主治医判断"],
+        "appeal_process": "医療相談室経由で申請"
+      }
+    ]
+  },
+
+  "presentation": {
+    "gm_script": "明日午前中の退院が決定しています。妻は80歳で要支援状態、娘は年に数回しか来られません。世帯年金は月15万円、貯金はありません。訪問看護は週1回が限界、訪問診療は月1回のみ。要介護1でサービス枠は極めて限定的です。本日中にサービス担当者会議を完了させる必要があります。",
+
+    "visual_aids": [
+      {
+        "type": "table",
+        "content": "| サービス | 利用可能回数 | 制約 |\\n|---|---|---|\\n| 訪問診療 | 月1回 | 第3水曜のみ |\\n| 訪問看護 | 週1回 | 水曜午前のみ |\\n| 訪問リハ | なし | 枠なし |\\n| デイサービス | なし | 3ヶ月待ち |\\n| ヘルパー | 週2回30分 | 買い物のみ |"
+      },
+      {
+        "type": "budget_breakdown",
+        "content": "収入：年金15万円\\n固定支出：\\n- 生活費 12万円\\n- 医療費 1.5万円\\n- 介護保険 2万円\\n残額：-5千円（赤字）"
+      },
+      {
+        "type": "timeline",
+        "content": "本日16時：退院カンファレンス\\n本日17時：サービス担当者会議\\n明日10時：退院\\n3日後：訪問看護開始\\n3週間後：訪問診療初回"
+      }
+    ],
+
+    "emphasis_points": [
+      "明日退院は変更不可",
+      "経済的余裕は一切なし",
+      "家族支援はほぼ期待できない",
+      "サービス資源が極端に不足",
+      "要介護1でできることは限定的"
+    ]
+  },
+
+  "flexibility": {
+    "negotiable_constraints": [
+      "退院時間を午後にずらす程度",
+      "訪問看護の曜日変更（ただし週1回は不変）"
+    ],
+    "emergency_overrides": [
+      "医学的に生命の危険がある場合のみ退院延期可"
+    ]
+  },
+
+  "tags_affected": ["time", "resources", "family_burden", "legal_policy"],
+
+  "flavor_text": "制度の狭間で、ギリギリの選択を迫られる。完璧な解決は存在しない中で、最悪を回避する知恵と工夫が試される。",
+
+  "gm_effect_guide": {
+    "immediate_effects": [
+      "時間的切迫感による議論の緊張",
+      "経済的制約による選択肢の極端な制限",
+      "サービス不足による安全性への深刻な懸念",
+      "家族支援の欠如による介護負担の集中"
+    ],
+    "discussion_triggers": [
+      "本当に明日退院して大丈夫なのか？",
+      "週1回の訪問看護で安全を保てるか？",
+      "妻が倒れたらどうするのか？",
+      "在宅酸素なしで、かつサービスも不足で成立するか？",
+      "施設入所を検討すべきではないか？"
+    ],
+    "constraint_modifiers": {
+      "decision_pressure": "最大",
+      "creative_space": "極小（制約だらけ）",
+      "negotiation_room": "ほぼなし",
+      "failure_risk": "高"
+    }
+  },
+
+  "special_notes": {
+    "gm_guidance": "このモードは経験者向けです。解決困難な状況で、参加者が『最悪の中のベター』を模索する過程を重視してください。完璧な解決を求めず、現実的な妥協点を見出す力を養います。",
+    "learning_focus": "制約下での優先順位付け、トリアージ的思考、チームでの合意形成"
+  },
+
+  "versioning": {
+    "created_by": "浅井",
+    "version": "1.0.0",
+    "last_updated": "2025-01-15T16:00:00Z",
+    "notes": "時間経過型シナリオ用HARD難易度。ループ1（退院前）用"
+  }
+}
