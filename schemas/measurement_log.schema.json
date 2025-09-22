@@ -1,0 +1,814 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/measurement_log.schema.json",
+  "title": "Measurement Log Schema",
+  "description": "多職種連携ゲームのプロセス測定・学習評価用ログ。主要評価は質的体験、数値指標は運営品質確認用に位置づけ。",
+  "type": "object",
+  "required": ["session_id", "scenario_id", "started_at", "participants", "loops"],
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "description": "セッション識別子"
+    },
+    "scenario_id": {
+      "type": "string",
+      "description": "使用シナリオID scenario_template参照"
+    },
+    "setting": {
+      "$ref": "#/$defs/setting"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "play_difficulty": {
+      "type": "string",
+      "enum": ["easy", "normal", "hard"]
+    },
+    "participants": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["player_id", "role"],
+        "properties": {
+          "player_id": { "type": "string" },
+          "player_name": { "type": "string" },
+          "role": { "$ref": "#/$defs/role" },
+          "experience_level": {
+            "type": "string",
+            "enum": ["novice", "intermediate", "expert"],
+            "description": "自己申告"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "participants_index": {
+      "type": "object",
+      "description": "player_id → participants配列のインデックス 検索支援・任意",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "utterances": {
+      "type": "array",
+      "description": "発言レベルの詳細ログ 運営品質確認用",
+      "items": {
+        "type": "object",
+        "required": ["utterance_id", "loop_id", "phase", "timestamp", "speaker_role", "content"],
+        "properties": {
+          "utterance_id": {
+            "type": "string",
+            "pattern": "^u_[0-9]+$"
+          },
+          "loop_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "phase": {
+            "type": "integer",
+            "enum": [1, 2, 3, 4, 5]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "speaker_role": { "$ref": "#/$defs/role" },
+          "player_id": { "type": "string" },
+          "content": {
+            "type": "string",
+            "description": "発言内容"
+          },
+          "tags": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/tag" },
+            "description": "この発言に関連する争点タグ"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["perspective_shift", "translation", "dispute", "decision", "other"],
+            "description": "発言の分類"
+          },
+          "ref_utterance_id": {
+            "type": "string",
+            "pattern": "^u_[0-9]+$",
+            "description": "参照・応答対象の発言ID"
+          },
+          "sbar_scores": {
+            "type": "object",
+            "description": "SBAR構造での品質評価（運営確認用）",
+            "properties": {
+              "S": { "type": "number", "minimum": 0, "maximum": 1 },
+              "B": { "type": "number", "minimum": 0, "maximum": 1 },
+              "A": { "type": "number", "minimum": 0, "maximum": 1 },
+              "R": { "type": "number", "minimum": 0, "maximum": 1 },
+              "structure": { "type": "number", "minimum": 0, "maximum": 1 },
+              "total": { "type": "number", "minimum": 0, "maximum": 5 }
+            },
+            "additionalProperties": false
+          },
+          "translation_quality": {
+            "type": "object",
+            "description": "翻訳体験の発生確認用",
+            "properties": {
+              "source_utterance_id": {
+                "type": "string",
+                "pattern": "^u_[0-9]+$"
+              },
+              "confirmed_by_source": {
+                "type": "boolean",
+                "description": "元発言者による合意確認"
+              },
+              "confirmed_by_player_id": {
+                "type": "string"
+              },
+              "confirmed_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "js_divergence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Jensen-Shannon距離"
+              },
+              "intent_match_rate": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "synergy_tokens": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "相乗効果を生む提案の数 異職種連携体験の確認用"
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": { "properties": { "type": { "const": "translation" } }, "required": ["type"] },
+            "then": { "required": ["translation_quality"] }
+          },
+          {
+            "if": { "properties": { "type": { "const": "decision" } }, "required": ["type"] },
+            "then": { "required": ["ref_utterance_id"] }
+          }
+        ]
+      }
+    },
+    "loops": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["loop_id", "phases", "metrics"],
+        "properties": {
+          "loop_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["phase_number", "started_at", "ended_at"],
+              "properties": {
+                "phase_number": {
+                  "type": "integer",
+                  "enum": [1, 2, 3, 4, 5]
+                },
+                "started_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "ended_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "time_allocated_sec": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "想定配分"
+                },
+                "time_actual_sec": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "実測"
+                },
+                "rule_violations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": ["overtime", "out_of_scope", "process_break", "translation_error", "other"]
+                      },
+                      "count": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "notes": { "type": "string" }
+                    },
+                    "additionalProperties": false
+                  },
+                  "description": "フェーズ内のルール逸脱"
+                },
+                "notes": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "disputes_snapshot": {
+            "type": "object",
+            "description": "Phase2時点の争点集計 dispute_queue参照の要約",
+            "properties": {
+              "count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "by_primary_tag": {
+                "type": "object",
+                "properties": {
+                  "safety": { "type": "integer", "minimum": 0 },
+                  "time": { "type": "integer", "minimum": 0 },
+                  "resources": { "type": "integer", "minimum": 0 },
+                  "family_burden": { "type": "integer", "minimum": 0 },
+                  "patient_preference": { "type": "integer", "minimum": 0 },
+                  "function": { "type": "integer", "minimum": 0 },
+                  "legal_policy": { "type": "integer", "minimum": 0 },
+                  "coordination": { "type": "integer", "minimum": 0 }
+                },
+                "additionalProperties": false,
+                "description": "tag → 件数"
+              },
+              "consensus_level": { "$ref": "#/$defs/consensus_level" }
+            },
+            "additionalProperties": false
+          },
+          "decision": {
+            "type": "object",
+            "description": "Phase4の方針決定結果",
+            "properties": {
+              "status": { "$ref": "#/$defs/decision_status" },
+              "options_considered": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "time_to_decide_sec": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "constraints_referenced": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/constraint_ref" }
+              },
+              "summary_ja": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          "events_drawn": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["event_id"],
+              "properties": {
+                "event_id": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "draw_order": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "applied": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "impact_notes": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "participant_metrics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["player_id", "role"],
+              "properties": {
+                "player_id": { "type": "string" },
+                "role": { "$ref": "#/$defs/role" },
+                "statements_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "talk_time_sec": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "questions_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "interruptions_count": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "tags_contributed": {
+                  "type": "array",
+                  "items": { "$ref": "#/$defs/tag" },
+                  "description": "当人の発言が誘発・関与した争点タグ 重複なし",
+                  "uniqueItems": true
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "metrics": {
+            "type": "object",
+            "description": "ループ単位の集計指標（運営品質確認用）",
+            "properties": {
+              "talk_time_gini": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "発言時間の不平等度"
+              },
+              "tags_distribution": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "description": "tag_id → 出現・争点化回数"
+              },
+              "phase_timing_adherence": {
+                "type": "object",
+                "properties": {
+                  "on_time_phases": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "over_time_phases": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "session_metrics": {
+      "type": "object",
+      "description": "セッション全体の集計（運営品質確認用）",
+      "properties": {
+        "total_loops": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "overall_tags_distribution": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "avg_time_to_decide_sec": {
+          "type": "number",
+          "minimum": 0
+        },
+        "rule_violations_total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "translation_attempts_total": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "翻訳体験の発生回数（成功率ではなく体験機会の確認用）"
+        },
+        "sbar_practice_opportunities": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "構造化提案の練習機会数（品質評価ではなく機会確認用）"
+        },
+        "synergy_moments_total": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "異職種連携場面の発生回数（効果測定ではなく体験確認用）"
+        },
+        "quality_thresholds": {
+          "type": "object",
+          "description": "運営品質確認用の警告閾値",
+          "properties": {
+            "talk_time_gini_threshold": {
+              "type": "number",
+              "default": 0.7,
+              "description": "これを超えたら発言偏重を警告"
+            },
+            "overtime_phases_threshold": {
+              "type": "integer",
+              "default": 2,
+              "description": "この数以上超過で時間管理要改善"
+            },
+            "rule_violations_threshold": {
+              "type": "integer",
+              "default": 5,
+              "description": "この数以上で進行方法要見直し"
+            },
+            "participant_silence_sec": {
+              "type": "integer",
+              "default": 300,
+              "description": "この秒数以上無発言で参加促進必要"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "qualitative_feedback": {
+      "type": "object",
+      "description": "主要評価：質的体験・主観的変化の記録",
+      "properties": {
+        "debrief_responses": {
+          "type": "object",
+          "properties": {
+            "profession_goal_achievement": {
+              "type": "array",
+              "description": "職種別目標達成度の質的評価",
+              "items": {
+                "type": "object",
+                "required": ["player_id", "role", "primary_goal", "success_criteria_evaluation"],
+                "properties": {
+                  "player_id": { "type": "string" },
+                  "role": { "$ref": "#/$defs/role" },
+                  "primary_goal": {
+                    "type": "string",
+                    "description": "評価対象の主要目標"
+                  },
+                  "success_criteria_evaluation": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["criterion", "achieved"],
+                      "properties": {
+                        "criterion": {
+                          "type": "string",
+                          "description": "評価基準"
+                        },
+                        "achieved": {
+                          "type": "boolean",
+                          "description": "達成したかどうか"
+                        },
+                        "achievement_level": {
+                          "type": "string",
+                          "enum": ["not_achieved", "partially_achieved", "fully_achieved", "exceeded"],
+                          "description": "達成度レベル"
+                        },
+                        "evidence": {
+                          "type": "string",
+                          "description": "達成/未達成の具体的根拠"
+                        },
+                        "evaluator_notes": {
+                          "type": "string",
+                          "description": "評価者（GM等）の補足メモ"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "overall_goal_achievement": {
+              "type": "string",
+              "enum": ["not_achieved", "partially_achieved", "fully_achieved", "exceeded"],
+              "description": "主要目標全体の達成度"
+            }
+          },
+          "additionalProperties": false
+        },
+        "perspective_shifts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["player_id", "moment_description"],
+            "properties": {
+              "player_id": { "type": "string" },
+              "moment_description": {
+                "type": "string",
+                "description": "他職種への新しい気づきの具体的場面"
+              },
+              "impact_level": {
+                "type": "string",
+                "enum": ["slight", "moderate", "significant", "transformative"]
+              },
+              "related_profession": { "$ref": "#/$defs/role" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "professional_blind_spots": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["player_id", "realization"],
+            "properties": {
+              "player_id": { "type": "string" },
+              "realization": {
+                "type": "string",
+                "description": "自職種の特徴・偏見への気づき"
+              },
+              "emotional_response": {
+                "type": "string",
+                "enum": ["surprised", "uncomfortable", "relieved", "curious", "motivated"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "conflict_attitude_changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["player_id", "before_attitude", "after_attitude"],
+            "properties": {
+              "player_id": { "type": "string" },
+              "before_attitude": {
+                "type": "string",
+                "description": "価値観対立への以前の感情・態度"
+              },
+              "after_attitude": {
+                "type": "string",
+                "description": "体験後の価値観対立への感情・態度"
+              },
+              "change_description": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "future_intentions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["player_id", "action_plan"],
+            "properties": {
+              "player_id": { "type": "string" },
+              "action_plan": {
+                "type": "string",
+                "description": "現場で試してみたい具体的行動"
+              },
+              "confidence_level": {
+                "type": "string",
+                "enum": ["hesitant", "willing_to_try", "motivated", "committed"]
+              },
+              "target_situation": {
+                "type": "string",
+                "description": "適用を想定する現場場面"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "experience_intensity": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["player_id", "overall_intensity"],
+            "properties": {
+              "player_id": { "type": "string" },
+              "overall_intensity": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5,
+                "description": "1=特に印象に残らない 5=価値観が変わるような体験"
+              },
+              "most_impactful_moment": { "type": "string" },
+              "one_word_summary": {
+                "type": "string",
+                "description": "体験を一言で表現"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "free_narratives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["player_id", "narrative"],
+        "properties": {
+          "player_id": { "type": "string" },
+          "narrative": {
+            "type": "string",
+            "description": "体験を物語として語った内容"
+          },
+          "narrative_type": {
+            "type": "string",
+            "enum": ["colleague_sharing", "story_format", "future_advice"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "surveys": {
+      "type": "array",
+      "description": "フォローアップ調査（質的変化の継続確認）",
+      "items": {
+        "type": "object",
+        "required": ["survey_id", "timepoint"],
+        "properties": {
+          "survey_id": {
+            "type": "string",
+            "description": "instrument識別子 例: immediate_post, week_1, month_3"
+          },
+          "timepoint": {
+            "type": "string",
+            "enum": ["immediate", "week_1", "month_3", "other"]
+          },
+          "administered_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "responses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["player_id", "qualitative_responses"],
+              "properties": {
+                "player_id": { "type": "string" },
+                "qualitative_responses": {
+                  "type": "object",
+                  "properties": {
+                    "remembered_moments": {
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "description": "まだ覚えている印象的場面"
+                    },
+                    "behavioral_changes": {
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "description": "現場での関わり方の変化"
+                    },
+                    "attitude_shifts": {
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "description": "多職種連携への姿勢の変化"
+                    },
+                    "application_examples": {
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "description": "研修内容を現場で活用した具体例"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "quantitative_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["item_id", "response"],
+                    "properties": {
+                      "item_id": { "type": "string" },
+                      "response": {
+                        "type": ["number", "string", "boolean"]
+                      },
+                      "scale": {
+                        "type": "string",
+                        "description": "例: Likert1-5"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "free_text": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "debrief": {
+      "type": "object",
+      "description": "最終リフレクションの要約（質的評価の中核）",
+      "properties": {
+        "key_takeaways": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "collective_insights": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "グループ全体で共有された気づき"
+        },
+        "what_went_well": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "to_improve": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "group_dynamics_quality": {
+          "type": "string",
+          "enum": ["poor", "adequate", "good", "excellent"],
+          "description": "参加者間の相互理解の質"
+        }
+      },
+      "additionalProperties": false
+    },
+    "versioning": {
+      "type": "object",
+      "properties": {
+        "created_by": { "type": "string" },
+        "version": { "type": "string" },
+        "last_updated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "tag": {
+      "type": "string",
+      "enum": ["safety", "time", "resources", "family_burden", "patient_preference", "function", "legal_policy", "coordination"]
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "physician", "nurse", "pharmacist", "pt", "ot", "st",
+        "care_manager", "home_helper", "msw", "social_worker",
+        "dietitian", "assistive_device_specialist", "public_health_nurse",
+        "school_staff", "admin_officer", "community_member",
+        "patient", "family", "gm", "other"
+      ]
+    },
+    "setting": {
+      "type": "string",
+      "enum": [
+        "home_care", "acute_hospital", "chronic_ward", "rehab_hospital",
+        "long_term_care_facility", "outpatient", "day_care_rehab",
+        "hospice", "school", "community", "other"
+      ]
+    },
+    "decision_status": {
+      "type": "string",
+      "enum": ["decided", "undecided", "partial"],
+      "description": "方針決定の成否"
+    },
+    "consensus_level": {
+      "type": "string",
+      "enum": ["high_conflict", "moderate_disagreement", "partial_alignment", "broad_consensus"]
+    },
+    "constraint_ref": {
+      "type": "object",
+      "required": ["set_id"],
+      "properties": {
+        "set_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["time", "economic", "resources", "legal_policy"]
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "当該カテゴリ配列内の添字 任意"
+        },
+        "pointer": {
+          "type": "string",
+          "pattern": "^#/.+",
+          "description": "JSON Pointer 任意"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
