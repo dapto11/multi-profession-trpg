@@ -1,0 +1,290 @@
+constraint_set.schema.json
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/constraint_set.schema.json",
+  "title": "Constraint Set Schema",
+  "description": "多職種連携ゲーム Phase4 方針決定で適用される制約セット - 時間/経済/リソース/制度",
+  "type": "object",
+  "required": ["constraint_set_id", "name_ja", "constraints"],
+  "properties": {
+    "constraint_set_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "制約セット識別子 例: home_care_standard, acute_discharge_urgent"
+    },
+    "name_ja": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "制約セット名 GM向け表示用"
+    },
+    "description_ja": {
+      "type": "string",
+      "description": "制約セットの概要説明"
+    },
+    "setting": {
+      "$ref": "#/$defs/setting",
+      "description": "想定される適用現場"
+    },
+    "play_difficulty": {
+      "type": "string",
+      "enum": ["easy", "normal", "hard"],
+      "description": "制約の厳しさレベル"
+    },
+    "constraints": {
+      "type": "object",
+      "description": "制約カテゴリ別の具体的制約",
+      "properties": {
+        "time": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/time_constraint" },
+          "description": "時間制約"
+        },
+        "economic": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/economic_constraint" },
+          "description": "経済・費用制約"
+        },
+        "resources": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/resource_constraint" },
+          "description": "人的・物的リソース制約"
+        },
+        "legal_policy": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/legal_policy_constraint" },
+          "description": "制度・法的制約"
+        }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
+    },
+    "presentation": {
+      "type": "object",
+      "description": "GM向けの提示方法",
+      "properties": {
+        "gm_script": {
+          "type": "string",
+          "description": "GMが読み上げる制約説明文"
+        },
+        "visual_aids": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["table", "timeline", "budget_breakdown", "resource_map"]
+              },
+              "content": {
+                "type": "string",
+                "description": "表示内容 Markdown等"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "emphasis_points": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "特に強調すべき制約ポイント"
+        }
+      },
+      "additionalProperties": false
+    },
+    "flexibility": {
+      "type": "object",
+      "description": "制約の柔軟性・例外規定",
+      "properties": {
+        "negotiable_constraints": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "交渉可能な制約項目"
+        },
+        "emergency_overrides": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "緊急時の制約緩和条件"
+        }
+      },
+      "additionalProperties": false
+    },
+    "tags_affected": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/tag" },
+      "uniqueItems": true,
+      "description": "この制約セットが主に影響する争点タグ"
+    },
+    "flavor_text": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "プレイヤー向け雰囲気描写"
+    },
+    "gm_effect_guide": {
+      "type": "object",
+      "description": "GM用の構造化された効果ガイド",
+      "properties": {
+        "immediate_effects": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "即座に発生する影響"
+        },
+        "discussion_triggers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "議論を促すトピック"
+        },
+        "constraint_modifiers": {
+          "type": "object",
+          "description": "制約への影響",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "versioning": {
+      "type": "object",
+      "properties": {
+        "created_by": { "type": "string" },
+        "version": { "type": "string" },
+        "last_updated": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "time_constraint": {
+      "type": "object",
+      "required": ["type", "description_ja"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["deadline", "sequence", "availability", "duration_limit"]
+        },
+        "description_ja": { "type": "string" },
+        "value": {
+          "type": ["string", "number", "integer"],
+          "description": "具体的な期限・期間 例: '2週間以内', 14, '2025-09-15'"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["flexible", "firm", "absolute"],
+          "description": "制約の厳格度"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "制約の根拠・理由"
+        }
+      },
+      "additionalProperties": false
+    },
+    "economic_constraint": {
+      "type": "object",
+      "required": ["type", "description_ja"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["budget_limit", "insurance_coverage", "copayment", "income_limit", "cost_sharing"]
+        },
+        "description_ja": { "type": "string" },
+        "amount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "金額 円"
+        },
+        "currency": {
+          "type": "string",
+          "default": "JPY"
+        },
+        "period": {
+          "type": "string",
+          "enum": ["one_time", "daily", "weekly", "monthly", "yearly"],
+          "description": "対象期間"
+        },
+        "flexibility": {
+          "type": "string",
+          "enum": ["fixed", "negotiable", "emergency_expandable"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "resource_constraint": {
+      "type": "object",
+      "required": ["type", "description_ja"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["staff_availability", "equipment_capacity", "facility_access", "transport", "supply_chain"]
+        },
+        "description_ja": { "type": "string" },
+        "quantity": {
+          "oneOf": [
+            { "type": "number", "minimum": 0 },
+            { "type": "string", "enum": ["limited", "unavailable"] }
+          ],
+          "description": "利用可能量 数値または限定/不可"
+        },
+        "unit": {
+          "type": "string",
+          "description": "単位 回/週、時間/日等"
+        },
+        "availability_schedule": {
+          "type": "string",
+          "description": "利用可能スケジュール"
+        },
+        "waiting_time": {
+          "type": "string",
+          "description": "待機時間"
+        }
+      },
+      "additionalProperties": false
+    },
+    "legal_policy_constraint": {
+      "type": "object",
+      "required": ["type", "description_ja"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["insurance_rule", "certification_requirement", "legal_restriction", "institutional_policy", "professional_scope"]
+        },
+        "description_ja": { "type": "string" },
+        "authority": {
+          "type": "string",
+          "description": "制約を定める機関・法令"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "例外条件"
+        },
+        "appeal_process": {
+          "type": "string",
+          "description": "不服申立て・変更手続き"
+        }
+      },
+      "additionalProperties": false
+    },
+    "tag": {
+      "type": "string",
+      "enum": ["safety", "time", "resources", "family_burden", "patient_preference", "function", "legal_policy", "coordination"]
+    },
+    "setting": {
+      "type": "string",
+      "enum": [
+        "home_care",
+        "acute_hospital",
+        "chronic_ward",
+        "rehab_hospital",
+        "long_term_care_facility",
+        "outpatient",
+        "day_care_rehab",
+        "hospice",
+        "school",
+        "community",
+        "other"
+      ]
+    }
+  }
+}
