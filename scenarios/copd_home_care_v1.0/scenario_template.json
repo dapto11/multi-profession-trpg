@@ -1,0 +1,507 @@
+{
+  "scenario_id": "copd_home_transition_01",
+  "title_ja": "息切れと共に生きる - 在宅移行への挑戦【時間経過型実験版】",
+  "description_ja": "【実験的シナリオ】このシナリオは時間経過型の新しい試みです。ループ1=退院前日、ループ2=退院1週間後、ループ3=退院1ヶ月後と、時間経過に伴う状況変化を体験します。COPD・心不全を持つ80代男性の退院から在宅療養の確立まで、在宅酸素への強い拒否、妻の介護負担、引きこもり息子の存在など、複雑な家族背景の中で最適な在宅療養体制を構築します。",
+
+  "experimental_notice": {
+    "is_experimental": true,
+    "experiment_type": "temporal_progression",
+    "notice_ja": "このシナリオは開発・実証段階の実験的コンテンツです。通常の多職種連携ゲームとは異なり、3つのループで時間経過を表現します。プレイ後のフィードバックをお願いします。",
+    "version_note": "Experimental v0.9 - 正式版リリース前の検証用",
+    "feedback_request": "時間経過型の学習効果について、特にご意見をお聞かせください"
+  },
+
+  "temporal_progression_guide": {
+    "overview": "このシナリオは3つの異なる時点を体験する特殊な構造です",
+    "loop_1": {
+      "time_point": "退院前日",
+      "setting_description": "入院3週間後、明日退院予定。病院でのカンファレンス",
+      "gm_announcement": "これから退院前カンファレンスを始めます。明日の退院に向けて、在宅療養の方針を決めてください。"
+    },
+    "loop_2": {
+      "time_point": "退院1週間後",
+      "setting_description": "在宅生活1週間。問題が顕在化し緊急カンファレンス",
+      "gm_announcement": "退院から1週間が経過しました。訪問看護師から緊急連絡があり、臨時カンファレンスを開催します。"
+    },
+    "loop_3": {
+      "time_point": "退院1ヶ月後",
+      "setting_description": "在宅生活1ヶ月。持続可能性を検討する定期カンファレンス",
+      "gm_announcement": "退院から1ヶ月が経過しました。これまでの経過を踏まえ、長期的な方針を検討します。"
+    }
+  },
+
+  "setting": "home_care",
+  "scenario_complexity": "intermediate",
+  "difficulty_hint": "normal",
+  "duration_minutes": 90,
+
+  "target_participants": [
+    "physician",
+    "nurse",
+    "pt",
+    "care_manager",
+    "msw",
+    "family"
+  ],
+
+  "phase_flow": [1, 2, 3, 4, 5],
+
+  "patient": {
+    "basic_info": {
+      "age": 82,
+      "gender": "male",
+      "name": "山田太郎",
+      "living_situation": "with_family",
+      "residence_type": "house",
+      "mobility": "independent"
+    },
+    "medical_condition": {
+      "primary_diagnosis": "慢性閉塞性肺疾患（COPD）、慢性心不全",
+      "secondary_diagnoses": [
+        "陳旧性心筋梗塞",
+        "高血圧症",
+        "軽度難聴"
+      ],
+      "current_medications": [
+        {
+          "name": "フロセミド",
+          "dosage": "20mg",
+          "frequency": "1日1回朝",
+          "adherence_issues": false
+        },
+        {
+          "name": "スピリーバ吸入",
+          "dosage": "2.5μg",
+          "frequency": "1日1回",
+          "adherence_issues": false
+        },
+        {
+          "name": "アムロジピン",
+          "dosage": "5mg",
+          "frequency": "1日1回朝",
+          "adherence_issues": false
+        }
+      ],
+      "functional_status": {
+        "adl_score": 85,
+        "iadl_score": 70,
+        "cognitive_status": "normal"
+      },
+      "recent_changes": [
+        "心不全増悪による緊急入院（3週間前）",
+        "人工呼吸器使用後離脱",
+        "労作時の著明なSpO2低下（88-90%）",
+        "在宅酸素療法の導入提案に対する強い拒否"
+      ]
+    },
+    "psychosocial": {
+      "personality_traits": [
+        "頑固で自尊心が高い",
+        "元病院警備員としてのプライド",
+        "他人に弱みを見せたくない"
+      ],
+      "values_preferences": [
+        "自宅での普通の生活",
+        "医療機器に頼らない生活",
+        "近所との体面を保つこと"
+      ],
+      "concerns_fears": [
+        "酸素チューブをつけた姿を見られること",
+        "妻に先立たれること",
+        "息子の将来"
+      ],
+      "goals_wishes": [
+        "できれば楽になりたい",
+        "妻に迷惑をかけたくない",
+        "普通に生活したい"
+      ]
+    }
+  },
+
+  "family_caregivers": [
+    {
+      "relationship": "妻",
+      "age": 80,
+      "gender": "female",
+      "involvement_level": "primary",
+      "availability": "常時在宅",
+      "capabilities": [
+        "服薬管理",
+        "簡単な身体介護",
+        "精神的支え"
+      ],
+      "limitations": [
+        "腰痛あり",
+        "体力的限界",
+        "夫の依存による精神的疲労"
+      ],
+      "concerns": [
+        "夫の健康状態",
+        "息子のこと（詳細は話したがらない）",
+        "自分の体力"
+      ]
+    },
+    {
+      "relationship": "長男",
+      "age": 50,
+      "gender": "male",
+      "involvement_level": "minimal",
+      "availability": "同居だが関わりなし",
+      "capabilities": [],
+      "limitations": [
+        "引きこもり状態",
+        "介護への関与困難",
+        "コミュニケーション困難"
+      ],
+      "concerns": []
+    },
+    {
+      "relationship": "長女",
+      "age": 48,
+      "gender": "female",
+      "involvement_level": "secondary",
+      "availability": "月1-2回訪問可能",
+      "capabilities": [
+        "経済的支援可能",
+        "緊急時対応"
+      ],
+      "limitations": [
+        "遠方居住（車で2時間）",
+        "仕事あり"
+      ],
+      "concerns": [
+        "両親の健康",
+        "兄のこと",
+        "遠方からのサポート方法"
+      ]
+    }
+  ],
+
+  "initial_situation": {
+    "trigger_event": "【時間経過型】ループごとに異なる状況設定。詳細はtemporal_progression_guideを参照",
+    "current_services": [
+      {
+        "service_type": "状況により変化",
+        "provider": "temporal_progression_guideを参照",
+        "frequency": "ループにより異なる",
+        "effectiveness": "progressive"
+      }
+    ],
+    "immediate_concerns": [
+      "[ループ1] 労作時SpO2低下への対応、在宅酸素導入の可否",
+      "[ループ2] 夜間低酸素エピソード、妻の疲労蓄積",
+      "[ループ3] 心不全増悪の兆候、持続可能性への疑問"
+    ],
+    "available_resources": [
+      "訪問診療医の確保済み",
+      "訪問看護ステーション対応可能",
+      "訪問リハビリ提供可能",
+      "要介護2の認定済み"
+    ],
+    "environmental_factors": [
+      "古い戸建て住宅（手すり設置済み）",
+      "下町の閑静な住宅街",
+      "近隣との付き合いあり",
+      "最寄り病院まで車で20分"
+    ]
+  },
+
+  "learning_objectives": {
+    "primary_objectives": [
+      "医学的必要性と患者の価値観の対立を体験する",
+      "家族の隠れた問題への配慮を学ぶ",
+      "【実験的要素】時間経過による問題の変化と深刻化を体験する"
+    ],
+    "secondary_objectives": [
+      "段階的な信頼関係構築の重要性を知る",
+      "制約下での創造的解決策を模索する",
+      "【実験的要素】同じチームでの継続的な関わりを体験する"
+    ],
+    "target_tags": [
+      "safety",
+      "patient_preference",
+      "family_burden",
+      "resources",
+      "coordination"
+    ],
+    "competencies": [
+      "communication",
+      "collaboration",
+      "conflict_resolution",
+      "patient_centered_care",
+      "family_engagement"
+    ]
+  },
+
+  "profession_cards_config": {
+    "physician": {
+      "known_info_override": [
+        "[ループ1] BNP値上昇、EF40%の心機能低下、労作時SpO2 88-90%",
+        "[ループ2] この1週間で夜間SpO2 85%以下を3回記録、再入院リスク上昇",
+        "[ループ3] BNP値さらに上昇、下肢浮腫増強、3ヶ月以内の再入院可能性大"
+      ],
+      "objectives": {
+        "primary_goal": "医学的に安全な在宅療養体制を確立し、再入院リスクを最小化する",
+        "success_criteria": [
+          "酸素療法または代替的な呼吸管理方法が方針に含まれている",
+          "心不全増悪の早期発見体制が構築されている",
+          "服薬アドヒアランス確保策が明確である",
+          "緊急時対応フローが確立されている"
+        ],
+        "engagement_triggers": [
+          "SpO2低下の医学的リスクが軽視される時",
+          "在宅酸素の必要性が議論される時",
+          "代替案の医学的妥当性を評価する時",
+          "予後について説明が必要な時"
+        ]
+      },
+      "special_concerns": [
+        "酸素なしでの突然死リスク",
+        "本人の拒否による治療困難"
+      ]
+    },
+    "nurse": {
+      "known_info_override": [
+        "[ループ1] 入院中の入浴時恐怖心、妻への依存（頻回ナースコール）",
+        "[ループ2] 完全入浴拒否、妻への電話1日10回以上、「早く楽になりたい」発言",
+        "[ループ3] 清拭も拒否、抑うつ悪化、妻「私が倒れそう」、息子を意識し始めた様子"
+      ],
+      "objectives": {
+        "primary_goal": "本人の生活の質を保ちながら、安全な在宅生活を支援する体制を作る",
+        "success_criteria": [
+          "入浴支援を含む日常生活援助が計画されている",
+          "本人の心理的ケアが方針に含まれている",
+          "妻の負担軽減策が具体的に示されている",
+          "段階的な関係構築アプローチが考慮されている"
+        ],
+        "engagement_triggers": [
+          "日常生活の具体的支援が議論される時",
+          "本人の心理状態への対応が必要な時",
+          "家族ケアが話題になる時",
+          "他職種との連携方法を検討する時"
+        ]
+      },
+      "special_concerns": [
+        "本人の抑うつ傾向",
+        "妻の介護疲労",
+        "信頼関係構築の必要性"
+      ]
+    },
+    "pt": {
+      "known_info_override": [
+        "[ループ1] 病棟リハで50m歩行で息切れ、下肢筋力は年齢相応",
+        "[ループ2] 家の中でも息切れ、階段昇降は危険、活動量低下",
+        "[ループ3] 筋力低下進行、社会参加ゼロ、廃用症候群のリスク"
+      ],
+      "objectives": {
+        "primary_goal": "残存機能を最大限活用し、活動性向上と社会参加を促進する",
+        "success_criteria": [
+          "リハビリテーションプログラムが明確である",
+          "活動性向上の段階的目標が設定されている",
+          "将来的な社会参加（デイサービス等）が視野に入っている",
+          "運動時の安全管理方法が確立されている"
+        ],
+        "engagement_triggers": [
+          "身体機能評価が必要な時",
+          "活動性向上の可能性が議論される時",
+          "リハビリの目標設定をする時",
+          "他サービスへの移行を検討する時",
+          "呼吸リハビリテーションの可能性が議論される時",
+          "HOT（在宅酸素療法）使用下での運動指導を検討する時"
+        ]
+      },
+      "special_concerns": [
+        "運動時の酸素需要増大",
+        "本人のモチベーション",
+        "将来的なサービス移行"
+      ]
+    },
+    "care_manager": {
+      "known_info_override": [
+        "[ループ1] 要介護2認定済み、サービス利用枠に余裕",
+        "[ループ2] 本人「サービスは堅苦しい」、息子の情報なし",
+        "[ループ3] サービス拒否継続、制度の限界、区分変更検討時期"
+      ],
+      "objectives": {
+        "primary_goal": "介護保険制度内で持続可能な在宅ケアプランを策定する",
+        "success_criteria": [
+          "要介護2の範囲内でサービスが組まれている",
+          "緊急時対応を含むケアプランである",
+          "家族の介護負担が考慮されている",
+          "サービス間の連携体制が明確である"
+        ],
+        "engagement_triggers": [
+          "サービス利用調整が必要な時",
+          "介護保険の制約が関わる時",
+          "家族支援の具体策を検討する時",
+          "多職種連携の調整をする時"
+        ]
+      },
+      "special_concerns": [
+        "本人との関係構築の難しさ",
+        "息子の状況把握困難",
+        "サービスの適正利用"
+      ]
+    },
+    "msw": {
+      "known_info_override": [
+        "[ループ1] 元病院職員、経済面安定、息子の引きこもり10年以上",
+        "[ループ2] 妻の限界近い、娘は協力的だが多忙、地域から孤立傾向",
+        "[ループ3] 息子が父を心配している様子、施設入所の選択肢も検討時期"
+      ],
+      "objectives": {
+        "primary_goal": "家族全体を支援し、持続可能な在宅療養環境を整備する",
+        "success_criteria": [
+          "家族の隠れた問題への配慮が示されている",
+          "社会資源の活用が提案されている",
+          "長期的な家族支援の視点が含まれている",
+          "地域との関係性が考慮されている"
+        ],
+        "engagement_triggers": [
+          "家族の問題が表面化する時",
+          "社会資源の活用を検討する時",
+          "退院調整の具体化をする時",
+          "長期的な支援体制を議論する時"
+        ]
+      },
+      "special_concerns": [
+        "息子への介入の必要性と困難さ",
+        "妻の限界",
+        "本人のプライド"
+      ]
+    },
+    "family": {
+      "known_info_override": [
+        "[ループ1] 夫の入院で疲弊、息子のことは話したくない、腰痛あり",
+        "[ループ2] 夫の頻繁な電話で睡眠不足、介護負担増大、限界近い",
+        "[ループ3] 「もう無理かも」、娘から施設を勧められる、でも夫を見捨てられない"
+      ],
+      "objectives": {
+        "primary_goal": "夫の安全を確保しつつ、介護負担を現実的なレベルに保つ",
+        "success_criteria": [
+          "妻の介護負担が軽減される具体策がある",
+          "夫の安全が確保される方法が明確である",
+          "息子の問題に無理に踏み込まない配慮がある",
+          "妻自身の健康維持策が含まれている"
+        ],
+        "engagement_triggers": [
+          "介護負担が議論される時",
+          "在宅での具体的ケアを検討する時",
+          "家族の役割分担を決める時",
+          "息子の話題が出た時"
+        ]
+      },
+      "special_concerns": [
+        "これ以上の負担は限界",
+        "息子のことを知られたくない",
+        "夫の依存"
+      ]
+    }
+  },
+
+  "constraint_sets": [
+    "home_care_copd_easy",
+    "home_care_copd_normal"
+  ],
+
+  "constraint_progression_note": "ループ1はeasy（希望的）、ループ2-3はnormal（現実的制約）を適用",
+
+  "event_pool": {
+    "experimental_note": "時間経過型のため、イベントカードは時期別に使用。詳細は別紙イベントカード使用ガイド参照",
+    "included_events": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    "excluded_events": [],
+    "weighted_categories": {
+      "A_medical": 0.3,
+      "B_psych": 0.25,
+      "C_family": 0.25,
+      "D_services": 0.15,
+      "E_environment": 0.05
+    }
+  },
+
+  "success_criteria": {
+    "experiential_outcomes": [
+      "医学的安全性と本人の価値観の対立を深く体験した",
+      "家族の語られない問題への配慮の重要性を理解した",
+      "職種による視点の違いと、それぞれの正当性を認識した",
+      "【実験的要素】時間経過による問題の深刻化と対応の変化を体験した"
+    ],
+    "process_indicators": [
+      "全職種が自身の専門的視点を表明した",
+      "対立する価値観が明確に言語化された",
+      "創造的な代替案が検討された",
+      "【実験的要素】ループごとに異なるアプローチが試みられた"
+    ],
+    "collaboration_quality": [
+      "異なる意見を否定せず受け止めた",
+      "専門用語を他職種に翻訳できた",
+      "妥協点を見出すプロセスが見られた",
+      "【実験的要素】チームの成熟が3ループを通じて観察された"
+    ]
+  },
+
+  "facilitator_notes": {
+    "preparation_checklist": [
+      "【重要】このシナリオは時間経過型の実験版であることを説明",
+      "ループごとの時点設定（退院前→1週間後→1ヶ月後）を明確に伝える",
+      "参加者の職種と経験レベルの確認",
+      "息子の問題は詳細に踏み込まないよう事前説明",
+      "在宅酸素拒否の背景にある価値観の重要性を理解",
+      "制約セットの難易度選択（ループ1=easy、ループ2-3=normal）"
+    ],
+    "common_pitfalls": [
+      "医学的正しさの押し付けに終始する",
+      "息子の問題を無理に解決しようとする",
+      "妻の負担を軽視する",
+      "本人の価値観を単なるわがままと捉える",
+      "【実験版特有】時間経過を忘れて同じ議論を繰り返す"
+    ],
+    "intervention_points": [
+      {
+        "timing": "各ループ開始時",
+        "situation": "時点設定を忘れている時",
+        "suggested_action": "「今は○○の時点です」と明確に伝える"
+      },
+      {
+        "timing": "Phase2",
+        "situation": "在宅酸素の議論が平行線の時",
+        "suggested_action": "本人にとっての'普通の生活'の意味を問いかける"
+      },
+      {
+        "timing": "Phase3",
+        "situation": "息子の問題に深入りしそうな時",
+        "suggested_action": "今回の焦点は退院調整であることを確認"
+      },
+      {
+        "timing": "Phase4",
+        "situation": "完璧な解決を求めて行き詰まった時",
+        "suggested_action": "段階的アプローチの可能性を示唆"
+      }
+    ],
+    "debrief_questions": [
+      "在宅酸素を拒否する本人の気持ちをどう理解しましたか？",
+      "各職種の立場の違いはどこから生じていましたか？",
+      "家族の語らない問題にどう配慮しましたか？",
+      "【実験版特有】時間経過によって、あなたの判断はどう変わりましたか？",
+      "【実験版特有】3つの時点を体験して、何を学びましたか？",
+      "現実の現場で似た経験はありますか？"
+    ]
+  },
+
+  "versioning": {
+    "created_by": "浅井",
+    "version": "2.0.0-experimental",
+    "last_updated": "2025-01-15T15:00:00Z",
+    "playtested": false,
+    "feedback_incorporated": [
+      "時間経過型の実験的実装",
+      "3ループで異なる時点を表現",
+      "段階的な情報開示と問題の深刻化"
+    ],
+    "experimental_features": [
+      "temporal_progression",
+      "loop_based_time_advancement",
+      "progressive_information_disclosure"
+    ]
+  }
+}
