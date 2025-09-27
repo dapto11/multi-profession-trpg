@@ -1,0 +1,598 @@
+
+{
+  "session_id": "copd_timeline_session_001",
+  "scenario_id": "copd_timeline_v2",
+  "setting": "home_care",
+  "started_at": "2025-01-01T09:00:00Z",
+  "ended_at": null,
+  "play_difficulty": "normal",
+  "participants": [
+    {
+      "player_id": "p1",
+      "player_name": "",
+      "role": "physician",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "p2",
+      "player_name": "",
+      "role": "nurse",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "p3",
+      "player_name": "",
+      "role": "pharmacist",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "p4",
+      "player_name": "",
+      "role": "pt",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "p5",
+      "player_name": "",
+      "role": "care_manager",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "p6",
+      "player_name": "",
+      "role": "msw",
+      "experience_level": "intermediate"
+    }
+  ],
+  "participants_index": {
+    "p1": 0,
+    "p2": 1,
+    "p3": 2,
+    "p4": 3,
+    "p5": 4,
+    "p6": 5
+  },
+  "utterances": [],
+  "loops": [
+    {
+      "loop_id": 1,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 300,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": "退院前カンファレンス設定"
+        },
+        {
+          "phase_number": 2,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 3,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 4,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 5,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 300,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        }
+      ],
+      "disputes_snapshot": {
+        "count": null,
+        "by_primary_tag": {
+          "safety": 0,
+          "time": 0,
+          "resources": 0,
+          "family_burden": 0,
+          "patient_preference": 0,
+          "function": 0,
+          "legal_policy": 0,
+          "coordination": 0
+        },
+        "consensus_level": null
+      },
+      "decision": {
+        "status": null,
+        "options_considered": null,
+        "time_to_decide_sec": null,
+        "constraints_referenced": [],
+        "summary_ja": null
+      },
+      "events_drawn": [],
+      "participant_metrics": [],
+      "metrics": {
+        "talk_time_gini": null,
+        "tags_distribution": {},
+        "phase_timing_adherence": {
+          "on_time_phases": 0,
+          "over_time_phases": 0
+        }
+      }
+    },
+    {
+      "loop_id": 2,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 0,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": "退院1週間後設定・Phase1スキップ"
+        },
+        {
+          "phase_number": 2,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 3,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 4,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 5,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 300,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        }
+      ],
+      "disputes_snapshot": {
+        "count": null,
+        "by_primary_tag": {
+          "safety": 0,
+          "time": 0,
+          "resources": 0,
+          "family_burden": 0,
+          "patient_preference": 0,
+          "function": 0,
+          "legal_policy": 0,
+          "coordination": 0
+        },
+        "consensus_level": null
+      },
+      "decision": {
+        "status": null,
+        "options_considered": null,
+        "time_to_decide_sec": null,
+        "constraints_referenced": [],
+        "summary_ja": null
+      },
+      "events_drawn": [],
+      "participant_metrics": [],
+      "metrics": {
+        "talk_time_gini": null,
+        "tags_distribution": {},
+        "phase_timing_adherence": {
+          "on_time_phases": 0,
+          "over_time_phases": 0
+        }
+      }
+    },
+    {
+      "loop_id": 3,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 0,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": "退院半年後設定・Phase1スキップ"
+        },
+        {
+          "phase_number": 2,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 3,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 4,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 5,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 300,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        }
+      ],
+      "disputes_snapshot": {
+        "count": null,
+        "by_primary_tag": {
+          "safety": 0,
+          "time": 0,
+          "resources": 0,
+          "family_burden": 0,
+          "patient_preference": 0,
+          "function": 0,
+          "legal_policy": 0,
+          "coordination": 0
+        },
+        "consensus_level": null
+      },
+      "decision": {
+        "status": null,
+        "options_considered": null,
+        "time_to_decide_sec": null,
+        "constraints_referenced": [],
+        "summary_ja": null
+      },
+      "events_drawn": [],
+      "participant_metrics": [],
+      "metrics": {
+        "talk_time_gini": null,
+        "tags_distribution": {},
+        "phase_timing_adherence": {
+          "on_time_phases": 0,
+          "over_time_phases": 0
+        }
+      }
+    }
+  ],
+  "session_metrics": {
+    "total_loops": 3,
+    "overall_tags_distribution": {},
+    "avg_time_to_decide_sec": null,
+    "rule_violations_total": 0,
+    "translation_attempts_total": 0,
+    "sbar_practice_opportunities": 0,
+    "synergy_moments_total": 0,
+    "quality_thresholds": {
+      "talk_time_gini_threshold": 0.7,
+      "overtime_phases_threshold": 2,
+      "rule_violations_threshold": 5,
+      "participant_silence_sec": 300
+    }
+  },
+  "qualitative_feedback": {
+    "debrief_responses": {
+      "profession_goal_achievement": [
+        {
+          "player_id": "p1",
+          "role": "physician",
+          "primary_goal": "医学的に必要な在宅酸素療法を何らかの形で導入し、心肺機能の悪化を防ぐ",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "在宅酸素または代替的な呼吸管理方法が方針に含まれる",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "急変時対応プロトコルが明確化される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "定期的な医学的モニタリング体制が確立される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "p2",
+          "role": "nurse",
+          "primary_goal": "本人の尊厳を保ちながら安全な在宅生活を支援し、妻の介護負担を軽減する体制を作る",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "本人の心理的ケアが方針に組み込まれる",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "妻の負担軽減策が具体化される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "入浴を含む日常生活支援体制が確立される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "p3",
+          "role": "pharmacist",
+          "primary_goal": "安全で効果的な薬物療法を継続し、在宅での服薬管理体制を確立する",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "服薬管理の具体的方法が決定される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "吸入指導の継続体制が確保される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "副作用モニタリング方法が明確化される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "p4",
+          "role": "pt",
+          "primary_goal": "残存機能を最大限活用し、在宅での活動性向上と呼吸機能の代償能力を改善する",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "個別リハビリプログラムが作成される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "活動性向上の具体的目標が設定される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "呼吸リハの継続方法が決定される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "p5",
+          "role": "care_manager",
+          "primary_goal": "介護保険サービスを適切に組み合わせ、安全で持続可能な在宅生活支援体制を構築する",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "介護保険サービスの具体的計画が立案される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "緊急時対応フローが明確化される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "家族支援を含むケアプランが作成される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "p6",
+          "role": "msw",
+          "primary_goal": "複雑な家族問題を含む社会的課題を調整し、在宅移行を円滑に進める",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "家族問題への対応方針が示される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "社会資源の活用計画が立案される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "退院後のフォロー体制が確立される",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        }
+      ],
+      "overall_goal_achievement": null
+    },
+    "perspective_shifts": [
+      {
+        "player_id": "",
+        "moment_description": "【期待される気づきの例】医師が本人の酸素拒否の背景にある羞恥心と尊厳の重さを理解した瞬間",
+        "impact_level": null,
+        "related_profession": null
+      },
+      {
+        "player_id": "",
+        "moment_description": "【期待される気づきの例】ケアマネが医師の医学的懸念の深刻さを実感した場面",
+        "impact_level": null,
+        "related_profession": null
+      },
+      {
+        "player_id": "",
+        "moment_description": "【期待される気づきの例】PTが妻の介護負担の限界を目の当たりにした時",
+        "impact_level": null,
+        "related_profession": null
+      },
+      {
+        "player_id": "",
+        "moment_description": "【期待される気づきの例】看護師が引きこもり長男の潜在的な介護力に気づいた瞬間",
+        "impact_level": null,
+        "related_profession": null
+      },
+      {
+        "player_id": "",
+        "moment_description": "【期待される気づきの例】薬剤師が本人の服薬拒否の真の理由を理解した時",
+        "impact_level": null,
+        "related_profession": null
+      }
+    ],
+    "professional_blind_spots": [
+      {
+        "player_id": "",
+        "realization": "【医師の盲点】医学的正しさを優先するあまり、患者の生きる意味や価値観を軽視していた",
+        "emotional_response": null
+      },
+      {
+        "player_id": "",
+        "realization": "【看護師の盲点】共感的になりすぎて、時に医学的リスクを過小評価していた",
+        "emotional_response": null
+      },
+      {
+        "player_id": "",
+        "realization": "【PTの盲点】機能改善に固執し、本人の意欲低下の深刻さを見逃していた",
+        "emotional_response": null
+      },
+      {
+        "player_id": "",
+        "realization": "【ケアマネの盲点】安全重視のあまり、本人のQOLや挑戦の機会を制限していた",
+        "emotional_response": null
+      },
+      {
+        "player_id": "",
+        "realization": "【薬剤師の盲点】服薬アドヒアランスを薬学的観点のみで捉え、生活の文脈を見落としていた",
+        "emotional_response": null
+      }
+    ],
+    "conflict_attitude_changes": [],
+    "future_intentions": [],
+    "experience_intensity": []
+  },
+  "free_narratives": [],
+  "surveys": [],
+  "debrief": {
+    "key_takeaways": [],
+    "collective_insights": [],
+    "what_went_well": [],
+    "to_improve": [],
+    "group_dynamics_quality": null
+  },
+  "versioning": {
+    "created_by": "浅井",
+    "version": "2.0",
+    "last_updated": "2025-01-01T00:00:00Z",
+    "notes": "COPDシナリオv2用測定テンプレート - 時系列進行対応版"
+  },
+  "scenario_specific_debrief_questions": [
+    "在宅酸素拒否に対して、時間経過でどのように対応方針が変化しましたか？",
+    "引きこもり長男の存在は、各ループでどのように議論に影響しましたか？",
+    "妻の介護負担について、退院前・1週間後・半年後でどう認識が変わりましたか？",
+    "時系列で優先順位はどのように変化しましたか？その理由は？",
+    "実際の現場で、このような長期的視点をどう活かせると思いますか？"
+  ],
+  "expected_perspective_shifts": [
+    "医学的必要性と患者の価値観の両立は不可能ではないという気づき",
+    "時間経過により問題の性質が変化することへの理解",
+    "隠された家族資源（長男）の可能性への着目",
+    "各職種の時間軸の違いによる視点の相違への理解",
+    "短期的対応と長期的持続可能性のバランスの重要性"
+  ],
+  "target_blind_spots": [
+    "医師：患者の尊厳と医学的正しさの天秤",
+    "看護師：共感と客観的リスク評価のバランス",
+    "PT：機能改善への期待と現実のギャップ",
+    "ケアマネ：リスク回避と挑戦機会のトレードオフ",
+    "薬剤師：薬物療法の限界と生活の質の関係",
+    "MSW：家族システムの複雑性と介入の限界"
+  ],
+  "followup_focus_areas": [
+    "在宅酸素拒否への対応で得た気づきの現場活用",
+    "時系列での優先順位変化の経験の応用",
+    "隠れた家族資源への着目の実践",
+    "多職種の時間軸の違いへの配慮",
+    "価値観対立への耐性の変化"
+  ]
+}
+```
