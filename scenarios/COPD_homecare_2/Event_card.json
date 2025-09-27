@@ -1,4 +1,3 @@
-```json
 [
   {
     "event_id": 1,
@@ -620,13 +619,13 @@
     "event_id": 10,
     "category": "D_services",
     "subcategory": "policy_system",
-    "title_ja": "介護保険更新で要介護1に下がる",
-    "body_ja": "半年後の介護保険更新審査で、まさかの要介護1判定。理由は「{{reason}}」。現在のサービス量維持は困難に。ケアマネは困惑し、家族は「どうすればいいの」と途方に暮れる。",
+    "title_ja": "ケアマネとPT・本人の見解相違",
+    "body_ja": "半年後のサービス担当者会議で、ケアマネが「{{care_manager_opinion}}」と訪問リハの継続を強調。しかしPTは「目標はほぼ達成、デイサービスへの移行が妥当」と判断。本人も「もうリハビリはいらない」と同調。ケアマネは食い下がる。",
     "direction": "negative",
     "urgency": "high",
     "duration": "long_term",
     "settings": ["home_care"],
-    "actors_primary": ["care_manager", "msw"],
+    "actors_primary": ["care_manager", "pt"],
     "actors_secondary": ["nurse", "family"],
     "tags": {
       "primary": "legal_policy",
@@ -634,45 +633,45 @@
     },
     "parameters": [
       {
-        "name": "reason",
+        "name": "care_manager_opinion",
         "type": "string",
         "enum": [
-          "ADLが自立と判定されたため",
-          "認知症状がないため",
-          "調査時の状態が良好だったため"
+          "身体機能の維持は大事ですから",
+          "転倒リスクを考えると継続すべき",
+          "まだリハビリは必要だと思います"
         ],
-        "examples": ["ADLが自立と判定されたため"]
+        "examples": ["身体機能の維持は大事ですから"]
       }
     ],
     "impact_hints": {
-      "state_fields": ["/care_system/service_availability", "/family/anxiety"],
-      "constraints_hint": ["severe_service_reduction"],
-      "discussion_seeds": ["区分変更申請", "自費サービスの検討"],
-      "coordination_targets": ["care_manager", "msw", "all"]
+      "state_fields": ["/care_team/consensus", "/service_plan/revision"],
+      "constraints_hint": ["service_allocation_conflict"],
+      "discussion_seeds": ["サービスの必要性判断", "職種間の認識差"],
+      "coordination_targets": ["care_manager", "pt", "physician"]
     },
     "gm_guidance": {
-      "narration_tips": ["制度の壁による困難を強調"],
-      "probing_questions": ["限られた資源でどう支えるか？"],
-      "modifiers": ["サービス調整の困難度上昇"]
+      "narration_tips": ["職種間の温度差を明確に"],
+      "probing_questions": ["誰の判断を優先すべきか？"],
+      "modifiers": ["調整の困難さを強調"]
     },
-    "flavor_text": "判定通知書の文字が冷たい。制度の網目から、こぼれ落ちそうになる。",
+    "flavor_text": "会議室に漂う微妙な空気。それぞれの「正しさ」がぶつかり合う。",
     "gm_effect_guide": {
       "immediate_effects": [
-        "サービス計画の全面見直し",
-        "家族不安の急増"
+        "サービス計画の再検討",
+        "職種間の調整必要"
       ],
       "discussion_triggers": [
-        "限度額内での優先順位",
-        "インフォーマルサポート活用"
+        "専門職の判断vs調整役の判断",
+        "本人の意向の重み"
       ],
       "constraint_modifiers": {
-        "legal_policy": "+3",
-        "resources": "-4"
+        "coordination": "-2",
+        "resources": "+1"
       }
     },
     "weights": {
-      "draw_weight": 0.9,
-      "severity_score": 4
+      "draw_weight": 1.0,
+      "severity_score": 3
     },
     "versioning": {
       "created_by": "浅井",
@@ -837,11 +836,10 @@
         "name": "ac_reason",
         "type": "string",
         "enum": [
-          "電気代がもったいない",
           "冷房は体に悪い",
           "自然の風がいい"
         ],
-        "examples": ["電気代がもったいない"]
+        "examples": ["冷房は体に悪い"]
       }
     ],
     "impact_hints": {
@@ -1011,4 +1009,3 @@
     }
   }
 ]
-```
