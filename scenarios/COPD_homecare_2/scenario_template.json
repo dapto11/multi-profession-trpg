@@ -4,7 +4,7 @@
   "title_ja": "COPD高齢者の退院支援と在宅療養の時系列変化",
   "description_ja": "心不全増悪で入院した80代COPD患者の退院前カンファレンスから半年後までの時系列を追う。在宅酸素拒否、妻への依存、引きこもり長男という複雑な家族構造の中で、多職種がどう連携し価値観の違いを乗り越えるかを体験する。",
   "setting": "home_care",
-  "scenario_complexity": "intermediate",,  // シナリオ構造の複雑さ（時系列進行は中級程度）
+  "scenario_complexity": "intermediate",// シナリオ構造の複雑さ（時系列進行は中級程度）
   "difficulty_hint": "normal",// デフォルトの制約セット推奨
   "duration_minutes": 90,
   "target_participants": ["physician", "nurse", "pharmacist", "pt", "care_manager", "msw"],
