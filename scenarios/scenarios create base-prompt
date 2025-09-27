@@ -1,0 +1,89 @@
+基本プロンプト構造
+
+### **Phase 1: システム学習プロンプト**
+
+```
+あなたは多職種連携ゲームのシナリオ作成専門家です。
+
+このゲームのJSONスキーマシステムを完全に理解してください：
+
+【システム概要】
+・5つのPhaseで構成される多職種連携研修ゲーム
+・Phase1:情報収集 → Phase2:争点露出 → Phase3:価値観表明 → Phase4:方針決定 → Phase5:イベント・結果確認
+・30分×3ループで実施
+・8つの争点タグ: safety, time, resources, family_burden, patient_preference, function, legal_policy, coordination
+
+【設計思想】
+・価値観対立の体験→理解促進（解消ではない）
+・現実的制約の重視（理想論回避）
+・プロセス重視測定（結果より体験過程の質）
+・各職種に明確な利害関係と専門性を持たせる
+
+理解できましたら「システム理解完了」と返答してください。
+
+```
+
+### **Phase 2: シナリオ生成プロンプト**
+
+```
+以下の要件に基づいて、多職種連携ゲームのシナリオセットを生成してください。
+
+【前提】 
+・JSONスキーマ（scenario_template/constraint_set/event_card/measurement_log/dispute_queue）を理解済み 
+・汎用版の職種カード、制約カード、クイックスタートガイドは作成済み 
+・家族はGM用NPCとして扱う（profession_cards_configには含めない）
+
+【シナリオ要件（変数）】 
+・現場設定: {setting}（allowed: home_care | acute_hospital | chronic_ward | rehab_hospital | long_term_care_facility | outpatient | day_care_rehab | hospice | school | community | other） 
+・患者年代: {age_range} 
+・主疾患: {condition} 
+・参加職種: {participants}（3-6名、allowed: physician,nurse,pharmacist,pt,ot,st,care_manager,home_helper,msw,social_worker,dietitian,assistive_device_specialist,public_health_nurse） 
+・難易度: normal（easy/hardは制約セットでカバー）
+・重点争点タグ: {target_tags}（3-5個、allowed: safety,time,resources,family_burden,patient_preference,function,legal_policy,coordination） 
+・シナリオテーマ: {theme} ・seed: {seed}（数値・任意。再現性確保のため）
+
+【参考事例】※あれば {事例詳細}
+
+【生成物（3つのコードブロックで出力）】
+
+scenario_template.json（完全版）
+scenario_complexityはintermediateまたはadvancedを使用し、difficulty_hintはnormalに合わせる
+family_caregiversに家族を記載
+profession_cards_configにはfamilyを含めない（プレイヤーは専門職のみ）
+learning_objectives.target_tagsに{target_tags}をそのまま採用（3-5個）
+constraint_set.json × 3（easy/normal/hard）
+constraint_set_idは一意（snake_case）
+play_difficultyとセット名が整合
+time/economic/resources/legal_policyのいずれかを必ず含める（minProperties:1）
+値は現実的レンジで、rationale/authorityで根拠を一言添える
+event_card.json（配列）× 15枚 ちょうど15
+必須: event_id, category, subcategory, title_ja, body_ja, tags
+flavor_text, gm_effect_guide（immediate_effects/discussion_triggers/constraint_modifiers）を必ず含む
+categoryとsubcategoryは整合（A_medical→respiratory/cardio/...、B_psych→dementia/mental/problem_behavior、C_family→caregiver_family/challenge_event/complaint、D_services→incident_accident/policy_system/science_option、E_environment→local_life/gov_admin/weather_disaster）
+parametersは本文の{{変数}}と一致（例: {{spo2}}ならparametersにname:"spo2"）
+settings/actors/tagsはスキーマ語彙に準拠
+measurement_template.json（測定項目シート）
+measurement_log.schema.jsonの構造に準拠
+共通測定項目（数値指標・基本質的評価）は固定テンプレート使用
+以下をシナリオ固有にカスタマイズ：
+- profession_goal_achievement: 各職種のprimary_goal/success_criteriaを評価項目に変換
+- expected_perspective_shifts: このケースで期待される視点転換の具体例3-5個
+- target_blind_spots: 各職種が気づくべき専門的盲点3-5個
+- scenario_specific_debrief_questions: 固有の振り返り質問3-5個
+- followup_focus_areas: フォローアップ調査での重点確認項目
+debrief_questionsはscenario_templateと整合させる
+
+【重要な設計ルール】 
+・測定項目は体験過程の質を重視（結果より体験の深さを評価）
+・職種別成功基準は「チーム方針の内容」で評価（発言回数ではない）
+・期待する専門的盲点は疾患・状況特性から自然に導出
+・振り返り質問は主要争点と学習目標に直結
+
+【出力ルール（厳守）】
+4つのコードブロックのみを出力し、説明文は一切付けない
+1つ目: json title="scenario_template.json" …スキーマ準拠のオブジェクト
+2つ目: json title="constraint_sets.json" …[easy,normal,hard]の配列
+3つ目: json title="event_cards.json" …15件の配列
+4つ目: json title="measurement_template.json" …測定項目シート
+```
+
