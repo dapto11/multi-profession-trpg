@@ -25,11 +25,11 @@
       "economic": [
         {
           "type": "budget_limit",
-          "description_ja": "介護保険限度額に加え、自費サービス月3万円まで利用可能",
-          "amount": 30000,
+          "description_ja": "介護保険限度額19,705単位/月内での調整",
+          "amount": 19705,
           "currency": "JPY",
           "period": "monthly",
-          "flexibility": "negotiable"
+          "flexibility": "fixed"
         },
         {
           "type": "insurance_coverage",
@@ -51,11 +51,11 @@
         },
         {
           "type": "facility_access",
-          "description_ja": "デイサービスは複数施設から選択可能",
-          "quantity": 3,
-          "unit": "施設",
-          "availability_schedule": "平日",
-          "waiting_time": "1週間以内"
+          "description_ja": "デイサービスは施設の空きはあるが、本人の強い拒否により利用開始は困難",
+          "quantity": "limited",
+          "unit": "",
+          "availability_schedule": "利用可能だが本人拒否",
+          "waiting_time": "本人の気持ち次第"
         }
       ],
       "legal_policy": [
@@ -69,22 +69,21 @@
       ]
     },
     "presentation": {
-      "gm_script": "制約は比較的緩やかです。退院まで2週間の準備期間があり、訪問看護・リハビリも週3回まで対応可能です。自費サービスも月3万円まで使えるため、柔軟な対応が可能です。",
+      "gm_script": "制約は比較的緩やかです。退院まで2週間の準備期間があり、訪問看護・リハビリも週3回まで対応可能です。ただし、デイサービスは本人の強い拒否があり、利用開始は困難な状況です。",
       "visual_aids": [
         {
           "type": "table",
-          "content": "| サービス | 利用可能頻度 | 備考 |\n|---------|------------|------|\n| 訪問看護 | 週3回 | 医療保険 |\n| 訪問リハ | 週3回 | 介護保険 |\n| デイサービス | 週2-3回 | 介護保険 |"
+          "content": "| サービス | 利用可能頻度 | 備考 |\n|---------|------------|------|\n| 訪問看護 | 週3回 | 介護保険 |\n| 訪問リハ | 週3回 | 介護保険 |\n| デイサービス | 利用困難 | 本人拒否 |"
         }
       ],
       "emphasis_points": [
         "時間的余裕があるため、本人の気持ちの変化を待つことも可能",
-        "自費サービスの活用により介護保険の制約を補える"
+        "サービス頻度は確保できるが、本人の拒否への対応が課題"
       ]
     },
     "flexibility": {
       "negotiable_constraints": [
-        "退院日の延期（最大1週間）",
-        "自費サービス予算の増額（家族と相談）"
+        "退院日の延期（最大1週間）"
       ],
       "emergency_overrides": [
         "急変時は即入院可能",
@@ -141,7 +140,7 @@
       "economic": [
         {
           "type": "budget_limit",
-          "description_ja": "介護保険限度額内での調整が原則",
+          "description_ja": "介護保険限度額19,705単位/月内での調整が原則",
           "amount": 19705,
           "currency": "JPY",
           "period": "monthly",
@@ -175,11 +174,11 @@
         },
         {
           "type": "facility_access",
-          "description_ja": "デイサービスは1施設のみ空きあり",
-          "quantity": 1,
-          "unit": "施設",
-          "availability_schedule": "週2回まで",
-          "waiting_time": "2週間後から"
+          "description_ja": "デイサービスは1施設空きありだが、本人の拒否と羞恥心により利用開始の見通し立たず",
+          "quantity": "limited",
+          "unit": "",
+          "availability_schedule": "利用可能だが本人拒否",
+          "waiting_time": "本人の気持ち次第"
         }
       ],
       "legal_policy": [
@@ -200,31 +199,30 @@
       ]
     },
     "presentation": {
-      "gm_script": "標準的な制約条件です。退院まで1週間、訪問看護は週2回、リハビリも週2回が限度です。介護保険限度額内での調整が必要で、デイサービスも選択肢が限られます。",
+      "gm_script": "標準的な制約条件です。退院まで1週間、訪問看護は週2回、リハビリも週2回が限度です。介護保険限度額内での調整が必要で、デイサービスも本人の拒否により利用困難です。",
       "visual_aids": [
         {
           "type": "timeline",
-          "content": "退院日 → 3日以内にサービス開始 → 2週間後デイサービス"
+          "content": "退院日 → 3日以内にサービス開始 → 本人の気持ち次第でデイサービス"
         },
         {
           "type": "budget_breakdown",
-          "content": "限度額19,705単位：訪問看護(医療保険別枠)、訪問リハ週2回(約6,000単位)、残り約13,000単位"
+          "content": "限度額19,705単位：訪問看護週2回(約7,200単位)、訪問リハ週2回(約4,800単位)、残り約7,700単位"
         }
       ],
       "emphasis_points": [
         "1週間での退院調整という時間的制約",
         "限度額内での優先順位づけが必要",
-        "サービスの空き状況による制約"
+        "本人の拒否への対応が鍵"
       ]
     },
     "flexibility": {
       "negotiable_constraints": [
-        "デイサービスの利用開始時期",
         "訪問時間帯の調整"
       ],
       "emergency_overrides": [
         "急変時の緊急入院",
-        "医療保険での訪問看護追加"
+        "医療保険での訪問看護追加（医師判断）"
       ]
     },
     "tags_affected": ["time", "resources", "legal_policy", "coordination"],
@@ -277,7 +275,7 @@
         {
           "type": "duration_limit",
           "description_ja": "各サービス提供時間は最短設定",
-          "value": "訪問看護30分、リハ20分",
+          "value": "訪問看護30分、リハ40分、介護30分",
           "severity": "firm",
           "rationale": "人員不足による"
         }
@@ -285,8 +283,8 @@
       "economic": [
         {
           "type": "budget_limit",
-          "description_ja": "介護保険限度額の8割までしか使えない",
-          "amount": 15764,
+          "description_ja": "介護保険限度額19,705単位/月内での調整",
+          "amount": 19705,
           "currency": "JPY",
           "period": "monthly",
           "flexibility": "fixed"
@@ -298,48 +296,48 @@
           "currency": "JPY",
           "period": "monthly",
           "flexibility": "fixed"
-        },
-        {
-          "type": "cost_sharing",
-          "description_ja": "在宅酸素の自己負担月7,000円",
-          "amount": 7000,
-          "currency": "JPY",
-          "period": "monthly",
-          "flexibility": "fixed"
         }
       ],
       "resources": [
         {
           "type": "staff_availability",
-          "description_ja": "訪問看護は週1回のみ、新人看護師",
+          "description_ja": "訪問看護（介護保険）：週2回、1回30分のみ",
+          "quantity": 2,
+          "unit": "回/週",
+          "availability_schedule": "水曜・金曜午後",
+          "waiting_time": "1週間後から"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問リハビリ（介護保険）：週1回、40分",
           "quantity": 1,
           "unit": "回/週",
-          "availability_schedule": "水曜午後のみ",
+          "availability_schedule": "火曜午前",
           "waiting_time": "2週間後から"
         },
         {
           "type": "staff_availability",
-          "description_ja": "訪問リハビリは月2回が限度",
+          "description_ja": "訪問介護：週2回、30分（身体介護）",
           "quantity": 2,
-          "unit": "回/月",
-          "availability_schedule": "第2・4火曜",
-          "waiting_time": "1ヶ月後から"
+          "unit": "回/週",
+          "availability_schedule": "月曜・木曜午前",
+          "waiting_time": "即日開始可能"
         },
         {
           "type": "facility_access",
-          "description_ja": "デイサービスは3ヶ月待機",
+          "description_ja": "デイサービス：空きはあるが本人拒否、ケアマネも消極的",
           "quantity": "unavailable",
           "unit": "",
-          "availability_schedule": "3ヶ月後",
-          "waiting_time": "3ヶ月"
+          "availability_schedule": "本人拒否により利用不可",
+          "waiting_time": "利用見込みなし"
         },
         {
           "type": "equipment_capacity",
-          "description_ja": "在宅酸素機器の在庫なし",
+          "description_ja": "在宅酸素は即日導入可能だが、本人の絶対的拒否により導入不可",
           "quantity": "limited",
           "unit": "",
-          "availability_schedule": "2週間後に入荷予定",
-          "waiting_time": "2週間"
+          "availability_schedule": "機器はあるが本人拒否",
+          "waiting_time": "本人の意思次第"
         }
       ],
       "legal_policy": [
@@ -367,17 +365,21 @@
       ]
     },
     "presentation": {
-      "gm_script": "極めて厳しい制約です。3日後には必ず退院、訪問看護は週1回のみ、リハビリは月2回。デイサービスは3ヶ月待ち、在宅酸素機器も2週間待ちです。限度額も8割までしか使えません。",
+      "gm_script": "極めて厳しい制約です。3日後には必ず退院、訪問看護は週2回30分、リハビリは週1回40分のみ。デイサービスは本人拒否とケアマネの消極姿勢で利用不可。合計約12,800単位で限度額の65％ですが、事業所の人員不足でこれ以上追加できません。",
       "visual_aids": [
         {
           "type": "table",
-          "content": "| 制約項目 | 内容 | 影響 |\n|---------|------|------|\n| 退院期限 | 3日後 | 準備時間なし |\n| 訪問看護 | 週1回30分 | 最小限の支援 |\n| デイサービス | 3ヶ月待機 | 当面利用不可 |"
+          "content": "| 制約項目 | 内容 | 影響 |\n|---------|------|------|\n| 退院期限 | 3日後 | 準備時間なし |\n| 訪問看護 | 週2回30分 | 最小限の支援 |\n| 訪問リハ | 週1回40分 | 機能維持困難 |\n| デイサービス | 利用不可 | 社会参加なし |"
+        },
+        {
+          "type": "budget_breakdown",
+          "content": "使用単位内訳：訪問看護7,200単位＋訪問リハ2,400単位＋訪問介護3,200単位＝計12,800単位（限度額の65％）"
         }
       ],
       "emphasis_points": [
         "3日での退院は変更不可能",
-        "サービスの絶対的不足",
-        "在宅酸素も即座には導入できない"
+        "サービスの絶対的不足（人員不足により追加不可）",
+        "在宅酸素は本人拒否で導入できない"
       ]
     },
     "flexibility": {
