@@ -1,0 +1,473 @@
+```json
+{
+  "scenario_id": "copd_timeline_v2",
+  "title_ja": "COPD高齢者の退院支援と在宅療養の時系列変化",
+  "description_ja": "心不全増悪で入院した80代COPD患者の退院前カンファレンスから半年後までの時系列を追う。在宅酸素拒否、妻への依存、引きこもり長男という複雑な家族構造の中で、多職種がどう連携し価値観の違いを乗り越えるかを体験する。",
+  "setting": "home_care",
+  "scenario_complexity": "advanced",
+  "difficulty_hint": "hard",
+  "duration_minutes": 90,
+  "target_participants": ["physician", "nurse", "pharmacist", "pt", "care_manager", "msw"],
+  "phase_flow": [1, 2, 3, 4, 5],
+  "patient": {
+    "basic_info": {
+      "age": 82,
+      "gender": "male",
+      "name": "山田太郎",
+      "living_situation": "with_family",
+      "residence_type": "house",
+      "mobility": "independent"
+    },
+    "medical_condition": {
+      "primary_diagnosis": "COPD（慢性閉塞性肺疾患）",
+      "secondary_diagnoses": [
+        "心不全（BNP軽度上昇）",
+        "陳旧性心筋梗塞",
+        "高血圧症",
+        "加齢性難聴"
+      ],
+      "current_medications": [
+        {
+          "name": "フロセミド",
+          "dosage": "20mg",
+          "frequency": "1日1回朝",
+          "adherence_issues": false
+        },
+        {
+          "name": "スピリーバ吸入",
+          "dosage": "18μg",
+          "frequency": "1日1回",
+          "adherence_issues": false
+        },
+        {
+          "name": "アムロジピン",
+          "dosage": "5mg",
+          "frequency": "1日1回朝",
+          "adherence_issues": false
+        }
+      ],
+      "functional_status": {
+        "adl_score": 85,
+        "iadl_score": 60,
+        "cognitive_status": "normal"
+      },
+      "recent_changes": [
+        "心不全増悪による緊急入院（人工呼吸器使用歴あり）",
+        "立位でSpO2 88%まで低下、5分で94%まで回復",
+        "在宅酸素導入を医師が推奨するも本人が強く拒否",
+        "「早く楽になりたい」等の希死念慮を示唆する発言"
+      ]
+    },
+    "psychosocial": {
+      "personality_traits": [
+        "元病院警備員としてのプライド",
+        "顔馴染みが多く社交的だった",
+        "妻への強い依存傾向"
+      ],
+      "values_preferences": [
+        "「こんな姿を見られたくない」という羞恥心",
+        "酸素チューブをつけることへの強い抵抗感",
+        "自宅で過ごしたいが不安も強い"
+      ],
+      "concerns_fears": [
+        "呼吸苦への恐怖",
+        "入浴時の転倒不安",
+        "妻が外出することへの不安"
+      ],
+      "goals_wishes": [
+        "楽に呼吸したい（ただし酸素は拒否）",
+        "妻にそばにいてほしい",
+        "昔のように普通に生活したい"
+      ]
+    }
+  },
+  "family_caregivers": [
+    {
+      "relationship": "妻",
+      "age": 80,
+      "gender": "female",
+      "involvement_level": "primary",
+      "availability": "同居・常時",
+      "capabilities": [
+        "日常生活の世話",
+        "服薬管理の補助",
+        "精神的支え"
+      ],
+      "limitations": [
+        "高齢による体力低下",
+        "腰痛あり",
+        "夫の依存による精神的負担"
+      ],
+      "concerns": [
+        "夫の呼吸状態悪化",
+        "自分が倒れたらどうなるか",
+        "長男のことを他人に知られたくない"
+      ]
+    },
+    {
+      "relationship": "長男",
+      "age": 55,
+      "gender": "male",
+      "involvement_level": "minimal",
+      "availability": "同居だが関与なし",
+      "capabilities": [],
+      "limitations": [
+        "長期引きこもり",
+        "介護への関与なし",
+        "家族以外との接触回避"
+      ],
+      "concerns": []
+    },
+    {
+      "relationship": "長女",
+      "age": 52,
+      "gender": "female",
+      "involvement_level": "secondary",
+      "availability": "車で2時間・月1-2回",
+      "capabilities": [
+        "緊急時の対応",
+        "母親の相談相手"
+      ],
+      "limitations": [
+        "遠方居住",
+        "仕事あり",
+        "頻繁な訪問困難"
+      ],
+      "concerns": [
+        "両親の健康",
+        "母の介護負担",
+        "兄のこと"
+      ]
+    }
+  ],
+  "initial_situation": {
+    "trigger_event": "心不全増悪による緊急入院から3週間。病状安定し退院調整開始。退院前カンファレンスで在宅療養体制を検討中。",
+    "current_services": [
+      {
+        "service_type": "急性期病院入院中",
+        "provider": "総合病院",
+        "frequency": "継続中",
+        "effectiveness": "effective"
+      }
+    ],
+    "immediate_concerns": [
+      "在宅酸素の必要性vs本人の強い拒否",
+      "妻の介護負担と本人の依存関係",
+      "退院後の急変リスク",
+      "引きこもり長男の存在と介護力不足",
+      "本人の抑うつ的発言"
+    ],
+    "available_resources": [
+      "要介護2の認定",
+      "訪問診療医の確保",
+      "訪問看護ステーション",
+      "訪問リハビリ事業所",
+      "近隣のデイサービス"
+    ],
+    "environmental_factors": [
+      "古い戸建て住宅（手すり設置済み）",
+      "下町の閑静な住宅街",
+      "近所との関係は疎遠になりつつある",
+      "元職場（病院）のスタッフとの交流"
+    ]
+  },
+  "learning_objectives": {
+    "primary_objectives": [
+      "医学的必要性と患者の自己決定権の対立を体験する",
+      "時系列での価値観・優先順位の変化を理解する",
+      "家族システムの複雑性が多職種連携に与える影響を学ぶ"
+    ],
+    "secondary_objectives": [
+      "各職種の時間軸による視点の違いを認識する",
+      "長期的な在宅療養における持続可能性を考察する",
+      "隠された家族問題への対応方法を検討する"
+    ],
+    "target_tags": ["safety", "family_burden", "patient_preference", "function", "coordination"],
+    "competencies": [
+      "communication",
+      "collaboration",
+      "conflict_resolution",
+      "patient_centered_care",
+      "family_engagement"
+    ]
+  },
+  "profession_cards_config": {
+    "physician": {
+      "known_info_override": [
+        "SpO2が立位で88%まで低下、安静時でも92-93%",
+        "BNP軽度上昇、心エコーでEF45%",
+        "在宅酸素なしでは生命予後に影響の可能性"
+      ],
+      "objectives": {
+        "primary_goal": "医学的に必要な在宅酸素療法を何らかの形で導入し、心肺機能の悪化を防ぐ",
+        "success_criteria": [
+          "在宅酸素または代替的な呼吸管理方法が方針に含まれる",
+          "急変時対応プロトコルが明確化される",
+          "定期的な医学的モニタリング体制が確立される"
+        ],
+        "engagement_triggers": [
+          "SpO2低下のリスク議論時",
+          "在宅酸素の必要性説明時",
+          "予後に関する話題",
+          "急変時対応の検討"
+        ]
+      },
+      "unknown_info_override": [
+        "引きこもり長男の詳細",
+        "妻の介護負担の実態",
+        "本人の死生観の背景"
+      ],
+      "special_concerns": [
+        "医学的エビデンスと患者意思の板挟み",
+        "在宅での急変リスク管理"
+      ],
+      "constraints_override": [
+        "訪問診療は月2回が限度",
+        "緊急往診の対応に限界"
+      ]
+    },
+    "nurse": {
+      "known_info_override": [
+        "入院中の酸素拒否エピソード",
+        "妻への依存的な電話の頻度",
+        "入浴への強い恐怖心",
+        "「早く楽になりたい」発言の頻度"
+      ],
+      "objectives": {
+        "primary_goal": "本人の尊厳を保ちながら安全な在宅生活を支援し、妻の介護負担を軽減する体制を作る",
+        "success_criteria": [
+          "本人の心理的ケアが方針に組み込まれる",
+          "妻の負担軽減策が具体化される",
+          "入浴を含む日常生活支援体制が確立される"
+        ],
+        "engagement_triggers": [
+          "本人の心理状態の話題",
+          "妻の負担に関する議論",
+          "日常生活ケアの検討",
+          "精神的支援の必要性"
+        ]
+      },
+      "unknown_info_override": [
+        "長男との関係性の詳細",
+        "近所との過去の交流状況"
+      ],
+      "special_concerns": [
+        "希死念慮への対応",
+        "妻の共倒れリスク",
+        "本人の自尊心の維持"
+      ],
+      "constraints_override": [
+        "訪問看護は週2-3回が限度",
+        "24時間対応には限界"
+      ]
+    },
+    "pharmacist": {
+      "known_info_override": [
+        "吸入薬の手技に問題なし",
+        "内服アドヒアランス良好",
+        "利尿剤による電解質管理必要"
+      ],
+      "objectives": {
+        "primary_goal": "安全で効果的な薬物療法を継続し、在宅での服薬管理体制を確立する",
+        "success_criteria": [
+          "服薬管理の具体的方法が決定される",
+          "吸入指導の継続体制が確保される",
+          "副作用モニタリング方法が明確化される"
+        ],
+        "engagement_triggers": [
+          "服薬管理方法の議論",
+          "吸入薬の効果評価",
+          "新規薬剤の提案時",
+          "副作用リスクの検討"
+        ]
+      },
+      "unknown_info_override": [
+        "自宅での薬剤保管環境",
+        "妻の服薬支援能力の詳細"
+      ],
+      "special_concerns": [
+        "多剤併用のリスク",
+        "在宅での吸入確実性"
+      ],
+      "constraints_override": [
+        "訪問薬剤指導は月2回まで",
+        "緊急時の薬剤供給体制"
+      ]
+    },
+    "pt": {
+      "known_info_override": [
+        "歩行は自立だが息切れ著明",
+        "運動時SpO2の急激な低下",
+        "代償機能の改善可能性あり"
+      ],
+      "objectives": {
+        "primary_goal": "残存機能を最大限活用し、在宅での活動性向上と呼吸機能の代償能力を改善する",
+        "success_criteria": [
+          "個別リハビリプログラムが作成される",
+          "活動性向上の具体的目標が設定される",
+          "呼吸リハの継続方法が決定される"
+        ],
+        "engagement_triggers": [
+          "身体機能評価の共有時",
+          "リハビリ目標の設定時",
+          "活動制限の議論",
+          "社会参加の可能性"
+        ]
+      },
+      "unknown_info_override": [
+        "自宅の詳細な住環境",
+        "過去の運動習慣"
+      ],
+      "special_concerns": [
+        "運動時の低酸素リスク",
+        "本人のモチベーション低下",
+        "過負荷による心不全悪化"
+      ],
+      "constraints_override": [
+        "訪問リハは週2回が上限",
+        "リハ時間は40分/回"
+      ]
+    },
+    "care_manager": {
+      "known_info_override": [
+        "要介護2の認定内容",
+        "利用可能なサービス単位数",
+        "地域の社会資源情報"
+      ],
+      "objectives": {
+        "primary_goal": "介護保険サービスを適切に組み合わせ、安全で持続可能な在宅生活支援体制を構築する",
+        "success_criteria": [
+          "介護保険サービスの具体的計画が立案される",
+          "緊急時対応フローが明確化される",
+          "家族支援を含むケアプランが作成される"
+        ],
+        "engagement_triggers": [
+          "サービス調整の議論",
+          "介護保険限度額の話題",
+          "多職種連携の必要性",
+          "長期的な見通し"
+        ]
+      },
+      "unknown_info_override": [
+        "長男の状況と支援可能性",
+        "本人の本音と希望"
+      ],
+      "special_concerns": [
+        "サービス拒否のリスク",
+        "限度額内での調整",
+        "多職種間の調整負担"
+      ],
+      "constraints_override": [
+        "要介護2の限度額19,705単位",
+        "デイサービスの空き状況"
+      ]
+    },
+    "msw": {
+      "known_info_override": [
+        "入院中の本人の言動",
+        "病院スタッフとの関係性",
+        "退院調整の経緯"
+      ],
+      "objectives": {
+        "primary_goal": "複雑な家族問題を含む社会的課題を調整し、在宅移行を円滑に進める",
+        "success_criteria": [
+          "家族問題への対応方針が示される",
+          "社会資源の活用計画が立案される",
+          "退院後のフォロー体制が確立される"
+        ],
+        "engagement_triggers": [
+          "家族問題の話題",
+          "経済的課題の検討",
+          "地域連携の必要性",
+          "長男への対応"
+        ]
+      },
+      "unknown_info_override": [
+        "長男の詳細な状況",
+        "近所との現在の関係"
+      ],
+      "special_concerns": [
+        "引きこもり長男への介入可能性",
+        "妻の介護負担と限界",
+        "本人の社会的孤立"
+      ],
+      "constraints_override": [
+        "退院後の病院からの支援に限界",
+        "長男への直接介入困難"
+      ]
+    }
+  },
+  "constraint_sets": ["copd_timeline_easy", "copd_timeline_normal", "copd_timeline_hard"],
+  "event_pool": {
+    "included_events": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    "excluded_events": [],
+    "weighted_categories": {
+      "A_medical": 0.3,
+      "B_psych": 0.25,
+      "C_family": 0.25,
+      "D_services": 0.1,
+      "E_environment": 0.1
+    }
+  },
+  "success_criteria": {
+    "experiential_outcomes": [
+      "医学的必要性vs患者意思の葛藤を深く体験する",
+      "時間経過による優先順位の変化を実感する",
+      "隠された家族問題が及ぼす影響を理解する"
+    ],
+    "process_indicators": [
+      "各ループで異なる視点から議論が展開される",
+      "職種間の価値観の違いが明確に表出される",
+      "妥協点を見出すプロセスが観察される"
+    ],
+    "collaboration_quality": [
+      "異なる時間軸での視点を統合できる",
+      "家族システム全体を考慮した方針立案",
+      "現実的制約の中での創造的解決"
+    ]
+  },
+  "facilitator_notes": {
+    "preparation_checklist": [
+      "時系列進行の説明（ループ1:退院前、ループ2:1週間後、ループ3:半年後）",
+      "引きこもり長男の扱い方を事前確認",
+      "在宅酸素拒否の重みを強調"
+    ],
+    "common_pitfalls": [
+      "医学的正しさのみで押し切ろうとする",
+      "長男問題を無視して進める",
+      "妻の負担を過小評価する"
+    ],
+    "intervention_points": [
+      {
+        "timing": "ループ1のPhase3",
+        "situation": "在宅酸素の議論が平行線",
+        "suggested_action": "本人の価値観の背景を探るよう促す"
+      },
+      {
+        "timing": "ループ2のPhase2",
+        "situation": "1週間後の問題が表面化",
+        "suggested_action": "短期的対応と長期的視点の両立を促す"
+      },
+      {
+        "timing": "ループ3のPhase4",
+        "situation": "半年後の持続可能性",
+        "suggested_action": "現実的な落としどころを見つけるよう誘導"
+      }
+    ],
+    "debrief_questions": [
+      "在宅酸素拒否への対応で、どんな価値観の対立がありましたか？",
+      "時間経過により、優先順位はどう変化しましたか？",
+      "引きこもり長男の存在は議論にどう影響しましたか？",
+      "妻の負担について、職種間でどんな認識の違いがありましたか？",
+      "実際の現場で活かせる気づきは何でしたか？"
+    ]
+  },
+  "versioning": {
+    "created_by": "浅井",
+    "version": "2.0",
+    "last_updated": "2025-01-01T00:00:00Z",
+    "playtested": false,
+    "feedback_incorporated": []
+  }
+}
+```
