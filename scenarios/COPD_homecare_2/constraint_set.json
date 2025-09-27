@@ -1,0 +1,416 @@
+[
+  {
+    "constraint_set_id": "copd_timeline_easy",
+    "name_ja": "COPD時系列シナリオ - 緩やか制約",
+    "description_ja": "退院支援において比較的柔軟な対応が可能な状況。資源や時間にある程度の余裕があり、調整の選択肢が多い。",
+    "setting": "home_care",
+    "play_difficulty": "easy",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "退院予定日まで2週間の準備期間がある",
+          "value": "14日",
+          "severity": "flexible",
+          "rationale": "病院側も柔軟に対応可能"
+        },
+        {
+          "type": "availability",
+          "description_ja": "訪問看護は週3回まで訪問可能",
+          "value": "週3回",
+          "severity": "flexible",
+          "rationale": "ステーションに人員の余裕あり"
+        }
+      ],
+      "economic": [
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険限度額に加え、自費サービス月3万円まで利用可能",
+          "amount": 30000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "negotiable"
+        },
+        {
+          "type": "insurance_coverage",
+          "description_ja": "在宅酸素は医療保険で全額カバー",
+          "amount": 0,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問リハビリは週3回まで対応可能",
+          "quantity": 3,
+          "unit": "回/週",
+          "availability_schedule": "平日日中",
+          "waiting_time": "即日開始可能"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "デイサービスは複数施設から選択可能",
+          "quantity": 3,
+          "unit": "施設",
+          "availability_schedule": "平日",
+          "waiting_time": "1週間以内"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "要介護2の限度額19,705単位/月",
+          "authority": "介護保険法",
+          "exceptions": ["区分変更申請により要介護3への変更可能"],
+          "appeal_process": "区分変更申請は随時可能"
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "制約は比較的緩やかです。退院まで2週間の準備期間があり、訪問看護・リハビリも週3回まで対応可能です。自費サービスも月3万円まで使えるため、柔軟な対応が可能です。",
+      "visual_aids": [
+        {
+          "type": "table",
+          "content": "| サービス | 利用可能頻度 | 備考 |\n|---------|------------|------|\n| 訪問看護 | 週3回 | 医療保険 |\n| 訪問リハ | 週3回 | 介護保険 |\n| デイサービス | 週2-3回 | 介護保険 |"
+        }
+      ],
+      "emphasis_points": [
+        "時間的余裕があるため、本人の気持ちの変化を待つことも可能",
+        "自費サービスの活用により介護保険の制約を補える"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "退院日の延期（最大1週間）",
+        "自費サービス予算の増額（家族と相談）"
+      ],
+      "emergency_overrides": [
+        "急変時は即入院可能",
+        "緊急時の訪問看護24時間対応"
+      ]
+    },
+    "tags_affected": ["time", "resources", "family_burden"],
+    "flavor_text": "病院も地域も協力的な体制。しかし、本人の気持ちと家族の複雑な事情は変わらない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "時間的余裕により、じっくり話し合いが可能",
+        "サービス選択肢が多く、優先順位の議論が活発化"
+      ],
+      "discussion_triggers": [
+        "豊富な選択肢の中で何を優先するか",
+        "本人の拒否に対してどこまで時間をかけるか"
+      ],
+      "constraint_modifiers": {
+        "time_pressure": "低",
+        "resource_scarcity": "低",
+        "decision_complexity": "中"
+      }
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z",
+      "notes": "COPDシナリオv2用easy制約"
+    }
+  },
+  {
+    "constraint_set_id": "copd_timeline_normal",
+    "name_ja": "COPD時系列シナリオ - 標準制約",
+    "description_ja": "一般的な退院支援の制約条件。限られた資源と時間の中で、現実的な調整が求められる。",
+    "setting": "home_care",
+    "play_difficulty": "normal",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "退院予定日まで1週間、延期は困難",
+          "value": "7日",
+          "severity": "firm",
+          "rationale": "病床管理上、これ以上の入院継続は困難"
+        },
+        {
+          "type": "sequence",
+          "description_ja": "サービス開始は退院後3日以内に調整必要",
+          "value": "3日",
+          "severity": "firm",
+          "rationale": "空白期間のリスク管理"
+        }
+      ],
+      "economic": [
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険限度額内での調整が原則",
+          "amount": 19705,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        },
+        {
+          "type": "copayment",
+          "description_ja": "利用者負担1割（月約2万円が上限）",
+          "amount": 20000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護は週2回が限度",
+          "quantity": 2,
+          "unit": "回/週",
+          "availability_schedule": "平日日中のみ",
+          "waiting_time": "3日後から開始"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問リハビリは週2回、PTのみ",
+          "quantity": 2,
+          "unit": "回/週",
+          "availability_schedule": "平日午前",
+          "waiting_time": "1週間後から"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "デイサービスは1施設のみ空きあり",
+          "quantity": 1,
+          "unit": "施設",
+          "availability_schedule": "週2回まで",
+          "waiting_time": "2週間後から"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "要介護2の限度額19,705単位/月を超過不可",
+          "authority": "介護保険法",
+          "exceptions": ["区分変更申請は可能だが1ヶ月かかる"],
+          "appeal_process": "区分変更申請書の提出と審査会"
+        },
+        {
+          "type": "certification_requirement",
+          "description_ja": "在宅酸素は医師の指示書が必須",
+          "authority": "医療法",
+          "exceptions": ["本人拒否の場合は導入不可"],
+          "appeal_process": "なし"
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "標準的な制約条件です。退院まで1週間、訪問看護は週2回、リハビリも週2回が限度です。介護保険限度額内での調整が必要で、デイサービスも選択肢が限られます。",
+      "visual_aids": [
+        {
+          "type": "timeline",
+          "content": "退院日 → 3日以内にサービス開始 → 2週間後デイサービス"
+        },
+        {
+          "type": "budget_breakdown",
+          "content": "限度額19,705単位：訪問看護(医療保険別枠)、訪問リハ週2回(約6,000単位)、残り約13,000単位"
+        }
+      ],
+      "emphasis_points": [
+        "1週間での退院調整という時間的制約",
+        "限度額内での優先順位づけが必要",
+        "サービスの空き状況による制約"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "デイサービスの利用開始時期",
+        "訪問時間帯の調整"
+      ],
+      "emergency_overrides": [
+        "急変時の緊急入院",
+        "医療保険での訪問看護追加"
+      ]
+    },
+    "tags_affected": ["time", "resources", "legal_policy", "coordination"],
+    "flavor_text": "現実的な制約の中で、最善の選択を迫られる。全てを満たすことはできない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "時間的プレッシャーによる議論の緊迫化",
+        "限られた資源の配分で対立が生じやすい"
+      ],
+      "discussion_triggers": [
+        "何を優先し、何を諦めるか",
+        "本人の拒否への対応に使える時間の限界",
+        "妻の負担と利用可能サービスのギャップ"
+      ],
+      "constraint_modifiers": {
+        "time_pressure": "中",
+        "resource_scarcity": "中",
+        "decision_complexity": "高"
+      }
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z",
+      "notes": "COPDシナリオv2用normal制約"
+    }
+  },
+  {
+    "constraint_set_id": "copd_timeline_hard",
+    "name_ja": "COPD時系列シナリオ - 厳格制約",
+    "description_ja": "非常に厳しい制約条件。早急な退院要請、限られた資源、複数の制約が重なる困難な状況。",
+    "setting": "home_care",
+    "play_difficulty": "hard",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "3日後に退院確定、延期不可",
+          "value": "3日",
+          "severity": "absolute",
+          "rationale": "DPC期限切れ、次の入院患者確定"
+        },
+        {
+          "type": "availability",
+          "description_ja": "土日はサービス提供不可",
+          "value": "平日のみ",
+          "severity": "absolute",
+          "rationale": "地域の事業所体制"
+        },
+        {
+          "type": "duration_limit",
+          "description_ja": "各サービス提供時間は最短設定",
+          "value": "訪問看護30分、リハ20分",
+          "severity": "firm",
+          "rationale": "人員不足による"
+        }
+      ],
+      "economic": [
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険限度額の8割までしか使えない",
+          "amount": 15764,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        },
+        {
+          "type": "income_limit",
+          "description_ja": "年金収入のみ、追加負担困難",
+          "amount": 150000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        },
+        {
+          "type": "cost_sharing",
+          "description_ja": "在宅酸素の自己負担月7,000円",
+          "amount": 7000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護は週1回のみ、新人看護師",
+          "quantity": 1,
+          "unit": "回/週",
+          "availability_schedule": "水曜午後のみ",
+          "waiting_time": "2週間後から"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問リハビリは月2回が限度",
+          "quantity": 2,
+          "unit": "回/月",
+          "availability_schedule": "第2・4火曜",
+          "waiting_time": "1ヶ月後から"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "デイサービスは3ヶ月待機",
+          "quantity": "unavailable",
+          "unit": "",
+          "availability_schedule": "3ヶ月後",
+          "waiting_time": "3ヶ月"
+        },
+        {
+          "type": "equipment_capacity",
+          "description_ja": "在宅酸素機器の在庫なし",
+          "quantity": "limited",
+          "unit": "",
+          "availability_schedule": "2週間後に入荷予定",
+          "waiting_time": "2週間"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "要介護2、区分変更は却下済み",
+          "authority": "介護保険法",
+          "exceptions": [],
+          "appeal_process": "再申請は6ヶ月後"
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "病院の退院基準：医学的安定をもって退院",
+          "authority": "病院規定",
+          "exceptions": [],
+          "appeal_process": "なし"
+        },
+        {
+          "type": "professional_scope",
+          "description_ja": "訪問看護師は医療処置のみ、生活援助不可",
+          "authority": "訪問看護ステーション方針",
+          "exceptions": [],
+          "appeal_process": "なし"
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "極めて厳しい制約です。3日後には必ず退院、訪問看護は週1回のみ、リハビリは月2回。デイサービスは3ヶ月待ち、在宅酸素機器も2週間待ちです。限度額も8割までしか使えません。",
+      "visual_aids": [
+        {
+          "type": "table",
+          "content": "| 制約項目 | 内容 | 影響 |\n|---------|------|------|\n| 退院期限 | 3日後 | 準備時間なし |\n| 訪問看護 | 週1回30分 | 最小限の支援 |\n| デイサービス | 3ヶ月待機 | 当面利用不可 |"
+        }
+      ],
+      "emphasis_points": [
+        "3日での退院は変更不可能",
+        "サービスの絶対的不足",
+        "在宅酸素も即座には導入できない"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [],
+      "emergency_overrides": [
+        "生命危険時のみ再入院考慮"
+      ]
+    },
+    "tags_affected": ["safety", "time", "resources", "family_burden", "legal_policy"],
+    "flavor_text": "制約の壁が立ちはだかる。理想は遠く、現実は厳しい。それでも答えを出さねばならない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "極度の時間的プレッシャー",
+        "サービス不足による安全性への懸念",
+        "家族負担の急激な増大"
+      ],
+      "discussion_triggers": [
+        "最低限の安全をどう確保するか",
+        "妻にかかる負担の限界点",
+        "再入院リスクとの天秤",
+        "本人の意思と現実のギャップ"
+      ],
+      "constraint_modifiers": {
+        "time_pressure": "極高",
+        "resource_scarcity": "極高",
+        "decision_complexity": "極高"
+      }
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z",
+      "notes": "COPDシナリオv2用hard制約"
+    }
+  }
+]
