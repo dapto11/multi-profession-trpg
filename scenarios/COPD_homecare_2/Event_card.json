@@ -1,0 +1,1014 @@
+```json
+[
+  {
+    "event_id": 1,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "退院直後の呼吸困難エピソード",
+    "body_ja": "退院初日の夜、トイレに立った際にSpO2が{{spo2_low}}%まで低下。妻が慌てて救急要請を考えたが、本人が強く拒否。{{recovery_time}}分後にSpO2 {{spo2_recovery}}%まで回復したが、妻は「もう無理」と泣き崩れた。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "transient",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "physician"],
+    "actors_secondary": ["care_manager", "family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["family_burden", "patient_preference"]
+    },
+    "parameters": [
+      {
+        "name": "spo2_low",
+        "type": "integer",
+        "unit": "%",
+        "min": 82,
+        "max": 88,
+        "examples": [85, 86]
+      },
+      {
+        "name": "recovery_time",
+        "type": "integer",
+        "unit": "分",
+        "min": 5,
+        "max": 15,
+        "examples": [10]
+      },
+      {
+        "name": "spo2_recovery",
+        "type": "integer",
+        "unit": "%",
+        "min": 92,
+        "max": 95,
+        "examples": [93, 94]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/patient/vitals/spo2", "/family/stress_level"],
+      "constraints_hint": ["increase_time_pressure", "reduce_family_capacity"],
+      "discussion_seeds": ["在宅酸素の再検討", "緊急時対応の具体化"],
+      "coordination_targets": ["physician", "nurse", "care_manager"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["妻の疲労と恐怖を強調"],
+      "probing_questions": ["このまま在宅を続けられるか？"],
+      "modifiers": ["hard版では回復時間を長めに設定"]
+    },
+    "flavor_text": "暗闇の中、響く荒い呼吸音。妻の震える手がスマートフォンを握りしめる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "妻の介護継続意欲が大幅低下",
+        "緊急対応体制の見直し必要"
+      ],
+      "discussion_triggers": [
+        "在宅酸素なしでの限界",
+        "妻の精神的限界点"
+      ],
+      "constraint_modifiers": {
+        "family_burden": "+2",
+        "safety_concern": "+3"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.5,
+      "severity_score": 4
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 2,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "引きこもり長男の予期せぬ協力",
+    "body_ja": "退院2日目、妻が買い物中に本人が呼吸苦。すると普段部屋から出ない長男が降りてきて、黙って父親の背中をさすり、「{{breathing_instruction}}」と呼吸法を指導。本人も長男も互いに目を合わせないが、呼吸は落ち着いた。",
+    "direction": "positive",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["family", "msw"],
+    "actors_secondary": ["nurse", "care_manager"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["coordination"]
+    },
+    "parameters": [
+      {
+        "name": "breathing_instruction",
+        "type": "string",
+        "enum": ["ゆっくり吐いて", "肩の力抜いて", "口すぼめ呼吸で"],
+        "examples": ["ゆっくり吐いて"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/family/dynamics", "/patient/support_system"],
+      "constraints_hint": ["potential_resource_increase"],
+      "discussion_seeds": ["長男の潜在的介護力", "家族関係の再構築可能性"],
+      "coordination_targets": ["msw", "nurse", "care_manager"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["長男の存在を初めて実感させる"],
+      "probing_questions": ["長男を介護資源として考えられるか？"],
+      "modifiers": ["関係者の長男への認識を変化させる"]
+    },
+    "flavor_text": "階段を降りる足音。10年ぶりに聞く息子の声は、意外にも落ち着いていた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "家族の介護資源の再評価",
+        "長男への支援アプローチ検討"
+      ],
+      "discussion_triggers": [
+        "長男をどう巻き込むか",
+        "家族システム全体の見直し"
+      ],
+      "constraint_modifiers": {
+        "family_burden": "-1",
+        "resources": "+1"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.2,
+      "severity_score": 2
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 3,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "本人の自殺企図をほのめかす発言",
+    "body_ja": "退院3日目の訪問看護時、本人が「{{suicidal_hint}}」と発言。妻は隣室にいたが聞いていない。看護師が詳しく聞こうとすると「冗談だよ」と話題を変えたが、表情は真剣だった。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "physician"],
+    "actors_secondary": ["msw", "care_manager"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference", "coordination"]
+    },
+    "parameters": [
+      {
+        "name": "suicidal_hint",
+        "type": "string",
+        "enum": [
+          "薬を全部飲んだら楽になれるかな",
+          "2階から落ちたら入院できるかな",
+          "酸素止めたらどうなるか知ってる？"
+        ],
+        "examples": ["薬を全部飲んだら楽になれるかな"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/patient/mental_state", "/care_team/alert_level"],
+      "constraints_hint": ["require_urgent_intervention"],
+      "discussion_seeds": ["精神科介入の必要性", "24時間見守り体制"],
+      "coordination_targets": ["physician", "nurse", "msw"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["深刻さと情報共有の難しさを演出"],
+      "probing_questions": ["妻に伝えるべきか？どう対応するか？"],
+      "modifiers": ["緊急度を最大に"]
+    },
+    "flavor_text": "冗談めかした言葉の裏に、深い闇が見え隠れする。看護師の手が震えた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "緊急カンファレンスの必要性",
+        "精神科コンサルト検討"
+      ],
+      "discussion_triggers": [
+        "自殺リスク評価",
+        "家族への情報共有の是非"
+      ],
+      "constraint_modifiers": {
+        "safety_concern": "+5",
+        "time_pressure": "+3"
+      }
+    },
+    "weights": {
+      "draw_weight": 0.8,
+      "severity_score": 5
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 4,
+    "category": "D_services",
+    "subcategory": "incident_accident",
+    "title_ja": "訪問リハビリ中の転倒ニアミス",
+    "body_ja": "初回訪問リハビリ時、歩行練習中に{{incident_detail}}。PTが支えて転倒は免れたが、本人は「もうリハビリはいい」と拒否。妻も「危ないからやめて」と言い出した。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["pt", "care_manager"],
+    "actors_secondary": ["nurse", "family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["function", "patient_preference"]
+    },
+    "parameters": [
+      {
+        "name": "incident_detail",
+        "type": "string",
+        "enum": [
+          "急にふらつき壁にもたれかかった",
+          "膝折れを起こしかけた",
+          "めまいを訴え座り込みそうになった"
+        ],
+        "examples": ["急にふらつき壁にもたれかかった"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/patient/rehabilitation_motivation", "/family/risk_perception"],
+      "constraints_hint": ["reduce_rehabilitation_acceptance"],
+      "discussion_seeds": ["リハビリ継続の是非", "安全な運動方法"],
+      "coordination_targets": ["pt", "physician", "nurse"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["本人と家族の恐怖を描写"],
+      "probing_questions": ["機能維持vs安全、どちらを優先？"],
+      "modifiers": ["リハビリ拒否を強める"]
+    },
+    "flavor_text": "一瞬の静寂。PTの腕が父を支える。妻の顔が青ざめる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "リハビリ方針の見直し必要",
+        "本人・家族の不安増大"
+      ],
+      "discussion_triggers": [
+        "リハビリのリスクとベネフィット",
+        "代替的な機能維持方法"
+      ],
+      "constraint_modifiers": {
+        "function": "-2",
+        "patient_preference": "-1"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.0,
+      "severity_score": 3
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 5,
+    "category": "E_environment",
+    "subcategory": "local_life",
+    "title_ja": "元同僚からの励ましの電話",
+    "body_ja": "退院1週間後、病院の元警備員仲間から電話。「{{encouragement}}」との言葉に、本人は久しぶりに笑顔を見せた。「また会いたい」と言いつつも「この姿は見せられない」と複雑な表情。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["msw", "nurse"],
+    "actors_secondary": ["care_manager"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["function"]
+    },
+    "parameters": [
+      {
+        "name": "encouragement",
+        "type": "string",
+        "enum": [
+          "みんな山田さんに会いたがってる",
+          "病院に顔出してくれよ",
+          "山田さんがいないと寂しい"
+        ],
+        "examples": ["みんな山田さんに会いたがってる"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/patient/social_motivation", "/patient/self_image"],
+      "constraints_hint": ["potential_social_resource"],
+      "discussion_seeds": ["社会参加への動機づけ", "自尊心の回復"],
+      "coordination_targets": ["msw", "nurse", "care_manager"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["本人の揺れる気持ちを表現"],
+      "probing_questions": ["社会とのつながりをどう活かすか？"],
+      "modifiers": ["わずかな希望を演出"]
+    },
+    "flavor_text": "受話器を握る手に、かすかな温もりが戻る。でも、鏡は見たくない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "本人の気持ちに変化の兆し",
+        "社会参加への糸口"
+      ],
+      "discussion_triggers": [
+        "段階的な社会復帰の可能性",
+        "自尊心への配慮方法"
+      ],
+      "constraint_modifiers": {
+        "patient_preference": "+1",
+        "function": "+1"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.1,
+      "severity_score": 2
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 6,
+    "category": "A_medical",
+    "subcategory": "cardio",
+    "title_ja": "半年後：心不全の徴候出現",
+    "body_ja": "退院から半年、定期訪問時に下腿浮腫{{edema_level}}を確認。体重も{{weight_gain}}kg増加。本人は「大丈夫」と言うが、労作時呼吸苦も悪化傾向。BNP値は{{bnp_value}}pg/mlまで上昇。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["physician", "nurse"],
+    "actors_secondary": ["pharmacist", "care_manager"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["time", "resources"]
+    },
+    "parameters": [
+      {
+        "name": "edema_level",
+        "type": "string",
+        "enum": ["軽度", "中等度", "高度"],
+        "examples": ["中等度"]
+      },
+      {
+        "name": "weight_gain",
+        "type": "number",
+        "unit": "kg",
+        "min": 2,
+        "max": 5,
+        "examples": [3, 3.5]
+      },
+      {
+        "name": "bnp_value",
+        "type": "integer",
+        "unit": "pg/ml",
+        "min": 200,
+        "max": 500,
+        "examples": [350]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/patient/cardiac_status", "/patient/prognosis"],
+      "constraints_hint": ["increase_medical_monitoring", "medication_adjustment"],
+      "discussion_seeds": ["入院vs在宅管理強化", "利尿剤調整"],
+      "coordination_targets": ["physician", "nurse", "pharmacist"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["緩やかな悪化を強調"],
+      "probing_questions": ["このまま在宅で管理可能か？"],
+      "modifiers": ["長期的視点での判断を促す"]
+    },
+    "flavor_text": "靴下の跡がくっきり。体重計の数字が、静かに危機を告げる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "治療方針の見直し必要",
+        "モニタリング頻度増加"
+      ],
+      "discussion_triggers": [
+        "在宅管理の限界",
+        "入院のタイミング"
+      ],
+      "constraint_modifiers": {
+        "safety_concern": "+2",
+        "resources": "-1"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.3,
+      "severity_score": 3
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 7,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "妻の腰痛悪化で介護困難に",
+    "body_ja": "退院から{{months}}ヶ月、妻が重度の腰痛で整形外科受診。「{{diagnosis}}」と診断され、医師から「介護は無理」と宣告。妻は泣きながら「でも他に誰もいない」と訴える。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "msw"],
+    "actors_secondary": ["nurse", "family"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["resources", "coordination"]
+    },
+    "parameters": [
+      {
+        "name": "months",
+        "type": "integer",
+        "unit": "ヶ月",
+        "min": 3,
+        "max": 6,
+        "examples": [4, 5]
+      },
+      {
+        "name": "diagnosis",
+        "type": "string",
+        "enum": [
+          "腰椎椎間板ヘルニア",
+          "脊柱管狭窄症",
+          "圧迫骨折"
+        ],
+        "examples": ["腰椎椎間板ヘルニア"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/family/care_capacity", "/care_system/sustainability"],
+      "constraints_hint": ["critical_resource_shortage"],
+      "discussion_seeds": ["代替介護者の確保", "施設入所の検討"],
+      "coordination_targets": ["care_manager", "msw", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["介護体制の崩壊危機を演出"],
+      "probing_questions": ["在宅継続は可能か？"],
+      "modifiers": ["最重要課題として提示"]
+    },
+    "flavor_text": "支える人が倒れる時、全てが崩れ始める。妻の涙が止まらない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "介護体制の全面見直し",
+        "緊急対応の必要性"
+      ],
+      "discussion_triggers": [
+        "長男の活用可能性",
+        "施設入所vs在宅継続"
+      ],
+      "constraint_modifiers": {
+        "family_burden": "+5",
+        "resources": "-3"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.2,
+      "severity_score": 5
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 8,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "デイサービス初日の成功体験",
+    "body_ja": "渋々デイサービスに行った初日、昔の知り合いと再会。「{{old_friend_comment}}」と声をかけられ、本人は照れながらも嬉しそう。帰宅後、妻に「また行ってもいい」と小声で伝えた。",
+    "direction": "positive",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "nurse"],
+    "actors_secondary": ["msw", "family"],
+    "tags": {
+      "primary": "function",
+      "secondary": ["patient_preference", "family_burden"]
+    },
+    "parameters": [
+      {
+        "name": "old_friend_comment",
+        "type": "string",
+        "enum": [
+          "山田さん、元気そうで良かった",
+          "一緒に将棋でもやろうよ",
+          "みんな山田さんを待ってたよ"
+        ],
+        "examples": ["山田さん、元気そうで良かった"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/patient/social_participation", "/patient/mood"],
+      "constraints_hint": ["increase_service_acceptance"],
+      "discussion_seeds": ["社会参加の拡大", "QOL向上"],
+      "coordination_targets": ["care_manager", "nurse"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["小さな変化の大きな意味を強調"],
+      "probing_questions": ["この変化をどう発展させるか？"],
+      "modifiers": ["希望的な展開を示唆"]
+    },
+    "flavor_text": "久しぶりの笑顔。小さな一歩が、大きな変化の始まりかもしれない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "本人の社会参加意欲向上",
+        "妻の負担軽減の可能性"
+      ],
+      "discussion_triggers": [
+        "デイサービス利用拡大",
+        "社会参加の段階的促進"
+      ],
+      "constraint_modifiers": {
+        "patient_preference": "+2",
+        "family_burden": "-1"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.0,
+      "severity_score": 1
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 9,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "季節変化による呼吸状態悪化",
+    "body_ja": "{{season}}になり、気温{{temperature}}により呼吸状態が悪化。安静時SpO2も{{spo2_rest}}%まで低下し、入浴が困難に。本人は「もう風呂はいい」と諦め気味。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "physician"],
+    "actors_secondary": ["pt", "care_manager"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["function", "patient_preference"]
+    },
+    "parameters": [
+      {
+        "name": "season",
+        "type": "string",
+        "enum": ["梅雨", "真夏", "真冬"],
+        "examples": ["梅雨"]
+      },
+      {
+        "name": "temperature",
+        "type": "string",
+        "enum": ["の上昇と湿度", "35度超え", "の低下"],
+        "examples": ["の上昇と湿度"]
+      },
+      {
+        "name": "spo2_rest",
+        "type": "integer",
+        "unit": "%",
+        "min": 90,
+        "max": 92,
+        "examples": [91]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/patient/respiratory_status", "/patient/adl"],
+      "constraints_hint": ["seasonal_management_needed"],
+      "discussion_seeds": ["環境調整", "入浴方法の工夫"],
+      "coordination_targets": ["nurse", "pt", "physician"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["季節要因の影響を具体的に"],
+      "probing_questions": ["環境調整で対応可能か？"],
+      "modifiers": ["長期的な対策を促す"]
+    },
+    "flavor_text": "季節の変わり目が、呼吸を奪う。窓の外の景色が、遠く感じる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "ADL低下への対応必要",
+        "環境調整の検討"
+      ],
+      "discussion_triggers": [
+        "季節対策の長期計画",
+        "QOL維持の工夫"
+      ],
+      "constraint_modifiers": {
+        "safety": "+1",
+        "function": "-2"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.1,
+      "severity_score": 3
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 10,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "介護保険更新で要介護1に下がる",
+    "body_ja": "半年後の介護保険更新審査で、まさかの要介護1判定。理由は「{{reason}}」。現在のサービス量維持は困難に。ケアマネは困惑し、家族は「どうすればいいの」と途方に暮れる。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "msw"],
+    "actors_secondary": ["nurse", "family"],
+    "tags": {
+      "primary": "legal_policy",
+      "secondary": ["resources", "coordination"]
+    },
+    "parameters": [
+      {
+        "name": "reason",
+        "type": "string",
+        "enum": [
+          "ADLが自立と判定されたため",
+          "認知症状がないため",
+          "調査時の状態が良好だったため"
+        ],
+        "examples": ["ADLが自立と判定されたため"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/care_system/service_availability", "/family/anxiety"],
+      "constraints_hint": ["severe_service_reduction"],
+      "discussion_seeds": ["区分変更申請", "自費サービスの検討"],
+      "coordination_targets": ["care_manager", "msw", "all"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["制度の壁による困難を強調"],
+      "probing_questions": ["限られた資源でどう支えるか？"],
+      "modifiers": ["サービス調整の困難度上昇"]
+    },
+    "flavor_text": "判定通知書の文字が冷たい。制度の網目から、こぼれ落ちそうになる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "サービス計画の全面見直し",
+        "家族不安の急増"
+      ],
+      "discussion_triggers": [
+        "限度額内での優先順位",
+        "インフォーマルサポート活用"
+      ],
+      "constraint_modifiers": {
+        "legal_policy": "+3",
+        "resources": "-4"
+      }
+    },
+    "weights": {
+      "draw_weight": 0.9,
+      "severity_score": 4
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 11,
+    "category": "C_family",
+    "subcategory": "challenge_event",
+    "title_ja": "長女の突然の支援申し出",
+    "body_ja": "遠方の長女から連絡。「{{support_offer}}」と提案。月2回なら通えるとのこと。妻は嬉しいが、本人は「娘に迷惑かけたくない」と難色。",
+    "direction": "positive",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["family", "care_manager"],
+    "actors_secondary": ["nurse", "msw"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["resources", "patient_preference"]
+    },
+    "parameters": [
+      {
+        "name": "support_offer",
+        "type": "string",
+        "enum": [
+          "私も介護を手伝うから",
+          "お母さんを休ませてあげたい",
+          "お父さんの通院は私が付き添う"
+        ],
+        "examples": ["私も介護を手伝うから"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/family/support_network", "/family/dynamics"],
+      "constraints_hint": ["resource_increase_potential"],
+      "discussion_seeds": ["家族資源の活用", "役割分担"],
+      "coordination_targets": ["care_manager", "family", "msw"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["家族の複雑な思いを描写"],
+      "probing_questions": ["この申し出をどう活かすか？"],
+      "modifiers": ["新たな可能性を提示"]
+    },
+    "flavor_text": "電話の向こうの娘の声が、少し震えている。距離を超えた想いが伝わる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "家族支援体制の再構築可能性",
+        "妻の負担軽減の糸口"
+      ],
+      "discussion_triggers": [
+        "長女の役割設定",
+        "本人の気持ちへの配慮"
+      ],
+      "constraint_modifiers": {
+        "family_burden": "-2",
+        "resources": "+1"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.0,
+      "severity_score": 2
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 12,
+    "category": "B_psych",
+    "subcategory": "problem_behavior",
+    "title_ja": "本人の頑固な服薬拒否",
+    "body_ja": "最近、「{{refusal_reason}}」と言い、利尿剤の服用を拒否。妻が説得しても聞かない。むくみが悪化し始めている。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["pharmacist", "nurse"],
+    "actors_secondary": ["physician", "family"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["safety", "coordination"]
+    },
+    "parameters": [
+      {
+        "name": "refusal_reason",
+        "type": "string",
+        "enum": [
+          "トイレが近くて嫌だ",
+          "薬なんか効かない",
+          "もう治療はいい"
+        ],
+        "examples": ["トイレが近くて嫌だ"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/patient/medication_adherence", "/patient/cardiac_status"],
+      "constraints_hint": ["medication_management_crisis"],
+      "discussion_seeds": ["服薬指導の工夫", "代替案の検討"],
+      "coordination_targets": ["pharmacist", "nurse", "physician"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["本人の頑固さと医学的リスクの板挟み"],
+      "probing_questions": ["どう服薬を促すか？"],
+      "modifiers": ["アドヒアランス問題を前面に"]
+    },
+    "flavor_text": "薬の袋が、手つかずのまま積み重なる。本人の意志は固い。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "心不全悪化リスク上昇",
+        "服薬管理方法の見直し"
+      ],
+      "discussion_triggers": [
+        "本人の価値観の理解",
+        "リスクとのバランス"
+      ],
+      "constraint_modifiers": {
+        "patient_preference": "+2",
+        "safety": "-2"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.2,
+      "severity_score": 4
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 13,
+    "category": "E_environment",
+    "subcategory": "weather_disaster",
+    "title_ja": "猛暑による体調悪化と熱中症リスク",
+    "body_ja": "連日{{temperature}}度超えの猛暑。エアコンを「{{ac_reason}}」と言って使わない。訪問時、脱水傾向あり。妻も暑さでぐったりしている。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "transient",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "care_manager"],
+    "actors_secondary": ["physician", "family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference", "family_burden"]
+    },
+    "parameters": [
+      {
+        "name": "temperature",
+        "type": "integer",
+        "unit": "度",
+        "min": 35,
+        "max": 40,
+        "examples": [37, 38]
+      },
+      {
+        "name": "ac_reason",
+        "type": "string",
+        "enum": [
+          "電気代がもったいない",
+          "冷房は体に悪い",
+          "自然の風がいい"
+        ],
+        "examples": ["電気代がもったいない"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/patient/hydration", "/environment/safety"],
+      "constraints_hint": ["environmental_risk_management"],
+      "discussion_seeds": ["熱中症予防", "環境調整"],
+      "coordination_targets": ["nurse", "care_manager", "family"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["環境リスクと本人の頑固さ"],
+      "probing_questions": ["安全確保をどう実現するか？"],
+      "modifiers": ["緊急性を強調"]
+    },
+    "flavor_text": "室温計が危険域を示す。汗が流れ落ちる。でも、窓は開けたまま。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "熱中症の緊急リスク",
+        "環境調整の必要性"
+      ],
+      "discussion_triggers": [
+        "本人の価値観vs安全",
+        "代替的な冷却方法"
+      ],
+      "constraint_modifiers": {
+        "safety": "-3",
+        "patient_preference": "+1"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.0,
+      "severity_score": 4
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 14,
+    "category": "A_medical",
+    "subcategory": "accident_safety",
+    "title_ja": "夜間の転倒と軽度打撲",
+    "body_ja": "夜中にトイレに行こうとして転倒。{{injury_site}}を打撲したが、本人は「大丈夫」と病院受診を拒否。翌朝の訪問看護で{{symptom}}を確認。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "physician"],
+    "actors_secondary": ["pt", "family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["function", "patient_preference"]
+    },
+    "parameters": [
+      {
+        "name": "injury_site",
+        "type": "string",
+        "enum": ["右肩", "左腰部", "右膝"],
+        "examples": ["右肩"]
+      },
+      {
+        "name": "symptom",
+        "type": "string",
+        "enum": ["腫脹と圧痛", "皮下出血", "可動域制限"],
+        "examples": ["腫脹と圧痛"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/patient/mobility", "/patient/fall_risk"],
+      "constraints_hint": ["increase_monitoring_need"],
+      "discussion_seeds": ["転倒予防策", "夜間の安全確保"],
+      "coordination_targets": ["nurse", "pt", "care_manager"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["転倒リスクの現実化"],
+      "probing_questions": ["再発防止策は？"],
+      "modifiers": ["環境整備の必要性を強調"]
+    },
+    "flavor_text": "暗闇の中の一瞬の出来事。朝になって、痣が物語る。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "転倒リスク評価の見直し",
+        "環境整備の緊急性"
+      ],
+      "discussion_triggers": [
+        "夜間の見守り体制",
+        "住環境の改善"
+      ],
+      "constraint_modifiers": {
+        "safety": "-2",
+        "function": "-1"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.1,
+      "severity_score": 3
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 15,
+    "category": "C_family",
+    "subcategory": "complaint",
+    "title_ja": "ケアマネへの不信感爆発",
+    "body_ja": "本人が突然「{{complaint}}」とケアマネへの不満を爆発。「もう来なくていい」と言い出した。妻も困惑し、他の専門職も対応に苦慮。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "msw"],
+    "actors_secondary": ["nurse", "family"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["patient_preference"]
+    },
+    "parameters": [
+      {
+        "name": "complaint",
+        "type": "string",
+        "enum": [
+          "あの人は俺の話を聞かない",
+          "型通りのことしか言わない",
+          "心配ばかりで何もしてくれない"
+        ],
+        "examples": ["あの人は俺の話を聞かない"]
+      }
+    ],
+    "impact_hints": {
+      "state_fields": ["/care_team/cohesion", "/patient/trust"],
+      "constraints_hint": ["coordination_breakdown"],
+      "discussion_seeds": ["信頼関係の再構築", "コミュニケーション改善"],
+      "coordination_targets": ["care_manager", "msw", "nurse"]
+    },
+    "gm_guidance": {
+      "narration_tips": ["関係性の危機を描写"],
+      "probing_questions": ["チーム連携をどう立て直すか？"],
+      "modifiers": ["調整役の重要性を強調"]
+    },
+    "flavor_text": "積み重ねた不満が、堰を切って溢れ出す。信頼の糸が、プツリと切れる音。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "ケアチームの連携危機",
+        "調整機能の低下"
+      ],
+      "discussion_triggers": [
+        "関係修復の方法",
+        "代替的な調整役"
+      ],
+      "constraint_modifiers": {
+        "coordination": "-3",
+        "patient_preference": "+1"
+      }
+    },
+    "weights": {
+      "draw_weight": 1.0,
+      "severity_score": 3
+    },
+    "versioning": {
+      "created_by": "浅井",
+      "version": "2.0",
+      "last_updated": "2025-01-01T00:00:00Z"
+    }
+  }
+]
+```
