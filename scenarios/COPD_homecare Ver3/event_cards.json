@@ -1,0 +1,1147 @@
+[
+  {
+    "event_id": 1,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "立ち上がり時のSpO2急低下",
+    "body_ja": "山田さんがトイレに立ち上がった際、SpO2が85%まで低下。5分後に91%まで回復したが、強い息切れと不安感を訴えている。「こんなに苦しいなら、もう動きたくない」と発言。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "transient",
+    "settings": ["home_care"],
+    "actors_primary": ["physician", "nurse", "pt"],
+    "actors_secondary": ["patient", "family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.physical_condition",
+        "change": -1,
+        "reason": "立ち上がり時のSpO2急低下により身体状態が悪化"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -1,
+        "reason": "強い息切れと不安感"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": 1,
+        "reason": "夫の急変を目の当たりにして不安増大"
+      }
+    ],
+    "flavor_text": "妻は「やっぱり酸素が必要なんじゃないか」と心配そうに見守っている。本人は「大丈夫、すぐ治まる」と強がっているが、表情は硬い。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "在宅酸素療法の必要性が再浮上",
+        "活動制限の必要性",
+        "SpO2モニタリングの重要性"
+      ],
+      "discussion_triggers": [
+        "在宅酸素なしでの安全性",
+        "活動レベルの調整",
+        "妻の見守り負担"
+      ],
+      "constraint_modifiers": {
+        "time": "急変リスクへの対応が急務",
+        "resources": "SpO2モニター機器の必要性"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 2,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "「早く楽になりたい」という発言",
+    "body_ja": "訪問看護師が訪問した際、山田さんが「こんなに苦しいなら、早く楽になりたい」と発言。妻は「そんなこと言わないで」と涙ぐんでいる。本人は「冗談だよ」と笑ってごまかすが、表情は暗い。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "msw", "physician"],
+    "actors_secondary": ["patient", "family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference", "family_burden"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -2,
+        "reason": "希死念慮を示唆する発言"
+      },
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": -1,
+        "reason": "本心を隠している状態"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": 2,
+        "reason": "夫の希死念慮への強い不安"
+      }
+    ],
+    "flavor_text": "妻は「夫がこんなことを言うなんて」とショックを受けている。訪問看護師は「これは見逃せない」と感じている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "希死念慮への緊急対応が必要",
+        "精神科医への相談の検討",
+        "家族への心理的支援"
+      ],
+      "discussion_triggers": [
+        "希死念慮への多職種での対応",
+        "本人の心理状態の評価",
+        "妻の心理的負担"
+      ],
+      "constraint_modifiers": {
+        "resources": "精神科医、臨床心理士の介入検討"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 3,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "妻の腰痛悪化",
+    "body_ja": "妻が「最近腰痛がひどくて、夫を支えるのが辛い」と訴えている。夜中に夫がトイレに起きる際、転倒しないよう見守っているが、自分も睡眠不足で体調を崩しつつある。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "nurse", "msw"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["resources"]
+    },
+    "status_effects": [
+      {
+        "target": "family_0.caregiver_burden",
+        "change": 2,
+        "reason": "腰痛悪化と睡眠不足により介護負担が増大"
+      },
+      {
+        "target": "family_0.hope_for_support",
+        "change": 1,
+        "reason": "支援の必要性を実感"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -1,
+        "reason": "妻の体調悪化を知って罪悪感"
+      }
+    ],
+    "flavor_text": "妻は「夫には言えないけど、正直もう限界」と小声で訴えている。本人は妻の腰痛に気づいていない様子。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "妻の介護負担軽減策が急務",
+        "夜間の見守り体制の検討",
+        "妻の健康管理"
+      ],
+      "discussion_triggers": [
+        "妻のレスパイトケア",
+        "夜間の訪問介護の可能性",
+        "長男の潜在的介護力の活用"
+      ],
+      "constraint_modifiers": {
+        "resources": "夜間の訪問介護の追加検討",
+        "economic": "追加サービスの費用負担"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 4,
+    "category": "A_medical",
+    "subcategory": "cardio",
+    "title_ja": "下肢浮腫の出現",
+    "body_ja": "訪問看護師が観察したところ、両下肢に軽度の浮腫が出現。体重も2kg増加している。本人は「少し足がむくんでいる気がする」と訴えているが、「大したことない」と気にしていない様子。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["physician", "nurse", "pharmacist"],
+    "actors_secondary": ["patient"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.physical_condition",
+        "change": -1,
+        "reason": "心不全徴候の出現"
+      },
+      {
+        "target": "profession.physician.symptom_management",
+        "change": -1,
+        "reason": "心不全管理が不十分"
+      },
+      {
+        "target": "profession.nurse.patient_safety_assurance",
+        "change": 1,
+        "reason": "早期発見により適切な対応が可能"
+      }
+    ],
+    "flavor_text": "訪問看護師は「心不全の徴候かもしれない」と判断し、医師への報告を検討している。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "医師への緊急報告",
+        "利尿剤の調整検討",
+        "体重・浮腫のモニタリング強化"
+      ],
+      "discussion_triggers": [
+        "心不全管理の強化",
+        "電解質管理の重要性",
+        "多職種での情報共有"
+      ],
+      "constraint_modifiers": {
+        "resources": "訪問看護の頻度増加の検討"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 5,
+    "category": "B_psych",
+    "subcategory": "problem_behavior",
+    "title_ja": "入浴拒否の継続",
+    "body_ja": "訪問介護員が入浴介助を提案したが、山田さんは「今日は気分が乗らない」と拒否。妻によると、退院後一度も入浴していないとのこと。「お風呂が怖い」という本人の発言もあり。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "pt", "care_manager"],
+    "actors_secondary": ["patient", "family"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["safety", "function"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.autonomy_satisfaction",
+        "change": -1,
+        "reason": "入浴への恐怖心により自己決定が制限されている"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -1,
+        "reason": "入浴への恐怖心"
+      },
+      {
+        "target": "family_0.caregiver_burden",
+        "change": 1,
+        "reason": "清拭などの代替手段による負担増"
+      }
+    ],
+    "flavor_text": "妻は「せめて週に1回は入ってほしい」と困っている。本人は「昔、お風呂で溺れかけたことがある」と小声で話している。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "入浴への恐怖心の原因探索",
+        "代替手段（清拭、部分浴）の検討",
+        "安全な入浴方法の提案"
+      ],
+      "discussion_triggers": [
+        "入浴の必要性と本人の恐怖心のバランス",
+        "過去のトラウマへの対応",
+        "段階的な入浴再開の計画"
+      ],
+      "constraint_modifiers": {
+        "resources": "入浴介助の時間延長の検討"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 6,
+    "category": "C_family",
+    "subcategory": "challenge_event",
+    "title_ja": "長男の存在が明らかに",
+    "body_ja": "訪問看護師が訪問した際、2階から物音が聞こえた。妻は慌てて「何でもない」と言うが、表情が硬い。後日、長女から「実は兄が引きこもっていて、母はそれを隠している」と打ち明けられる。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["msw", "care_manager"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["coordination", "resources"]
+    },
+    "status_effects": [
+      {
+        "target": "family_0.psychological_distress",
+        "change": 1,
+        "reason": "家族の秘密が明らかになることへの不安"
+      },
+      {
+        "target": "family_0.hope_for_support",
+        "change": -1,
+        "reason": "長男のことを知られたくないという気持ち"
+      },
+      {
+        "target": "profession.msw.family_advocacy",
+        "change": 1,
+        "reason": "家族システム全体への理解が深まった"
+      }
+    ],
+    "flavor_text": "妻は「長男のことは誰にも言わないでほしい」と懇願している。長女は「兄が少しでも手伝ってくれれば」と複雑な表情。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "家族の秘密への配慮",
+        "長男の潜在的介護力の評価",
+        "家族システム全体への支援"
+      ],
+      "discussion_triggers": [
+        "長男の引きこもりへの介入の是非",
+        "家族の秘密を守りながらの支援",
+        "長男の社会参加の可能性"
+      ],
+      "constraint_modifiers": {
+        "resources": "長男を潜在的な介護力として活用できる可能性"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 7,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "介護保険の限度額オーバー",
+    "body_ja": "ケアマネジャーが試算したところ、現在のサービス計画では介護保険の限度額（19,705単位/月）を超過することが判明。訪問看護を週3回から2回に減らすか、自己負担を増やすかの選択を迫られている。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "msw"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "resources",
+      "secondary": ["legal_policy", "family_burden"]
+    },
+    "status_effects": [
+      {
+        "target": "family_0.hope_for_support",
+        "change": -1,
+        "reason": "経済的制約により希望するサービスが受けられない"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": 1,
+        "reason": "経済的不安の増大"
+      },
+      {
+        "target": "profession.care_manager.resource_coordination",
+        "change": -1,
+        "reason": "限度額内でのサービス調整が困難"
+      }
+    ],
+    "flavor_text": "妻は「これ以上の負担は無理」と困惑している。ケアマネジャーは「どこかを削るしかない」と頭を抱えている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "サービス内容の優先順位づけ",
+        "自己負担増の検討",
+        "代替案の模索"
+      ],
+      "discussion_triggers": [
+        "限度額内でのサービス調整",
+        "何を優先し、何を諦めるか",
+        "自己負担増の現実性"
+      ],
+      "constraint_modifiers": {
+        "economic": "自己負担増の検討",
+        "resources": "サービス頻度の削減"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 8,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "夜間の呼吸困難",
+    "body_ja": "妻から「夜中に夫が息苦しそうにしていて、何度も起きた」と報告。本人は「少し苦しかったけど、朝には治まった」と言うが、SpO2は89%。妻は「夜中に救急車を呼ぶべきか迷った」と不安そう。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "transient",
+    "settings": ["home_care"],
+    "actors_primary": ["physician", "nurse"],
+    "actors_secondary": ["patient", "family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["family_burden", "time"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.physical_condition",
+        "change": -2,
+        "reason": "夜間の呼吸困難により身体状態が悪化"
+      },
+      {
+        "target": "family_0.caregiver_burden",
+        "change": 2,
+        "reason": "夜間の見守り負担が増大"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": 2,
+        "reason": "夫の急変への強い不安"
+      }
+    ],
+    "flavor_text": "妻は「このままでは自分が倒れてしまう」と涙ぐんでいる。本人は「心配かけてごめん」と申し訳なさそう。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "急変時対応プロトコルの確立",
+        "夜間の緊急連絡体制の整備",
+        "在宅酸素療法の再検討"
+      ],
+      "discussion_triggers": [
+        "夜間の急変リスクへの対応",
+        "妻の見守り負担の限界",
+        "在宅酸素療法の必要性"
+      ],
+      "constraint_modifiers": {
+        "time": "急変リスクへの緊急対応が必要",
+        "resources": "夜間の訪問看護の検討"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 9,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "元職場の仲間の訪問",
+    "body_ja": "元病院警備員時代の同僚が訪問。山田さんは久しぶりの再会に笑顔を見せるが、「こんな姿を見られたくなかった」とも発言。同僚が帰った後、「もう会いたくない」と落ち込んでいる。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "msw"],
+    "actors_secondary": ["patient"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["function"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -1,
+        "reason": "元職場の仲間に弱った姿を見られた羞恥心"
+      },
+      {
+        "target": "patient.autonomy_satisfaction",
+        "change": -1,
+        "reason": "「こんな姿を見られたくなかった」という思い"
+      },
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": 1,
+        "reason": "久しぶりの再会で一時的に気持ちが明るくなった"
+      }
+    ],
+    "flavor_text": "妻は「久しぶりに笑顔を見られて嬉しかった」と言うが、本人は「もう誰にも会いたくない」と塞ぎ込んでいる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "社会的つながりの重要性の再認識",
+        "羞恥心への配慮",
+        "本人の価値観の理解"
+      ],
+      "discussion_triggers": [
+        "在宅酸素への抵抗の根源",
+        "社会参加と羞恥心のバランス",
+        "本人のプライドの尊重"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 10,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "妻の外出困難",
+    "body_ja": "妻が「買い物に行きたいが、夫を一人にするのが不安」と訴えている。本人も「妻が出かけると不安になる」と発言。結果、妻は2週間以上外出していない状況。長女から「母の様子がおかしい」と連絡。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "msw", "nurse"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["patient_preference", "coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "family_0.caregiver_burden",
+        "change": 2,
+        "reason": "外出できない状況による心理的・社会的負担"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": 2,
+        "reason": "孤立感と閉塞感の増大"
+      },
+      {
+        "target": "patient.autonomy_satisfaction",
+        "change": -1,
+        "reason": "妻への依存が強く、自己決定が制限されている"
+      }
+    ],
+    "flavor_text": "長女は「母が倒れたらどうするのか」と心配している。妻は「夫が一人でいる間に何かあったら」と不安を訴えている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "妻のレスパイトケアが急務",
+        "見守り体制の整備",
+        "本人の依存心への対応"
+      ],
+      "discussion_triggers": [
+        "妻の外出を可能にする支援",
+        "本人の不安への対応",
+        "長男の潜在的介護力の活用"
+      ],
+      "constraint_modifiers": {
+        "resources": "見守りサービスの追加検討",
+        "economic": "追加サービスの費用負担"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 11,
+    "category": "A_medical",
+    "subcategory": "metabolic",
+    "title_ja": "電解質異常の発見",
+    "body_ja": "訪問診療時の血液検査で、カリウム値が3.2mEq/L（基準値3.5-5.0）と低下していることが判明。利尿剤の副作用と考えられる。本人は「特に症状はない」と言うが、不整脈のリスクあり。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["physician", "pharmacist", "nurse"],
+    "actors_secondary": ["patient"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.physical_condition",
+        "change": -1,
+        "reason": "電解質異常により身体状態が悪化"
+      },
+      {
+        "target": "profession.pharmacist.medication_optimization",
+        "change": 1,
+        "reason": "副作用モニタリングにより早期発見"
+      },
+      {
+        "target": "profession.physician.symptom_management",
+        "change": 1,
+        "reason": "適切な処方調整により対応"
+      }
+    ],
+    "flavor_text": "医師は「利尿剤の減量とカリウム製剤の追加を検討する」と説明。薬剤師は「定期的なモニタリングが必要」と助言。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "処方調整の必要性",
+        "定期的な血液検査の重要性",
+        "多職種での情報共有"
+      ],
+      "discussion_triggers": [
+        "電解質管理の重要性",
+        "服薬管理の継続",
+        "副作用モニタリングの役割分担"
+      ],
+      "constraint_modifiers": {
+        "resources": "訪問薬剤管理の頻度増加の検討"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 12,
+    "category": "D_services",
+    "subcategory": "incident_accident",
+    "title_ja": "訪問リハビリのキャンセル",
+    "body_ja": "理学療法士の体調不良により、今週の訪問リハビリがキャンセルに。代替のセラピストの派遣は困難とのこと。本人は「リハビリがないと動けなくなる」と不安を訴えている。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["pt", "care_manager"],
+    "actors_secondary": ["patient"],
+    "tags": {
+      "primary": "resources",
+      "secondary": ["coordination", "function"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -1,
+        "reason": "リハビリのキャンセルによる不安"
+      },
+      {
+        "target": "profession.pt.rehabilitation_progress",
+        "change": -1,
+        "reason": "リハビリの継続が困難"
+      },
+      {
+        "target": "profession.care_manager.resource_coordination",
+        "change": -1,
+        "reason": "代替リソースの確保が困難"
+      }
+    ],
+    "flavor_text": "妻は「リハビリがないと夫が動かなくなってしまう」と心配している。ケアマネジャーは「代替案を考えないと」と焦っている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "代替リハビリプログラムの検討",
+        "自主トレーニングの指導",
+        "サービス継続の課題"
+      ],
+      "discussion_triggers": [
+        "人員不足によるサービス中断リスク",
+        "自主トレーニングの可能性",
+        "代替リソースの確保"
+      ],
+      "constraint_modifiers": {
+        "resources": "訪問リハビリの継続困難"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 13,
+    "category": "B_psych",
+    "subcategory": "problem_behavior",
+    "title_ja": "在宅酸素への拒否の再燃",
+    "body_ja": "医師が再度、在宅酸素療法を提案したが、山田さんは「絶対に嫌だ。こんな姿を見られたくない」と強く拒否。妻は「命のためなら」と説得を試みるが、本人は「それなら死んだ方がマシだ」と激高。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["physician", "nurse", "patient"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["safety", "family_burden"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": -2,
+        "reason": "医師の提案を強く拒否し、信頼関係が悪化"
+      },
+      {
+        "target": "patient.autonomy_satisfaction",
+        "change": -2,
+        "reason": "自分の意思が尊重されていないと感じている"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": 2,
+        "reason": "夫の激高により強い不安"
+      },
+      {
+        "target": "profession.physician.patient_safety_assurance",
+        "change": -1,
+        "reason": "医学的に必要な治療が導入できない"
+      }
+    ],
+    "flavor_text": "妻は「どうしたらいいのか分からない」と途方に暮れている。医師は「医学的には必要なのだが」とジレンマを感じている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "本人の価値観の深い理解",
+        "代替案の模索",
+        "家族への心理的支援"
+      ],
+      "discussion_triggers": [
+        "自己決定権と医学的必要性のバランス",
+        "本人のプライドの尊重",
+        "段階的なアプローチの可能性"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 14,
+    "category": "C_family",
+    "subcategory": "challenge_event",
+    "title_ja": "長女の訪問頻度の減少",
+    "body_ja": "長女から「仕事が忙しくて、しばらく訪問できない」と連絡。妻は「娘も大変なのは分かるけど、寂しい」と落胆している。本人は「娘に迷惑をかけたくない」と気にしている様子。",
+    "direction": "negative",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["msw", "care_manager"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "family_0.psychological_distress",
+        "change": 1,
+        "reason": "長女の訪問減少により孤立感が増大"
+      },
+      {
+        "target": "family_0.hope_for_support",
+        "change": -1,
+        "reason": "家族からの支援が減少"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -1,
+        "reason": "娘に迷惑をかけている罪悪感"
+      }
+    ],
+    "flavor_text": "妻は「長男がいるのに、娘ばかりに頼ってしまう」と複雑な表情。MSWは「家族の役割分担を再検討する必要がある」と考えている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "家族の役割分担の再検討",
+        "遠方家族の関与の仕方",
+        "長男の潜在的介護力の再評価"
+      ],
+      "discussion_triggers": [
+        "遠方家族の支援の限界",
+        "長男の関与の可能性",
+        "家族システム全体の支援"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 15,
+    "category": "E_environment",
+    "subcategory": "weather_disaster",
+    "title_ja": "猛暑による体調悪化",
+    "body_ja": "連日の猛暑により、山田さんの呼吸困難が悪化。エアコンはあるが、「電気代がもったいない」と使用を控えている。SpO2も90%前後で推移し、妻は「このままでは危ない」と心配している。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "physician", "care_manager"],
+    "actors_secondary": ["patient", "family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["resources", "patient_preference"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.physical_condition",
+        "change": -2,
+        "reason": "猛暑により呼吸困難が悪化"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": 1,
+        "reason": "夫の体調悪化への不安"
+      },
+      {
+        "target": "family_0.caregiver_burden",
+        "change": 1,
+        "reason": "見守りの負担増大"
+      }
+    ],
+    "flavor_text": "妻は「エアコンを使ってほしいけど、夫が電気代を気にしている」と困っている。訪問看護師は「熱中症のリスクもある」と警告。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "エアコン使用の促進",
+        "経済的支援の検討",
+        "熱中症予防の指導"
+      ],
+      "discussion_triggers": [
+        "経済的制約と健康リスクのバランス",
+        "電気代への支援策",
+        "環境調整の重要性"
+      ],
+      "constraint_modifiers": {
+        "economic": "電気代の追加負担"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 101,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "【閾値】信頼関係の決定的崩壊",
+    "body_ja": "山田さんが「もう誰も信用できない。みんな自分の都合ばかり押し付けてくる」と激怒。訪問看護師や医師との面会を拒否し、「もう来なくていい」と発言。妻は「どうしたらいいのか」と泣き崩れている。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "physician", "msw", "patient"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["coordination", "family_burden"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": -3,
+        "reason": "信頼関係の決定的崩壊"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -2,
+        "reason": "強い怒りと孤立感"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": 2,
+        "reason": "夫の激怒により強いショック"
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "patient.trust_and_acceptance <= 2",
+      "auto_occurrence": true,
+      "forced_discussion_minutes": 10,
+      "recovery_condition": "patient.trust_and_acceptance >= 4",
+      "recovery_event_id": 102,
+      "cooldown_loops": 1,
+      "max_occurrences_per_session": 2
+    },
+    "flavor_text": "妻は「夫がこんなに怒るなんて初めて」とショックを受けている。専門職は「一旦距離を置くべきか」と判断に迷っている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "緊急多職種カンファレンス",
+        "本人の気持ちの傾聴",
+        "支援方針の根本的見直し"
+      ],
+      "discussion_triggers": [
+        "信頼関係の再構築",
+        "本人の価値観の深い理解",
+        "支援の押し付けになっていないか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 102,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "【回復】信頼関係の回復の兆し",
+    "body_ja": "訪問看護師が「あなたの気持ちを聞かせてください」と時間をかけて傾聴したところ、山田さんが「実は誰も自分の話を聞いてくれないと思っていた」と本音を語る。「もう一度、一緒に考えてみようか」という提案に、本人は涙ぐみながら頷いた。",
+    "direction": "positive",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "msw", "patient"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": 3,
+        "reason": "専門職が本人の気持ちを傾聴し、信頼関係が回復"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": 2,
+        "reason": "本音を語れたことで心理的安寧が回復"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": -1,
+        "reason": "夫の気持ちが落ち着いたことで不安が軽減"
+      },
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": 2,
+        "reason": "傾聴により信頼関係を再構築"
+      }
+    ],
+    "flavor_text": "妻は「やっと夫の本当の気持ちが聞けた」と安堵している。専門職は「傾聴の重要性を再認識した」と振り返っている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "本人の価値観の深い理解",
+        "支援方針の再構築",
+        "傾聴の重要性の再認識"
+      ],
+      "discussion_triggers": [
+        "本人中心のケアの実践",
+        "専門職の関わり方の振り返り",
+        "信頼関係の維持"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 103,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "【閾値】妻の介護限界",
+    "body_ja": "妻が「もう限界です。夫を施設に入れてください」と涙ながらに訴える。夜も眠れず、腰痛も悪化し、自分も倒れそうだと。本人は妻の訴えを聞いて「自分のせいで」とショックを受けている。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "msw", "nurse", "family"],
+    "actors_secondary": ["patient"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["coordination", "resources"]
+    },
+    "status_effects": [
+      {
+        "target": "family_0.caregiver_burden",
+        "change": -2,
+        "reason": "限界を訴えたことで一時的に負担感が軽減（表出効果）"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": 2,
+        "reason": "限界を訴えたことへの罪悪感"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -2,
+        "reason": "妻の限界を知ってショック"
+      },
+      {
+        "target": "patient.autonomy_satisfaction",
+        "change": -1,
+        "reason": "施設入所の可能性に自己決定が揺らぐ"
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "family_0.caregiver_burden >= 9",
+      "auto_occurrence": true,
+      "forced_discussion_minutes": 10,
+      "recovery_condition": "family_0.caregiver_burden <= 6",
+      "recovery_event_id": 104,
+      "cooldown_loops": 1,
+      "max_occurrences_per_session": 2
+    },
+    "flavor_text": "長女は「母がここまで追い詰められていたなんて」と驚いている。専門職は「妻の限界を見極められなかった」と反省している。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "妻の緊急レスパイトケア",
+        "家族会議の開催",
+        "在宅継続か施設入所かの検討"
+      ],
+      "discussion_triggers": [
+        "介護者の限界の見極め",
+        "レスパイトケアの重要性",
+        "在宅療養の持続可能性"
+      ],
+      "constraint_modifiers": {
+        "resources": "緊急レスパイトケアの必要性"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 104,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "【回復】妻の負担軽減の実現",
+    "body_ja": "ショートステイの利用と訪問介護の増回により、妻の介護負担が大幅に軽減。妻は「久しぶりにゆっくり眠れた」と笑顔を見せる。本人も「妻が元気になって嬉しい」と安心している。長男も少しずつ手伝うようになった。",
+    "direction": "positive",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "msw", "family"],
+    "actors_secondary": ["patient"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["coordination", "resources"]
+    },
+    "status_effects": [
+      {
+        "target": "family_0.caregiver_burden",
+        "change": -3,
+        "reason": "レスパイトケアにより介護負担が大幅に軽減"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": -2,
+        "reason": "休息により心理的苦痛が軽減"
+      },
+      {
+        "target": "family_0.hope_for_support",
+        "change": 2,
+        "reason": "支援が実現したことで期待感が向上"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": 1,
+        "reason": "妻が元気になったことで安心"
+      },
+      {
+        "target": "profession.care_manager.resource_coordination",
+        "change": 2,
+        "reason": "適切なサービス調整により負担軽減を実現"
+      }
+    ],
+    "flavor_text": "長女は「母の笑顔を久しぶりに見た」と喜んでいる。専門職は「レスパイトケアの重要性を実感した」と振り返っている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "在宅療養の持続可能性の向上",
+        "家族の結束の強化",
+        "長男の関与の可能性"
+      ],
+      "discussion_triggers": [
+        "レスパイトケアの効果",
+        "家族全体での支援体制",
+        "長男の潜在的介護力の活用"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 105,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "【閾値】重度の呼吸不全",
+    "body_ja": "山田さんが突然、激しい呼吸困難を訴え、SpO2が75%まで低下。妻が慌てて救急車を要請。病院搬送され、緊急入院となった。医師から「在宅酸素なしでは生命の危険がある」と厳しく告げられる。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["physician", "nurse", "patient"],
+    "actors_secondary": ["family"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference", "time"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.physical_condition",
+        "change": -3,
+        "reason": "重度の呼吸不全により身体状態が危機的"
+      },
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": 2,
+        "reason": "生命の危険を実感し、医学的必要性を受け入れる"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": 3,
+        "reason": "夫の急変により強いショック"
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "patient.physical_condition <= 2",
+      "auto_occurrence": true,
+      "forced_discussion_minutes": 10,
+      "recovery_condition": "patient.physical_condition >= 4 AND patient.trust_and_acceptance >= 5",
+      "recovery_event_id": null,
+      "cooldown_loops": 2,
+      "max_occurrences_per_session": 1
+    },
+    "flavor_text": "妻は「もっと早く説得すればよかった」と後悔している。本人は「こんなに苦しいとは思わなかった」と呟いている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "在宅酸素療法の緊急導入",
+        "在宅療養の再検討",
+        "家族への心理的支援"
+      ],
+      "discussion_triggers": [
+        "医学的必要性の再認識",
+        "本人の価値観の変化",
+        "在宅療養の安全性"
+      ],
+      "constraint_modifiers": {
+        "time": "緊急対応が必要"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  }
+]
