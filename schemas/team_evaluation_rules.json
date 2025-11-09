@@ -1,0 +1,381 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Team Evaluation Rules",
+  "description": "多職種連携ゲームのチーム評価計算ルール - 全シナリオ共通・人数職種構成に依存しない設計",
+  "type": "object",
+  "required": ["version", "evaluation_axes", "calculation_logic"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "ルールバージョン"
+    },
+    "description": {
+      "type": "string",
+      "description": "このルールセットの説明"
+    },
+    "evaluation_axes": {
+      "type": "object",
+      "description": "チーム評価の4軸",
+      "required": ["patient_centeredness", "safety_assurance", "care_sustainability", "family_support"],
+      "properties": {
+        "patient_centeredness": {
+          "type": "object",
+          "description": "患者中心性の計算ルール",
+          "required": ["label", "components"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "const": "患者中心性"
+            },
+            "description": {
+              "type": "string",
+              "description": "この評価軸の意味"
+            },
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["component_id", "source_category", "weight", "aggregation"],
+                "properties": {
+                  "component_id": {
+                    "type": "string",
+                    "description": "コンポーネント識別子"
+                  },
+                  "source_category": {
+                    "type": "string",
+                    "enum": ["patient", "family", "professions"],
+                    "description": "データソース"
+                  },
+                  "required_status_types": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "必須ステータスタイプ"
+                  },
+                  "preferred_status_types": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "優先ステータスタイプ（いずれかがあればOK）"
+                  },
+                  "weight": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "重み"
+                  },
+                  "aggregation": {
+                    "type": "string",
+                    "enum": ["average", "direct", "inverse_average", "weighted_average"],
+                    "description": "集計方法"
+                  },
+                  "selection_strategy": {
+                    "type": "string",
+                    "enum": ["any_available", "all_required", "best_match"],
+                    "default": "any_available",
+                    "description": "ステータス選択戦略"
+                  },
+                  "fallback_weight_redistribution": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "データ欠損時に重みを再配分するか"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "safety_assurance": {
+          "type": "object",
+          "description": "安全保障の計算ルール",
+          "required": ["label", "components"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "const": "安全保障"
+            },
+            "description": {
+              "type": "string",
+              "description": "この評価軸の意味"
+            },
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["component_id", "source_category", "weight", "aggregation"],
+                "properties": {
+                  "component_id": { "type": "string" },
+                  "source_category": {
+                    "type": "string",
+                    "enum": ["patient", "family", "professions"]
+                  },
+                  "required_status_types": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "preferred_status_types": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "weight": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "aggregation": {
+                    "type": "string",
+                    "enum": ["average", "direct", "inverse_average", "weighted_average"]
+                  },
+                  "selection_strategy": {
+                    "type": "string",
+                    "enum": ["any_available", "all_required", "best_match"],
+                    "default": "any_available"
+                  },
+                  "fallback_weight_redistribution": {
+                    "type": "boolean",
+                    "default": true
+                  }
+                },
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "care_sustainability": {
+          "type": "object",
+          "description": "ケアの持続可能性の計算ルール",
+          "required": ["label", "components"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "const": "ケアの持続可能性"
+            },
+            "description": {
+              "type": "string",
+              "description": "この評価軸の意味"
+            },
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["component_id", "source_category", "weight", "aggregation"],
+                "properties": {
+                  "component_id": { "type": "string" },
+                  "source_category": {
+                    "type": "string",
+                    "enum": ["patient", "family", "professions"]
+                  },
+                  "required_status_types": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "preferred_status_types": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "weight": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "aggregation": {
+                    "type": "string",
+                    "enum": ["average", "direct", "inverse_average", "weighted_average"]
+                  },
+                  "selection_strategy": {
+                    "type": "string",
+                    "enum": ["any_available", "all_required", "best_match"],
+                    "default": "any_available"
+                  },
+                  "fallback_weight_redistribution": {
+                    "type": "boolean",
+                    "default": true
+                  }
+                },
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "family_support": {
+          "type": "object",
+          "description": "家族支援の計算ルール",
+          "required": ["label", "components"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "const": "家族支援"
+            },
+            "description": {
+              "type": "string",
+              "description": "この評価軸の意味"
+            },
+            "components": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["component_id", "source_category", "weight", "aggregation"],
+                "properties": {
+                  "component_id": { "type": "string" },
+                  "source_category": {
+                    "type": "string",
+                    "enum": ["patient", "family", "professions"]
+                  },
+                  "required_status_types": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "preferred_status_types": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "weight": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "aggregation": {
+                    "type": "string",
+                    "enum": ["average", "direct", "inverse_average", "weighted_average"]
+                  },
+                  "selection_strategy": {
+                    "type": "string",
+                    "enum": ["any_available", "all_required", "best_match"],
+                    "default": "any_available"
+                  },
+                  "fallback_weight_redistribution": {
+                    "type": "boolean",
+                    "default": true
+                  }
+                },
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "calculation_logic": {
+      "type": "object",
+      "description": "計算ロジックの共通設定",
+      "required": ["normalization", "missing_component_handling"],
+      "properties": {
+        "normalization": {
+          "type": "string",
+          "enum": ["auto", "none"],
+          "default": "auto",
+          "description": "正規化方法"
+        },
+        "missing_component_handling": {
+          "type": "string",
+          "enum": ["weight_redistribution", "zero_fill", "skip"],
+          "default": "weight_redistribution",
+          "description": "欠損時の処理"
+        },
+        "minimum_components_required": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1,
+          "description": "最小必要コンポーネント数"
+        },
+        "display_warnings": {
+          "type": "object",
+          "description": "警告メッセージの定義",
+          "properties": {
+            "no_professional_contribution": {
+              "type": "string",
+              "default": "専門職のステータスが不足しています。患者・家族の状態のみで評価されています。"
+            },
+            "no_patient_data": {
+              "type": "string",
+              "default": "患者のステータスが不足しています。"
+            },
+            "no_family_data": {
+              "type": "string",
+              "default": "家族のステータスが不足しています。"
+            },
+            "low_relevance": {
+              "type": "string",
+              "default": "該当職種の参加が少なく、この評価軸は参考程度です。"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "relevance_calculation": {
+      "type": "object",
+      "description": "Relevance指標の計算方法",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Relevance指標を計算するか"
+        },
+        "formula": {
+          "type": "string",
+          "const": "referenced_professions / professions_with_relevant_status",
+          "description": "計算式"
+        },
+        "display_format": {
+          "type": "string",
+          "enum": ["percentage", "fraction", "icon"],
+          "default": "fraction",
+          "description": "表示形式"
+        },
+        "thresholds": {
+          "type": "object",
+          "properties": {
+            "complete": {
+              "type": "number",
+              "default": 1.0,
+              "description": "完全（✓）"
+            },
+            "partial": {
+              "type": "number",
+              "default": 0.5,
+              "description": "部分的（⚠️）"
+            },
+            "insufficient": {
+              "type": "number",
+              "default": 0.01,
+              "description": "不足（⚠️⚠️）"
+            },
+            "none": {
+              "type": "number",
+              "default": 0.0,
+              "description": "該当職種なし（⚠️⚠️）"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "usage_notes": {
+      "type": "string",
+      "description": "このルールセットの使い方・注意事項"
+    },
+    "versioning": {
+      "type": "object",
+      "properties": {
+        "created_by": { "type": "string" },
+        "version": { "type": "string" },
+        "last_updated": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
