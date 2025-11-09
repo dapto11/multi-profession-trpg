@@ -1,9 +1,8 @@
-
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/schemas/measurement_log.schema.json",
   "title": "Measurement Log Schema",
-  "description": "多職種連携ゲームのプロセス測定・学習評価用ログ。主要評価は質的体験、数値指標は運営品質確認用に位置づけ。",
+  "description": "多職種連携ゲームのプロセス測定・学習評価用ログ。主要評価は質的体験、数値指標は運営品質確認用に位置づけ。ステータスシステム対応版。",
   "type": "object",
   "required": ["session_id", "scenario_id", "started_at", "participants", "loops"],
   "properties": {
@@ -40,6 +39,10 @@
           "player_id": { "type": "string" },
           "player_name": { "type": "string" },
           "role": { "$ref": "#/$defs/role" },
+          "character_name": {
+            "type": "string",
+            "description": "患者・家族役の場合のキャラクター名"
+          },
           "experience_level": {
             "type": "string",
             "enum": ["novice", "intermediate", "expert"],
@@ -229,6 +232,152 @@
               "additionalProperties": false
             }
           },
+          "status_snapshot": {
+            "type": "object",
+            "description": "ループ終了時の全ステータス状態",
+            "properties": {
+              "patient": {
+                "type": "object",
+                "description": "患者のステータス",
+                "additionalProperties": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10
+                }
+              },
+              "family": {
+                "type": "array",
+                "description": "家族のステータス",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "family_index": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "description": "family_caregivers配列のインデックス"
+                    },
+                    "status": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 10
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "team": {
+                "type": "object",
+                "description": "チーム評価（自動計算）",
+                "additionalProperties": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 10
+                }
+              },
+              "professions": {
+                "type": "object",
+                "description": "職種別のステータス",
+                "additionalProperties": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "status_changes": {
+            "type": "array",
+            "description": "ループ中のステータス変化記録",
+            "items": {
+              "type": "object",
+              "required": ["timestamp", "target", "change", "trigger"],
+              "properties": {
+                "timestamp": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "target": {
+                  "type": "string",
+                  "pattern": "^(patient|family_\\d+|profession\\.[a-z_]+|team)\\.[a-z_]+$",
+                  "description": "対象ステータス"
+                },
+                "change": {
+                  "type": "integer",
+                  "minimum": -3,
+                  "maximum": 3,
+                  "description": "変化量"
+                },
+                "before": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "description": "変化前の値"
+                },
+                "after": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "description": "変化後の値"
+                },
+                "trigger": {
+                  "type": "string",
+                  "enum": ["event_card", "player_statement", "gm_judgment", "threshold_event", "player_adjustment"],
+                  "description": "変化のきっかけ"
+                },
+                "trigger_detail": {
+                  "type": "string",
+                  "description": "詳細（イベントID、発言内容等）"
+                },
+                "reason": {
+                  "type": "string",
+                  "description": "変化の理由"
+                },
+                "operator_role": {
+                  "$ref": "#/$defs/role",
+                  "description": "操作者の役職"
+                },
+                "operator_player_id": {
+                  "type": "string",
+                  "description": "操作者のプレイヤーID"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "threshold_events_occurred": {
+            "type": "array",
+            "description": "閾値により自動発生したイベント",
+            "items": {
+              "type": "object",
+              "required": ["event_id", "trigger_condition"],
+              "properties": {
+                "event_id": {
+                  "type": "integer",
+                  "description": "発生したイベントID"
+                },
+                "trigger_condition": {
+                  "type": "string",
+                  "description": "発生条件"
+                },
+                "occurred_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "resolution_notes": {
+                  "type": "string",
+                  "description": "対応・回復の記録"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
           "disputes_snapshot": {
             "type": "object",
             "description": "Phase2時点の争点集計 dispute_queue参照の要約",
@@ -410,6 +559,151 @@
           "type": "integer",
           "minimum": 0,
           "description": "異職種連携場面の発生回数（効果測定ではなく体験確認用）"
+        },
+        "status_trajectories": {
+          "type": "object",
+          "description": "セッション全体のステータス推移",
+          "properties": {
+            "patient": {
+              "type": "object",
+              "description": "患者の各ステータスの推移",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "initial": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10
+                  },
+                  "final": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10
+                  },
+                  "total_change": {
+                    "type": "integer",
+                    "minimum": -9,
+                    "maximum": 9
+                  },
+                  "trajectory": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 10
+                    },
+                    "description": "各ループ終了時の値"
+                  },
+                  "turning_points": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "loop_id": { "type": "integer" },
+                        "change": { "type": "integer" },
+                        "reason": { "type": "string" }
+                      },
+                      "additionalProperties": false
+                    },
+                    "description": "大きな変化があった箇所"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "family": {
+              "type": "array",
+              "description": "家族の各ステータスの推移",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "family_index": { "type": "integer" },
+                  "status_trajectories": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "properties": {
+                        "initial": { "type": "integer", "minimum": 1, "maximum": 10 },
+                        "final": { "type": "integer", "minimum": 1, "maximum": 10 },
+                        "total_change": { "type": "integer", "minimum": -9, "maximum": 9 },
+                        "trajectory": {
+                          "type": "array",
+                          "items": { "type": "integer", "minimum": 1, "maximum": 10 }
+                        },
+                        "turning_points": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "loop_id": { "type": "integer" },
+                              "change": { "type": "integer" },
+                              "reason": { "type": "string" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "team": {
+              "type": "object",
+              "description": "チーム評価の推移",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "initial": { "type": "number", "minimum": 0, "maximum": 10 },
+                  "final": { "type": "number", "minimum": 0, "maximum": 10 },
+                  "total_change": { "type": "number", "minimum": -10, "maximum": 10 },
+                  "trajectory": {
+                    "type": "array",
+                    "items": { "type": "number", "minimum": 0, "maximum": 10 }
+                  }
+                }
+              }
+            },
+            "professions": {
+              "type": "object",
+              "description": "職種別ステータスの推移",
+              "additionalProperties": {
+                "type": "object",
+                "description": "職種名 → ステータス推移",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "initial": { "type": "integer", "minimum": 1, "maximum": 10 },
+                    "final": { "type": "integer", "minimum": 1, "maximum": 10 },
+                    "total_change": { "type": "integer", "minimum": -9, "maximum": 9 },
+                    "trajectory": {
+                      "type": "array",
+                      "items": { "type": "integer", "minimum": 1, "maximum": 10 }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "threshold_events_summary": {
+          "type": "object",
+          "description": "閾値イベントの集計",
+          "properties": {
+            "total_occurrences": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "by_condition": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "description": "条件別の発生回数"
+            }
+          },
+          "additionalProperties": false
         },
         "quality_thresholds": {
           "type": "object",
