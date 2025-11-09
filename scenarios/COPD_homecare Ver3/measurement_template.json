@@ -1,0 +1,956 @@
+{
+  "session_id": "COPD_HOME_DISCHARGE_SESSION_001",
+  "scenario_id": "copd_home_discharge_20251109",
+  "setting": "home_care",
+  "started_at": "2025-11-09T19:00:00Z",
+  "ended_at": null,
+  "play_difficulty": "normal",
+  "participants": [
+    {
+      "player_id": "P1",
+      "player_name": "",
+      "role": "physician",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "P2",
+      "player_name": "",
+      "role": "nurse",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "P3",
+      "player_name": "",
+      "role": "pharmacist",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "P4",
+      "player_name": "",
+      "role": "pt",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "P5",
+      "player_name": "",
+      "role": "care_manager",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "P6",
+      "player_name": "",
+      "role": "msw",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "P7",
+      "player_name": "",
+      "role": "patient",
+      "character_name": "山田太郎（患者本人）",
+      "experience_level": "novice"
+    },
+    {
+      "player_id": "P8",
+      "player_name": "",
+      "role": "family",
+      "character_name": "山田花子（妻）",
+      "experience_level": "novice"
+    }
+  ],
+  "participants_index": {
+    "P1": 0,
+    "P2": 1,
+    "P3": 2,
+    "P4": 3,
+    "P5": 4,
+    "P6": 5,
+    "P7": 6,
+    "P8": 7
+  },
+  "utterances": [],
+  "loops": [
+    {
+      "loop_id": 1,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 2,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 3,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 4,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 5,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null
+        }
+      ],
+      "status_snapshot": {
+        "patient": {
+          "physical_condition": 4,
+          "trust_and_acceptance": 5,
+          "autonomy_satisfaction": 3,
+          "psychological_wellbeing": 3
+        },
+        "family": [
+          {
+            "family_index": 0,
+            "status": {
+              "caregiver_burden": 7,
+              "hope_for_support": 6,
+              "psychological_distress": 6
+            }
+          }
+        ],
+        "team": {
+          "patient_centeredness": null,
+          "safety_assurance": null,
+          "care_sustainability": null,
+          "family_support": null
+        },
+        "professions": {
+          "physician": {
+            "patient_safety_assurance": 4,
+            "symptom_management": 5,
+            "collaboration_effectiveness": 5
+          },
+          "nurse": {
+            "psychosocial_support": 5,
+            "family_advocacy": 6,
+            "collaboration_effectiveness": 5
+          },
+          "pharmacist": {
+            "medication_optimization": 7,
+            "patient_safety_assurance": 6,
+            "collaboration_effectiveness": 5
+          },
+          "pt": {
+            "rehabilitation_progress": 5,
+            "patient_safety_assurance": 5,
+            "collaboration_effectiveness": 5
+          },
+          "care_manager": {
+            "resource_coordination": 5,
+            "system_navigation": 6,
+            "collaboration_effectiveness": 5
+          },
+          "msw": {
+            "family_advocacy": 6,
+            "psychosocial_support": 5,
+            "collaboration_effectiveness": 5
+          }
+        }
+      },
+      "status_changes": [],
+      "threshold_events_occurred": [],
+      "disputes_snapshot": {
+        "count": 0,
+        "by_primary_tag": {
+          "safety": 0,
+          "time": 0,
+          "resources": 0,
+          "family_burden": 0,
+          "patient_preference": 0,
+          "function": 0,
+          "legal_policy": 0,
+          "coordination": 0
+        },
+        "consensus_level": "partial_alignment"
+      },
+      "decision": {
+        "status": "undecided",
+        "options_considered": 0,
+        "time_to_decide_sec": 0,
+        "constraints_referenced": [],
+        "summary_ja": ""
+      },
+      "events_drawn": [],
+      "participant_metrics": [
+        {
+          "player_id": "P1",
+          "role": "physician",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P2",
+          "role": "nurse",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P3",
+          "role": "pharmacist",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P4",
+          "role": "pt",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P5",
+          "role": "care_manager",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P6",
+          "role": "msw",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P7",
+          "role": "patient",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P8",
+          "role": "family",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        }
+      ],
+      "metrics": {
+        "talk_time_gini": 0,
+        "tags_distribution": {
+          "safety": 0,
+          "time": 0,
+          "resources": 0,
+          "family_burden": 0,
+          "patient_preference": 0,
+          "function": 0,
+          "legal_policy": 0,
+          "coordination": 0
+        },
+        "phase_timing_adherence": {
+          "on_time_phases": 0,
+          "over_time_phases": 0
+        }
+      }
+    },
+    {
+      "loop_id": 2,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 2,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 3,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 4,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 5,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null
+        }
+      ],
+      "status_snapshot": {
+        "patient": {},
+        "family": [],
+        "team": {},
+        "professions": {}
+      },
+      "status_changes": [],
+      "threshold_events_occurred": [],
+      "disputes_snapshot": {
+        "count": 0,
+        "by_primary_tag": {},
+        "consensus_level": "partial_alignment"
+      },
+      "decision": {
+        "status": "undecided",
+        "options_considered": 0,
+        "time_to_decide_sec": 0,
+        "constraints_referenced": [],
+        "summary_ja": ""
+      },
+      "events_drawn": [],
+      "participant_metrics": [],
+      "metrics": {}
+    },
+    {
+      "loop_id": 3,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 2,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 3,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 4,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null
+        },
+        {
+          "phase_number": 5,
+          "started_at": null,
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null
+        }
+      ],
+      "status_snapshot": {
+        "patient": {},
+        "family": [],
+        "team": {},
+        "professions": {}
+      },
+      "status_changes": [],
+      "threshold_events_occurred": [],
+      "disputes_snapshot": {
+        "count": 0,
+        "by_primary_tag": {},
+        "consensus_level": "partial_alignment"
+      },
+      "decision": {
+        "status": "undecided",
+        "options_considered": 0,
+        "time_to_decide_sec": 0,
+        "constraints_referenced": [],
+        "summary_ja": ""
+      },
+      "events_drawn": [],
+      "participant_metrics": [],
+      "metrics": {}
+    }
+  ],
+  "session_metrics": {
+    "total_loops": 3,
+    "overall_tags_distribution": {
+      "safety": 0,
+      "time": 0,
+      "resources": 0,
+      "family_burden": 0,
+      "patient_preference": 0,
+      "function": 0,
+      "legal_policy": 0,
+      "coordination": 0
+    },
+    "avg_time_to_decide_sec": 0,
+    "rule_violations_total": 0,
+    "translation_attempts_total": 0,
+    "sbar_practice_opportunities": 0,
+    "synergy_moments_total": 0,
+    "status_trajectories": {
+      "patient": {
+        "physical_condition": {
+          "initial": 4,
+          "final": null,
+          "total_change": 0,
+          "trajectory": [4],
+          "turning_points": []
+        },
+        "trust_and_acceptance": {
+          "initial": 5,
+          "final": null,
+          "total_change": 0,
+          "trajectory": [5],
+          "turning_points": []
+        },
+        "autonomy_satisfaction": {
+          "initial": 3,
+          "final": null,
+          "total_change": 0,
+          "trajectory": [3],
+          "turning_points": []
+        },
+        "psychological_wellbeing": {
+          "initial": 3,
+          "final": null,
+          "total_change": 0,
+          "trajectory": [3],
+          "turning_points": []
+        }
+      },
+      "family": [
+        {
+          "family_index": 0,
+          "status_trajectories": {
+            "caregiver_burden": {
+              "initial": 7,
+              "final": null,
+              "total_change": 0,
+              "trajectory": [7],
+              "turning_points": []
+            },
+            "hope_for_support": {
+              "initial": 6,
+              "final": null,
+              "total_change": 0,
+              "trajectory": [6],
+              "turning_points": []
+            },
+            "psychological_distress": {
+              "initial": 6,
+              "final": null,
+              "total_change": 0,
+              "trajectory": [6],
+              "turning_points": []
+            }
+          }
+        }
+      ],
+      "team": {
+        "patient_centeredness": {
+          "initial": null,
+          "final": null,
+          "total_change": 0,
+          "trajectory": []
+        },
+        "safety_assurance": {
+          "initial": null,
+          "final": null,
+          "total_change": 0,
+          "trajectory": []
+        },
+        "care_sustainability": {
+          "initial": null,
+          "final": null,
+          "total_change": 0,
+          "trajectory": []
+        },
+        "family_support": {
+          "initial": null,
+          "final": null,
+          "total_change": 0,
+          "trajectory": []
+        }
+      },
+      "professions": {
+        "physician": {
+          "patient_safety_assurance": {
+            "initial": 4,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [4]
+          },
+          "symptom_management": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          }
+        },
+        "nurse": {
+          "psychosocial_support": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          },
+          "family_advocacy": {
+            "initial": 6,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [6]
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          }
+        },
+        "pharmacist": {
+          "medication_optimization": {
+            "initial": 7,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [7]
+          },
+          "patient_safety_assurance": {
+            "initial": 6,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [6]
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          }
+        },
+        "pt": {
+          "rehabilitation_progress": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          },
+          "patient_safety_assurance": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          }
+        },
+        "care_manager": {
+          "resource_coordination": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          },
+          "system_navigation": {
+            "initial": 6,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [6]
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          }
+        },
+        "msw": {
+          "family_advocacy": {
+            "initial": 6,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [6]
+          },
+          "psychosocial_support": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": null,
+            "total_change": 0,
+            "trajectory": [5]
+          }
+        }
+      }
+    },
+    "threshold_events_summary": {
+      "total_occurrences": 0,
+      "by_condition": {}
+    },
+    "quality_thresholds": {
+      "talk_time_gini_threshold": 0.7,
+      "overtime_phases_threshold": 2,
+      "rule_violations_threshold": 5,
+      "participant_silence_sec": 300
+    }
+  },
+  "qualitative_feedback": {
+    "debrief_responses": {
+      "profession_goal_achievement": [
+        {
+          "player_id": "P1",
+          "role": "physician",
+          "primary_goal": "医学的に必要な在宅酸素療法を導入し、心肺機能の悪化を防ぐ",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "在宅酸素療法の導入、または医学的に妥当な代替案の合意",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "急変時対応プロトコルの確立",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "心不全管理の継続体制の構築",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "本人・家族が治療方針を理解し納得している",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "退院後の医療体制が整っている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P2",
+          "role": "nurse",
+          "primary_goal": "本人の心理的ケアと妻の負担軽減を実現し、安心して在宅療養できる環境を整える",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "本人の不安や恐怖心が軽減されている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "妻の介護負担が軽減される具体策が決まっている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "本人・家族が安心感を持てている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "希死念慮への対応が計画に含まれている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "訪問看護の役割が明確になっている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P3",
+          "role": "pharmacist",
+          "primary_goal": "服薬管理を継続し、副作用モニタリング体制を構築する",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "訪問薬剤管理の体制が整っている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "電解質管理の計画が立てられている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "副作用モニタリングの役割分担が明確",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "本人・家族が服薬の重要性を理解している",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "吸入手技の継続確認体制が決まっている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P4",
+          "role": "pt",
+          "primary_goal": "呼吸リハビリと歩行訓練により、活動性を維持・向上させる",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "訪問リハビリの頻度・内容が決まっている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "運動時SpO2モニタリングの計画がある",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "転倒予防策が講じられている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "本人が無理なく取り組める運動プログラムが提案されている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "活動性向上の具体的目標が設定されている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P5",
+          "role": "care_manager",
+          "primary_goal": "介護保険制度内で持続可能なサービス体制を構築する",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "限度額内でサービスが調整されている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "本人・家族が納得できるサービス内容",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "妻の負担軽減につながるサービスが組み込まれている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "緊急時の対応体制が整っている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "退院後3日以内にサービス開始できる",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P6",
+          "role": "msw",
+          "primary_goal": "家族システム全体を視野に入れ、長期的に持続可能な支援体制を構築する",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "家族の秘密（長男の引きこもり）への配慮がなされている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "妻の介護負担軽減の具体策が決まっている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "長女の関与の仕方が明確になっている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "本人の希死念慮への対応が計画に含まれている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "退院後のフォロー体制が整っている",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        }
+      ],
+      "overall_goal_achievement": null
+    },
+    "perspective_shifts": [],
+    "professional_blind_spots": [],
+    "conflict_attitude_changes": [],
+    "future_intentions": [],
+    "experience_intensity": []
+  },
+  "free_narratives": [],
+  "surveys": [],
+  "debrief": {
+    "key_takeaways": [],
+    "collective_insights": [],
+    "what_went_well": [],
+    "to_improve": [],
+    "group_dynamics_quality": null
+  },
+  "expected_perspective_shifts": [
+    "医師：在宅酸素を拒否する患者の背景に、元職場の仲間との繋がりを失う恐怖があることを理解し、医学的必要性だけでなく社会的つながりの重要性に気づく",
+    "看護師：妻の介護負担が限界に達していることを見逃していた自分の観察不足に気づき、介護者の非言語的サインを読み取る重要性を学ぶ",
+    "ケアマネジャー：介護保険の限度額という制約の中で、家族の秘密（長男の引きこもり）を配慮しながらサービス調整する難しさを体験し、制度の柔軟性と硬直性の両面を理解する",
+    "MSW：長男の引きこもりという家族の秘密が支援計画に与える影響を理解し、家族システム全体を視野に入れた支援の重要性を実感する",
+    "患者役：専門職が自分の価値観（プライド、羞恥心）を理解しようとする姿勢と、医学的必要性を押し付ける姿勢の違いを体験し、患者中心のケアの本質を理解する"
+  ],
+  "target_blind_spots": [
+    "医師の専門的盲点：医学的必要性を優先するあまり、患者の社会的アイデンティティ（元病院警備員としてのプライド）への配慮が不足していた",
+    "看護師の専門的盲点：患者の心理状態に注目するあまり、妻の介護負担の限界サインを見逃していた",
+    "薬剤師の専門的盲点：服薬管理に注力するあまり、患者の希死念慮という心理的危機への対応が後手に回っていた",
+    "PTの専門的盲点：機能訓練の重要性を強調するあまり、患者の入浴への恐怖心（過去のトラウマ）への配慮が不足していた",
+    "ケアマネジャーの専門的盲点：制度内でのサービス調整に注力するあまり、家族の潜在的リソース（長男）を見落としていた",
+    "MSWの専門的盲点：家族の秘密への配慮を優先するあまり、長男の社会参加の可能性を探る介入が遅れていた"
+  ],
+  "scenario_specific_debrief_questions": [
+    "在宅酸素への拒否について、各職種はどう感じましたか？ 自分の専門性との葛藤はありましたか？",
+    "長男の引きこもりという情報を知ったとき、どう思いましたか？ 支援計画にどう影響しましたか？",
+    "時間的制約（退院期限）の中で、どのように優先順位をつけましたか？ 何を諦めましたか？",
+    "患者役・家族役を体験して、専門職の関わりをどう感じましたか？ 「患者中心のケア」とは何だと思いますか？",
+    "チーム評価の4軸（患者中心性、安全保障、持続可能性、家族支援）を見て、どの軸が高く/低くなりましたか？ それはなぜだと思いますか？",
+    "妻の介護負担が限界に達したとき、どのように気づき、どう対応しましたか？ 介護者の限界を見極めるサインは何だと思いますか？",
+    "希死念慮を示唆する発言があったとき、どう感じ、どう対応しましたか？ 多職種で共有する重要性を感じましたか？"
+  ],
+  "followup_focus_areas": [
+    "在宅酸素への拒否に対するアプローチ方法の変化（現場での実践例）",
+    "介護者の限界サインへの気づきと早期介入（現場での観察例）",
+    "家族の秘密への配慮と支援のバランス（現場での対応例）",
+    "希死念慮への多職種での対応（現場での連携例）",
+    "時間的制約の中での優先順位づけ（現場での意思決定例）"
+  ],
+  "versioning": {
+    "created_by": "AI Scenario Generator v3.1",
+    "version": "1.0",
+    "last_updated": "2025-11-09T00:00:00Z",
+    "notes": "ステータスシステム対応版。シナリオ固有のカスタマイズ項目を含む。"
+  }
+}
