@@ -1,89 +1,919 @@
-基本プロンプト構造
+# **多職種連携TRPGシナリオ生成プロンプト v3.1**
 
-### **Phase 1: システム学習プロンプト**
+## **2025年11月9日 - ステータスシステム対応版（修正版）**
 
+______________________________________________________________________
+
+## **Phase 1: システム学習（このフェーズは必読）**
+
+あなたはこれから、多職種連携研修用TRPGのシナリオを生成します。まず、以下の6つのシステムファイルを理解してください。
+
+______________________________________________________________________
+
+### **【ゲームシステム概要】**
+
+**基本構造:**
+
+- 5つのPhaseで構成される多職種連携研修ゲーム
+- Phase 1: 情報共有（6分）→ Phase 2: 争点マーキング（6分）→ Phase 3: 価値観表明（8分）→ Phase 4: 方針決定（7分）→ Phase 5: イベント・結果確認＋ステータス調整（8分）
+- **30分×3ループ + ステータス調整5分 = 35分/ループ**
+- 8つの争点タグ: `safety`, `time`, `resources`, `family_burden`, `patient_preference`, `function`, `legal_policy`, `coordination`
+
+**設計思想（重要）:**
+
+- **価値観対立の体験→理解促進（解消ではない）**
+- 現実的制約の重視（理想論回避）
+- プロセス重視測定（結果より体験過程の質）
+- 各職種に明確な利害関係と専門性を持たせる
+- **測定とゲームプレイの一体化**（プレイヤーのステータス調整が測定を兼ねる）
+- **部分最適 vs 全体最適の可視化**（職種別目標とチーム評価のギャップ体験）
+
+______________________________________________________________________
+
+### **1. scenario_template.schema.json**
+
+**【基本構造】**
+
+- シナリオの全体設計を定義
+- 患者情報、家族構成、職種構成、タイムライン、イベント、制約を含む
+
+**【2025年11月9日の重要な追加機能】**
+
+#### **1-1. ステータスタイプのカタログ（$defs）**
+
+**患者用ステータス（10種類）:**
+
+- `physical_condition`: 身体状態
+- `trust_and_acceptance`: 信頼と受容
+- `autonomy_satisfaction`: 自己決定の満足
+- `psychological_wellbeing`: 心理的安寧
+- `pain_control`: 疼痛コントロール
+- `medication_adherence`: 服薬遵守
+- `functional_independence`: 機能的自立度
+- `social_connection`: 社会的つながり
+- `hope_and_meaning`: 希望と生きがい
+- `symptom_burden`: 症状負担
+
+**家族用ステータス（8種類）:**
+
+- `caregiver_burden`: 介護負担
+- `hope_for_support`: 支援への期待
+- `psychological_distress`: 心理的苦痛
+- `family_cohesion`: 家族の結束
+- `economic_anxiety`: 経済的不安
+- `information_needs`: 情報ニーズ
+- `coping_capacity`: 対処能力
+- `relationship_quality`: 関係性の質
+
+**職種用ステータス（12種類）:**
+
+- `goal_achievement`: 目標達成度
+- `professional_contribution`: 専門的貢献
+- `collaboration_effectiveness`: 連携効果（**全職種必須**）
+- `patient_safety_assurance`: 患者安全確保
+- `symptom_management`: 症状管理
+- `resource_coordination`: 資源調整
+- `family_advocacy`: 家族代弁
+- `information_provision`: 情報提供
+- `rehabilitation_progress`: リハビリ進捗
+- `medication_optimization`: 服薬最適化
+- `psychosocial_support`: 心理社会的支援
+- `system_navigation`: 制度活用支援
+
+**各ステータスタイプに含まれる情報:**
+
+- `description`: 説明文
+- `recommended_use`: 推奨使用場面
+- `scale_anchors`: 評価基準（1-2/3-4/5-6/7-8/9-10の意味）
+- `behavior_anchors`: 行動アンカー（±1、±2の具体例）
+
+#### **1-2. 患者へのステータス設定**
+
+```json
+"patient": {
+  "status_config": {
+    "enabled": true,
+    "status_types": [
+      {
+        "type": "physical_condition",
+        "initial": 4,
+        "critical_low": 2,
+        "critical_high": null,
+        "label": "身体状態",
+        "description": "呼吸困難、倦怠感などの身体症状"
+      }
+      // 3-5種類を推奨
+    ]
+  }
+}
 ```
-あなたは多職種連携ゲームのシナリオ作成専門家です。
 
-このゲームのJSONスキーマシステムを完全に理解してください：
+#### **1-3. 家族へのステータス設定**
 
-【システム概要】
-・5つのPhaseで構成される多職種連携研修ゲーム
-・Phase1:情報収集 → Phase2:争点露出 → Phase3:価値観表明 → Phase4:方針決定 → Phase5:イベント・結果確認
-・30分×3ループで実施
-・8つの争点タグ: safety, time, resources, family_burden, patient_preference, function, legal_policy, coordination
-
-【設計思想】
-・価値観対立の体験→理解促進（解消ではない）
-・現実的制約の重視（理想論回避）
-・プロセス重視測定（結果より体験過程の質）
-・各職種に明確な利害関係と専門性を持たせる
-
-理解できましたら「システム理解完了」と返答してください。
-
+```json
+"family_caregivers": [
+  {
+    "status_config": {
+      "enabled": true,
+      "status_types": [
+        {
+          "type": "caregiver_burden",
+          "initial": 6,
+          "critical_low": null,
+          "critical_high": 8,
+          "label": "介護負担",
+          "description": "日常的な介護による身体的・精神的負担"
+        }
+        // 2-3種類を推奨
+      ]
+    }
+  }
+]
 ```
 
-### **Phase 2: シナリオ生成プロンプト**
+#### **1-4. 職種へのステータス設定**
 
+```json
+"profession_cards_config": {
+  "医師": {
+    "objectives": {
+      "status_tracking": {
+        "enabled": true,
+        "status_types": [
+          {
+            "type": "symptom_management",
+            "initial": 5,
+            "target": 8,
+            "label": "症状管理"
+          },
+          {
+            "type": "collaboration_effectiveness",
+            "initial": 5,
+            "target": 8,
+            "label": "連携効果"
+          }
+          // 3種類を推奨、collaboration_effectivenessは必須
+        ]
+      }
+    }
+  }
+}
 ```
-以下の要件に基づいて、多職種連携ゲームのシナリオセットを生成してください。
 
-【前提】 
-・JSONスキーマ（scenario_template/constraint_set/event_card/measurement_log/dispute_queue）を理解済み 
-・汎用版の職種カード、制約カード、クイックスタートガイドは作成済み 
-・家族はGM用NPCとして扱う（profession_cards_configには含めない）
+#### **1-5. 患者・家族の役職化**
 
-【シナリオ要件（変数）】 
-・現場設定: {setting}（allowed: home_care | acute_hospital | chronic_ward | rehab_hospital | long_term_care_facility | outpatient | day_care_rehab | hospice | school | community | other） 
-・患者年代: {age_range} 
-・主疾患: {condition} 
-・参加職種: {participants}（3-6名、allowed: physician,nurse,pharmacist,pt,ot,st,care_manager,home_helper,msw,social_worker,dietitian,assistive_device_specialist,public_health_nurse） 
-・難易度: normal（easy/hardは制約セットでカバー）
-・重点争点タグ: {target_tags}（3-5個、allowed: safety,time,resources,family_burden,patient_preference,function,legal_policy,coordination） 
-・シナリオテーマ: {theme} ・seed: {seed}（数値・任意。再現性確保のため）
+```json
+"patient_as_role": true,
+"family_as_role": true
+```
 
-【参考事例】※あれば {事例詳細}
+**患者カード・家族カードの生成指示:**
 
-【生成物（3つのコードブロックで出力）】
+- `known_information`: 公開情報
+- `hidden_information`: 非公開情報（本人のみ知る）
+- `values`: 価値観
+- `engagement_triggers`: 反応のきっかけ
 
-scenario_template.json（完全版）
-scenario_complexityはintermediateまたはadvancedを使用し、difficulty_hintはnormalに合わせる
-family_caregiversに家族を記載
-profession_cards_configにはfamilyを含めない（プレイヤーは専門職のみ）
-learning_objectives.target_tagsに{target_tags}をそのまま採用（3-5個）
-constraint_set.json × 3（easy/normal/hard）
-constraint_set_idは一意（snake_case）
-play_difficultyとセット名が整合
-time/economic/resources/legal_policyのいずれかを必ず含める（minProperties:1）
-値は現実的レンジで、rationale/authorityで根拠を一言添える
-event_card.json（配列）× 15枚 ちょうど15
-必須: event_id, category, subcategory, title_ja, body_ja, tags
-flavor_text, gm_effect_guide（immediate_effects/discussion_triggers/constraint_modifiers）を必ず含む
-categoryとsubcategoryは整合（A_medical→respiratory/cardio/...、B_psych→dementia/mental/problem_behavior、C_family→caregiver_family/challenge_event/complaint、D_services→incident_accident/policy_system/science_option、E_environment→local_life/gov_admin/weather_disaster）
-parametersは本文の{{変数}}と一致（例: {{spo2}}ならparametersにname:"spo2"）
-settings/actors/tagsはスキーマ語彙に準拠
-measurement_template.json（測定項目シート）
-measurement_log.schema.jsonの構造に準拠
-共通測定項目（数値指標・基本質的評価）は固定テンプレート使用
+**意味:**
+
+- 患者・家族もプレイヤーとして参加
+- 専門職を「外から見た評価」を提供
+- 専門職の「正しさ」と患者・家族の「体験」のギャップを可視化
+
+#### **1-6. チーム評価システム**
+
+```json
+"team_evaluation_config": {
+  "enabled": true,
+  "use_system_rules": true,
+  "rules_version": "1.0.0",
+  "notes": "team_evaluation_rules.jsonを参照"
+}
+```
+
+**重要:** 計算式はシナリオ固有に定義しない。すべて `team_evaluation_rules.json` に従う。
+
+#### **1-7. 分岐シナリオ（将来実装予定）**
+
+```json
+"branch_scenarios": {
+  "loop1_end_choices": [
+    {
+      "choice_id": "continue_home",
+      "label": "在宅継続",
+      "next_loop_adjustments": { }
+    },
+    {
+      "choice_id": "hospitalize",
+      "label": "入院",
+      "scenario_end": true,
+      "end_narration": "..."
+    }
+  ]
+}
+```
+
+#### **1-8. エンディングシステム（将来実装予定）**
+
+```json
+"ending_system": {
+  "evaluation_axes": ["patient_centeredness", "safety_assurance"],
+  "ending_narratives": [
+    {
+      "condition": "patient_centeredness >= 7 AND safety_assurance >= 7",
+      "title": "理想的な連携",
+      "description": "...",
+      "team_score": "S"
+    }
+  ]
+}
+```
+
+#### **1-9. 倫理的配慮**
+
+```json
+"ethical_considerations": {
+  "x_card_enabled": true,
+  "role_exit_allowed": true,
+  "hierarchy_mitigation": ["個別入力", "GMからまとめてアナウンス"]
+}
+```
+
+______________________________________________________________________
+
+### **2. event_card.schema.json**
+
+**【基本構造】**
+
+- イベントカードの定義
+- 通常イベント（ID: 1-100）と閾値イベント（ID: 101以降）
+
+**【2025年11月9日の重要な追加機能】**
+
+#### **2-1. status_effects（ステータスへの影響）**
+
+```json
+"status_effects": [
+  {
+    "target": "patient.trust_and_acceptance",
+    "change": -2,
+    "reason": "専門職が一方的に説明し、本人の意見を聞かなかった",
+    "conditional": null
+  },
+  {
+    "target": "profession.医師.symptom_management",
+    "change": +1,
+    "reason": "適切な処方調整を行った",
+    "conditional": null
+  }
+]
+```
+
+**target の形式:**
+
+- 患者: `patient.ステータスタイプ`
+- 家族: `family_N.ステータスタイプ`（Nは家族の番号、0始まり）
+- 職種: `profession.職種名.ステータスタイプ`
+
+**change の範囲:**
+
+- 基本: ±1
+- 大きな影響: ±2
+- 劇的な変化: ±3（閾値イベントのみ）
+
+#### **2-2. threshold_trigger（閾値イベント専用）**
+
+```json
+"threshold_trigger": {
+  "condition": "patient.trust_and_acceptance <= 2",
+  "auto_occurrence": true,
+  "forced_discussion_minutes": 5,
+  "recovery_condition": "patient.trust_and_acceptance >= 4",
+  "recovery_event_id": 102,
+  "cooldown_loops": 1,
+  "max_occurrences_per_session": 2
+}
+```
+
+**閾値イベントの設計原則:**
+
+- 患者・家族のステータスが危機的状態に達したときに自動発生
+- 必ず回復経路を設定
+- ネガティブ・スパイラル防止（冷却期間、最大発生回数）
+
+______________________________________________________________________
+
+### **3. measurement_log.schema.json**
+
+**【基本構造】**
+
+- セッション記録の定義
+- 参加者、ループごとの記録、セッション全体のメトリクス
+
+**【2025年11月9日の重要な追加機能】**
+
+#### **3-1. 参加者への患者・家族役の追加**
+
+```json
+"participants": [
+  {
+    "player_id": "P6",
+    "role": "patient",
+    "character_name": "山田太郎（患者本人）"
+  },
+  {
+    "player_id": "P7",
+    "role": "family",
+    "character_name": "山田花子（妻）"
+  }
+]
+```
+
+#### **3-2. ループごとのステータス記録**
+
+```json
+"loops": [
+  {
+    "loop_number": 1,
+    "status_snapshot": {
+      "patient": {
+        "physical_condition": 4,
+        "trust_and_acceptance": 6
+      },
+      "family": [
+        {
+          "caregiver_burden": 6,
+          "hope_for_support": 5
+        }
+      ],
+      "team": {
+        "patient_centeredness": 6.2,
+        "safety_assurance": 5.8
+      },
+      "professions": {
+        "医師": {
+          "symptom_management": 6,
+          "collaboration_effectiveness": 5
+        }
+      }
+    },
+    "status_changes": [
+      {
+        "timestamp": "2025-11-01T19:45:00Z",
+        "target": "patient.trust_and_acceptance",
+        "change": -1,
+        "before": 6,
+        "after": 5,
+        "trigger": "event",
+        "trigger_detail": "Event 13",
+        "reason": "専門職が一方的に説明",
+        "operator_role": "patient",
+        "operator_player_id": "P6"
+      }
+    ],
+    "threshold_events_occurred": [
+      {
+        "event_id": 101,
+        "trigger_condition": "patient.trust_and_acceptance <= 2",
+        "occurred_at": "2025-11-01T20:15:00Z",
+        "resolution_notes": "チームで傾聴の時間を設け、信頼が回復"
+      }
+    ]
+  }
+]
+```
+
+#### **3-3. セッション全体のステータス推移**
+
+```json
+"session_metrics": {
+  "status_trajectories": {
+    "patient.trust_and_acceptance": {
+      "initial": 6,
+      "final": 7,
+      "total_change": +1,
+      "trajectory": [6, 5, 6, 7],
+      "turning_points": [
+        {
+          "loop": 1,
+          "event": "Event 13",
+          "change": -1,
+          "significance": "専門職の一方的な説明で低下"
+        }
+      ]
+    }
+  },
+  "threshold_events_summary": {
+    "total_occurrences": 2,
+    "by_condition": {
+      "patient.trust_and_acceptance <= 2": 1,
+      "family_0.caregiver_burden >= 8": 1
+    }
+  }
+}
+```
+
+______________________________________________________________________
+
+### **4. team_evaluation_rules.json**
+
+**【目的】**
+
+- システム共通のチーム評価計算ルール
+- 全シナリオで使い回す
+- シナリオ固有の計算式は定義しない
+
+**【評価軸（4軸）】**
+
+1. **patient_centeredness（患者中心性）**
+   - 患者の体験（信頼、自己決定）×60%
+   - 専門職の連携効果×40%
+
+2. **safety_assurance（安全保障）**
+   - 患者の身体状態×40%
+   - 専門職の安全確保・症状管理×60%
+
+3. **care_sustainability（ケアの持続可能性）**
+   - (10-家族の介護負担)×30%
+   - 家族の支援への期待×20%
+   - 専門職の資源調整×50%
+
+4. **family_support（家族支援）**
+   - (10-家族の介護負担)×30%
+   - 家族の支援への期待×20%
+   - 専門職の家族支援×50%
+
+**【各軸のcomponents定義】**
+
+```json
+{
+  "source_category": "patient",
+  "required_status_types": ["trust_and_acceptance", "autonomy_satisfaction"],
+  "preferred_status_types": ["trust_and_acceptance"],
+  "weight": 0.6,
+  "aggregation": "average",
+  "selection_strategy": "any_available",
+  "fallback_weight_redistribution": true
+}
+```
+
+**【重要な設計思想】**
+
+- 特定の職種名を参照しない（ステータスタイプのみ）
+- 職種が欠けても自動対応（重み再配分）
+- 人数・職種構成に依存しない
+
+**【Relevance指標】**
+
+- 参照職種数 ÷ 該当ステータスを持つ職種数
+- 計算結果の信頼性を可視化
+
+______________________________________________________________________
+
+### **5. constraint_set.schema.json**
+
+**【基本構造】**
+
+- Phase 4（方針決定）時の制約を定義
+- Easy/Normal/Hardの3レベル
+
+**【2025年11月9日の方針】**
+
+- 修正なし
+- ステータスシステムとは独立
+- 間接的な影響のみ（プレイヤーの判断に委ねる）
+
+______________________________________________________________________
+
+### **6. dispute_queue.schema.json**
+
+**【基本構造】**
+
+- 争点の記録と追跡
+- 8タグ体系（医学的判断、倫理的判断、資源配分、等）
+
+**【2025年11月9日の方針】**
+
+- 修正なし
+- 既存の構造で対応可能
+- 運用レベルでの改善のみ（Phase 2の簡略化）
+
+______________________________________________________________________
+
+## **Phase 2: シナリオ生成**
+
+以下の5つのファイルを生成してください。
+
+______________________________________________________________________
+
+### **【シナリオ要件（変数）】**
+
+以下の情報を基にシナリオを生成してください：
+
+- **現場設定**: {setting}
+  - allowed: `home_care` | `acute_hospital` | `chronic_ward` | `rehab_hospital` | `long_term_care_facility` | `outpatient` | `day_care_rehab` | `hospice` | `school` | `community` | `other`
+
+- **患者年代**: {age_range}
+
+- **主疾患**: {condition}
+
+- **参加職種**: {participants}（3-6名）
+  - allowed: `physician`, `nurse`, `pharmacist`, `pt`, `ot`, `st`, `care_manager`, `home_helper`, `msw`, `social_worker`, `dietitian`, `assistive_device_specialist`, `public_health_nurse`
+
+- **難易度**: normal（easy/hardは制約セットでカバー）
+
+- **重点争点タグ**: {target_tags}（3-5個）
+  - allowed: `safety`, `time`, `resources`, `family_burden`, `patient_preference`, `function`, `legal_policy`, `coordination`
+
+- **シナリオテーマ**: {theme}
+
+- **seed**: {seed}（数値・任意。再現性確保のため）
+
+**【参考事例】**（あれば）
+{事例詳細}
+
+______________________________________________________________________
+
+### **生成ファイル1: scenario_template.json**
+
+**【必須要素】**
+
+1. **基本設定**
+   - `scenario_complexity`: `intermediate` または `advanced` を使用
+   - `difficulty_hint`: `normal` に合わせる
+   - `learning_objectives.target_tags`: {target_tags} をそのまま採用（3-5個）
+
+2. **患者情報**
+   - 基本情報（氏名、年齢、診断名、等）
+   - `status_config`: 3-5種類のステータスを選択
+     - 各ステータスに初期値、閾値を設定
+     - `behavior_anchors`（行動アンカー）を記述
+
+3. **家族情報**
+   - `family_caregivers`: 家族を記載（患者・家族も役職カードとして配布）
+   - 各家族メンバーに `status_config`
+   - 2-3種類のステータスを選択
+
+4. **職種構成**
+   - `profession_cards_config`: 専門職のみ（familyは含めない）
+   - 各職種に `status_tracking`
+   - 3種類のステータスを選択（**collaboration_effectivenessは必須**）
+   - 初期値と目標値を設定
+
+5. **患者・家族カードの生成指示**
+   - `patient_as_role: true`
+   - `family_as_role: true`
+   - 各カードに以下を記述:
+     - `known_information`: 公開情報
+     - `hidden_information`: 非公開情報
+     - `values`: 価値観
+     - `engagement_triggers`: 反応のきっかけ
+
+6. **チーム評価設定**
+   - `team_evaluation_config.enabled: true`
+   - `use_system_rules: true`
+
+7. **倫理的配慮**
+   - `x_card_enabled: true`
+   - `role_exit_allowed: true`
+
+**【行動アンカーの記述方法】**
+
+各ステータスタイプに以下を記述:
+
+```json
+"behavior_anchors": {
+  "plus_2": [
+    "専門職が本人の話を30分以上傾聴し、複数の選択肢を提示",
+    "本人の価値観を深く理解し、それに沿った提案を行った"
+  ],
+  "plus_1": [
+    "専門職が本人の希望を尋ね、尊重する姿勢を示した",
+    "本人の質問に丁寧に答え、安心感を与えた"
+  ],
+  "minus_1": [
+    "専門職が一方的に説明し、本人の意見を聞かなかった",
+    "本人の不安を軽視し、「大丈夫」と流した"
+  ],
+  "minus_2": [
+    "専門職が本人の拒否を無視し、強制的に進めた",
+    "本人の価値観を否定し、専門職の判断を押し付けた"
+  ],
+  "zero_principle": "迷ったら変更しない"
+}
+```
+
+______________________________________________________________________
+
+### **生成ファイル2: event_cards.json**
+
+**【必須要素】**
+
+1. **通常イベント15枚（ID: 1-15）**
+   - 各イベントに `status_effects` を記述
+   - 変化量は±1〜±2
+
+2. **閾値イベント5種類（ID: 101以降）**
+   - `threshold_trigger` を設定
+   - 必ず回復経路を設定（`recovery_condition`, `recovery_event_id`）
+   - 変化量は±2〜±3
+
+**【イベントカードの詳細要件】**
+
+- 必須フィールド: `event_id`, `category`, `subcategory`, `title_ja`, `body_ja`, `tags`
+- `flavor_text`, `gm_effect_guide`（`immediate_effects`/`discussion_triggers`/`constraint_modifiers`）を必ず含む
+- `parameters` は本文の {{変数}} と一致（例: {{spo2}} なら parameters に `name:"spo2"`）
+- `settings`/`actors`/`tags` はスキーマ語彙に準拠
+
+**【category と subcategory の対応】**
+
+- `A_medical` → `respiratory`, `cardio`, `neuro`, `digestive`, `renal`, `metabolic`, `infection`, `cancer`, `pain`, `other_medical`
+- `B_psych` → `dementia`, `mental`, `problem_behavior`, `cognitive`, `other_psych`
+- `C_family` → `caregiver_family`, `challenge_event`, `complaint`, `other_family`
+- `D_services` → `incident_accident`, `policy_system`, `science_option`, `other_services`
+- `E_environment` → `local_life`, `gov_admin`, `weather_disaster`, `other_environment`
+
+**【status_effectsの記述方法】**
+
+```json
+"status_effects": [
+  {
+    "target": "patient.trust_and_acceptance",
+    "change": -2,
+    "reason": "専門職が一方的に説明し、本人の意見を聞かなかった"
+  },
+  {
+    "target": "profession.医師.symptom_management",
+    "change": +1,
+    "reason": "適切な処方調整を行った"
+  }
+]
+```
+
+**【二重カウント防止のガイドライン】**
+
+- イベントは患者・家族の体験に主作用
+- 職種側は「自分が何をしたか」に限定
+- 同じ根拠で両側に±2は禁止
+- 片方±2、もう片方±1は許容
+- 片方±1、もう片方±0を推奨
+
+**【閾値イベントの設計】**
+
+```json
+{
+  "event_id": 101,
+  "title": "患者の治療拒否",
+  "threshold_trigger": {
+    "condition": "patient.trust_and_acceptance <= 2",
+    "auto_occurrence": true,
+    "forced_discussion_minutes": 5,
+    "recovery_condition": "patient.trust_and_acceptance >= 4",
+    "recovery_event_id": 102,
+    "cooldown_loops": 1,
+    "max_occurrences_per_session": 2
+  },
+  "status_effects": [
+    {
+      "target": "patient.trust_and_acceptance",
+      "change": -1,
+      "reason": "信頼関係の決定的な崩壊"
+    }
+  ]
+}
+```
+
+______________________________________________________________________
+
+### **生成ファイル3: constraint_sets.json**
+
+**【必須要素】**
+
+- Easy/Normal/Hardの3レベル
+- 各レベルに一意の `constraint_set_id`（snake_case）
+- `play_difficulty` とセット名が整合
+- **time/economic/resources/legal_policy のいずれかを必ず含める**（minProperties: 1）
+- 値は現実的レンジで、`rationale`/`authority` で根拠を一言添える
+- 既存の形式（v2）を踏襲
+
+______________________________________________________________________
+
+### **生成ファイル4: measurement_template.json**
+
+**【必須要素】**
+
+- `participants` に患者役（role: "patient"）と家族役（role: "family"）を含む
+- `loops` に `status_snapshot`, `status_changes`, `threshold_events_occurred` を含む
+- `session_metrics` に `status_trajectories`, `threshold_events_summary` を含む
+
+**【シナリオ固有のカスタマイズ項目】**
+
 以下をシナリオ固有にカスタマイズ：
-- profession_goal_achievement: 各職種のprimary_goal/success_criteriaを評価項目に変換
-- expected_perspective_shifts: このケースで期待される視点転換の具体例3-5個
-- target_blind_spots: 各職種が気づくべき専門的盲点3-5個
-- scenario_specific_debrief_questions: 固有の振り返り質問3-5個
-- followup_focus_areas: フォローアップ調査での重点確認項目
-debrief_questionsはscenario_templateと整合させる
 
-【重要な設計ルール】 
-・測定項目は体験過程の質を重視（結果より体験の深さを評価）
-・職種別成功基準は「チーム方針の内容」で評価（発言回数ではない）
-・期待する専門的盲点は疾患・状況特性から自然に導出
-・振り返り質問は主要争点と学習目標に直結
+- **profession_goal_achievement**: 各職種の `primary_goal`/`success_criteria` を評価項目に変換
+- **expected_perspective_shifts**: このケースで期待される視点転換の具体例3-5個
+- **target_blind_spots**: 各職種が気づくべき専門的盲点3-5個
+- **scenario_specific_debrief_questions**: 固有の振り返り質問3-5個
+- **followup_focus_areas**: フォローアップ調査での重点確認項目
 
-【出力ルール（厳守）】
-4つのコードブロックのみを出力し、説明文は一切付けない
-1つ目: json title="scenario_template.json" …スキーマ準拠のオブジェクト
-2つ目: json title="constraint_sets.json" …[easy,normal,hard]の配列
-3つ目: json title="event_cards.json" …15件の配列
-4つ目: json title="measurement_template.json" …測定項目シート
+`debrief_questions` は `scenario_template` と整合させる
+
+______________________________________________________________________
+
+### **生成ファイル5: team_evaluation_sheet.csv**
+
+**【目的】**
+
+- チーム評価の簡易計算シート
+- Google スプレッドシート / Excel 互換
+- タブレット・スマホで編集可能
+
+**【シート構成】**
+
+#### **1. 入力欄（黄色背景）**
+
+| ステータス | 初期値 | Loop 1 | Loop 2 | Loop 3 |
+|-----------|--------|--------|--------|--------|
+| 患者: 身体状態 | 4 | [入力] | [入力] | [入力] |
+| 患者: 信頼と受容 | 6 | [入力] | [入力] | [入力] |
+| 家族: 介護負担 | 6 | [入力] | [入力] | [入力] |
+| 医師: 症状管理 | 5 | [入力] | [入力] | [入力] |
+| 医師: 連携効果 | 5 | [入力] | [入力] | [入力] |
+| ... | ... | ... | ... | ... |
+
+#### **2. 計算式エリア（自動計算）**
+
+```
+患者中心性 = (患者.信頼と受容 + 患者.自己決定の満足) / 2 * 0.6 +
+            (医師.連携効果 + 看護師.連携効果 + ...) / 職種数 * 0.4
 ```
 
+#### **3. 結果表示エリア**
+
+| 評価軸 | Loop 1 | Loop 2 | Loop 3 | Relevance |
+|--------|--------|--------|--------|-----------|
+| 患者中心性 | [計算] | [計算] | [計算] | ✓ 完全（3/3職種） |
+| 安全保障 | [計算] | [計算] | [計算] | ✓ 完全（3/3職種） |
+| 持続可能性 | [計算] | [計算] | [計算] | ⚠️ 部分的（1/2職種） |
+| 家族支援 | [計算] | [計算] | [計算] | ✓ 完全（2/2職種） |
+
+#### **4. Relevance指標の表示**
+
+- ✓ 完全（3/3職種）: 信頼できる
+- ⚠️ 部分的（1/2職種）: 参考程度
+- ⚠️⚠️ 該当職種なし（0/0職種）: 計算不能
+
+**【生成時の注意】**
+
+- 計算式はExcel/Google Sheets両対応
+- Relevance指標は自動表示
+- 入力欄には初期値を設定
+- 各評価軸の計算根拠をコメントで記載
+
+______________________________________________________________________
+
+## **Phase 3: 検証**
+
+生成後、以下のチェックリストで検証してください。
+
+______________________________________________________________________
+
+### **scenario_template.json の検証**
+
+- [ ] `scenario_complexity` が `intermediate` または `advanced`
+- [ ] `difficulty_hint` が `normal`
+- [ ] `learning_objectives.target_tags` に {target_tags} が採用されている（3-5個）
+- [ ] 患者のステータスが3-5種類設定されている
+- [ ] 家族のステータスが2-3種類設定されている
+- [ ] 各職種に3種類のステータスが設定されている
+- [ ] すべての職種に `collaboration_effectiveness` が含まれている
+- [ ] 初期値が1-10の範囲内
+- [ ] 閾値（critical_low/high）が適切に設定されている
+- [ ] 行動アンカーが各ステータスに記述されている（+2, +1, -1, -2）
+- [ ] `patient_as_role: true` が設定されている
+- [ ] `family_as_role: true` が設定されている
+- [ ] 患者・家族カードに known_information, hidden_information, values, engagement_triggers が記述されている
+- [ ] `family_caregivers` に家族が記載されている
+- [ ] `profession_cards_config` に family が含まれていない
+
+______________________________________________________________________
+
+### **event_cards.json の検証**
+
+- [ ] 通常イベント15枚（ID: 1-15）が定義されている
+- [ ] 閾値イベント5種類（ID: 101以降）が定義されている
+- [ ] 各通常イベントに `status_effects` が記述されている
+- [ ] 各閾値イベントに `threshold_trigger` が設定されている
+- [ ] 閾値イベントに回復条件（recovery_condition, recovery_event_id）が設定されている
+- [ ] 通常イベントの変化量が±1〜±2の範囲内
+- [ ] 閾値イベントの変化量が±2〜±3の範囲内
+- [ ] 二重カウント防止のガイドラインが守られている
+- [ ] `flavor_text`, `gm_effect_guide` が含まれている
+- [ ] `category` と `subcategory` が対応表に従っている
+- [ ] `parameters` が本文の {{変数}} と一致している
+- [ ] `settings`/`actors`/`tags` がスキーマ語彙に準拠している
+
+______________________________________________________________________
+
+### **constraint_sets.json の検証**
+
+- [ ] Easy レベルが定義されている
+- [ ] Normal レベルが定義されている
+- [ ] Hard レベルが定義されている
+- [ ] 各レベルに一意の `constraint_set_id`（snake_case）がある
+- [ ] `play_difficulty` とセット名が整合している
+- [ ] time/economic/resources/legal_policy のいずれかが含まれている
+- [ ] 値が現実的レンジである
+- [ ] `rationale`/`authority` で根拠が記載されている
+- [ ] 既存の形式（v2）を踏襲している
+
+______________________________________________________________________
+
+### **measurement_template.json の検証**
+
+- [ ] `participants` に患者役（role: "patient"）が含まれている
+- [ ] `participants` に家族役（role: "family"）が含まれている
+- [ ] `loops` 配列に `status_snapshot` フィールドが含まれている
+- [ ] `loops` 配列に `status_changes` 配列が定義されている
+- [ ] `loops` 配列に `threshold_events_occurred` 配列が定義されている
+- [ ] `session_metrics` に `status_trajectories` が含まれている
+- [ ] `session_metrics` に `threshold_events_summary` が含まれている
+- [ ] `profession_goal_achievement` がカスタマイズされている
+- [ ] `expected_perspective_shifts`（3-5個）がカスタマイズされている
+- [ ] `target_blind_spots`（3-5個）がカスタマイズされている
+- [ ] `scenario_specific_debrief_questions`（3-5個）がカスタマイズされている
+- [ ] `followup_focus_areas` がカスタマイズされている
+- [ ] `debrief_questions` が `scenario_template` と整合している
+
+______________________________________________________________________
+
+### **team_evaluation_sheet.csv の検証**
+
+- [ ] 入力欄が黄色背景で明示されている
+- [ ] 計算式が `team_evaluation_rules.json` に準拠している
+- [ ] 4つの評価軸すべて（患者中心性、安全保障、持続可能性、家族支援）が計算されている
+- [ ] Relevance指標が各評価軸に表示されている
+- [ ] 初期値がすべての入力欄に設定されている
+- [ ] Google Sheets / Excel で開ける形式（CSV）
+- [ ] 計算式がExcel/Google Sheets両対応
+- [ ] 各評価軸の計算根拠がコメントで記載されている
+
+______________________________________________________________________
+
+## **検証後の対応**
+
+**すべてのチェック項目が満たされている場合:**
+✅ シナリオv3の生成完了
+
+**一部のチェック項目が満たされていない場合:**
+⚠️ 該当箇所を修正し、再検証
+
+**多数のチェック項目が満たされていない場合:**
+❌ 生成プロセスを見直し、再生成
+
+______________________________________________________________________
+
+## **重要な設計ルール（厳守）**
+
+1. ステータスは**1-10段階**、調整は**±1〜2が基本**
+2. 患者・家族も**役職カードとして配布**
+3. チーム評価は**システム共通ルール**で計算
+4. 計算式は**シナリオ固有に定義しない**
+5. すべての職種に **collaboration_effectiveness** を含める
+6. 行動アンカーは**具体的で理解しやすく**
+7. 閾値イベントには**必ず回復経路**を設定
+8. 二重カウント防止のガイドラインを遵守
+9. 測定項目は**体験過程の質を重視**（結果より体験の深さを評価）
+10. 職種別成功基準は**「チーム方針の内容」で評価**（発言回数ではない）
+11. 期待する専門的盲点は**疾患・状況特性から自然に導出**
+12. 振り返り質問は**主要争点と学習目標に直結**
+
+______________________________________________________________________
+
+## **出力ルール（厳守）**
+
+**5つのコードブロックのみを出力し、説明文は一切付けない**
+
+1. ```json title="scenario_template.json"
+   …スキーマ準拠のオブジェクト
+   ```
+
+2. ```json title="constraint_sets.json"
+   …[easy, normal, hard]の配列
+   ```
+
+3. ```json title="event_cards.json"
+   …20件（通常イベント15件 + 閾値イベント5件）の配列
+   ```
+
+4. ```json title="measurement_template.json"
+   …測定項目シート
+   ```
+
+5. ```csv title="team_evaluation_sheet.csv"
+   …チーム評価計算シート
+   ```
+
+______________________________________________________________________
+
+**以上、シナリオ生成プロンプト v3.1（修正版）**
