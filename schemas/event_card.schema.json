@@ -1,16 +1,15 @@
-
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/schemas/event_card.schema.json",
   "title": "Event Card Schema",
-  "description": "多職種連携ゲーム用イベントカードのJSONスキーマ - 汎用・シナリオ適用可能・タグ/影響/運用ヒント/生成支援付き",
+  "description": "多職種連携ゲーム用イベントカードのJSONスキーマ - 汎用・シナリオ適用可能・タグ/影響/運用ヒント/生成支援/ステータス効果対応",
   "type": "object",
   "required": ["event_id", "category", "subcategory", "title_ja", "body_ja", "tags"],
   "properties": {
     "event_id": {
       "type": "integer",
       "minimum": 1,
-      "description": "イベント一意ID"
+      "description": "イベント一意ID 1-100:通常イベント、101-:閾値イベント"
     },
     "category": {
       "type": "string",
@@ -77,6 +76,77 @@
       },
       "additionalProperties": false,
       "description": "争点タグ8タグ体系。Primaryは1つ必須、Secondaryは最大2つ"
+    },
+    "status_effects": {
+      "type": "array",
+      "description": "このイベントがステータスに与える影響（任意だが推奨）",
+      "items": {
+        "type": "object",
+        "required": ["target", "change"],
+        "properties": {
+          "target": {
+            "type": "string",
+            "pattern": "^(patient|family_\\d+|profession\\.[a-z_]+|team)\\.[a-z_]+$",
+            "description": "対象ステータス 例: patient.trust_and_acceptance, family_0.caregiver_burden, profession.nurse.patient_safety_assurance, team.patient_centeredness"
+          },
+          "change": {
+            "type": "integer",
+            "minimum": -3,
+            "maximum": 3,
+            "description": "変化量 ±1が基本、±2が大きな影響、±3が劇的（稀）"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "変化の理由（GM向け説明）"
+          },
+          "conditional": {
+            "type": "string",
+            "description": "条件付き効果の場合の条件記述"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "threshold_trigger": {
+      "type": "object",
+      "description": "閾値による自動発生イベントの場合の設定",
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "発生条件 例: patient.trust_and_acceptance <= 2"
+        },
+        "auto_occurrence": {
+          "type": "boolean",
+          "default": true,
+          "description": "自動発生するかどうか"
+        },
+        "forced_discussion_minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "強制的に議論する時間（分）"
+        },
+        "recovery_condition": {
+          "type": "string",
+          "description": "回復条件 例: trust_and_acceptance >= 4"
+        },
+        "recovery_event_id": {
+          "type": "integer",
+          "description": "回復イベントのID"
+        },
+        "cooldown_loops": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "再発防止の冷却期間（ループ数）"
+        },
+        "max_occurrences_per_session": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 2,
+          "description": "セッション中の最大発生回数"
+        }
+      },
+      "additionalProperties": false
     },
     "parameters": {
       "type": "array",
