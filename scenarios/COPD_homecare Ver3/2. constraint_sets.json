@@ -1,0 +1,464 @@
+[
+  {
+    "constraint_set_id": "copd_home_discharge_easy_20251109",
+    "name_ja": "COPD退院支援（Easy）- 時間的余裕あり",
+    "description_ja": "退院期限に2週間の余裕があり、サービス調整も比較的柔軟。初学者向け。",
+    "setting": "home_care",
+    "play_difficulty": "easy",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "退院期限まで2週間",
+          "value": 14,
+          "severity": "flexible",
+          "rationale": "DPC期限切れまで余裕あり、次の入院患者もまだ確定していない"
+        },
+        {
+          "type": "availability",
+          "description_ja": "サービス開始は退院後1週間以内に調整可能",
+          "value": "1週間",
+          "severity": "flexible",
+          "rationale": "各事業所に余裕があり、調整しやすい"
+        }
+      ],
+      "economic": [
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険限度額",
+          "amount": 19705,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "negotiable"
+        },
+        {
+          "type": "income_limit",
+          "description_ja": "年金収入",
+          "amount": 150000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        },
+        {
+          "type": "copayment",
+          "description_ja": "自己負担1割（追加負担は月10,000円まで可能）",
+          "amount": 10000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "negotiable"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護",
+          "quantity": 3,
+          "unit": "回/週",
+          "availability_schedule": "平日・土日対応可",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問リハビリ（PT）",
+          "quantity": 2,
+          "unit": "回/週",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問介護",
+          "quantity": 3,
+          "unit": "回/週",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問診療",
+          "quantity": 2,
+          "unit": "回/月",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問薬剤管理",
+          "quantity": 2,
+          "unit": "回/月",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "デイサービス",
+          "quantity": "空きあり",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "要介護2（限度額19,705単位/月）",
+          "authority": "介護保険法",
+          "exceptions": [
+            "区分変更申請は却下済み（再申請は6ヶ月後）"
+          ],
+          "appeal_process": "6ヶ月後に再申請可能"
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "訪問看護師は医療処置のみ、生活援助不可",
+          "authority": "事業所規定",
+          "exceptions": [],
+          "appeal_process": "なし"
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "退院期限まで2週間の余裕があります。各サービスの調整も比較的柔軟で、平日は問題なく、土日も訪問看護は対応可能です。介護保険の限度額は19,705単位/月ですが、自己負担で月10,000円までなら追加サービスも検討できます。",
+      "emphasis_points": [
+        "時間的余裕がある",
+        "サービス調整が柔軟",
+        "土日も訪問看護対応可"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "退院期限（1週間程度の延長可能）",
+        "自己負担額（月10,000円まで）"
+      ],
+      "emergency_overrides": [
+        "急変時は緊急訪問看護対応可"
+      ]
+    },
+    "tags_affected": [
+      "time",
+      "resources"
+    ],
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z",
+      "notes": "Easy難易度。時間的余裕あり、サービス調整柔軟。"
+    }
+  },
+  {
+    "constraint_set_id": "copd_home_discharge_normal_20251109",
+    "name_ja": "COPD退院支援（Normal）- 標準的制約",
+    "description_ja": "退院期限まで1週間、サービス調整は平日のみ。標準的な制約条件。",
+    "setting": "home_care",
+    "play_difficulty": "normal",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "退院期限まで1週間",
+          "value": 7,
+          "severity": "firm",
+          "rationale": "DPC期限切れが近づいており、次の入院患者も確定している"
+        },
+        {
+          "type": "availability",
+          "description_ja": "サービス開始は退院後3日以内に調整必要",
+          "value": "3日",
+          "severity": "firm",
+          "rationale": "各事業所のスケジュール調整に時間がかかる"
+        }
+      ],
+      "economic": [
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険限度額",
+          "amount": 19705,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        },
+        {
+          "type": "income_limit",
+          "description_ja": "年金収入",
+          "amount": 150000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        },
+        {
+          "type": "copayment",
+          "description_ja": "自己負担1割（追加負担は月5,000円まで）",
+          "amount": 5000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "negotiable"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護",
+          "quantity": 2,
+          "unit": "回/週",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問リハビリ（PT）",
+          "quantity": 1,
+          "unit": "回/週",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問介護",
+          "quantity": 2,
+          "unit": "回/週、30分",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問診療",
+          "quantity": 2,
+          "unit": "回/月",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問薬剤管理",
+          "quantity": 2,
+          "unit": "回/月",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "デイサービス",
+          "quantity": "空きあり",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "要介護2（限度額19,705単位/月）",
+          "authority": "介護保険法",
+          "exceptions": [
+            "区分変更申請は却下済み（再申請は6ヶ月後）"
+          ],
+          "appeal_process": "6ヶ月後に再申請可能"
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "訪問看護師は医療処置のみ、生活援助不可",
+          "authority": "事業所規定",
+          "exceptions": [],
+          "appeal_process": "なし"
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "土日のサービス提供不可",
+          "authority": "各事業所の勤務体制",
+          "exceptions": [
+            "緊急時のみ訪問看護対応可"
+          ],
+          "appeal_process": "なし"
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "退院期限まで1週間です。サービス開始は退院後3日以内に調整する必要があります。訪問看護は週2回、訪問リハビリは週1回、訪問介護は週2回（30分）が限度です。土日のサービス提供は原則不可で、緊急時のみ訪問看護が対応します。介護保険の限度額は19,705単位/月で、自己負担は月5,000円までなら検討可能です。",
+      "emphasis_points": [
+        "退院期限まで1週間",
+        "サービス開始は退院後3日以内",
+        "土日のサービス提供不可",
+        "訪問看護週2回、訪問リハビリ週1回が限度"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "自己負担額（月5,000円まで）"
+      ],
+      "emergency_overrides": [
+        "急変時は緊急訪問看護対応可（土日含む）"
+      ]
+    },
+    "tags_affected": [
+      "time",
+      "resources",
+      "legal_policy"
+    ],
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z",
+      "notes": "Normal難易度。退院期限1週間、サービス調整は平日のみ。"
+    }
+  },
+  {
+    "constraint_set_id": "copd_home_discharge_hard_20251109",
+    "name_ja": "COPD退院支援（Hard）- 厳しい制約",
+    "description_ja": "退院期限まで3日、サービス調整は極めて困難。上級者向け。",
+    "setting": "home_care",
+    "play_difficulty": "hard",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "退院期限まで3日",
+          "value": 3,
+          "severity": "absolute",
+          "rationale": "DPC期限切れ、次の入院患者が確定しており、病床確保が急務"
+        },
+        {
+          "type": "availability",
+          "description_ja": "サービス開始は退院当日に調整必要",
+          "value": "当日",
+          "severity": "absolute",
+          "rationale": "各事業所のスケジュールが埋まっており、調整が極めて困難"
+        }
+      ],
+      "economic": [
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険限度額",
+          "amount": 19705,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        },
+        {
+          "type": "income_limit",
+          "description_ja": "年金収入",
+          "amount": 150000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        },
+        {
+          "type": "copayment",
+          "description_ja": "自己負担1割（追加負担困難）",
+          "amount": 0,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護",
+          "quantity": 1,
+          "unit": "回/週",
+          "availability_schedule": "平日のみ、特定曜日のみ",
+          "waiting_time": "2週間"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問リハビリ（PT）",
+          "quantity": 1,
+          "unit": "回/2週",
+          "availability_schedule": "平日のみ、特定曜日のみ",
+          "waiting_time": "3週間"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問介護",
+          "quantity": 1,
+          "unit": "回/週、30分",
+          "availability_schedule": "平日のみ、特定曜日のみ",
+          "waiting_time": "1週間"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問診療",
+          "quantity": 2,
+          "unit": "回/月",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "2週間"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問薬剤管理",
+          "quantity": 2,
+          "unit": "回/月",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "1週間"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "デイサービス",
+          "quantity": "空きあり",
+          "availability_schedule": "平日のみ",
+          "waiting_time": "なし"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "要介護2（限度額19,705単位/月）",
+          "authority": "介護保険法",
+          "exceptions": [
+            "区分変更申請は却下済み（再申請は6ヶ月後）"
+          ],
+          "appeal_process": "6ヶ月後に再申請可能"
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "訪問看護師は医療処置のみ、生活援助不可",
+          "authority": "事業所規定",
+          "exceptions": [],
+          "appeal_process": "なし"
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "土日のサービス提供不可",
+          "authority": "各事業所の勤務体制",
+          "exceptions": [
+            "緊急時のみ訪問看護対応可（ただし割増料金）"
+          ],
+          "appeal_process": "なし"
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "人員不足により新規受け入れ制限中",
+          "authority": "各事業所の運営状況",
+          "exceptions": [],
+          "appeal_process": "なし"
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "退院期限まで3日しかありません。サービス開始は退院当日に調整する必要があります。訪問看護は週1回、訪問リハビリは2週に1回、訪問介護は週1回（30分）が限度で、いずれも待機期間があります。土日のサービス提供は不可で、緊急時のみ訪問看護が対応しますが割増料金がかかります。介護保険の限度額は19,705単位/月で、追加負担は困難です。人員不足により新規受け入れも制限されています。",
+      "emphasis_points": [
+        "退院期限まで3日のみ",
+        "サービス開始は退院当日",
+        "訪問看護週1回、訪問リハビリ2週に1回が限度",
+        "土日のサービス提供不可",
+        "人員不足により新規受け入れ制限中",
+        "追加負担困難"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [],
+      "emergency_overrides": [
+        "急変時は緊急訪問看護対応可（土日含む、割増料金）"
+      ]
+    },
+    "tags_affected": [
+      "time",
+      "resources",
+      "legal_policy"
+    ],
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z",
+      "notes": "Hard難易度。退院期限3日、サービス調整極めて困難。"
+    }
+  }
+]
