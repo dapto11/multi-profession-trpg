@@ -1,9 +1,8 @@
-
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/schemas/scenario_template.schema.json",
   "title": "Scenario Template Schema",
-  "description": "多職種連携ゲームのシナリオテンプレート 患者設定・背景・初期状況・学習目標",
+  "description": "多職種連携ゲームのシナリオテンプレート 患者設定・背景・初期状況・学習目標・ステータスシステム対応",
   "type": "object",
   "required": ["scenario_id", "title_ja", "patient", "setting", "initial_situation", "learning_objectives", "phase_flow"],
   "properties": {
@@ -154,9 +153,33 @@
             "goals_wishes": { "type": "array", "items": { "type": "string" } }
           },
           "additionalProperties": false
+        },
+        "status_config": {
+          "type": "object",
+          "description": "患者のステータス設定（1-10段階）",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true,
+              "description": "ステータス機能の有効/無効"
+            },
+            "status_types": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/status_field_config" },
+              "minItems": 1,
+              "maxItems": 5,
+              "description": "使用するステータスタイプ（患者用から選択）"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
+    },
+    "patient_as_role": {
+      "type": "boolean",
+      "default": true,
+      "description": "患者を役職カードとしてプレイヤーに配布するか"
     },
     "family_caregivers": {
       "type": "array",
@@ -171,10 +194,33 @@
           "availability": { "type": "string" },
           "capabilities": { "type": "array", "items": { "type": "string" } },
           "limitations": { "type": "array", "items": { "type": "string" } },
-          "concerns": { "type": "array", "items": { "type": "string" } }
+          "concerns": { "type": "array", "items": { "type": "string" } },
+          "status_config": {
+            "type": "object",
+            "description": "家族のステータス設定（1-10段階）",
+            "properties": {
+              "enabled": {
+                "type": "boolean",
+                "default": true
+              },
+              "status_types": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/status_field_config" },
+                "minItems": 1,
+                "maxItems": 4,
+                "description": "使用するステータスタイプ（家族用から選択）"
+              }
+            },
+            "additionalProperties": false
+          }
         },
         "additionalProperties": false
       }
+    },
+    "family_as_role": {
+      "type": "boolean",
+      "default": true,
+      "description": "家族を役職カードとしてプレイヤーに配布するか"
     },
     "initial_situation": {
       "type": "object",
@@ -254,7 +300,7 @@
     },
     "profession_cards_config": {
       "type": "object",
-      "description": "職種カードの個別設定 拡張対応版",
+      "description": "職種カードの個別設定 ステータストラッキング対応",
       "propertyNames": {
         "enum": [
           "physician", "nurse", "pharmacist", "pt", "ot", "st",
@@ -272,24 +318,68 @@
           },
           "objectives": {
             "type": "object",
-            "description": "この職種のゲーム内目的設定 実質的成果に基づく評価",
+            "description": "この職種のゲーム内目的設定",
             "properties": {
               "primary_goal": {
                 "type": "string",
                 "maxLength": 200,
-                "description": "この職種の主要達成目標 実質的成果目標"
+                "description": "この職種の主要達成目標"
               },
               "success_criteria": {
                 "type": "array",
                 "items": { "type": "string" },
                 "maxItems": 5,
-                "description": "主要目標の達成度を測る基準 チーム方針・対応内容の質的評価"
+                "description": "主要目標の達成度を測る基準"
               },
               "engagement_triggers": {
                 "type": "array",
                 "items": { "type": "string" },
                 "maxItems": 8,
                 "description": "積極的発言を促すトリガー条件・場面"
+              },
+              "status_tracking": {
+                "type": "object",
+                "description": "職種別目標のステータストラッキング",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "status_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["type", "initial", "target"],
+                      "properties": {
+                        "type": {
+                          "$ref": "#/$defs/profession_status_type",
+                          "description": "職種用ステータスタイプ"
+                        },
+                        "initial": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 10,
+                          "description": "初期値"
+                        },
+                        "target": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 10,
+                          "description": "目標値"
+                        },
+                        "label": {
+                          "type": "string",
+                          "description": "表示名"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "minItems": 2,
+                    "maxItems": 4,
+                    "description": "使用するステータスタイプ（3種類推奨）"
+                  }
+                },
+                "additionalProperties": false
               }
             },
             "additionalProperties": false
@@ -312,6 +402,179 @@
         },
         "additionalProperties": false
       }
+    },
+    "team_evaluation_config": {
+      "type": "object",
+      "description": "チーム評価の設定",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "チーム評価機能の有効/無効"
+        },
+        "use_system_rules": {
+          "type": "boolean",
+          "const": true,
+          "description": "システム共通のteam_evaluation_rulesを使用（常にtrue）"
+        },
+        "rules_version": {
+          "type": "string",
+          "default": "1.0",
+          "description": "使用するルールのバージョン"
+        },
+        "notes": {
+          "type": "string",
+          "description": "説明文"
+        }
+      },
+      "additionalProperties": false
+    },
+    "branch_scenarios": {
+      "type": "object",
+      "description": "シナリオ分岐の定義",
+      "properties": {
+        "loop1_end_choices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["choice_id", "label", "description"],
+            "properties": {
+              "choice_id": {
+                "type": "string",
+                "pattern": "^[a-z0-9_]+$"
+              },
+              "label": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "next_loop_adjustments": {
+                "type": "object",
+                "properties": {
+                  "timeline": {
+                    "type": "string",
+                    "description": "時系列の変更 例: 転院2週間後"
+                  },
+                  "available_events": {
+                    "type": "array",
+                    "items": { "type": "integer" },
+                    "description": "使用可能なイベントカードID"
+                  },
+                  "constraint_changes": {
+                    "type": "object",
+                    "description": "制約の変更",
+                    "additionalProperties": { "type": "string" }
+                  },
+                  "additional_narration": {
+                    "type": "string",
+                    "description": "追加の描写"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "scenario_end": {
+                "type": "boolean",
+                "default": false,
+                "description": "この選択でシナリオ終了"
+              },
+              "end_narration": {
+                "type": "string",
+                "description": "エンディング描写"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "ループ1終了時の選択肢"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ending_system": {
+      "type": "object",
+      "description": "エンディングシステムの定義",
+      "properties": {
+        "evaluation_axes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["axis", "weight", "calculation"],
+            "properties": {
+              "axis": {
+                "type": "string",
+                "description": "評価軸名"
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "重み"
+              },
+              "calculation": {
+                "type": "string",
+                "description": "計算方法の説明"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "評価軸の定義"
+        },
+        "ending_narratives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["condition", "title", "description"],
+            "properties": {
+              "condition": {
+                "type": "string",
+                "description": "発生条件の記述"
+              },
+              "title": {
+                "type": "string",
+                "maxLength": 100,
+                "description": "エンディングタイトル"
+              },
+              "description": {
+                "type": "string",
+                "description": "エンディング描写"
+              },
+              "team_score": {
+                "type": "string",
+                "enum": ["S", "A", "B", "C", "D"],
+                "description": "評価ランク"
+              }
+            },
+            "additionalProperties": false
+          },
+          "minItems": 3,
+          "maxItems": 7,
+          "description": "エンディングパターン"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ethical_considerations": {
+      "type": "object",
+      "description": "倫理的配慮の設定",
+      "properties": {
+        "x_card_enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Xカード機能（不快時の中断）"
+        },
+        "role_exit_allowed": {
+          "type": "boolean",
+          "default": true,
+          "description": "役職からの降板可"
+        },
+        "hierarchy_mitigation": {
+          "type": "string",
+          "description": "職種間ヒエラルキーへの配慮方法"
+        }
+      },
+      "additionalProperties": false
     },
     "constraint_sets": {
       "type": "array",
@@ -428,6 +691,133 @@
     "tag": {
       "type": "string",
       "enum": ["safety", "time", "resources", "family_burden", "patient_preference", "function", "legal_policy", "coordination"]
+    },
+    "patient_status_type": {
+      "type": "string",
+      "enum": [
+        "physical_condition",
+        "trust_and_acceptance",
+        "autonomy_satisfaction",
+        "psychological_wellbeing",
+        "pain_control",
+        "medication_adherence",
+        "functional_independence",
+        "social_connection",
+        "hope_and_meaning",
+        "symptom_burden"
+      ],
+      "description": "患者用ステータスタイプ"
+    },
+    "family_status_type": {
+      "type": "string",
+      "enum": [
+        "caregiver_burden",
+        "hope_for_support",
+        "psychological_distress",
+        "family_cohesion",
+        "economic_anxiety",
+        "information_needs",
+        "coping_capacity",
+        "relationship_quality"
+      ],
+      "description": "家族用ステータスタイプ"
+    },
+    "profession_status_type": {
+      "type": "string",
+      "enum": [
+        "goal_achievement",
+        "professional_contribution",
+        "collaboration_effectiveness",
+        "patient_safety_assurance",
+        "symptom_management",
+        "resource_coordination",
+        "family_advocacy",
+        "information_provision",
+        "rehabilitation_progress",
+        "medication_optimization",
+        "psychosocial_support",
+        "system_navigation"
+      ],
+      "description": "職種用ステータスタイプ"
+    },
+    "status_field_config": {
+      "type": "object",
+      "required": ["type", "initial"],
+      "properties": {
+        "type": {
+          "oneOf": [
+            { "$ref": "#/$defs/patient_status_type" },
+            { "$ref": "#/$defs/family_status_type" }
+          ],
+          "description": "ステータスタイプ"
+        },
+        "initial": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "初期値（1-10）"
+        },
+        "critical_low": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "下限閾値（この値以下で閾値イベント発生）"
+        },
+        "critical_high": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "上限閾値（この値以上で閾値イベント発生）"
+        },
+        "label": {
+          "type": "string",
+          "description": "表示ラベル"
+        },
+        "description": {
+          "type": "string",
+          "description": "説明"
+        }
+      },
+      "additionalProperties": false
+    },
+    "behavior_anchor": {
+      "type": "object",
+      "description": "行動アンカー：ステータス調整の具体例",
+      "properties": {
+        "plus_two_examples": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 2,
+          "description": "+2の具体例"
+        },
+        "plus_one_examples": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 2,
+          "description": "+1の具体例"
+        },
+        "minus_one_examples": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 2,
+          "description": "-1の具体例"
+        },
+        "minus_two_examples": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 2,
+          "description": "-2の具体例"
+        },
+        "neutral_guideline": {
+          "type": "string",
+          "description": "±0の原則（迷ったら±0）"
+        }
+      },
+      "additionalProperties": false
     }
   }
 }
