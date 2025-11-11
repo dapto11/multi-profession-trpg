@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/schemas/scenario_template.schema.json",
   "title": "Scenario Template Schema",
-  "description": "多職種連携ゲームのシナリオテンプレート 患者設定・背景・初期状況・学習目標・ステータスシステム対応",
+  "description": "多職種連携ゲームのシナリオテンプレート 患者設定・背景・初期状況・学習目標・ステータスシステム対応（他者評価方式）",
   "type": "object",
   "required": ["scenario_id", "title_ja", "patient", "setting", "initial_situation", "learning_objectives", "phase_flow"],
   "properties": {
@@ -300,7 +300,7 @@
     },
     "profession_cards_config": {
       "type": "object",
-      "description": "職種カードの個別設定 ステータストラッキング対応",
+      "description": "職種カードの個別設定 ステータストラッキング・他者評価方式対応",
       "propertyNames": {
         "enum": [
           "physician", "nurse", "pharmacist", "pt", "ot", "st",
@@ -370,13 +370,42 @@
                         "label": {
                           "type": "string",
                           "description": "表示名"
+                        },
+                        "scenario_specific_description": {
+                          "type": "string",
+                          "maxLength": 200,
+                          "description": "このシナリオでの具体例。例: 在宅酸素なしでの生命予後、急変リスクへの対応"
                         }
                       },
                       "additionalProperties": false
                     },
-                    "minItems": 2,
+                    "minItems": 3,
                     "maxItems": 4,
-                    "description": "使用するステータスタイプ（3種類推奨）"
+                    "description": "使用するステータスタイプ（3-4種類推奨、collaboration_effectivenessは必須）"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "peer_evaluation_guide": {
+                "type": "object",
+                "description": "Phase 5での他者評価ガイド",
+                "properties": {
+                  "self_declaration_template": {
+                    "type": "string",
+                    "maxLength": 300,
+                    "description": "自己申告のテンプレート 例: 私の『患者安全確保』について評価をお願いします。今回のループで、〇〇しました"
+                  },
+                  "evaluation_examples": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "maxItems": 5,
+                    "description": "他者評価の具体例 例: 急変リスクを予測し報告した → +1に賛成"
+                  },
+                  "evaluation_focus_points": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "maxItems": 3,
+                    "description": "評価時に注目すべきポイント"
                   }
                 },
                 "additionalProperties": false
@@ -776,6 +805,11 @@
         "description": {
           "type": "string",
           "description": "説明"
+        },
+        "scenario_specific_description": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "このシナリオでの具体例。例: 在宅酸素なしでの生命予後、急変リスクへの対応"
         }
       },
       "additionalProperties": false
