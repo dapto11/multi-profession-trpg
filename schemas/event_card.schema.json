@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/schemas/event_card.schema.json",
   "title": "Event Card Schema",
-  "description": "多職種連携ゲーム用イベントカードのJSONスキーマ - 汎用・シナリオ適用可能・タグ/影響/運用ヒント/生成支援/ステータス効果対応",
+  "description": "多職種連携ゲーム用イベントカードのJSONスキーマ - 汎用・シナリオ適用可能・タグ/影響/運用ヒント/生成支援/ステータス効果対応・職種バランス要件追加",
   "type": "object",
   "required": ["event_id", "category", "subcategory", "title_ja", "body_ja", "tags"],
   "properties": {
@@ -436,6 +436,122 @@
             "field_notes": {
               "type": "string",
               "description": "現場からのフィードバック"
+            }
+          },
+          "additionalProperties": false
+        },
+        "profession_balance_requirements": {
+          "type": "object",
+          "description": "イベントカードの職種別出現頻度のバランス要件",
+          "properties": {
+            "description": {
+              "type": "string",
+              "const": "イベントカードの職種別出現頻度のバランス要件。各職種が主要関与者として登場する機会を均等化し、特定職種に偏らないようにする。"
+            },
+            "minimum_events_per_profession": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 3,
+              "description": "各職種が主要関与者（actors_primary）として登場する最低回数。通常イベント15枚の場合、3回が推奨。"
+            },
+            "maximum_events_per_profession": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 6,
+              "description": "各職種が主要関与者（actors_primary）として登場する最高回数。通常イベント15枚の場合、6回が推奨。"
+            },
+            "balance_tolerance": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.3,
+              "description": "職種間の出現回数の差の許容範囲。0.3は30%の差を許容することを意味する。例: 最多職種6回、最少職種4回（差33%）は許容範囲外。"
+            },
+            "calculation_method": {
+              "type": "string",
+              "const": "actors_primary と actors_secondary の合計で計算。actors_primaryは1.0、actors_secondaryは0.5の重みで計算する。",
+              "description": "職種別出現回数の計算方法"
+            },
+            "target_professions": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/role" },
+              "uniqueItems": true,
+              "description": "バランスを取る対象職種のリスト。シナリオのtarget_participantsと一致させる。"
+            },
+            "validation_notes": {
+              "type": "string",
+              "description": "バランス検証時のメモ。例: 看護師5回、PT3回、ケアマネ4回で許容範囲内。"
+            }
+          },
+          "additionalProperties": false
+        },
+        "direction_balance_requirements": {
+          "type": "object",
+          "description": "イベントカードの方向性（positive/negative/mixed）のバランス要件",
+          "properties": {
+            "description": {
+              "type": "string",
+              "const": "イベントカードの方向性（positive/negative/mixed）のバランス要件。ネガティブイベント中心だが、ポジティブイベントで成功体験を提供し、ミックスイベントで判断の複雑さを体験させる。"
+            },
+            "negative_ratio": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.67,
+              "description": "ネガティブイベントの比率。通常イベント15枚の場合、67%（10枚）が推奨。"
+            },
+            "mixed_ratio": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.20,
+              "description": "ミックスイベントの比率。通常イベント15枚の場合、20%（3枚）が推奨。"
+            },
+            "positive_ratio": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.13,
+              "description": "ポジティブイベントの比率。通常イベント15枚の場合、13%（2枚）が推奨。"
+            },
+            "target_counts": {
+              "type": "object",
+              "properties": {
+                "negative": { 
+                  "type": "integer",
+                  "minimum": 0,
+                  "default": 10,
+                  "description": "ネガティブイベントの目標枚数"
+                },
+                "mixed": { 
+                  "type": "integer",
+                  "minimum": 0,
+                  "default": 3,
+                  "description": "ミックスイベントの目標枚数"
+                },
+                "positive": { 
+                  "type": "integer",
+                  "minimum": 0,
+                  "default": 2,
+                  "description": "ポジティブイベントの目標枚数"
+                }
+              },
+              "additionalProperties": false,
+              "description": "通常イベント15枚の内訳。合計が通常イベント総数と一致すること。"
+            },
+            "positive_event_guidelines": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "ポジティブイベントの作成ガイドライン。例: 家族の協力が得られた、リハビリが順調に進んだ、近所の人が訪問してデイサービスに興味を持つ、妻の旅行に比較的好意的に受け入れる"
+            },
+            "mixed_event_guidelines": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "ミックスイベントの作成ガイドライン。例: メリット・デメリット両方がある、職種間で評価が分かれる、短期的にはポジティブだが長期的にはネガティブ"
+            },
+            "validation_notes": {
+              "type": "string",
+              "description": "方向性バランス検証時のメモ。例: ネガティブ10枚、ミックス3枚、ポジティブ2枚で目標達成。"
             }
           },
           "additionalProperties": false
