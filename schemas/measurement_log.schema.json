@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.org/schemas/measurement_log.schema.json",
   "title": "Measurement Log Schema",
-  "description": "多職種連携ゲームのプロセス測定・学習評価用ログ。主要評価は質的体験、数値指標は運営品質確認用に位置づけ。ステータスシステム対応版。",
+  "description": "多職種連携ゲームのプロセス測定・学習評価用ログ。主要評価は質的体験、数値指標は運営品質確認用に位置づけ。ステータスシステム・他者評価方式対応版。",
   "type": "object",
   "required": ["session_id", "scenario_id", "started_at", "participants", "loops"],
   "properties": {
@@ -328,7 +328,7 @@
                 },
                 "trigger": {
                   "type": "string",
-                  "enum": ["event_card", "player_statement", "gm_judgment", "threshold_event", "player_adjustment"],
+                  "enum": ["event_card", "player_statement", "gm_judgment", "threshold_event", "player_adjustment", "peer_evaluation"],
                   "description": "変化のきっかけ"
                 },
                 "trigger_detail": {
@@ -346,9 +346,46 @@
                 "operator_player_id": {
                   "type": "string",
                   "description": "操作者のプレイヤーID"
+                },
+                "evaluation_method": {
+                  "type": "string",
+                  "enum": ["consensus", "majority", "no_objection"],
+                  "description": "他者評価の方法（peer_evaluationの場合のみ）"
+                },
+                "evaluators": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["player_id", "role", "vote"],
+                    "properties": {
+                      "player_id": { "type": "string" },
+                      "role": { "$ref": "#/$defs/role" },
+                      "vote": {
+                        "type": "string",
+                        "enum": ["agree", "neutral", "disagree"],
+                        "description": "評価の投票"
+                      },
+                      "comment": {
+                        "type": "string",
+                        "description": "評価コメント（任意）"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "description": "評価者のリスト（peer_evaluationの場合のみ）"
+                },
+                "self_declaration": {
+                  "type": "string",
+                  "description": "プレイヤーの自己申告内容（peer_evaluationの場合のみ）"
                 }
               },
-              "additionalProperties": false
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": { "properties": { "trigger": { "const": "peer_evaluation" } }, "required": ["trigger"] },
+                  "then": { "required": ["evaluation_method", "evaluators", "self_declaration"] }
+                }
+              ]
             }
           },
           "threshold_events_occurred": {
@@ -559,6 +596,39 @@
           "type": "integer",
           "minimum": 0,
           "description": "異職種連携場面の発生回数（効果測定ではなく体験確認用）"
+        },
+        "peer_evaluation_sessions": {
+          "type": "object",
+          "description": "他者評価セッションの統計",
+          "properties": {
+            "total_evaluations": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "他者評価の総回数"
+            },
+            "by_method": {
+              "type": "object",
+              "properties": {
+                "consensus": { "type": "integer", "minimum": 0 },
+                "majority": { "type": "integer", "minimum": 0 },
+                "no_objection": { "type": "integer", "minimum": 0 }
+              },
+              "additionalProperties": false,
+              "description": "評価方法別の回数"
+            },
+            "avg_evaluation_time_sec": {
+              "type": "number",
+              "minimum": 0,
+              "description": "1回あたりの平均評価時間"
+            },
+            "disagreement_rate": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "評価が割れた割合"
+            }
+          },
+          "additionalProperties": false
         },
         "status_trajectories": {
           "type": "object",
