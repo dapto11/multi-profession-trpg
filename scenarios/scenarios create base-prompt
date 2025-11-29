@@ -1,12 +1,12 @@
-# **多職種連携TRPGシナリオ生成プロンプト v3.1**
+# **多職種連携TRPGシナリオ生成プロンプト v3.2**
 
-## **2025年11月9日 - ステータスシステム対応版（修正版）**
+## **2025年11月29日 - 他者評価方式対応版**
 
 ______________________________________________________________________
 
 ## **Phase 1: システム学習（このフェーズは必読）**
 
-あなたはこれから、多職種連携研修用TRPGのシナリオを生成します。まず、以下の6つのシステムファイルを理解してください。
+あなたはこれから、多職種連携研修用TRPGのシナリオを生成します。まず、以下の7つのシステムファイルを理解してください。
 
 ______________________________________________________________________
 
@@ -27,6 +27,7 @@ ______________________________________________________________________
 - 各職種に明確な利害関係と専門性を持たせる
 - **測定とゲームプレイの一体化**（プレイヤーのステータス調整が測定を兼ねる）
 - **部分最適 vs 全体最適の可視化**（職種別目標とチーム評価のギャップ体験）
+- **他者評価方式**（GMではなくプレイヤー同士が評価、Phase 5で実施）
 
 ______________________________________________________________________
 
@@ -37,7 +38,7 @@ ______________________________________________________________________
 - シナリオの全体設計を定義
 - 患者情報、家族構成、職種構成、タイムライン、イベント、制約を含む
 
-**【2025年11月9日の重要な追加機能】**
+**【2025年11月29日の重要な追加機能】**
 
 #### **1-1. ステータスタイプのカタログ（$defs）**
 
@@ -100,7 +101,8 @@ ______________________________________________________________________
         "critical_low": 2,
         "critical_high": null,
         "label": "身体状態",
-        "description": "呼吸困難、倦怠感などの身体症状"
+        "description": "呼吸困難、倦怠感などの身体症状",
+        "scenario_specific_description": "COPD増悪による呼吸困難、SpO2 88-90%、在宅酸素なしでの生命予後"
       }
       // 3-5種類を推奨
     ]
@@ -122,7 +124,8 @@ ______________________________________________________________________
           "critical_low": null,
           "critical_high": 8,
           "label": "介護負担",
-          "description": "日常的な介護による身体的・精神的負担"
+          "description": "日常的な介護による身体的・精神的負担",
+          "scenario_specific_description": "夜間の呼吸困難への対応、24時間の見守り、自分の時間がない"
         }
         // 2-3種類を推奨
       ]
@@ -135,7 +138,7 @@ ______________________________________________________________________
 
 ```json
 "profession_cards_config": {
-  "医師": {
+  "physician": {
     "objectives": {
       "status_tracking": {
         "enabled": true,
@@ -144,15 +147,32 @@ ______________________________________________________________________
             "type": "symptom_management",
             "initial": 5,
             "target": 8,
-            "label": "症状管理"
+            "label": "症状管理",
+            "scenario_specific_description": "COPD患者の呼吸困難・SpO2管理、増悪予防のための処方調整"
+          },
+          {
+            "type": "patient_safety_assurance",
+            "initial": 5,
+            "target": 8,
+            "label": "患者安全確保",
+            "scenario_specific_description": "在宅酸素なしでの生命予後、急変リスクへの対応"
+          },
+          {
+            "type": "information_provision",
+            "initial": 5,
+            "target": 7,
+            "label": "情報提供",
+            "scenario_specific_description": "病状説明、予後の見通し、治療選択肢の提示"
           },
           {
             "type": "collaboration_effectiveness",
             "initial": 5,
             "target": 8,
-            "label": "連携効果"
+            "label": "連携効果",
+            "scenario_specific_description": "他職種との情報共有、役割分担の明確化"
           }
-          // 3種類を推奨、collaboration_effectivenessは必須
+          // 3-4種類を推奨、collaboration_effectivenessは必須
+          // 4種類の場合: 専門性3つ + collaboration_effectiveness（推奨）
         ]
       }
     }
@@ -186,7 +206,7 @@ ______________________________________________________________________
 "team_evaluation_config": {
   "enabled": true,
   "use_system_rules": true,
-  "rules_version": "1.0.0",
+  "rules_version": "1.0",
   "notes": "team_evaluation_rules.jsonを参照"
 }
 ```
@@ -239,6 +259,73 @@ ______________________________________________________________________
 }
 ```
 
+#### **1-10. peer_evaluation_guide（Phase 5での他者評価）**
+
+**【目的】**
+- Phase 5でプレイヤー同士が互いのステータスを評価する
+- GMの負担を軽減し、プレイヤーの自律的な議論を促す
+- 8分以内で実施可能（1人あたり1分×6名 + 患者・家族1分）
+
+**【構造】**
+```json
+"peer_evaluation_guide": {
+  "self_declaration_template": "私の『患者安全確保』について評価をお願いします。今回のループで、急変リスクを予測し、チームに報告しました。",
+  "evaluation_examples": [
+    "急変リスクを予測し報告した → +1に賛成",
+    "安全な環境整備に貢献した → +1に賛成",
+    "リスクを見逃した → -1に賛成",
+    "重大なリスクを無視した → -2に賛成"
+  ],
+  "evaluation_focus_points": [
+    "専門性の発揮",
+    "チームへの新しい視点の提供",
+    "他職種の尊重"
+  ]
+}
+```
+
+**【生成時の注意】**
+- `self_declaration_template` はステータスタイプごとに具体的に書く
+- `evaluation_examples` は3-5個、±1と±2の両方を含む
+- `evaluation_focus_points` は発言回数ではなく、貢献の質に注目
+- 評価の原則: ±1が基本、±2は大きな影響、迷ったら±0
+
+______________________________________________________________________
+
+### **1-A. profession_status_catalog.json**
+
+**【目的】**
+- 職種用ステータスタイプの詳細定義
+- 全シナリオ共通のカタログ
+- 他者評価方式に対応した設計
+
+**【12種類のステータスタイプ】**
+
+各ステータスタイプには以下が含まれる:
+- `label`: ステータス名（日本語）
+- `description`: 汎用的な説明
+- `recommended_use`: 推奨使用職種
+- `typical_actions`: 典型的な行動例（5-7個）
+- `scale_anchors`: 1-10段階の意味
+- `self_assessment_guide`: プレイヤー向け自己評価ガイド
+  - `plus_2_description`
+  - `plus_1_description`
+  - `zero_description`
+  - `minus_1_description`
+  - `minus_2_description`
+  - `evaluation_prompt`
+  - `adjustment_principle`
+
+**【重要な設計判断】**
+- `increase_triggers`（具体的な上昇条件）は意図的に記載しない
+- 理由: プレイヤーが「じゃあそれで」と議論せずに終わってしまうため
+- 代わりに「典型的な行動例」として抽象度を保つ
+
+**【シナリオ生成時の使用方法】**
+1. カタログから適切なステータスタイプを選択
+2. `scenario_specific_description` を追加（シナリオ固有の具体例）
+3. `peer_evaluation_guide` を生成（Phase 5での他者評価用）
+
 ______________________________________________________________________
 
 ### **2. event_card.schema.json**
@@ -248,7 +335,7 @@ ______________________________________________________________________
 - イベントカードの定義
 - 通常イベント（ID: 1-100）と閾値イベント（ID: 101以降）
 
-**【2025年11月9日の重要な追加機能】**
+**【2025年11月29日の重要な追加機能】**
 
 #### **2-1. status_effects（ステータスへの影響）**
 
@@ -261,7 +348,7 @@ ______________________________________________________________________
     "conditional": null
   },
   {
-    "target": "profession.医師.symptom_management",
+    "target": "profession.physician.symptom_management",
     "change": +1,
     "reason": "適切な処方調整を行った",
     "conditional": null
@@ -301,6 +388,24 @@ ______________________________________________________________________
 - 必ず回復経路を設定
 - ネガティブ・スパイラル防止（冷却期間、最大発生回数）
 
+#### **2-3. イベントバランス要件**
+
+**【方向性のバランス】**
+- ネガティブイベント: 10枚（67%）
+- ミックスイベント: 3枚（20%）
+- ポジティブイベント: 2枚（13%）
+
+**ポジティブイベントの例:**
+- 近所の人が訪問してデイサービスに興味を持つ
+- 妻の旅行に比較的好意的に受け入れる
+- 家族の協力が得られた
+- リハビリが順調に進んだ
+
+**【職種バランス】**
+- 各職種が主要関与者（`actors_primary`）として登場する回数: 最低3回、最高6回
+- 職種間の出現回数の差は30%以内
+- 計算方法: `actors_primary` は1.0、`actors_secondary` は0.5の重みで計算
+
 ______________________________________________________________________
 
 ### **3. measurement_log.schema.json**
@@ -310,7 +415,7 @@ ______________________________________________________________________
 - セッション記録の定義
 - 参加者、ループごとの記録、セッション全体のメトリクス
 
-**【2025年11月9日の重要な追加機能】**
+**【2025年11月29日の重要な追加機能】**
 
 #### **3-1. 参加者への患者・家族役の追加**
 
@@ -334,7 +439,7 @@ ______________________________________________________________________
 ```json
 "loops": [
   {
-    "loop_number": 1,
+    "loop_id": 1,
     "status_snapshot": {
       "patient": {
         "physical_condition": 4,
@@ -351,7 +456,7 @@ ______________________________________________________________________
         "safety_assurance": 5.8
       },
       "professions": {
-        "医師": {
+        "physician": {
           "symptom_management": 6,
           "collaboration_effectiveness": 5
         }
@@ -364,11 +469,29 @@ ______________________________________________________________________
         "change": -1,
         "before": 6,
         "after": 5,
-        "trigger": "event",
+        "trigger": "event_card",
         "trigger_detail": "Event 13",
         "reason": "専門職が一方的に説明",
         "operator_role": "patient",
         "operator_player_id": "P6"
+      },
+      {
+        "timestamp": "2025-11-01T19:50:00Z",
+        "target": "profession.physician.symptom_management",
+        "change": +1,
+        "before": 5,
+        "after": 6,
+        "trigger": "peer_evaluation",
+        "evaluation_method": "majority",
+        "evaluators": [
+          {"player_id": "P1", "role": "nurse", "vote": "agree"},
+          {"player_id": "P2", "role": "pt", "vote": "agree"},
+          {"player_id": "P3", "role": "care_manager", "vote": "neutral"}
+        ],
+        "self_declaration": "症状を適切に評価し、処方調整を行いました",
+        "reason": "適切な処方調整を行った",
+        "operator_role": "physician",
+        "operator_player_id": "P0"
       }
     ],
     "threshold_events_occurred": [
@@ -388,19 +511,20 @@ ______________________________________________________________________
 ```json
 "session_metrics": {
   "status_trajectories": {
-    "patient.trust_and_acceptance": {
-      "initial": 6,
-      "final": 7,
-      "total_change": +1,
-      "trajectory": [6, 5, 6, 7],
-      "turning_points": [
-        {
-          "loop": 1,
-          "event": "Event 13",
-          "change": -1,
-          "significance": "専門職の一方的な説明で低下"
-        }
-      ]
+    "patient": {
+      "trust_and_acceptance": {
+        "initial": 6,
+        "final": 7,
+        "total_change": +1,
+        "trajectory": [6, 5, 6, 7],
+        "turning_points": [
+          {
+            "loop_id": 1,
+            "change": -1,
+            "reason": "専門職の一方的な説明で低下"
+          }
+        ]
+      }
     }
   },
   "threshold_events_summary": {
@@ -409,6 +533,16 @@ ______________________________________________________________________
       "patient.trust_and_acceptance <= 2": 1,
       "family_0.caregiver_burden >= 8": 1
     }
+  },
+  "peer_evaluation_sessions": {
+    "total_evaluations": 18,
+    "by_method": {
+      "consensus": 12,
+      "majority": 5,
+      "no_objection": 1
+    },
+    "avg_evaluation_time_sec": 50,
+    "disagreement_rate": 0.15
   }
 }
 ```
@@ -477,7 +611,7 @@ ______________________________________________________________________
 - Phase 4（方針決定）時の制約を定義
 - Easy/Normal/Hardの3レベル
 
-**【2025年11月9日の方針】**
+**【2025年11月29日の方針】**
 
 - 修正なし
 - ステータスシステムとは独立
@@ -492,7 +626,7 @@ ______________________________________________________________________
 - 争点の記録と追跡
 - 8タグ体系（医学的判断、倫理的判断、資源配分、等）
 
-**【2025年11月9日の方針】**
+**【2025年11月29日の方針】**
 
 - 修正なし
 - 既存の構造で対応可能
@@ -500,11 +634,6 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-## **Phase 2: シナリオ生成**
-
-以下の5つのファイルを生成してください。
-
-______________________________________________________________________
 ## **Phase 2: シナリオ生成**
 
 以下の5つのファイルを生成してください。
@@ -524,7 +653,7 @@ ______________________________________________________________________
    - 職種: 医師 → `physician`、看護師 → `nurse`、等
 
 3. **seed値の生成**
-   - ユーザー指定がない場合は日付ベース（例: 20251109）
+   - ユーザー指定がない場合は日付ベース（例: 20251129）
 
 4. **難易度の設定**
    - 基本は `normal`
@@ -574,7 +703,6 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-
 ### **【シナリオ要件（変数）】**
 
 以下の情報を基にシナリオを生成してください：
@@ -616,18 +744,27 @@ ______________________________________________________________________
    - 基本情報（氏名、年齢、診断名、等）
    - `status_config`: 3-5種類のステータスを選択
      - 各ステータスに初期値、閾値を設定
+     - **`scenario_specific_description` を必ず記述**（シナリオ固有の具体例）
      - `behavior_anchors`（行動アンカー）を記述
 
 3. **家族情報**
    - `family_caregivers`: 家族を記載（患者・家族も役職カードとして配布）
    - 各家族メンバーに `status_config`
    - 2-3種類のステータスを選択
+   - **`scenario_specific_description` を必ず記述**
 
 4. **職種構成**
    - `profession_cards_config`: 専門職のみ（familyは含めない）
    - 各職種に `status_tracking`
-   - 3種類のステータスを選択（**collaboration_effectivenessは必須**）
+   - **3-4種類のステータスを選択（collaboration_effectivenessは必須）**
+     - 3種類の場合: 専門性2つ + collaboration_effectiveness
+     - 4種類の場合: 専門性3つ + collaboration_effectiveness（**推奨**）
    - 初期値と目標値を設定
+   - **各ステータスに `scenario_specific_description` を必ず記述**
+   - **`peer_evaluation_guide` を生成**
+     - `self_declaration_template`: 自己申告のテンプレート
+     - `evaluation_examples`: 他者評価の具体例（3-5個、±1と±2の両方を含む）
+     - `evaluation_focus_points`: 評価時の注目ポイント（3個）
 
 5. **患者・家族カードの生成指示**
    - `patient_as_role: true`
@@ -645,6 +782,38 @@ ______________________________________________________________________
 7. **倫理的配慮**
    - `x_card_enabled: true`
    - `role_exit_allowed: true`
+
+**【scenario_specific_description の記述例】**
+
+```json
+{
+  "type": "symptom_management",
+  "initial": 5,
+  "target": 8,
+  "label": "症状管理",
+  "scenario_specific_description": "COPD患者の呼吸困難・SpO2管理、増悪予防のための処方調整、在宅酸素導入の判断"
+}
+```
+
+**【peer_evaluation_guide の記述例】**
+
+```json
+"peer_evaluation_guide": {
+  "self_declaration_template": "私の『症状管理』について評価をお願いします。今回のループで、患者の呼吸状態を評価し、必要な処方調整を提案しました。",
+  "evaluation_examples": [
+    "症状を適切に評価し、処方調整を行った → +1に賛成",
+    "症状の変化に迅速に対応した → +1に賛成",
+    "症状を大きく改善させた → +2に賛成",
+    "症状の変化を見逃した → -1に賛成",
+    "不適切な処方調整を行った → -2に賛成"
+  ],
+  "evaluation_focus_points": [
+    "症状評価の適切性と処方調整のタイミング",
+    "他職種との情報共有と連携",
+    "患者・家族への説明のわかりやすさ"
+  ]
+}
+```
 
 **【行動アンカーの記述方法】**
 
@@ -681,6 +850,10 @@ ______________________________________________________________________
 1. **通常イベント15枚（ID: 1-15）**
    - 各イベントに `status_effects` を記述
    - 変化量は±1〜±2
+   - **方向性のバランス:**
+     - ネガティブイベント: 10枚（67%）
+     - ミックスイベント: 3枚（20%）
+     - **ポジティブイベント: 2枚（13%）**
 
 2. **閾値イベント5種類（ID: 101以降）**
    - `threshold_trigger` を設定
@@ -696,11 +869,24 @@ ______________________________________________________________________
 
 **【category と subcategory の対応】**
 
-- `A_medical` → `respiratory`, `cardio`, `neuro`, `digestive`, `renal`, `metabolic`, `infection`, `cancer`, `pain`, `other_medical`
-- `B_psych` → `dementia`, `mental`, `problem_behavior`, `cognitive`, `other_psych`
-- `C_family` → `caregiver_family`, `challenge_event`, `complaint`, `other_family`
-- `D_services` → `incident_accident`, `policy_system`, `science_option`, `other_services`
-- `E_environment` → `local_life`, `gov_admin`, `weather_disaster`, `other_environment`
+- `A_medical` → `respiratory`, `cardio`, `metabolic`, `gastrointestinal`, `neuro`, `musculoskeletal`, `dermatology`, `disease_generic`, `accident_safety`
+- `B_psych` → `dementia`, `mental`, `problem_behavior`
+- `C_family` → `caregiver_family`, `challenge_event`, `complaint`
+- `D_services` → `incident_accident`, `policy_system`, `science_option`
+- `E_environment` → `local_life`, `gov_admin`, `weather_disaster`
+
+**【ポジティブイベントの例】**
+- 近所の人が訪問してデイサービスに興味を持つ
+- 妻の旅行に比較的好意的に受け入れる
+- 家族の協力が得られた
+- リハビリが順調に進んだ
+- 患者が前向きな発言をする
+- 地域の支援者が現れる
+
+**【職種バランスの要件】**
+- 各職種が主要関与者（`actors_primary`）として登場する回数: **最低3回、最高6回**
+- 職種間の出現回数の差は**30%以内**
+- 計算方法: `actors_primary` は1.0、`actors_secondary` は0.5の重みで計算
 
 **【status_effectsの記述方法】**
 
@@ -712,7 +898,7 @@ ______________________________________________________________________
     "reason": "専門職が一方的に説明し、本人の意見を聞かなかった"
   },
   {
-    "target": "profession.医師.symptom_management",
+    "target": "profession.physician.symptom_management",
     "change": +1,
     "reason": "適切な処方調整を行った"
   }
@@ -732,7 +918,7 @@ ______________________________________________________________________
 ```json
 {
   "event_id": 101,
-  "title": "患者の治療拒否",
+  "title_ja": "患者の治療拒否",
   "threshold_trigger": {
     "condition": "patient.trust_and_acceptance <= 2",
     "auto_occurrence": true,
@@ -773,7 +959,7 @@ ______________________________________________________________________
 
 - `participants` に患者役（role: "patient"）と家族役（role: "family"）を含む
 - `loops` に `status_snapshot`, `status_changes`, `threshold_events_occurred` を含む
-- `session_metrics` に `status_trajectories`, `threshold_events_summary` を含む
+- `session_metrics` に `status_trajectories`, `threshold_events_summary`, `peer_evaluation_sessions` を含む
 
 **【シナリオ固有のカスタマイズ項目】**
 
@@ -854,11 +1040,16 @@ ______________________________________________________________________
 - [ ] `learning_objectives.target_tags` に {target_tags} が採用されている（3-5個）
 - [ ] 患者のステータスが3-5種類設定されている
 - [ ] 家族のステータスが2-3種類設定されている
-- [ ] 各職種に3種類のステータスが設定されている
+- [ ] 各職種に3-4種類のステータスが設定されている（**4種類を推奨**）
 - [ ] すべての職種に `collaboration_effectiveness` が含まれている
 - [ ] 初期値が1-10の範囲内
 - [ ] 閾値（critical_low/high）が適切に設定されている
 - [ ] 行動アンカーが各ステータスに記述されている（+2, +1, -1, -2）
+- [ ] **各ステータスに `scenario_specific_description` が記述されている**
+- [ ] **各職種に `peer_evaluation_guide` が記述されている**
+- [ ] **`peer_evaluation_guide` に `self_declaration_template` が含まれている**
+- [ ] **`peer_evaluation_guide` に `evaluation_examples`（3-5個）が含まれている**
+- [ ] **`peer_evaluation_guide` に `evaluation_focus_points`（3個）が含まれている**
 - [ ] `patient_as_role: true` が設定されている
 - [ ] `family_as_role: true` が設定されている
 - [ ] 患者・家族カードに known_information, hidden_information, values, engagement_triggers が記述されている
@@ -881,6 +1072,9 @@ ______________________________________________________________________
 - [ ] `category` と `subcategory` が対応表に従っている
 - [ ] `parameters` が本文の {{変数}} と一致している
 - [ ] `settings`/`actors`/`tags` がスキーマ語彙に準拠している
+- [ ] **ポジティブイベントが2枚含まれている**
+- [ ] **各職種が主要関与者として最低3回登場している**
+- [ ] **職種間の出現回数の差が30%以内である**
 
 ______________________________________________________________________
 
@@ -907,6 +1101,7 @@ ______________________________________________________________________
 - [ ] `loops` 配列に `threshold_events_occurred` 配列が定義されている
 - [ ] `session_metrics` に `status_trajectories` が含まれている
 - [ ] `session_metrics` に `threshold_events_summary` が含まれている
+- [ ] **`session_metrics` に `peer_evaluation_sessions` が含まれている**
 - [ ] `profession_goal_achievement` がカスタマイズされている
 - [ ] `expected_perspective_shifts`（3-5個）がカスタマイズされている
 - [ ] `target_blind_spots`（3-5個）がカスタマイズされている
@@ -932,7 +1127,7 @@ ______________________________________________________________________
 ## **検証後の対応**
 
 **すべてのチェック項目が満たされている場合:**
-✅ シナリオv3の生成完了
+✅ シナリオv3.2の生成完了
 
 **一部のチェック項目が満たされていない場合:**
 ⚠️ 該当箇所を修正し、再検証
@@ -949,13 +1144,18 @@ ______________________________________________________________________
 3. チーム評価は**システム共通ルール**で計算
 4. 計算式は**シナリオ固有に定義しない**
 5. すべての職種に **collaboration_effectiveness** を含める
-6. 行動アンカーは**具体的で理解しやすく**
-7. 閾値イベントには**必ず回復経路**を設定
-8. 二重カウント防止のガイドラインを遵守
-9. 測定項目は**体験過程の質を重視**（結果より体験の深さを評価）
-10. 職種別成功基準は**「チーム方針の内容」で評価**（発言回数ではない）
-11. 期待する専門的盲点は**疾患・状況特性から自然に導出**
-12. 振り返り質問は**主要争点と学習目標に直結**
+6. **各ステータスに `scenario_specific_description` を必ず記述**
+7. **各職種に `peer_evaluation_guide` を必ず生成**
+8. **ステータス数は3-4種類、4種類を推奨**
+9. 行動アンカーは**具体的で理解しやすく**
+10. 閾値イベントには**必ず回復経路**を設定
+11. 二重カウント防止のガイドラインを遵守
+12. **ポジティブイベントを2枚含める**
+13. **各職種が主要関与者として最低3回登場**
+14. 測定項目は**体験過程の質を重視**（結果より体験の深さを評価）
+15. 職種別成功基準は**「チーム方針の内容」で評価**（発言回数ではない）
+16. 期待する専門的盲点は**疾患・状況特性から自然に導出**
+17. 振り返り質問は**主要争点と学習目標に直結**
 
 ______________________________________________________________________
 
@@ -985,4 +1185,4 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-**以上、シナリオ生成プロンプト v3.1（修正版）**
+**以上、シナリオ生成プロンプト v3.2（他者評価方式対応版）**
