@@ -1,6 +1,5 @@
 # GM_GUIDE.md
 
-```markdown
 # 多職種連携TRPG ゲームマスターガイド
 
 **Version 3.2 - 他者評価方式対応版**  
