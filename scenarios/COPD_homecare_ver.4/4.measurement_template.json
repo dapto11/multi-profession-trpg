@@ -1,0 +1,1145 @@
+{
+  "session_id": "SESSION_PLACEHOLDER",
+  "scenario_id": "copd_heart_failure_home_01",
+  "setting": "home_care",
+  "started_at": "TIMESTAMP_PLACEHOLDER",
+  "ended_at": null,
+  "play_difficulty": "normal",
+  "participants": [
+    {
+      "player_id": "P1",
+      "player_name": "PLAYER_NAME_PLACEHOLDER",
+      "role": "nurse",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "P2",
+      "player_name": "PLAYER_NAME_PLACEHOLDER",
+      "role": "pt",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "P3",
+      "player_name": "PLAYER_NAME_PLACEHOLDER",
+      "role": "physician",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "P4",
+      "player_name": "PLAYER_NAME_PLACEHOLDER",
+      "role": "care_manager",
+      "experience_level": "intermediate"
+    },
+    {
+      "player_id": "P5",
+      "player_name": "PLAYER_NAME_PLACEHOLDER",
+      "role": "patient",
+      "character_name": "田中一郎（患者本人）",
+      "experience_level": "novice"
+    },
+    {
+      "player_id": "P6",
+      "player_name": "PLAYER_NAME_PLACEHOLDER",
+      "role": "family",
+      "character_name": "田中花子（妻）",
+      "experience_level": "novice"
+    }
+  ],
+  "participants_index": {
+    "P1": 0,
+    "P2": 1,
+    "P3": 2,
+    "P4": 3,
+    "P5": 4,
+    "P6": 5
+  },
+  "utterances": [],
+  "loops": [
+    {
+      "loop_id": 1,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 2,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 3,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 4,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 5,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        }
+      ],
+      "status_snapshot": {
+        "patient": {
+          "physical_condition": 5,
+          "trust_and_acceptance": 3,
+          "autonomy_satisfaction": 4,
+          "psychological_wellbeing": 3,
+          "social_connection": 2
+        },
+        "family": [
+          {
+            "family_index": 0,
+            "status": {
+              "caregiver_burden": 7,
+              "hope_for_support": 6,
+              "psychological_distress": 6
+            }
+          }
+        ],
+        "team": {
+          "patient_centeredness": 0,
+          "safety_assurance": 0,
+          "care_sustainability": 0,
+          "family_support": 0
+        },
+        "professions": {
+          "nurse": {
+            "patient_safety_assurance": 5,
+            "family_advocacy": 5,
+            "psychosocial_support": 5,
+            "collaboration_effectiveness": 5
+          },
+          "pt": {
+            "rehabilitation_progress": 5,
+            "patient_safety_assurance": 5,
+            "information_provision": 5,
+            "collaboration_effectiveness": 5
+          },
+          "physician": {
+            "symptom_management": 5,
+            "patient_safety_assurance": 5,
+            "information_provision": 5,
+            "collaboration_effectiveness": 5
+          },
+          "care_manager": {
+            "resource_coordination": 5,
+            "patient_safety_assurance": 6,
+            "system_navigation": 5,
+            "collaboration_effectiveness": 4
+          }
+        }
+      },
+      "status_changes": [],
+      "threshold_events_occurred": [],
+      "disputes_snapshot": {
+        "count": 0,
+        "by_primary_tag": {
+          "safety": 0,
+          "time": 0,
+          "resources": 0,
+          "family_burden": 0,
+          "patient_preference": 0,
+          "function": 0,
+          "legal_policy": 0,
+          "coordination": 0
+        },
+        "consensus_level": "partial_alignment"
+      },
+      "decision": {
+        "status": "undecided",
+        "options_considered": 0,
+        "time_to_decide_sec": 0,
+        "constraints_referenced": [],
+        "summary_ja": ""
+      },
+      "events_drawn": [],
+      "participant_metrics": [
+        {
+          "player_id": "P1",
+          "role": "nurse",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P2",
+          "role": "pt",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P3",
+          "role": "physician",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P4",
+          "role": "care_manager",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P5",
+          "role": "patient",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P6",
+          "role": "family",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        }
+      ],
+      "metrics": {
+        "talk_time_gini": 0,
+        "tags_distribution": {},
+        "phase_timing_adherence": {
+          "on_time_phases": 0,
+          "over_time_phases": 0
+        }
+      }
+    },
+    {
+      "loop_id": 2,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 2,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 3,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 4,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 5,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        }
+      ],
+      "status_snapshot": {
+        "patient": {
+          "physical_condition": 5,
+          "trust_and_acceptance": 3,
+          "autonomy_satisfaction": 4,
+          "psychological_wellbeing": 3,
+          "social_connection": 2
+        },
+        "family": [
+          {
+            "family_index": 0,
+            "status": {
+              "caregiver_burden": 7,
+              "hope_for_support": 6,
+              "psychological_distress": 6
+            }
+          }
+        ],
+        "team": {
+          "patient_centeredness": 0,
+          "safety_assurance": 0,
+          "care_sustainability": 0,
+          "family_support": 0
+        },
+        "professions": {
+          "nurse": {
+            "patient_safety_assurance": 5,
+            "family_advocacy": 5,
+            "psychosocial_support": 5,
+            "collaboration_effectiveness": 5
+          },
+          "pt": {
+            "rehabilitation_progress": 5,
+            "patient_safety_assurance": 5,
+            "information_provision": 5,
+            "collaboration_effectiveness": 5
+          },
+          "physician": {
+            "symptom_management": 5,
+            "patient_safety_assurance": 5,
+            "information_provision": 5,
+            "collaboration_effectiveness": 5
+          },
+          "care_manager": {
+            "resource_coordination": 5,
+            "patient_safety_assurance": 6,
+            "system_navigation": 5,
+            "collaboration_effectiveness": 4
+          }
+        }
+      },
+      "status_changes": [],
+      "threshold_events_occurred": [],
+      "disputes_snapshot": {
+        "count": 0,
+        "by_primary_tag": {
+          "safety": 0,
+          "time": 0,
+          "resources": 0,
+          "family_burden": 0,
+          "patient_preference": 0,
+          "function": 0,
+          "legal_policy": 0,
+          "coordination": 0
+        },
+        "consensus_level": "partial_alignment"
+      },
+      "decision": {
+        "status": "undecided",
+        "options_considered": 0,
+        "time_to_decide_sec": 0,
+        "constraints_referenced": [],
+        "summary_ja": ""
+      },
+      "events_drawn": [],
+      "participant_metrics": [
+        {
+          "player_id": "P1",
+          "role": "nurse",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P2",
+          "role": "pt",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P3",
+          "role": "physician",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P4",
+          "role": "care_manager",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P5",
+          "role": "patient",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P6",
+          "role": "family",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        }
+      ],
+      "metrics": {
+        "talk_time_gini": 0,
+        "tags_distribution": {},
+        "phase_timing_adherence": {
+          "on_time_phases": 0,
+          "over_time_phases": 0
+        }
+      }
+    },
+    {
+      "loop_id": 3,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 2,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 3,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 4,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        },
+        {
+          "phase_number": 5,
+          "started_at": "TIMESTAMP_PLACEHOLDER",
+          "ended_at": null,
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "rule_violations": [],
+          "notes": ""
+        }
+      ],
+      "status_snapshot": {
+        "patient": {
+          "physical_condition": 5,
+          "trust_and_acceptance": 3,
+          "autonomy_satisfaction": 4,
+          "psychological_wellbeing": 3,
+          "social_connection": 2
+        },
+        "family": [
+          {
+            "family_index": 0,
+            "status": {
+              "caregiver_burden": 7,
+              "hope_for_support": 6,
+              "psychological_distress": 6
+            }
+          }
+        ],
+        "team": {
+          "patient_centeredness": 0,
+          "safety_assurance": 0,
+          "care_sustainability": 0,
+          "family_support": 0
+        },
+        "professions": {
+          "nurse": {
+            "patient_safety_assurance": 5,
+            "family_advocacy": 5,
+            "psychosocial_support": 5,
+            "collaboration_effectiveness": 5
+          },
+          "pt": {
+            "rehabilitation_progress": 5,
+            "patient_safety_assurance": 5,
+            "information_provision": 5,
+            "collaboration_effectiveness": 5
+          },
+          "physician": {
+            "symptom_management": 5,
+            "patient_safety_assurance": 5,
+            "information_provision": 5,
+            "collaboration_effectiveness": 5
+          },
+          "care_manager": {
+            "resource_coordination": 5,
+            "patient_safety_assurance": 6,
+            "system_navigation": 5,
+            "collaboration_effectiveness": 4
+          }
+        }
+      },
+      "status_changes": [],
+      "threshold_events_occurred": [],
+      "disputes_snapshot": {
+        "count": 0,
+        "by_primary_tag": {
+          "safety": 0,
+          "time": 0,
+          "resources": 0,
+          "family_burden": 0,
+          "patient_preference": 0,
+          "function": 0,
+          "legal_policy": 0,
+          "coordination": 0
+        },
+        "consensus_level": "partial_alignment"
+      },
+      "decision": {
+        "status": "undecided",
+        "options_considered": 0,
+        "time_to_decide_sec": 0,
+        "constraints_referenced": [],
+        "summary_ja": ""
+      },
+      "events_drawn": [],
+      "participant_metrics": [
+        {
+          "player_id": "P1",
+          "role": "nurse",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P2",
+          "role": "pt",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P3",
+          "role": "physician",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P4",
+          "role": "care_manager",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P5",
+          "role": "patient",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        },
+        {
+          "player_id": "P6",
+          "role": "family",
+          "statements_count": 0,
+          "talk_time_sec": 0,
+          "questions_count": 0,
+          "interruptions_count": 0,
+          "tags_contributed": []
+        }
+      ],
+      "metrics": {
+        "talk_time_gini": 0,
+        "tags_distribution": {},
+        "phase_timing_adherence": {
+          "on_time_phases": 0,
+          "over_time_phases": 0
+        }
+      }
+    }
+  ],
+  "session_metrics": {
+    "total_loops": 3,
+    "overall_tags_distribution": {},
+    "avg_time_to_decide_sec": 0,
+    "rule_violations_total": 0,
+    "translation_attempts_total": 0,
+    "sbar_practice_opportunities": 0,
+    "synergy_moments_total": 0,
+    "peer_evaluation_sessions": {
+      "total_evaluations": 0,
+      "by_method": {
+        "consensus": 0,
+        "majority": 0,
+        "no_objection": 0
+      },
+      "avg_evaluation_time_sec": 0,
+      "disagreement_rate": 0
+    },
+    "status_trajectories": {
+      "patient": {
+        "physical_condition": {
+          "initial": 5,
+          "final": 5,
+          "total_change": 0,
+          "trajectory": [5, 5, 5],
+          "turning_points": []
+        },
+        "trust_and_acceptance": {
+          "initial": 3,
+          "final": 3,
+          "total_change": 0,
+          "trajectory": [3, 3, 3],
+          "turning_points": []
+        },
+        "autonomy_satisfaction": {
+          "initial": 4,
+          "final": 4,
+          "total_change": 0,
+          "trajectory": [4, 4, 4],
+          "turning_points": []
+        },
+        "psychological_wellbeing": {
+          "initial": 3,
+          "final": 3,
+          "total_change": 0,
+          "trajectory": [3, 3, 3],
+          "turning_points": []
+        },
+        "social_connection": {
+          "initial": 2,
+          "final": 2,
+          "total_change": 0,
+          "trajectory": [2, 2, 2],
+          "turning_points": []
+        }
+      },
+      "family": [
+        {
+          "family_index": 0,
+          "status_trajectories": {
+            "caregiver_burden": {
+              "initial": 7,
+              "final": 7,
+              "total_change": 0,
+              "trajectory": [7, 7, 7],
+              "turning_points": []
+            },
+            "hope_for_support": {
+              "initial": 6,
+              "final": 6,
+              "total_change": 0,
+              "trajectory": [6, 6, 6],
+              "turning_points": []
+            },
+            "psychological_distress": {
+              "initial": 6,
+              "final": 6,
+              "total_change": 0,
+              "trajectory": [6, 6, 6],
+              "turning_points": []
+            }
+          }
+        }
+      ],
+      "team": {
+        "patient_centeredness": {
+          "initial": 0,
+          "final": 0,
+          "total_change": 0,
+          "trajectory": [0, 0, 0]
+        },
+        "safety_assurance": {
+          "initial": 0,
+          "final": 0,
+          "total_change": 0,
+          "trajectory": [0, 0, 0]
+        },
+        "care_sustainability": {
+          "initial": 0,
+          "final": 0,
+          "total_change": 0,
+          "trajectory": [0, 0, 0]
+        },
+        "family_support": {
+          "initial": 0,
+          "final": 0,
+          "total_change": 0,
+          "trajectory": [0, 0, 0]
+        }
+      },
+      "professions": {
+        "nurse": {
+          "patient_safety_assurance": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "family_advocacy": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "psychosocial_support": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          }
+        },
+        "pt": {
+          "rehabilitation_progress": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "patient_safety_assurance": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "information_provision": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          }
+        },
+        "physician": {
+          "symptom_management": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "patient_safety_assurance": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "information_provision": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          }
+        },
+        "care_manager": {
+          "resource_coordination": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "patient_safety_assurance": {
+            "initial": 6,
+            "final": 6,
+            "total_change": 0,
+            "trajectory": [6, 6, 6]
+          },
+          "system_navigation": {
+            "initial": 5,
+            "final": 5,
+            "total_change": 0,
+            "trajectory": [5, 5, 5]
+          },
+          "collaboration_effectiveness": {
+            "initial": 4,
+            "final": 4,
+            "total_change": 0,
+            "trajectory": [4, 4, 4]
+          }
+        }
+      }
+    },
+    "threshold_events_summary": {
+      "total_occurrences": 0,
+      "by_condition": {}
+    },
+    "quality_thresholds": {
+      "talk_time_gini_threshold": 0.7,
+      "overtime_phases_threshold": 2,
+      "rule_violations_threshold": 5,
+      "participant_silence_sec": 300
+    }
+  },
+  "qualitative_feedback": {
+    "debrief_responses": {
+      "profession_goal_achievement": [
+        {
+          "player_id": "P1",
+          "role": "nurse",
+          "primary_goal": "患者との信頼関係を構築し、安全な在宅生活を支援する。妻の介護負担を軽減し、患者の社会参加を促す。",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "患者が訪問看護を受け入れ、入浴介助が可能になる",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "妻の介護負担が軽減される（デイサービス利用など）",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "患者の心理的安寧が向上する（ネガティブな発言が減る）",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "患者の社会的つながりが回復する（外出、デイサービス利用）",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P2",
+          "role": "pt",
+          "primary_goal": "患者の残存機能を維持・向上させ、安全な在宅生活を支援する。患者との信頼関係を構築し、リハビリを受け入れてもらう。",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "患者がリハビリを受け入れ、関係性が構築される",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "心肺機能の代償能力が向上する（SpO2回復時間の短縮）",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "ADLが維持・向上する（自宅内や外のポストまで歩ける）",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "デイサービス移行により、訪問リハビリから撤退できる",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P3",
+          "role": "physician",
+          "primary_goal": "患者の生命予後を守りながら、本人の意思を尊重する。在宅酸素導入の必要性を説明し、理解を促す。",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "在宅酸素導入の必要性を患者・家族に理解してもらう",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "患者の安全を確保しながら、本人の意思を尊重する",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "心不全の再増悪を予防する（再入院を避ける）",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "患者のQOL（社会参加、心理的安寧）を向上させる",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P4",
+          "role": "care_manager",
+          "primary_goal": "患者の安全を確保しながら、適切なサービス調整を行う。患者・家族との関係性を構築し、信頼を得る。",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "患者・家族との関係性が構築される",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "適切なサービス調整が行われる（デイサービス利用、訪問リハビリの調整）",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "患者の安全が確保される",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            },
+            {
+              "criterion": "他職種との連携が円滑になる",
+              "achieved": false,
+              "achievement_level": "not_achieved",
+              "evidence": "",
+              "evaluator_notes": ""
+            }
+          ]
+        }
+      ],
+      "overall_goal_achievement": "not_achieved"
+    },
+    "perspective_shifts": [
+      {
+        "player_id": "PLACEHOLDER",
+        "moment_description": "在宅酸素を拒否する患者の背景に、「弱った姿を見られたくない」というプライドがあることに気づいた",
+        "impact_level": "significant",
+        "related_profession": "patient"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "moment_description": "妻の介護負担が限界に近いことを、妻の非言語的サイン（疲労、体重減少）から理解した",
+        "impact_level": "significant",
+        "related_profession": "family"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "moment_description": "ケアマネの慎重な姿勢は、患者の安全を最優先にしているからだと理解した",
+        "impact_level": "moderate",
+        "related_profession": "care_manager"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "moment_description": "患者の「誰にも会いたくない」という言葉の裏に、「本当は外に出たい」という本心があることに気づいた",
+        "impact_level": "transformative",
+        "related_profession": "patient"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "moment_description": "訪問看護師の積極的な提案と、ケアマネの慎重な姿勢の両方が、患者の安全と尊厳を守るために必要だと理解した",
+        "impact_level": "significant",
+        "related_profession": "nurse"
+      }
+    ],
+    "professional_blind_spots": [
+      {
+        "player_id": "PLACEHOLDER",
+        "realization": "医学的に正しい説明をしても、患者の不安や恐怖に寄り添わなければ、受け入れてもらえない",
+        "emotional_response": "surprised"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "realization": "家族の負担を「当たり前」と思っていたが、妻は限界に近かった",
+        "emotional_response": "uncomfortable"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "realization": "患者の拒否的な態度は、関係性が構築されていないことの表れだった",
+        "emotional_response": "curious"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "realization": "自分の職種の「正しさ」を主張するだけでは、他職種と連携できない",
+        "emotional_response": "uncomfortable"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "realization": "患者の「本心」を引き出すには、時間をかけた傾聴が必要だった",
+        "emotional_response": "motivated"
+      }
+    ],
+    "conflict_attitude_changes": [
+      {
+        "player_id": "PLACEHOLDER",
+        "before_attitude": "価値観の対立は「どちらかが正しい」問題だと思っていた",
+        "after_attitude": "価値観の対立は「どちらも正しい」中で、バランスを取る問題だと理解した",
+        "change_description": "患者の意思と医学的必要性の両方を尊重する難しさを体験した"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "before_attitude": "職種間の見解の相違は「面倒なこと」だと思っていた",
+        "after_attitude": "職種間の見解の相違は「多角的な視点を得る機会」だと理解した",
+        "change_description": "ケアマネの慎重な姿勢と看護師の積極的な提案の両方が必要だと気づいた"
+      }
+    ],
+    "future_intentions": [
+      {
+        "player_id": "PLACEHOLDER",
+        "action_plan": "患者の不安や恐怖に寄り添う時間を、診察の中に組み込む",
+        "confidence_level": "willing_to_try",
+        "target_situation": "在宅酸素導入など、患者が拒否的な態度を示す場面"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "action_plan": "家族の非言語的サイン（疲労、体重減少）に注意を払い、早期に介護負担を軽減する",
+        "confidence_level": "motivated",
+        "target_situation": "在宅ケアで家族が主介護者となっている場面"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "action_plan": "職種間の見解の相違を「対立」ではなく「多角的な視点」として受け止める",
+        "confidence_level": "committed",
+        "target_situation": "多職種カンファレンスで意見が分かれる場面"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "action_plan": "患者の「本心」を引き出すために、1対1で話す時間を意識的に作る",
+        "confidence_level": "motivated",
+        "target_situation": "患者が拒否的な態度を示す場面"
+      }
+    ],
+    "experience_intensity": [
+      {
+        "player_id": "PLACEHOLDER",
+        "overall_intensity": 4,
+        "most_impactful_moment": "患者の「本当は外に出たい」という本心を引き出せた瞬間",
+        "one_word_summary": "発見"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "overall_intensity": 4,
+        "most_impactful_moment": "妻が「もう限界です」と涙を流した場面",
+        "one_word_summary": "衝撃"
+      },
+      {
+        "player_id": "PLACEHOLDER",
+        "overall_intensity": 3,
+        "most_impactful_moment": "ケアマネと看護師の見解の相違を調整する過程",
+        "one_word_summary": "葛藤"
+      }
+    ]
+  },
+  "free_narratives": [],
+  "surveys": [],
+  "debrief": {
+    "key_takeaways": [
+      "患者の意思と医学的必要性のバランスを取る難しさを体験した",
+      "家族負担の可視化と早期対応の重要性を学んだ",
+      "職種間の見解の相違を調整するプロセスを体験した",
+      "関係性構築（拒否から受容へ）の重要性を実感した",
+      "患者の本心を引き出すコミュニケーションの力を学んだ"
+    ],
+    "collective_insights": [
+      "多職種連携は「正解を見つける」のではなく、「最善のバランスを探す」プロセス",
+      "患者・家族の声を聴くことが、すべての出発点",
+      "職種間の見解の相違は、多角的な視点を得る機会"
+    ],
+    "what_went_well": [],
+    "to_improve": [],
+    "group_dynamics_quality": "adequate"
+  },
+  "versioning": {
+    "created_by": "Claude (Anthropic)",
+    "version": "3.2",
+    "last_updated": "2025-11-29T00:00:00Z",
+    "notes": "他者評価方式対応版。患者・家族役を含む測定テンプレート。"
+  }
+}
