@@ -1,0 +1,523 @@
+[
+  {
+    "constraint_set_id": "copd_heart_failure_home_easy",
+    "name_ja": "在宅COPD・心不全ケア（Easy）",
+    "description_ja": "退院直後の在宅生活確立における制約。Easy版では、経済的・時間的余裕があり、サービス調整の柔軟性が高い設定。",
+    "setting": "home_care",
+    "play_difficulty": "easy",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "デイサービス利用開始までの猶予期間",
+          "value": "3ヶ月",
+          "severity": "flexible",
+          "rationale": "患者の拒否感が強いため、関係性構築に時間をかけられる"
+        },
+        {
+          "type": "availability",
+          "description_ja": "訪問看護・リハビリの訪問時間",
+          "value": "希望に応じて柔軟に調整可能",
+          "severity": "flexible",
+          "rationale": "訪問看護ステーションに余裕があり、患者の都合に合わせられる"
+        }
+      ],
+      "economic": [
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険の月額利用限度額",
+          "amount": 197000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "negotiable"
+        },
+        {
+          "type": "copayment",
+          "description_ja": "利用者負担（1割）",
+          "amount": 19700,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "negotiable"
+        },
+        {
+          "type": "income_limit",
+          "description_ja": "経済的余裕",
+          "amount": null,
+          "flexibility": "negotiable",
+          "rationale": "年金収入があり、医療費負担能力は特に問題ない"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護師・PTの訪問可能回数",
+          "quantity": "週4回（看護2回、リハ2回）+ 追加可能",
+          "unit": "回/週",
+          "availability_schedule": "平日・土日問わず対応可能",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "デイサービスの空き状況",
+          "quantity": "複数の選択肢あり",
+          "availability_schedule": "週1-3回利用可能",
+          "waiting_time": "1ヶ月以内"
+        },
+        {
+          "type": "equipment_capacity",
+          "description_ja": "在宅酸素療法の導入",
+          "quantity": "available",
+          "availability_schedule": "希望すればすぐに導入可能",
+          "waiting_time": "1週間以内"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "介護保険の利用範囲",
+          "authority": "介護保険法（要介護2）",
+          "exceptions": [
+            "医療保険との併用が可能",
+            "限度額を超える場合は自費で対応可能"
+          ],
+          "appeal_process": "ケアマネジャーを通じて区分変更申請が可能"
+        },
+        {
+          "type": "certification_requirement",
+          "description_ja": "訪問看護・リハビリの指示書",
+          "authority": "医師の指示書が必要",
+          "exceptions": [
+            "訪問医が迅速に発行可能"
+          ]
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "退院直後の在宅生活です。介護保険は要介護2で、月額約20万円の範囲内でサービスを利用できます。現在、訪問看護週2回、訪問リハビリ週2回を予定しており、まだ余裕があります。デイサービスの空きもあり、希望すれば1ヶ月以内に利用開始できます。経済的にも問題なく、時間的な猶予もあります。",
+      "visual_aids": [
+        {
+          "type": "budget_breakdown",
+          "content": "| サービス | 回数 | 単位数 | 自己負担 |\n|---------|------|--------|----------|\n| 訪問看護 | 週2回 | 約8,000単位 | 約8,000円 |\n| 訪問リハビリ | 週2回 | 約6,000単位 | 約6,000円 |\n| デイサービス | 週1回（追加可） | 約4,000単位 | 約4,000円 |\n| **合計** | - | **約18,000単位** | **約18,000円** |\n| **限度額** | - | **19,700単位** | **19,700円** |"
+        }
+      ],
+      "emphasis_points": [
+        "経済的・時間的余裕があり、サービス調整の柔軟性が高い",
+        "デイサービス利用の余地が十分にある",
+        "患者の拒否感への対応に時間をかけられる"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "デイサービス利用開始時期",
+        "訪問看護・リハビリの訪問時間",
+        "限度額を超える場合の自費対応"
+      ],
+      "emergency_overrides": [
+        "急変時は医療保険で訪問看護の回数を増やせる",
+        "再入院の場合は制約がリセットされる"
+      ]
+    },
+    "tags_affected": [
+      "time",
+      "resources",
+      "family_burden"
+    ],
+    "flavor_text": "退院直後で不安が大きいですが、経済的・時間的余裕があり、サービス調整の柔軟性が高い状況です。患者の拒否感に寄り添いながら、じっくりと関係性を構築できます。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "サービス追加の提案がしやすい",
+        "患者の拒否感への対応に時間をかけられる",
+        "妻の介護負担軽減策を複数検討できる"
+      ],
+      "discussion_triggers": [
+        "どのサービスを優先するか",
+        "患者の拒否感にどう対応するか",
+        "デイサービス利用のタイミング"
+      ],
+      "constraint_modifiers": {
+        "time_pressure": "低",
+        "economic_pressure": "低",
+        "resource_scarcity": "低"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z",
+      "notes": "Easy版：柔軟性が高く、時間的・経済的余裕がある設定"
+    }
+  },
+  {
+    "constraint_set_id": "copd_heart_failure_home_normal",
+    "name_ja": "在宅COPD・心不全ケア（Normal）",
+    "description_ja": "退院直後の在宅生活確立における制約。Normal版では、現実的な制約があり、サービス調整に工夫が必要な設定。",
+    "setting": "home_care",
+    "play_difficulty": "normal",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "デイサービス利用開始までの猶予期間",
+          "value": "2ヶ月",
+          "severity": "firm",
+          "rationale": "妻の介護負担が限界に近く、早期の対応が必要"
+        },
+        {
+          "type": "availability",
+          "description_ja": "訪問看護・リハビリの訪問時間",
+          "value": "平日午前中のみ",
+          "severity": "firm",
+          "rationale": "訪問看護ステーションの人員に限りがある"
+        },
+        {
+          "type": "sequence",
+          "description_ja": "関係性構築の期間",
+          "value": "最低1ヶ月",
+          "severity": "flexible",
+          "rationale": "患者の拒否感が強く、信頼関係構築に時間が必要"
+        }
+      ],
+      "economic": [
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険の月額利用限度額",
+          "amount": 197000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "firm"
+        },
+        {
+          "type": "copayment",
+          "description_ja": "利用者負担（1割）",
+          "amount": 19700,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "firm"
+        },
+        {
+          "type": "income_limit",
+          "description_ja": "経済的余裕",
+          "amount": null,
+          "flexibility": "fixed",
+          "rationale": "年金収入のみで、限度額を超える自費負担は困難"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護師・PTの訪問可能回数",
+          "quantity": "週4回（看護2回、リハ2回）",
+          "unit": "回/週",
+          "availability_schedule": "平日午前中のみ",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "デイサービスの空き状況",
+          "quantity": "週1回のみ空きあり",
+          "availability_schedule": "週1回（曜日固定）",
+          "waiting_time": "1-2ヶ月"
+        },
+        {
+          "type": "equipment_capacity",
+          "description_ja": "在宅酸素療法の導入",
+          "quantity": "available",
+          "availability_schedule": "希望すれば2週間以内に導入可能",
+          "waiting_time": "2週間"
+        },
+        {
+          "type": "transport",
+          "description_ja": "デイサービスの送迎",
+          "quantity": "limited",
+          "availability_schedule": "送迎可能だが、自宅前まで車が入れない",
+          "waiting_time": "なし"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "介護保険の利用範囲",
+          "authority": "介護保険法（要介護2）",
+          "exceptions": [
+            "医療保険との併用が可能",
+            "限度額を超える場合は区分変更申請が必要（審査に1-2ヶ月）"
+          ],
+          "appeal_process": "ケアマネジャーを通じて区分変更申請が可能だが、審査に時間がかかる"
+        },
+        {
+          "type": "certification_requirement",
+          "description_ja": "訪問看護・リハビリの指示書",
+          "authority": "医師の指示書が必要",
+          "exceptions": [
+            "訪問医が月1回の診察後に発行"
+          ]
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "デイサービス利用の条件",
+          "authority": "デイサービス事業所の規定",
+          "exceptions": [
+            "医師の許可書が必要",
+            "SpO2が90%以上であることが条件"
+          ]
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "退院直後の在宅生活です。介護保険は要介護2で、月額約20万円の範囲内でサービスを利用できます。現在、訪問看護週2回、訪問リハビリ週2回を予定していますが、訪問時間は平日午前中のみです。デイサービスは週1回のみ空きがあり、利用開始まで1-2ヶ月かかります。妻の介護負担が大きく、早期の対応が必要です。",
+      "visual_aids": [
+        {
+          "type": "budget_breakdown",
+          "content": "| サービス | 回数 | 単位数 | 自己負担 |\n|---------|------|--------|----------|\n| 訪問看護 | 週2回 | 約8,000単位 | 約8,000円 |\n| 訪問リハビリ | 週2回 | 約6,000単位 | 約6,000円 |\n| デイサービス | 週1回（追加困難） | 約4,000単位 | 約4,000円 |\n| **合計** | - | **約18,000単位** | **約18,000円** |\n| **限度額** | - | **19,700単位** | **19,700円** |"
+        },
+        {
+          "type": "timeline",
+          "content": "- 退院直後：訪問看護・リハビリ開始\n- 1ヶ月後：関係性構築、入浴介助開始\n- 2ヶ月後：デイサービス利用開始（目標）\n- 3ヶ月後：訪問リハビリ撤退検討"
+        }
+      ],
+      "emphasis_points": [
+        "妻の介護負担が大きく、早期の対応が必要",
+        "デイサービスの空きが限られている",
+        "訪問時間が平日午前中のみで、柔軟性が低い",
+        "限度額内でのサービス調整が必要"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "訪問看護・リハビリの訪問時間（午後への変更は困難だが交渉可能）",
+        "デイサービス利用開始時期（早めることは困難）"
+      ],
+      "emergency_overrides": [
+        "急変時は医療保険で訪問看護の回数を増やせる",
+        "妻が倒れた場合はショートステイの利用が可能"
+      ]
+    },
+    "tags_affected": [
+      "time",
+      "resources",
+      "family_burden",
+      "coordination"
+    ],
+    "flavor_text": "退院直後で不安が大きく、妻の介護負担も限界に近づいています。サービス調整に工夫が必要で、職種間の連携が重要です。患者の拒否感に寄り添いながら、現実的な制約の中で最善の方法を見つける必要があります。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "サービス追加の選択肢が限られる",
+        "妻の介護負担軽減が急務",
+        "デイサービス利用開始までの時間的制約"
+      ],
+      "discussion_triggers": [
+        "限られたリソースをどう配分するか",
+        "妻の介護負担をどう軽減するか",
+        "患者の拒否感にどう対応しつつ、時間的制約を守るか",
+        "デイサービス利用の優先順位"
+      ],
+      "constraint_modifiers": {
+        "time_pressure": "中",
+        "economic_pressure": "中",
+        "resource_scarcity": "中"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z",
+      "notes": "Normal版：現実的な制約があり、サービス調整に工夫が必要な設定"
+    }
+  },
+  {
+    "constraint_set_id": "copd_heart_failure_home_hard",
+    "name_ja": "在宅COPD・心不全ケア（Hard）",
+    "description_ja": "退院直後の在宅生活確立における制約。Hard版では、厳しい制約があり、困難な判断が求められる設定。",
+    "setting": "home_care",
+    "play_difficulty": "hard",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "デイサービス利用開始までの猶予期間",
+          "value": "1ヶ月",
+          "severity": "absolute",
+          "rationale": "妻が「もう限界」と訴えており、緊急の対応が必要"
+        },
+        {
+          "type": "availability",
+          "description_ja": "訪問看護・リハビリの訪問時間",
+          "value": "平日午前中のみ、週1回ずつに制限",
+          "severity": "absolute",
+          "rationale": "訪問看護ステーションの人員不足が深刻"
+        },
+        {
+          "type": "sequence",
+          "description_ja": "関係性構築の期間",
+          "value": "1ヶ月以内",
+          "severity": "firm",
+          "rationale": "患者の拒否感が強いが、妻の限界が近く、時間的余裕がない"
+        }
+      ],
+      "economic": [
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険の月額利用限度額",
+          "amount": 197000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        },
+        {
+          "type": "copayment",
+          "description_ja": "利用者負担（1割）",
+          "amount": 19700,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed"
+        },
+        {
+          "type": "income_limit",
+          "description_ja": "経済的余裕",
+          "amount": null,
+          "flexibility": "fixed",
+          "rationale": "年金収入のみで、限度額を超える自費負担は不可能。引きこもりの息子の生活費も負担している。"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護師・PTの訪問可能回数",
+          "quantity": "週2回（看護1回、リハ1回）",
+          "unit": "回/週",
+          "availability_schedule": "平日午前中のみ、曜日固定",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "デイサービスの空き状況",
+          "quantity": "週1回のみ空きあり（キャンセル待ち）",
+          "availability_schedule": "週1回（曜日固定）、送迎時間も固定",
+          "waiting_time": "2-3ヶ月（キャンセル待ち）"
+        },
+        {
+          "type": "equipment_capacity",
+          "description_ja": "在宅酸素療法の導入",
+          "quantity": "available",
+          "availability_schedule": "希望すれば1ヶ月以内に導入可能",
+          "waiting_time": "1ヶ月"
+        },
+        {
+          "type": "transport",
+          "description_ja": "デイサービスの送迎",
+          "quantity": "limited",
+          "availability_schedule": "送迎可能だが、自宅前まで車が入れない。妻が送迎車まで付き添う必要がある。",
+          "waiting_time": "なし"
+        },
+        {
+          "type": "supply_chain",
+          "description_ja": "訪問看護ステーションの人員不足",
+          "quantity": "limited",
+          "availability_schedule": "人員不足により、訪問回数を増やすことは困難",
+          "waiting_time": "不明"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "介護保険の利用範囲",
+          "authority": "介護保険法（要介護2）",
+          "exceptions": [
+            "医療保険との併用が可能",
+            "区分変更申請は可能だが、審査に2-3ヶ月かかり、認定される保証はない"
+          ],
+          "appeal_process": "ケアマネジャーを通じて区分変更申請が可能だが、審査に時間がかかり、認定される保証はない"
+        },
+        {
+          "type": "certification_requirement",
+          "description_ja": "訪問看護・リハビリの指示書",
+          "authority": "医師の指示書が必要",
+          "exceptions": [
+            "訪問医が月1回の診察後に発行。緊急時の変更は困難。"
+          ]
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "デイサービス利用の条件",
+          "authority": "デイサービス事業所の規定",
+          "exceptions": [
+            "医師の許可書が必要",
+            "SpO2が90%以上であることが条件",
+            "在宅酸素を使用していない場合、利用を断られる可能性がある"
+          ]
+        },
+        {
+          "type": "legal_restriction",
+          "description_ja": "訪問看護ステーションの人員配置基準",
+          "authority": "介護保険法の人員配置基準",
+          "exceptions": [
+            "人員不足により、訪問回数を増やすことは法的に困難"
+          ]
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "退院直後の在宅生活です。妻が「もう限界」と訴えており、1ヶ月以内にデイサービス利用を開始する必要があります。しかし、訪問看護ステーションは人員不足で、訪問看護・リハビリは週1回ずつしか来られません。デイサービスはキャンセル待ちで、2-3ヶ月かかる見込みです。在宅酸素を導入していない場合、デイサービスを断られる可能性もあります。経済的余裕もなく、限度額内でのサービス調整が必須です。",
+      "visual_aids": [
+        {
+          "type": "budget_breakdown",
+          "content": "| サービス | 回数 | 単位数 | 自己負担 |\n|---------|------|--------|----------|\n| 訪問看護 | 週1回 | 約4,000単位 | 約4,000円 |\n| 訪問リハビリ | 週1回 | 約3,000単位 | 約3,000円 |\n| デイサービス | 週1回（キャンセル待ち） | 約4,000単位 | 約4,000円 |\n| **合計** | - | **約11,000単位** | **約11,000円** |\n| **限度額** | - | **19,700単位** | **19,700円** |\n| **余裕** | - | **約8,700単位** | **約8,700円** |"
+        },
+        {
+          "type": "timeline",
+          "content": "- 退院直後：訪問看護・リハビリ開始（週1回ずつ）\n- 1ヶ月後：デイサービス利用開始（目標）← **妻の限界**\n- 2-3ヶ月後：デイサービスのキャンセル待ち\n- **ギャップ期間：妻が1人で介護を担う**"
+        }
+      ],
+      "emphasis_points": [
+        "妻が「もう限界」と訴えており、1ヶ月以内の対応が必須",
+        "訪問看護・リハビリは週1回ずつしか来られない",
+        "デイサービスはキャンセル待ちで、2-3ヶ月かかる",
+        "在宅酸素を導入していない場合、デイサービスを断られる可能性",
+        "経済的余裕がなく、限度額内でのサービス調整が必須"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "デイサービスのキャンセル待ちを短縮する交渉（困難だが試みる価値あり）"
+      ],
+      "emergency_overrides": [
+        "妻が倒れた場合はショートステイの緊急利用が可能（ただし空きがあるか不明）",
+        "急変時は医療保険で訪問看護の回数を増やせる（ただし人員不足で対応できるか不明）"
+      ]
+    },
+    "tags_affected": [
+      "time",
+      "resources",
+      "family_burden",
+      "coordination",
+      "safety"
+    ],
+    "flavor_text": "退院直後で不安が大きく、妻は「もう限界」と訴えています。訪問看護ステーションは人員不足で、デイサービスはキャンセル待ち。在宅酸素を導入しなければ、デイサービスも利用できない可能性があります。厳しい制約の中で、困難な判断が求められます。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "サービス追加がほぼ不可能",
+        "妻の介護負担が限界に達している",
+        "デイサービス利用開始までのギャップ期間をどう乗り切るか",
+        "在宅酸素導入の判断が迫られる"
+      ],
+      "discussion_triggers": [
+        "妻の限界にどう対応するか",
+        "在宅酸素を導入すべきか（患者は拒否）",
+        "デイサービスのキャンセル待ちをどう短縮するか",
+        "訪問看護・リハビリの限られた回数で何を優先するか",
+        "患者の安全と本人の意思のバランス"
+      ],
+      "constraint_modifiers": {
+        "time_pressure": "高",
+        "economic_pressure": "高",
+        "resource_scarcity": "高"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z",
+      "notes": "Hard版：厳しい制約があり、困難な判断が求められる設定"
+    }
+  }
+]
