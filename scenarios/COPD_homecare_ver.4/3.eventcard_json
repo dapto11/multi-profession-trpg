@@ -1,0 +1,1236 @@
+[
+  {
+    "event_id": 1,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "労作時のSpO2低下",
+    "body_ja": "訪問看護師が訪問した際、患者が立ち上がろうとしたところ、激しい息切れが見られた。SpO2を測定すると{{spo2}}%まで低下している。患者は「大丈夫、いつものことだ」と言うが、回復に{{recovery_time}}分以上かかっている。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "transient",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "physician"],
+    "actors_secondary": ["pt", "care_manager"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.physical_condition",
+        "change": -1,
+        "reason": "労作時のSpO2低下が頻繁に起こり、回復に時間がかかる"
+      },
+      {
+        "target": "profession.nurse.patient_safety_assurance",
+        "change": 0,
+        "reason": "SpO2低下を観察し、チームに報告する機会（評価は他者評価で決定）"
+      }
+    ],
+    "parameters": [
+      {
+        "name": "spo2",
+        "type": "integer",
+        "unit": "%",
+        "min": 85,
+        "max": 92,
+        "examples": [88, 90, 92]
+      },
+      {
+        "name": "recovery_time",
+        "type": "integer",
+        "unit": "分",
+        "min": 10,
+        "max": 20,
+        "examples": [10, 15, 20]
+      }
+    ],
+    "flavor_text": "患者は「大丈夫」と言うが、顔色が悪く、呼吸が荒い。在宅酸素なしでの生活に限界が見えている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の安全への懸念が高まる",
+        "在宅酸素導入の議論が必要になる",
+        "患者の「大丈夫」という言葉と実際の状態のギャップ"
+      ],
+      "discussion_triggers": [
+        "在宅酸素を導入すべきか",
+        "患者の意思をどこまで尊重するか",
+        "急変時の対応プロトコル"
+      ],
+      "constraint_modifiers": {
+        "safety_concern": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 2,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "妻からの頻繁な電話",
+    "body_ja": "妻が買い物に出かけようとすると、患者から「どこに行くんだ」「いつ帰ってくるんだ」と電話がかかってくる。妻は「買い物にも行けない」「自分の時間がない」と訴える。訪問看護師が訪問した際、妻の疲労が顔に出ている。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "care_manager"],
+    "actors_secondary": ["physician", "pt"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["patient_preference"]
+    },
+    "status_effects": [
+      {
+        "target": "family_0.caregiver_burden",
+        "change": +1,
+        "reason": "患者の依存的な態度により、妻の自由時間が奪われている"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": 0,
+        "reason": "患者は妻への依存を自覚しているが、不安から電話をかけてしまう"
+      },
+      {
+        "target": "profession.nurse.family_advocacy",
+        "change": 0,
+        "reason": "妻の負担を観察し、チームに報告する機会（評価は他者評価で決定）"
+      }
+    ],
+    "flavor_text": "妻は疲れた表情で「買い物にも行けない」と訴える。患者の依存的な態度が、妻の介護負担を増大させている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "妻の介護負担が可視化される",
+        "患者の依存的な態度が問題として認識される",
+        "デイサービス利用の必要性が高まる"
+      ],
+      "discussion_triggers": [
+        "妻の介護負担をどう軽減するか",
+        "患者の依存的な態度にどう対応するか",
+        "デイサービス利用のタイミング"
+      ],
+      "constraint_modifiers": {
+        "family_burden": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 3,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "希死念慮の表明",
+    "body_ja": "訪問看護師が訪問した際、患者が「早く桶（棺桶）に入りたい」「楽になれないな」と繰り返し話す。表情は暗く、会話も消極的。妻は「毎日こんな調子で、私も辛い」と訴える。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "physician"],
+    "actors_secondary": ["care_manager", "pt"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["family_burden"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -1,
+        "reason": "希死念慮が繰り返され、心理的安寧が低下している"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": +1,
+        "reason": "患者の希死念慮により、妻の心理的負担が増している"
+      },
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": 0,
+        "reason": "患者の心理状態に対応する機会（評価は他者評価で決定）"
+      }
+    ],
+    "flavor_text": "患者は暗い表情で「早く桶に入りたい」と繰り返す。妻も「毎日こんな調子で辛い」と訴え、家族全体が疲弊している。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の心理状態への懸念が高まる",
+        "妻の心理的負担も増大する",
+        "心理社会的支援の必要性が認識される"
+      ],
+      "discussion_triggers": [
+        "患者の希死念慮にどう対応するか",
+        "妻の心理的負担をどう軽減するか",
+        "患者の本心（本当は外に出たい）をどう引き出すか"
+      ],
+      "constraint_modifiers": {
+        "psychological_support_need": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 4,
+    "category": "C_family",
+    "subcategory": "challenge_event",
+    "title_ja": "入浴拒否",
+    "body_ja": "訪問看護師が入浴介助を提案したところ、患者は「怖いから無理」「入らなくてもいい」と明確に拒否した。妻は「入院前は毎日入っていたのに」と困惑している。看護師は清拭を提案したが、患者は「それもいらない」と拒否的。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse"],
+    "actors_secondary": ["care_manager", "pt"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["function"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": -1,
+        "reason": "訪問看護師への拒否的態度、関係性がまだ構築されていない"
+      },
+      {
+        "target": "patient.autonomy_satisfaction",
+        "change": 0,
+        "reason": "患者は自分の意思を表明できているが、恐怖心が強い"
+      },
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": 0,
+        "reason": "患者の恐怖心に対応し、関係性を構築する機会（評価は他者評価で決定）"
+      }
+    ],
+    "flavor_text": "患者は「怖いから無理」と繰り返し、入浴を拒否する。妻は「入院前は毎日入っていたのに」と困惑している。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の拒否的態度が顕在化する",
+        "関係性構築の必要性が認識される",
+        "清拭など代替案の検討が必要"
+      ],
+      "discussion_triggers": [
+        "患者の恐怖心にどう対応するか",
+        "関係性構築のためのアプローチ",
+        "清拭など代替案の提案"
+      ],
+      "constraint_modifiers": {
+        "trust_building_need": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 5,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "在宅酸素の再提案",
+    "body_ja": "訪問医が診察の際、SpO2の低下を確認し、在宅酸素導入を再度提案した。しかし患者は「機械をつけたくない」「そんなものは嫌だ」と強く拒否。医師は「このままでは心不全が再増悪する可能性がある」と説明したが、患者は聞く耳を持たない。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["physician"],
+    "actors_secondary": ["nurse", "care_manager"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["safety"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.autonomy_satisfaction",
+        "change": -1,
+        "reason": "医師が一方的に説明し、患者の不安や恐怖に寄り添わなかった"
+      },
+      {
+        "target": "profession.physician.information_provision",
+        "change": 0,
+        "reason": "在宅酸素の必要性を説明する機会（評価は他者評価で決定）"
+      }
+    ],
+    "flavor_text": "患者は「機械をつけたくない」と強く拒否する。医師の説明は医学的には正しいが、患者の不安に寄り添っていない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の意思と医学的必要性のバランスが問題になる",
+        "患者の不安や恐怖への対応が必要",
+        "一方的な説明では患者が受け入れないことが明確になる"
+      ],
+      "discussion_triggers": [
+        "患者の不安や恐怖にどう寄り添うか",
+        "在宅酸素導入の説明方法",
+        "患者の意思をどこまで尊重するか"
+      ],
+      "constraint_modifiers": {
+        "patient_autonomy_conflict": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 6,
+    "category": "B_psych",
+    "subcategory": "problem_behavior",
+    "title_ja": "社会的孤立の深刻化",
+    "body_ja": "訪問看護師が「町内会の人が心配していましたよ」と話しかけたところ、患者は「誰にも会いたくない」「こんな姿を見られたくない」と強く拒否。妻は「町内会の活動が好きだったのに、今は家に引きこもっている」と心配している。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "care_manager"],
+    "actors_secondary": ["pt"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["function"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.social_connection",
+        "change": -1,
+        "reason": "社会的孤立が深刻化し、外出や他者との交流を拒否している"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -1,
+        "reason": "孤立感が強まり、心理的安寧が低下している"
+      },
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": 0,
+        "reason": "患者の本心（本当は外に出たい）を引き出す機会（評価は他者評価で決定）"
+      }
+    ],
+    "flavor_text": "患者は「誰にも会いたくない」と強く拒否するが、妻は「町内会の活動が好きだったのに」と心配している。患者の本心はどこにあるのか。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の社会的孤立が可視化される",
+        "患者の本心（本当は外に出たい）を引き出す必要性",
+        "デイサービス利用の提案のきっかけ"
+      ],
+      "discussion_triggers": [
+        "患者の本心をどう引き出すか",
+        "社会参加を促す方法",
+        "デイサービス利用の提案のタイミング"
+      ],
+      "constraint_modifiers": {
+        "social_isolation_concern": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 7,
+    "category": "A_medical",
+    "subcategory": "cardio",
+    "title_ja": "心肺機能の改善の兆し",
+    "body_ja": "訪問リハビリ中、PTが患者のSpO2回復時間を測定したところ、以前は{{before_time}}分かかっていたが、今回は{{after_time}}分で回復した。PTは「心肺機能の代償能力が少し向上していますね」と患者に伝えた。患者は「そうか」と淡々と答えたが、少し表情が明るくなった。",
+    "direction": "positive",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["pt"],
+    "actors_secondary": ["nurse", "physician"],
+    "tags": {
+      "primary": "function",
+      "secondary": []
+    },
+    "status_effects": [
+      {
+        "target": "patient.physical_condition",
+        "change": +1,
+        "reason": "心肺機能の代償能力が向上し、SpO2回復時間が短縮した"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": +1,
+        "reason": "身体状態の改善により、患者の気持ちが少し前向きになった"
+      },
+      {
+        "target": "profession.pt.rehabilitation_progress",
+        "change": 0,
+        "reason": "リハビリの効果を確認し、患者に伝える機会（評価は他者評価で決定）"
+      }
+    ],
+    "parameters": [
+      {
+        "name": "before_time",
+        "type": "integer",
+        "unit": "分",
+        "min": 15,
+        "max": 20,
+        "examples": [15, 18, 20]
+      },
+      {
+        "name": "after_time",
+        "type": "integer",
+        "unit": "分",
+        "min": 5,
+        "max": 10,
+        "examples": [5, 7, 10]
+      }
+    ],
+    "flavor_text": "患者は「そうか」と淡々と答えたが、少し表情が明るくなった。リハビリの効果が見え始めている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の身体状態の改善が可視化される",
+        "患者の気持ちが少し前向きになる",
+        "リハビリの継続の意義が確認される"
+      ],
+      "discussion_triggers": [
+        "リハビリの目標をどう設定するか",
+        "デイサービス移行のタイミング",
+        "患者の前向きな気持ちをどう育てるか"
+      ],
+      "constraint_modifiers": {
+        "rehabilitation_effectiveness": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 8,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "妻の疲労の蓄積",
+    "body_ja": "訪問看護師が訪問した際、妻が「最近、夜もよく眠れない」「自分が倒れたらどうなるのか不安」と訴えた。妻の表情は疲れ切っており、体重も減っている様子。患者は妻の様子に気づいているようだが、「悪いな」と言うだけで、依存的な態度は変わらない。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "care_manager"],
+    "actors_secondary": ["physician"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": []
+    },
+    "status_effects": [
+      {
+        "target": "family_0.caregiver_burden",
+        "change": +1,
+        "reason": "妻の疲労が蓄積し、身体的・精神的負担が限界に近づいている"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": +1,
+        "reason": "妻の不安と孤立感が強まっている"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -1,
+        "reason": "患者は妻への罪悪感を感じているが、依存的な態度は変わらない"
+      },
+      {
+        "target": "profession.nurse.family_advocacy",
+        "change": 0,
+        "reason": "妻の限界を観察し、チームに報告する機会（評価は他者評価で決定）"
+      }
+    ],
+    "flavor_text": "妻は疲れ切った表情で「自分が倒れたらどうなるのか不安」と訴える。患者は「悪いな」と言うが、依存的な態度は変わらない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "妻の限界が明確になる",
+        "緊急の介護負担軽減策が必要",
+        "デイサービス利用の緊急性が高まる"
+      ],
+      "discussion_triggers": [
+        "妻の限界にどう対応するか",
+        "患者の依存的な態度をどう変えるか",
+        "デイサービス利用を急ぐべきか"
+      ],
+      "constraint_modifiers": {
+        "family_burden": "危機的",
+        "time_pressure": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 9,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "ケアマネからの慎重な意見",
+    "body_ja": "訪問看護師がデイサービス利用を提案したところ、ケアマネは「安全面や健康面で懸念があります」「SpO2が不安定な状態でデイサービスは難しいのでは」と慎重な意見を述べた。看護師は「患者の本心は外に出たいのでは」と反論したが、ケアマネは「リスクを考えると慎重にならざるを得ない」と譲らない。",
+    "direction": "mixed",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "nurse"],
+    "actors_secondary": ["physician"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["safety", "patient_preference"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.care_manager.patient_safety_assurance",
+        "change": 0,
+        "reason": "ケアマネは患者の安全を優先し、慎重な姿勢を示している（評価は他者評価で決定）"
+      },
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": 0,
+        "reason": "看護師は患者の本心を代弁し、デイサービス利用を提案している（評価は他者評価で決定）"
+      },
+      {
+        "target": "profession.care_manager.collaboration_effectiveness",
+        "change": -1,
+        "reason": "職種間の見解の相違が顕在化し、調整が必要になっている"
+      },
+      {
+        "target": "profession.nurse.collaboration_effectiveness",
+        "change": -1,
+        "reason": "職種間の見解の相違が顕在化し、調整が必要になっている"
+      }
+    ],
+    "flavor_text": "ケアマネは「リスクを考えると慎重にならざるを得ない」と譲らない。看護師との見解の相違が明確になった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "職種間の見解の相違が顕在化する",
+        "患者の安全と本人の意思のバランスが問題になる",
+        "調整の必要性が認識される"
+      ],
+      "discussion_triggers": [
+        "ケアマネと看護師の見解をどう調整するか",
+        "患者の安全と本人の意思のバランスをどう取るか",
+        "デイサービス利用のリスクをどう評価するか"
+      ],
+      "constraint_modifiers": {
+        "coordination_difficulty": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 10,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "患者の本心の表明",
+    "body_ja": "訪問看護師が患者と1対1で話す機会があった。看護師が「本当は外に出たいんじゃないですか？」と尋ねたところ、患者は少し間を置いてから「そうだな、本当は人と話したい。でも、こんな姿を見られたくない」と本心を話した。看護師は「デイサービスなら、同じような境遇の人がいますよ」と提案した。",
+    "direction": "positive",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse"],
+    "actors_secondary": ["care_manager", "pt"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": []
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": +1,
+        "reason": "看護師との関係性が構築され、患者が本心を話すようになった"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": +1,
+        "reason": "本心を話すことで、患者の気持ちが少し軽くなった"
+      },
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": 0,
+        "reason": "患者の本心を引き出し、デイサービス利用につなげる機会（評価は他者評価で決定）"
+      }
+    ],
+    "flavor_text": "患者は少し間を置いてから「本当は人と話したい」と本心を話した。看護師との関係性が深まっている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の本心が明らかになる",
+        "デイサービス利用の可能性が高まる",
+        "看護師との信頼関係が深まる"
+      ],
+      "discussion_triggers": [
+        "患者の本心をどう活かすか",
+        "デイサービス利用をどう進めるか",
+        "ケアマネとの調整をどうするか"
+      ],
+      "constraint_modifiers": {
+        "dayservice_feasibility": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 11,
+    "category": "A_medical",
+    "subcategory": "disease_generic",
+    "title_ja": "医師からの後押し",
+    "body_ja": "訪問医が診察の際、「外に出ることは心身の健康に良い影響を与える」「デイサービスは医学的にも推奨される」と患者に伝えた。患者は「先生がそう言うなら」と少し前向きな反応を示した。医師はケアマネにも「医学的には問題ない」と伝えた。",
+    "direction": "positive",
+    "urgency": "low",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["physician"],
+    "actors_secondary": ["nurse", "care_manager"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["patient_preference"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": +1,
+        "reason": "医師からの後押しにより、患者がデイサービス利用を前向きに考えるようになった"
+      },
+      {
+        "target": "profession.physician.information_provision",
+        "change": 0,
+        "reason": "医学的見地から患者・ケアマネに助言する機会（評価は他者評価で決定）"
+      },
+      {
+        "target": "profession.care_manager.collaboration_effectiveness",
+        "change": +1,
+        "reason": "医師からの助言により、ケアマネの懸念が軽減され、連携が進む"
+      }
+    ],
+    "flavor_text": "患者は「先生がそう言うなら」と少し前向きな反応を示した。医師からの後押しが、デイサービス利用の実現に近づいた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者がデイサービス利用を前向きに考えるようになる",
+        "ケアマネの懸念が軽減される",
+        "職種間の連携が進む"
+      ],
+      "discussion_triggers": [
+        "デイサービス利用の具体的な計画",
+        "患者の不安への対応",
+        "ケアマネとの最終調整"
+      ],
+      "constraint_modifiers": {
+        "dayservice_feasibility": "大幅増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 12,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "妻の希望の表明",
+    "body_ja": "訪問看護師が妻と話す機会があった。妻は「デイサービスに行ってくれたら、私も少し休める」「自分の時間が欲しい」と本音を話した。看護師は「デイサービス利用を進めましょう」と提案し、妻は「お願いします」と頼んだ。",
+    "direction": "mixed",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse"],
+    "actors_secondary": ["care_manager"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": []
+    },
+    "status_effects": [
+      {
+        "target": "family_0.hope_for_support",
+        "change": +1,
+        "reason": "妻がデイサービス利用への期待を表明し、支援への希望が高まった"
+      },
+      {
+        "target": "profession.nurse.family_advocacy",
+        "change": 0,
+        "reason": "妻の本音を引き出し、デイサービス利用につなげる機会（評価は他者評価で決定）"
+      }
+    ],
+    "flavor_text": "妻は「自分の時間が欲しい」と本音を話した。妻の希望が明確になり、デイサービス利用の必要性が高まった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "妻の希望が明確になる",
+        "デイサービス利用の必要性が高まる",
+        "看護師と妻の信頼関係が深まる"
+      ],
+      "discussion_triggers": [
+        "妻の希望をどう実現するか",
+        "デイサービス利用の具体的な計画",
+        "患者の理解をどう得るか"
+      ],
+      "constraint_modifiers": {
+        "dayservice_urgency": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 13,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "訪問リハビリの撤退提案",
+    "body_ja": "PTがケアマネに「リハビリの当初の目標はほぼ達成しました。デイサービスに移行して、訪問リハビリは撤退したいと思います」と提案した。しかしケアマネは「身体機能の維持は大事ですから、訪問リハビリは継続してください」と牽制した。PTは困惑している。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["pt", "care_manager"],
+    "actors_secondary": ["nurse"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["resources"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.pt.rehabilitation_progress",
+        "change": 0,
+        "reason": "PTはリハビリの目標達成を評価し、撤退を提案している（評価は他者評価で決定）"
+      },
+      {
+        "target": "profession.care_manager.resource_coordination",
+        "change": 0,
+        "reason": "ケアマネは身体機能の維持を重視し、訪問リハビリの継続を主張している（評価は他者評価で決定）"
+      },
+      {
+        "target": "profession.pt.collaboration_effectiveness",
+        "change": -1,
+        "reason": "職種間の見解の相違が顕在化し、調整が必要になっている"
+      },
+      {
+        "target": "profession.care_manager.collaboration_effectiveness",
+        "change": -1,
+        "reason": "職種間の見解の相違が顕在化し、調整が必要になっている"
+      }
+    ],
+    "flavor_text": "PTは「目標は達成しました」と言うが、ケアマネは「身体機能の維持は大事」と牽制する。職種間の見解の相違が明確になった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "職種間の見解の相違が顕在化する",
+        "リハビリの目標と継続の必要性が議論される",
+        "サービス調整の方針が問われる"
+      ],
+      "discussion_triggers": [
+        "PTとケアマネの見解をどう調整するか",
+        "リハビリの目標をどう評価するか",
+        "デイサービス移行のタイミング"
+      ],
+      "constraint_modifiers": {
+        "coordination_difficulty": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 14,
+    "category": "C_family",
+    "subcategory": "complaint",
+    "title_ja": "患者のケアマネへの苦手意識",
+    "body_ja": "訪問看護師が訪問した際、患者が「あのケアマネは苦手だ」「堅苦しくてつまらない」「あんた（看護師）みたいに話に付き合ってくれればいいのに」と愚痴をこぼした。看護師は「ケアマネも一生懸命やってくれていますよ」と伝えたが、患者は納得していない様子。",
+    "direction": "negative",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager"],
+    "actors_secondary": ["nurse"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": []
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": -1,
+        "reason": "患者がケアマネに苦手意識を持ち、関係性が構築できていない"
+      },
+      {
+        "target": "profession.care_manager.collaboration_effectiveness",
+        "change": -1,
+        "reason": "患者との関係性構築が不十分で、コミュニケーションに課題がある"
+      }
+    ],
+    "flavor_text": "患者は「あのケアマネは苦手だ」と愚痴をこぼす。ケアマネとの関係性構築が課題として浮上した。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者とケアマネの関係性の課題が可視化される",
+        "ケアマネのコミュニケーションスタイルが問題になる",
+        "職種間の調整が必要"
+      ],
+      "discussion_triggers": [
+        "患者とケアマネの関係性をどう改善するか",
+        "ケアマネのコミュニケーションスタイルをどう調整するか",
+        "他職種がどうサポートするか"
+      ],
+      "constraint_modifiers": {
+        "care_manager_patient_relationship": "悪化"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 15,
+    "category": "E_environment",
+    "subcategory": "local_life",
+    "title_ja": "近所の人の訪問",
+    "body_ja": "町内会の知人が患者宅を訪問し、「元気にしてるか？」と声をかけた。患者は当初「誰にも会いたくない」と拒否的だったが、知人が「町内会のみんなが心配してるぞ」と話すと、少し表情が和らいだ。知人が帰った後、患者は「久しぶりに人と話した」と妻に話した。",
+    "direction": "positive",
+    "urgency": "low",
+    "duration": "transient",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse"],
+    "actors_secondary": ["care_manager"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": []
+    },
+    "status_effects": [
+      {
+        "target": "patient.social_connection",
+        "change": +1,
+        "reason": "近所の人との交流により、社会的つながりが回復し始めた"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": +1,
+        "reason": "人と話すことで、患者の気持ちが前向きになった"
+      }
+    ],
+    "flavor_text": "患者は「久しぶりに人と話した」と妻に話した。近所の人との交流が、患者の社会参加への第一歩になるかもしれない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の社会的つながりが回復し始める",
+        "患者の気持ちが前向きになる",
+        "デイサービス利用への心理的ハードルが下がる"
+      ],
+      "discussion_triggers": [
+        "この機会をどう活かすか",
+        "デイサービス利用の提案のタイミング",
+        "患者の社会参加をどう促すか"
+      ],
+      "constraint_modifiers": {
+        "social_participation_readiness": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 101,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "【閾値】信頼関係の決定的な崩壊",
+    "body_ja": "患者が専門職への不信感を爆発させ、「もう誰も信用できない」「来なくていい」と訪問を拒否した。妻も「どうしたらいいのか分からない」と途方に暮れている。患者は部屋に引きこもり、誰とも話さなくなった。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "physician", "care_manager"],
+    "actors_secondary": ["pt"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": -2,
+        "reason": "専門職への不信感が爆発し、信頼関係が決定的に崩壊した"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -2,
+        "reason": "孤立感が強まり、心理的安寧が大きく低下した"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": +2,
+        "reason": "妻も途方に暮れ、心理的負担が急増した"
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "patient.trust_and_acceptance <= 2",
+      "auto_occurrence": true,
+      "forced_discussion_minutes": 5,
+      "recovery_condition": "patient.trust_and_acceptance >= 4",
+      "recovery_event_id": 102,
+      "cooldown_loops": 1,
+      "max_occurrences_per_session": 2
+    },
+    "flavor_text": "患者は「もう誰も信用できない」と訪問を拒否し、部屋に引きこもった。信頼関係の再構築が急務。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "信頼関係が決定的に崩壊する",
+        "患者が孤立し、訪問を拒否する",
+        "妻も途方に暮れ、家族全体が危機的状況",
+        "チーム全体で信頼関係の再構築が必要"
+      ],
+      "discussion_triggers": [
+        "信頼関係をどう再構築するか",
+        "患者の不信感の原因は何か",
+        "チーム全体でどう対応するか",
+        "妻の心理的負担をどう軽減するか"
+      ],
+      "constraint_modifiers": {
+        "trust_crisis": "発生",
+        "service_delivery": "停止"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 102,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "【回復】信頼関係の再構築",
+    "body_ja": "チームが患者の不信感の原因を話し合い、傾聴の時間を設けることにした。訪問看護師が患者と1対1で話し、「あなたの気持ちを聞かせてください」と丁寧に傾聴した。患者は少しずつ本音を話し始め、「話を聞いてくれてありがとう」と言った。信頼関係が少しずつ回復し始めた。",
+    "direction": "positive",
+    "urgency": "high",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse"],
+    "actors_secondary": ["physician", "care_manager", "pt"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": +2,
+        "reason": "チームが傾聴の時間を設け、患者の本音を引き出し、信頼関係が回復した"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": +2,
+        "reason": "話を聞いてもらえたことで、患者の気持ちが軽くなった"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": -1,
+        "reason": "患者の状態が改善し、妻の不安が軽減された"
+      }
+    ],
+    "flavor_text": "患者は「話を聞いてくれてありがとう」と言った。傾聴の力が、信頼関係の再構築につながった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "信頼関係が回復し始める",
+        "患者が本音を話すようになる",
+        "妻の不安も軽減される",
+        "チーム全体の連携が強化される"
+      ],
+      "discussion_triggers": [
+        "この経験から何を学んだか",
+        "今後の関係性構築のポイント",
+        "チーム全体でどう共有するか"
+      ],
+      "constraint_modifiers": {
+        "trust_crisis": "解消",
+        "service_delivery": "再開"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 103,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "【閾値】妻の限界",
+    "body_ja": "妻が「もう限界です」「私が倒れたら、夫はどうなるんですか」と訴え、涙を流した。妻の疲労は極限に達しており、体調不良を訴えている。患者は妻の様子に気づいているが、どうしていいか分からず、ただ「悪いな」と繰り返すだけ。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "care_manager"],
+    "actors_secondary": ["physician"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": []
+    },
+    "status_effects": [
+      {
+        "target": "family_0.caregiver_burden",
+        "change": -3,
+        "reason": "妻の介護負担が限界に達し、危機的状況になった"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": +2,
+        "reason": "妻の心理的負担が急増し、涙を流すほど追い詰められている"
+      },
+      {
+        "target": "patient.psychological_wellbeing",
+        "change": -2,
+        "reason": "患者は妻の限界に気づき、罪悪感と無力感に苛まれている"
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "family_0.caregiver_burden >= 9",
+      "auto_occurrence": true,
+      "forced_discussion_minutes": 5,
+      "recovery_condition": "family_0.caregiver_burden <= 7",
+      "recovery_event_id": 104,
+      "cooldown_loops": 1,
+      "max_occurrences_per_session": 2
+    },
+    "flavor_text": "妻は「もう限界です」と涙を流した。緊急の介護負担軽減策が必要。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "妻の限界が明確になる",
+        "緊急の介護負担軽減策が必要",
+        "デイサービス利用やショートステイの検討",
+        "患者の罪悪感と無力感"
+      ],
+      "discussion_triggers": [
+        "妻の限界にどう対応するか",
+        "緊急の介護負担軽減策は何か",
+        "デイサービスやショートステイの利用",
+        "患者の気持ちをどう支えるか"
+      ],
+      "constraint_modifiers": {
+        "family_crisis": "発生",
+        "time_pressure": "最大"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 104,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "【回復】妻の負担軽減",
+    "body_ja": "チームが緊急でデイサービス利用を調整し、週1回の利用が開始された。妻は「やっと自分の時間が持てる」「少し楽になった」と安堵の表情を見せた。患者も「妻に負担をかけていた」と自覚し、デイサービスに行くことを受け入れた。妻の介護負担が軽減され始めた。",
+    "direction": "positive",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["care_manager", "nurse"],
+    "actors_secondary": ["physician"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["resources"]
+    },
+    "status_effects": [
+      {
+        "target": "family_0.caregiver_burden",
+        "change": +3,
+        "reason": "デイサービス利用により、妻の介護負担が大幅に軽減された"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": -2,
+        "reason": "妻の心理的負担が軽減され、安堵の表情が見られた"
+      },
+      {
+        "target": "patient.autonomy_satisfaction",
+        "change": +1,
+        "reason": "患者が自ら妻への負担を自覚し、デイサービスを受け入れた"
+      },
+      {
+        "target": "patient.social_connection",
+        "change": +1,
+        "reason": "デイサービス利用により、社会参加が始まった"
+      }
+    ],
+    "flavor_text": "妻は「やっと自分の時間が持てる」と安堵の表情を見せた。デイサービス利用が、家族全体の負担軽減につながった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "妻の介護負担が軽減される",
+        "妻の心理的負担も軽減される",
+        "患者がデイサービスを受け入れる",
+        "家族全体の状況が改善する"
+      ],
+      "discussion_triggers": [
+        "この経験から何を学んだか",
+        "今後のサービス調整のポイント",
+        "患者の社会参加をどう促すか"
+      ],
+      "constraint_modifiers": {
+        "family_crisis": "解消",
+        "care_sustainability": "増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 105,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "【閾値】SpO2の危機的低下",
+    "body_ja": "訪問看護師が訪問した際、患者のSpO2が{{critical_spo2}}%まで低下しており、顔色も悪く、意識レベルも低下している。看護師は直ちに医師に連絡し、救急搬送を検討している。妻は「こんなことになるなんて」と動揺している。在宅酸素なしでの生活の限界が明確になった。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "transient",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse", "physician"],
+    "actors_secondary": ["care_manager"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.physical_condition",
+        "change": -3,
+        "reason": "SpO2が危機的に低下し、生命の危機に直面している"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": +2,
+        "reason": "妻が動揺し、心理的負担が急増した"
+      }
+    ],
+    "parameters": [
+      {
+        "name": "critical_spo2",
+        "type": "integer",
+        "unit": "%",
+        "min": 80,
+        "max": 85,
+        "examples": [80, 82, 85]
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "patient.physical_condition <= 3",
+      "auto_occurrence": true,
+      "forced_discussion_minutes": 5,
+      "recovery_condition": "patient.physical_condition >= 5",
+      "recovery_event_id": 106,
+      "cooldown_loops": 1,
+      "max_occurrences_per_session": 2
+    },
+    "flavor_text": "患者のSpO2が危機的に低下し、生命の危機に直面している。在宅酸素なしでの生活の限界が明確になった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の生命の危機",
+        "救急搬送の検討",
+        "在宅酸素導入の緊急性",
+        "妻の動揺と心理的負担"
+      ],
+      "discussion_triggers": [
+        "救急搬送すべきか",
+        "在宅酸素を緊急導入すべきか",
+        "患者の意思をどこまで尊重するか",
+        "妻の心理的負担をどう軽減するか"
+      ],
+      "constraint_modifiers": {
+        "life_crisis": "発生",
+        "oxygen_therapy_urgency": "最大"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 106,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "【回復】在宅酸素導入の受容",
+    "body_ja": "患者は危機的状況を経験し、「このままでは死んでしまう」と自覚した。医師が改めて在宅酸素の必要性を説明したところ、患者は「仕方ない、導入する」と受け入れた。在宅酸素導入後、SpO2は安定し、患者の表情も穏やかになった。妻も「これで安心できる」と安堵した。",
+    "direction": "positive",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["home_care"],
+    "actors_primary": ["physician", "nurse"],
+    "actors_secondary": ["care_manager"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.physical_condition",
+        "change": +3,
+        "reason": "在宅酸素導入により、SpO2が安定し、身体状態が大きく改善した"
+      },
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": +1,
+        "reason": "患者が在宅酸素を受け入れ、専門職への信頼が高まった"
+      },
+      {
+        "target": "family_0.psychological_distress",
+        "change": -2,
+        "reason": "妻の不安が軽減され、安心できるようになった"
+      }
+    ],
+    "flavor_text": "患者は「仕方ない、導入する」と在宅酸素を受け入れた。危機的状況が、患者の意識を変えるきっかけになった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の身体状態が改善する",
+        "在宅酸素が導入される",
+        "妻の不安が軽減される",
+        "患者の意識が変わる"
+      ],
+      "discussion_triggers": [
+        "この経験から何を学んだか",
+        "今後の在宅酸素管理のポイント",
+        "患者の意思と安全のバランス"
+      ],
+      "constraint_modifiers": {
+        "life_crisis": "解消",
+        "safety_assurance": "大幅増加"
+      }
+    },
+    "versioning": {
+      "created_by": "Claude (Anthropic)",
+      "version": "3.2",
+      "last_updated": "2025-11-29T00:00:00Z"
+    }
+  }
+]
