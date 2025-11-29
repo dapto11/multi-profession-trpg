@@ -1,6 +1,5 @@
 # SYSTEM_OVERVIEW.md
 
-```markdown
 # 多職種連携TRPG システム概要
 
 **Version 3.2 - 他者評価方式対応版**  
