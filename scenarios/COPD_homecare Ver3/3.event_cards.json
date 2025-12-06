@@ -22,8 +22,8 @@
         "reason": "立ち上がり時のSpO2急低下により身体状態が悪化"
       },
       {
-        "target": "patient.psychological_wellbeing",
-        "change": -1,
+        "target": "patient.psychological_distress",
+        "change": 1,
         "reason": "強い息切れと不安感"
       },
       {
@@ -73,8 +73,8 @@
     },
     "status_effects": [
       {
-        "target": "patient.psychological_wellbeing",
-        "change": -2,
+        "target": "patient.psychological_distress",
+        "change": 2,
         "reason": "希死念慮を示唆する発言"
       },
       {
@@ -138,8 +138,8 @@
         "reason": "支援の必要性を実感"
       },
       {
-        "target": "patient.psychological_wellbeing",
-        "change": -1,
+        "target": "patient.psychological_distress",
+        "change": 1,
         "reason": "妻の体調悪化を知って罪悪感"
       }
     ],
@@ -244,8 +244,8 @@
         "reason": "入浴への恐怖心により自己決定が制限されている"
       },
       {
-        "target": "patient.psychological_wellbeing",
-        "change": -1,
+        "target": "patient.psychological_distress",
+        "change": 1,
         "reason": "入浴への恐怖心"
       },
       {
@@ -461,8 +461,8 @@
     },
     "status_effects": [
       {
-        "target": "patient.psychological_wellbeing",
-        "change": -1,
+        "target": "patient.psychological_distress",
+        "change": 1,
         "reason": "元職場の仲間に弱った姿を見られた羞恥心"
       },
       {
@@ -554,6 +554,62 @@
   },
   {
     "event_id": 11,
+    "category": "E_environment",
+    "subcategory": "local_life",
+    "title_ja": "病院時代の看護助手との再会",
+    "body_ja": "妻が健康診断のために病院を訪れた際、患者が警備員として働いていた頃の看護助手と偶然出会った。看護助手は「田中さん、お元気ですか？ またお会いしたいとみんなで話していたんです」と妻に伝えた。妻が帰宅後、患者にそのことを話すと、患者は「そうか…あの人たちは優しかったな」と懐かしそうに話した。表情は少し明るくなり、「また会えるかな」とつぶやいた。",
+    "direction": "positive",
+    "urgency": "low",
+    "duration": "short_term",
+    "settings": ["home_care"],
+    "actors_primary": ["nurse"],
+    "actors_secondary": [],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": []
+    },
+    "status_effects": [
+      {
+        "target": "patient.social_connection",
+        "change": 1,
+        "reason": "病院時代の知人との再接触への期待"
+      },
+      {
+        "target": "patient.psychological_distress",
+        "change": -1,
+        "reason": "懐かしい思い出により気持ちが軽くなる"
+      },
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": 1,
+        "reason": "病院関係者への親しみが、専門職全般への信頼につながる"
+      }
+    ],
+    "flavor_text": "患者は「また会えるかな」とつぶやいた。病院時代の知人との再会への期待が、患者の心に小さな灯をともした。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の表情が明るくなる",
+        "病院関係者への親しみが再確認される",
+        "外出や人と会うことへの心理的ハードルが下がる"
+      ],
+      "discussion_triggers": [
+        "患者の「また会いたい」という気持ちをどう活かすか",
+        "病院訪問やデイサービス利用の提案のきっかけ",
+        "患者の社会参加を促す方法"
+      ],
+      "constraint_modifiers": {
+        "social_participation_readiness": "増加",
+        "psychological_barrier": "低下"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.1",
+      "version": "1.0",
+      "last_updated": "2025-11-09T00:00:00Z"
+    }
+  },
+  {
+    "event_id": 12,
     "category": "A_medical",
     "subcategory": "metabolic",
     "title_ja": "電解質異常の発見",
@@ -608,7 +664,7 @@
     }
   },
   {
-    "event_id": 12,
+    "event_id": 13,
     "category": "D_services",
     "subcategory": "incident_accident",
     "title_ja": "訪問リハビリのキャンセル",
@@ -625,8 +681,8 @@
     },
     "status_effects": [
       {
-        "target": "patient.psychological_wellbeing",
-        "change": -1,
+        "target": "patient.psychological_distress",
+        "change": 1,
         "reason": "リハビリのキャンセルによる不安"
       },
       {
@@ -663,7 +719,7 @@
     }
   },
   {
-    "event_id": 13,
+    "event_id": 14,
     "category": "B_psych",
     "subcategory": "problem_behavior",
     "title_ja": "在宅酸素への拒否の再燃",
@@ -721,7 +777,7 @@
     }
   },
   {
-    "event_id": 14,
+    "event_id": 15,
     "category": "C_family",
     "subcategory": "challenge_event",
     "title_ja": "長女の訪問頻度の減少",
@@ -748,8 +804,8 @@
         "reason": "家族からの支援が減少"
       },
       {
-        "target": "patient.psychological_wellbeing",
-        "change": -1,
+        "target": "patient.psychological_distress",
+        "change": 1,
         "reason": "娘に迷惑をかけている罪悪感"
       }
     ],
@@ -774,7 +830,7 @@
     }
   },
   {
-    "event_id": 15,
+    "event_id": 16,
     "category": "E_environment",
     "subcategory": "weather_disaster",
     "title_ja": "猛暑による体調悪化",
@@ -832,8 +888,8 @@
     "event_id": 101,
     "category": "B_psych",
     "subcategory": "mental",
-    "title_ja": "【閾値】信頼関係の決定的崩壊",
-    "body_ja": "山田さんが「もう誰も信用できない。みんな自分の都合ばかり押し付けてくる」と激怒。訪問看護師や医師との面会を拒否し、「もう来なくていい」と発言。妻は「どうしたらいいのか」と泣き崩れている。",
+    "title_ja": "【閾値】患者の訪問拒否",
+    "body_ja": "患者が「もう誰も来なくていい」と訪問を拒否した。妻は「どうしたらいいのか分からない」と途方に暮れている。患者は部屋に引きこもり、誰とも話さなくなった。このままでは訪問看護・リハビリが実施できない。",
     "direction": "negative",
     "urgency": "high",
     "duration": "long_term",
@@ -844,33 +900,16 @@
       "primary": "patient_preference",
       "secondary": ["coordination", "family_burden"]
     },
-    "status_effects": [
-      {
-        "target": "patient.trust_and_acceptance",
-        "change": -3,
-        "reason": "信頼関係の決定的崩壊"
-      },
-      {
-        "target": "patient.psychological_wellbeing",
-        "change": -2,
-        "reason": "強い怒りと孤立感"
-      },
-      {
-        "target": "family_0.psychological_distress",
-        "change": 2,
-        "reason": "夫の激怒により強いショック"
-      }
-    ],
+    "status_effects": [],
+    "additional_constraints": "患者が訪問を拒否しており、訪問看護・リハビリが実施できない状態が続いている。チームは関係性を再構築する方法を見つける必要がある。",
     "threshold_trigger": {
       "condition": "patient.trust_and_acceptance <= 2",
       "auto_occurrence": true,
-      "forced_discussion_minutes": 10,
-      "recovery_condition": "patient.trust_and_acceptance >= 4",
-      "recovery_event_id": 102,
-      "cooldown_loops": 1,
-      "max_occurrences_per_session": 2
+      "forced_discussion_minutes": 5,
+      "cooldown_loops": 2,
+      "max_occurrences_per_session": 1
     },
-    "flavor_text": "妻は「夫がこんなに怒るなんて初めて」とショックを受けている。専門職は「一旦距離を置くべきか」と判断に迷っている。",
+    "flavor_text": "妻は「夫がこんなに拒否するなんて初めて」とショックを受けている。専門職は「一旦距離を置くべきか」と判断に迷っている。",
     "gm_effect_guide": {
       "immediate_effects": [
         "緊急多職種カンファレンス",
@@ -884,63 +923,8 @@
       ],
       "constraint_modifiers": {}
     },
-    "versioning": {
-      "created_by": "AI Scenario Generator v3.1",
-      "version": "1.0",
-      "last_updated": "2025-11-09T00:00:00Z"
-    }
-  },
-  {
-    "event_id": 102,
-    "category": "B_psych",
-    "subcategory": "mental",
-    "title_ja": "【回復】信頼関係の回復の兆し",
-    "body_ja": "訪問看護師が「あなたの気持ちを聞かせてください」と時間をかけて傾聴したところ、山田さんが「実は誰も自分の話を聞いてくれないと思っていた」と本音を語る。「もう一度、一緒に考えてみようか」という提案に、本人は涙ぐみながら頷いた。",
-    "direction": "positive",
-    "urgency": "medium",
-    "duration": "long_term",
-    "settings": ["home_care"],
-    "actors_primary": ["nurse", "msw", "patient"],
-    "actors_secondary": ["family"],
-    "tags": {
-      "primary": "patient_preference",
-      "secondary": ["coordination"]
-    },
-    "status_effects": [
-      {
-        "target": "patient.trust_and_acceptance",
-        "change": 3,
-        "reason": "専門職が本人の気持ちを傾聴し、信頼関係が回復"
-      },
-      {
-        "target": "patient.psychological_wellbeing",
-        "change": 2,
-        "reason": "本音を語れたことで心理的安寧が回復"
-      },
-      {
-        "target": "family_0.psychological_distress",
-        "change": -1,
-        "reason": "夫の気持ちが落ち着いたことで不安が軽減"
-      },
-      {
-        "target": "profession.nurse.psychosocial_support",
-        "change": 2,
-        "reason": "傾聴により信頼関係を再構築"
-      }
-    ],
-    "flavor_text": "妻は「やっと夫の本当の気持ちが聞けた」と安堵している。専門職は「傾聴の重要性を再認識した」と振り返っている。",
-    "gm_effect_guide": {
-      "immediate_effects": [
-        "本人の価値観の深い理解",
-        "支援方針の再構築",
-        "傾聴の重要性の再認識"
-      ],
-      "discussion_triggers": [
-        "本人中心のケアの実践",
-        "専門職の関わり方の振り返り",
-        "信頼関係の維持"
-      ],
-      "constraint_modifiers": {}
+    "gm_guidance": {
+      "recovery_guide": "プレイヤーが以下のような対応を実施した場合、Phase 5のステータス調整で『患者.信頼と受容』を回復させることができます:\n\n- 1対1で話す時間を設ける（傾聴） → +1〜+2\n- 妻を通じて患者の気持ちを聞く → +1\n- 病院時代の知人に連絡を取り、仲介してもらう → +1\n- 訪問の頻度や時間を調整し、患者の負担を減らす → +1\n- チーム全体で患者への接し方を見直す → +1〜+2\n\n注意: 特定の方法を強制しない。プレイヤーの創意工夫を尊重する。複数の対応を組み合わせることも可能（最大+3まで）。何も対応しなかった場合、状態は改善しない。"
     },
     "versioning": {
       "created_by": "AI Scenario Generator v3.1",
@@ -952,8 +936,8 @@
     "event_id": 103,
     "category": "C_family",
     "subcategory": "caregiver_family",
-    "title_ja": "【閾値】妻の介護限界",
-    "body_ja": "妻が「もう限界です。夫を施設に入れてください」と涙ながらに訴える。夜も眠れず、腰痛も悪化し、自分も倒れそうだと。本人は妻の訴えを聞いて「自分のせいで」とショックを受けている。",
+    "title_ja": "【閾値】妻の体調不良",
+    "body_ja": "妻が「もう限界です」と訴え、涙を流した。翌日から妻は体調不良で寝込んでおり、介護ができない状態が続いている。患者は「悪いな」と言うが、どうしていいか分からず不安そうにしている。このままでは在宅生活が継続できない。",
     "direction": "negative",
     "urgency": "high",
     "duration": "long_term",
@@ -964,36 +948,14 @@
       "primary": "family_burden",
       "secondary": ["coordination", "resources"]
     },
-    "status_effects": [
-      {
-        "target": "family_0.caregiver_burden",
-        "change": -2,
-        "reason": "限界を訴えたことで一時的に負担感が軽減（表出効果）"
-      },
-      {
-        "target": "family_0.psychological_distress",
-        "change": 2,
-        "reason": "限界を訴えたことへの罪悪感"
-      },
-      {
-        "target": "patient.psychological_wellbeing",
-        "change": -2,
-        "reason": "妻の限界を知ってショック"
-      },
-      {
-        "target": "patient.autonomy_satisfaction",
-        "change": -1,
-        "reason": "施設入所の可能性に自己決定が揺らぐ"
-      }
-    ],
+    "status_effects": [],
+    "additional_constraints": "妻が体調不良で寝込んでおり、今週は介護ができない。患者の日常生活に支障が出ている。チームは緊急の介護負担軽減策を実施する必要がある。",
     "threshold_trigger": {
       "condition": "family_0.caregiver_burden >= 9",
       "auto_occurrence": true,
-      "forced_discussion_minutes": 10,
-      "recovery_condition": "family_0.caregiver_burden <= 6",
-      "recovery_event_id": 104,
-      "cooldown_loops": 1,
-      "max_occurrences_per_session": 2
+      "forced_discussion_minutes": 5,
+      "cooldown_loops": 2,
+      "max_occurrences_per_session": 1
     },
     "flavor_text": "長女は「母がここまで追い詰められていたなんて」と驚いている。専門職は「妻の限界を見極められなかった」と反省している。",
     "gm_effect_guide": {
@@ -1011,68 +973,8 @@
         "resources": "緊急レスパイトケアの必要性"
       }
     },
-    "versioning": {
-      "created_by": "AI Scenario Generator v3.1",
-      "version": "1.0",
-      "last_updated": "2025-11-09T00:00:00Z"
-    }
-  },
-  {
-    "event_id": 104,
-    "category": "C_family",
-    "subcategory": "caregiver_family",
-    "title_ja": "【回復】妻の負担軽減の実現",
-    "body_ja": "ショートステイの利用と訪問介護の増回により、妻の介護負担が大幅に軽減。妻は「久しぶりにゆっくり眠れた」と笑顔を見せる。本人も「妻が元気になって嬉しい」と安心している。長男も少しずつ手伝うようになった。",
-    "direction": "positive",
-    "urgency": "medium",
-    "duration": "long_term",
-    "settings": ["home_care"],
-    "actors_primary": ["care_manager", "msw", "family"],
-    "actors_secondary": ["patient"],
-    "tags": {
-      "primary": "family_burden",
-      "secondary": ["coordination", "resources"]
-    },
-    "status_effects": [
-      {
-        "target": "family_0.caregiver_burden",
-        "change": -3,
-        "reason": "レスパイトケアにより介護負担が大幅に軽減"
-      },
-      {
-        "target": "family_0.psychological_distress",
-        "change": -2,
-        "reason": "休息により心理的苦痛が軽減"
-      },
-      {
-        "target": "family_0.hope_for_support",
-        "change": 2,
-        "reason": "支援が実現したことで期待感が向上"
-      },
-      {
-        "target": "patient.psychological_wellbeing",
-        "change": 1,
-        "reason": "妻が元気になったことで安心"
-      },
-      {
-        "target": "profession.care_manager.resource_coordination",
-        "change": 2,
-        "reason": "適切なサービス調整により負担軽減を実現"
-      }
-    ],
-    "flavor_text": "長女は「母の笑顔を久しぶりに見た」と喜んでいる。専門職は「レスパイトケアの重要性を実感した」と振り返っている。",
-    "gm_effect_guide": {
-      "immediate_effects": [
-        "在宅療養の持続可能性の向上",
-        "家族の結束の強化",
-        "長男の関与の可能性"
-      ],
-      "discussion_triggers": [
-        "レスパイトケアの効果",
-        "家族全体での支援体制",
-        "長男の潜在的介護力の活用"
-      ],
-      "constraint_modifiers": {}
+    "gm_guidance": {
+      "recovery_guide": "プレイヤーが以下のような対応を実施した場合、Phase 5のステータス調整で『家族.介護負担』を軽減させることができます:\n\n- デイサービス利用を開始する → -2\n- ショートステイを利用する → -2\n- 訪問看護の回数を増やす → -1\n- 娘に緊急で来てもらう → -1\n- ホームヘルパーを導入する → -1\n- 患者が妻への依存を減らす努力をする → -1\n\n注意: 特定の方法を強制しない。プレイヤーの創意工夫を尊重する。複数の対応を組み合わせることも可能（最大-3まで）。何も対応しなかった場合、妻の負担はさらに増加する可能性がある（+1）。"
     },
     "versioning": {
       "created_by": "AI Scenario Generator v3.1",
@@ -1084,8 +986,8 @@
     "event_id": 105,
     "category": "A_medical",
     "subcategory": "respiratory",
-    "title_ja": "【閾値】重度の呼吸不全",
-    "body_ja": "山田さんが突然、激しい呼吸困難を訴え、SpO2が75%まで低下。妻が慌てて救急車を要請。病院搬送され、緊急入院となった。医師から「在宅酸素なしでは生命の危険がある」と厳しく告げられる。",
+    "title_ja": "【閾値】患者の急変",
+    "body_ja": "訪問看護師が訪問した際、患者のSpO2が80%まで低下しており、顔色も悪く、意識レベルも低下している。看護師は直ちに医師に連絡した。医師は「このままでは危険です。緊急の対応が必要です」と伝えた。妻は「どうしたらいいんですか」と動揺している。",
     "direction": "negative",
     "urgency": "high",
     "duration": "long_term",
@@ -1096,33 +998,16 @@
       "primary": "safety",
       "secondary": ["patient_preference", "time"]
     },
-    "status_effects": [
-      {
-        "target": "patient.physical_condition",
-        "change": -3,
-        "reason": "重度の呼吸不全により身体状態が危機的"
-      },
-      {
-        "target": "patient.trust_and_acceptance",
-        "change": 2,
-        "reason": "生命の危険を実感し、医学的必要性を受け入れる"
-      },
-      {
-        "target": "family_0.psychological_distress",
-        "change": 3,
-        "reason": "夫の急変により強いショック"
-      }
-    ],
+    "status_effects": [],
+    "additional_constraints": "患者の生命が危険な状態にある。緊急の対応をしなければ、再入院または死亡のリスクが高まる。チームは患者の安全を確保する方法を見つける必要がある。",
     "threshold_trigger": {
-      "condition": "patient.physical_condition <= 2",
+      "condition": "patient.physical_condition <= 3",
       "auto_occurrence": true,
-      "forced_discussion_minutes": 10,
-      "recovery_condition": "patient.physical_condition >= 4 AND patient.trust_and_acceptance >= 5",
-      "recovery_event_id": null,
+      "forced_discussion_minutes": 5,
       "cooldown_loops": 2,
       "max_occurrences_per_session": 1
     },
-    "flavor_text": "妻は「もっと早く説得すればよかった」と後悔している。本人は「こんなに苦しいとは思わなかった」と呟いている。",
+    "flavor_text": "妻は「もっと早く説得すればよかった」と後悔している。患者は「こんなに苦しいとは思わなかった」と呟いている。",
     "gm_effect_guide": {
       "immediate_effects": [
         "在宅酸素療法の緊急導入",
@@ -1131,12 +1016,15 @@
       ],
       "discussion_triggers": [
         "医学的必要性の再認識",
-        "本人の価値観の変化",
+        "患者の価値観の変化",
         "在宅療養の安全性"
       ],
       "constraint_modifiers": {
         "time": "緊急対応が必要"
       }
+    },
+    "gm_guidance": {
+      "recovery_guide": "プレイヤーが以下のような対応を実施した場合、Phase 5のステータス調整で『患者.身体状態』を改善させることができます:\n\n- 救急搬送する（再入院） → +3（ただしシナリオ終了の可能性）\n- 在宅酸素を緊急導入する → +2〜+3\n- 訪問看護の回数を増やし、モニタリングを強化する → +1\n- 患者と家族に危険性を説明し、安静を促す → +1\n- 処方を調整する（利尿剤の増量など） → +1\n\n注意: 特定の方法を強制しない。プレイヤーの創意工夫を尊重する。患者の意思（在宅酸素拒否）とのバランスを考慮する。複数の対応を組み合わせることも可能（最大+3まで）。何も対応しなかった場合、状態はさらに悪化する可能性がある（-1、再入院または死亡）。"
     },
     "versioning": {
       "created_by": "AI Scenario Generator v3.1",
