@@ -1,90 +1,89 @@
 {
-  "scenario_id": "copd_home_discharge_20251109",
-  "title_ja": "COPD高齢者の退院支援と在宅療養の時系列変化",
-  "description_ja": "在宅酸素療法を拒否するCOPD患者の退院調整。本人のプライドと医学的必要性、妻の介護負担、長男の引きこもりという家族の秘密が絡み合う複雑な事例。時系列で状況が変化する3ループ構成。",
+  "scenario_id": "copd_heart_failure_home_01",
+  "title_ja": "退院直後の在宅生活確立と社会的孤立への対応",
+  "description_ja": "COPD・心不全を持つ80代男性の退院直後、在宅酸素拒否と妻への依存、社会的孤立という複合的課題に多職種チームで取り組むシナリオ。患者の尊厳と安全のバランス、家族負担の軽減、職種間の見解の相違を体験する。",
   "setting": "home_care",
   "scenario_complexity": "advanced",
-  "difficulty_hint": "normal",
+  "difficulty_hint": "hard",
   "duration_minutes": 105,
   "target_participants": [
-    "physician",
     "nurse",
-    "pharmacist",
     "pt",
-    "care_manager",
-    "msw",
-    "patient",
-    "family"
+    "physician",
+    "care_manager"
   ],
   "phase_flow": [1, 2, 3, 4, 5],
   "patient": {
     "basic_info": {
       "age": 82,
       "gender": "male",
-      "name": "山田太郎",
-      "living_situation": "with_spouse",
+      "name": "田中一郎",
+      "living_situation": "with_family",
       "residence_type": "house",
-      "mobility": "assistive_device"
+      "mobility": "independent"
     },
     "medical_condition": {
-      "primary_diagnosis": "COPD（慢性閉塞性肺疾患）、心不全増悪後",
+      "primary_diagnosis": "COPD（慢性閉塞性肺疾患）、心不全",
       "secondary_diagnoses": [
-        "陳旧性心筋梗塞",
-        "高血圧症",
-        "加齢性難聴"
+        "心筋梗塞の既往",
+        "労作時呼吸困難",
+        "SpO2低下（労作時88-92%）"
       ],
       "current_medications": [
         {
-          "name": "フロセミド",
+          "name": "利尿剤",
           "dosage": "20mg",
-          "frequency": "1日1回朝",
+          "frequency": "1日1回朝食後",
           "adherence_issues": false
         },
         {
-          "name": "スピリーバ吸入",
-          "dosage": "18μg",
-          "frequency": "1日1回",
+          "name": "気管支拡張薬（吸入）",
+          "dosage": "1回2吸入",
+          "frequency": "1日2回",
           "adherence_issues": false
         },
         {
-          "name": "アムロジピン",
+          "name": "降圧薬",
           "dosage": "5mg",
-          "frequency": "1日1回朝",
+          "frequency": "1日1回朝食後",
           "adherence_issues": false
         }
       ],
       "functional_status": {
         "adl_score": 85,
         "iadl_score": 60,
-        "cognitive_status": "normal"
+        "cognitive_status": "mild_impairment"
       },
       "recent_changes": [
-        "心不全増悪で3週間入院（人工呼吸器使用歴あり）",
-        "立位でSpO2 88%まで低下、5分で94%まで回復",
-        "安静時SpO2 92-93%",
-        "BNP軽度上昇、心エコーEF45%"
+        "心不全増悪により緊急入院、人工呼吸器から離脱",
+        "在宅酸素導入を勧められたが強く拒否",
+        "労作時の息切れが激しく、SpO2が88%まで低下",
+        "歩行は可能だが、立ち上がるだけで息切れ"
       ]
     },
     "psychosocial": {
       "personality_traits": [
-        "元病院警備員としてのプライド",
-        "羞恥心が強い",
-        "妻への依存が強い"
+        "元警備員として病院で長年勤務、顔馴染みが多い",
+        "プライドが高く、「弱った姿を見られたくない」",
+        "妻に依存的で、頻繁に電話をかける",
+        "ネガティブな発言が多い（「早く桶に入りたい」「楽になれない」）"
       ],
       "values_preferences": [
-        "昔のように普通に生活したい",
-        "こんな姿を見られたくない",
-        "元職場のスタッフとの交流を大切にしている"
+        "自宅での生活を続けたい（入院は嫌）",
+        "在宅酸素は「機械をつけたくない」と拒否",
+        "町内会の人に「こんな姿を見られたくない」",
+        "「誰にも会いたくない」と外出を拒否"
       ],
       "concerns_fears": [
-        "酸素チューブをつけることへの強い抵抗感",
-        "入浴への強い恐怖心",
-        "妻が外出することへの不安"
+        "弱った姿を他人に見られることへの恐怖",
+        "入浴への恐怖（「怖いから無理」）",
+        "自分が妻の負担になっていることへの自覚と罪悪感",
+        "社会的孤立への不安（本心では外に出たい）"
       ],
       "goals_wishes": [
-        "楽に呼吸したい（ただし酸素は拒否）",
-        "妻にそばにいてほしい",
-        "早く楽になりたい（希死念慮を示唆）"
+        "自宅で妻と暮らし続けたい",
+        "尊厳を保ちたい（弱った姿を見せたくない）",
+        "本当は外に出たい、人と話したい（隠れた願望）"
       ]
     },
     "status_config": {
@@ -92,31 +91,143 @@
       "status_types": [
         {
           "type": "physical_condition",
-          "initial": 4,
-          "critical_low": 2,
+          "initial": 5,
+          "critical_low": 3,
+          "critical_high": null,
           "label": "身体状態",
-          "description": "呼吸困難、労作時SpO2低下、心不全徴候"
+          "description": "呼吸困難、SpO2低下、心機能の状態",
+          "scenario_specific_description": "労作時の激しい息切れ、SpO2 88-92%、心肺機能の代償能力の低さ。立ち上がるだけでSpO2が低下し、回復に時間がかかる。在宅酸素なしでの生命予後への懸念。",
+          "behavior_anchors": {
+            "plus_2": [
+              "心肺機能の代償能力が向上し、SpO2が5分以内に94-96%まで回復するようになった",
+              "労作時の息切れが軽減し、自宅内や外のポストまで歩けるようになった"
+            ],
+            "plus_1": [
+              "SpO2の低下が一時的で、休息により回復する",
+              "息切れはあるが、日常生活動作（ADL）は自立している"
+            ],
+            "minus_1": [
+              "労作時のSpO2低下が頻繁に起こる",
+              "息切れが激しく、動作が制限される"
+            ],
+            "minus_2": [
+              "SpO2が88%以下に低下し、回復に時間がかかる",
+              "心不全が増悪し、再入院のリスクが高まる"
+            ],
+            "zero_principle": "迷ったら変更しない"
+          }
         },
         {
           "type": "trust_and_acceptance",
-          "initial": 5,
+          "initial": 3,
           "critical_low": 2,
+          "critical_high": null,
           "label": "信頼と受容",
-          "description": "医療者への信頼、治療方針の受け入れ"
+          "description": "専門職への信頼、治療・ケアの受容",
+          "scenario_specific_description": "訪問看護師・PTへの明確な拒否、入浴拒否（「怖いから無理」）、在宅酸素拒否。ケアマネへの苦手意識（「堅苦しくてつまらない」）。一方で、病院時代の顔馴染みの医療者には親しみを持つ。",
+          "behavior_anchors": {
+            "plus_2": [
+              "専門職との関係性が構築され、提案を前向きに受け入れるようになった",
+              "入浴や外出など、当初拒否していたことを自ら希望するようになった"
+            ],
+            "plus_1": [
+              "専門職の訪問を受け入れ、会話ができるようになった",
+              "清拭や見守りでの入浴など、代替案を受け入れた"
+            ],
+            "minus_1": [
+              "専門職の提案を拒否する、会話を避ける",
+              "「あんたには関係ない」など、拒絶的な態度を示す"
+            ],
+            "minus_2": [
+              "専門職の訪問そのものを拒否する",
+              "治療やケアを完全に拒否し、孤立する"
+            ],
+            "zero_principle": "迷ったら変更しない"
+          }
         },
         {
           "type": "autonomy_satisfaction",
-          "initial": 3,
+          "initial": 4,
           "critical_low": 2,
+          "critical_high": null,
           "label": "自己決定の満足",
-          "description": "自分の意思が尊重されている実感"
+          "description": "自分の意思が尊重されているという実感",
+          "scenario_specific_description": "在宅酸素拒否、外出拒否など、本人の意思表示が強い。一方で、「入院は嫌」「自宅で暮らしたい」という希望もある。専門職が一方的に説明すると、自己決定が脅かされたと感じる。",
+          "behavior_anchors": {
+            "plus_2": [
+              "専門職が本人の意思を深く理解し、それに沿った提案を行った",
+              "本人が「自分で決めた」と実感できる選択肢を提供した"
+            ],
+            "plus_1": [
+              "専門職が本人の希望を尋ね、尊重する姿勢を示した",
+              "本人の質問に丁寧に答え、安心感を与えた"
+            ],
+            "minus_1": [
+              "専門職が一方的に説明し、本人の意見を聞かなかった",
+              "本人の不安を軽視し、「大丈夫」と流した"
+            ],
+            "minus_2": [
+              "専門職が本人の拒否を無視し、強制的に進めた",
+              "本人の価値観を否定し、専門職の判断を押し付けた"
+            ],
+            "zero_principle": "迷ったら変更しない"
+          }
         },
         {
-          "type": "psychological_wellbeing",
-          "initial": 3,
-          "critical_low": 2,
-          "label": "心理的安寧",
-          "description": "希死念慮、不安、恐怖心の程度"
+          "type": "psychological_distress",
+          "initial": 7,
+          "critical_low": null,
+          "critical_high": 8,
+          "label": "心理的苦痛",
+          "description": "不安、抑うつ、希死念慮の程度",
+          "scenario_specific_description": "「早く桶に入りたい」「楽になれない」などネガティブな発言が繰り返される。社会的孤立（「誰にも会いたくない」）と、本心では外に出たいという葛藤。妻への依存と罪悪感。",
+          "behavior_anchors": {
+            "plus_2": [
+              "希死念慮が強まり、具体的な計画を口にする",
+              "完全に孤立し、誰とも話さなくなった"
+            ],
+            "plus_1": [
+              "ネガティブな発言が続く、希死念慮が繰り返される",
+              "孤立感が強まり、会話を避けるようになった"
+            ],
+            "minus_1": [
+              "ネガティブな発言が減り、会話が増えた",
+              "専門職との関係性が構築され、本心を話すようになった"
+            ],
+            "minus_2": [
+              "前向きな発言が増え、希死念慮が消失した",
+              "外出やデイサービス利用など、社会参加への意欲が見られた"
+            ],
+            "zero_principle": "迷ったら変更しない"
+          }
+        },
+        {
+          "type": "social_connection",
+          "initial": 2,
+          "critical_low": 1,
+          "critical_high": null,
+          "label": "社会的つながり",
+          "description": "他者との交流、社会参加の状況",
+          "scenario_specific_description": "町内会活動をしていたが、「こんな姿を見られたくない」と外出を拒否。妻以外との交流がほとんどない。本心では外に出たい、人と話したいという願望がある。デイサービス利用が社会参加のきっかけになる可能性。",
+          "behavior_anchors": {
+            "plus_2": [
+              "デイサービス利用を開始し、他者との交流が生まれた",
+              "町内会の人と再び交流するようになった"
+            ],
+            "plus_1": [
+              "外出への拒否感が薄れ、ポストまで新聞を取りに行くようになった",
+              "専門職との会話を楽しむようになった"
+            ],
+            "minus_1": [
+              "外出を拒否し、自宅に引きこもる",
+              "妻以外との交流を避ける"
+            ],
+            "minus_2": [
+              "完全に孤立し、妻との会話も減る",
+              "社会参加への意欲が完全に失われる"
+            ],
+            "zero_principle": "迷ったら変更しない"
+          }
         }
       ]
     }
@@ -128,21 +239,22 @@
       "age": 80,
       "gender": "female",
       "involvement_level": "primary",
-      "availability": "常時在宅だが外出困難",
+      "availability": "24時間対応可能だが、買い物や外出時に夫から頻繁に電話がかかる",
       "capabilities": [
-        "服薬管理",
-        "食事準備",
-        "見守り"
+        "日常的な介護（食事準備、服薬管理、見守り）",
+        "夫の状態変化への気づき",
+        "専門職との連絡調整"
       ],
       "limitations": [
-        "高齢による体力低下",
-        "腰痛",
-        "夫の依存による外出困難"
+        "80代で体力的に限界がある",
+        "夫の依存的な態度に疲弊している",
+        "引きこもりの息子への対応で精神的に疲れている"
       ],
       "concerns": [
-        "自分が倒れたらどうなるか",
-        "長男のことを他人に知られたくない",
-        "夫の希死念慮への不安"
+        "夫が自分に依存しすぎている（買い物に出るたびに電話がかかる）",
+        "自分が倒れたら夫の介護ができなくなる",
+        "引きこもりの息子のことを誰にも相談できない",
+        "夫の希死念慮に不安を感じている"
       ],
       "status_config": {
         "enabled": true,
@@ -150,326 +262,303 @@
           {
             "type": "caregiver_burden",
             "initial": 7,
+            "critical_low": null,
             "critical_high": 9,
             "label": "介護負担",
-            "description": "身体的・心理的・時間的負担の総合"
+            "description": "日常的な介護による身体的・精神的負担",
+            "scenario_specific_description": "夫の依存的な態度（買い物に出るたびに電話）、24時間の見守り、引きこもりの息子への対応、自分の時間がない。80代で体力的に限界が近い。",
+            "behavior_anchors": {
+              "plus_2": [
+                "妻が倒れる、または介護を放棄する",
+                "夫婦関係が悪化し、妻が「もう限界」と訴える"
+              ],
+              "plus_1": [
+                "夫の依存が続き、妻の自由時間が減る",
+                "妻の疲労が蓄積し、体調不良を訴えるようになった"
+              ],
+              "minus_1": [
+                "訪問看護・リハの利用により、妻の負担が一部軽減された",
+                "夫が妻への依存を自覚し、電話の頻度が減った"
+              ],
+              "minus_2": [
+                "夫の依存が軽減し、妻が自由に外出できるようになった",
+                "デイサービス利用により、妻の介護負担が大幅に軽減された"
+              ],
+              "zero_principle": "迷ったら変更しない"
+            }
           },
           {
             "type": "hope_for_support",
             "initial": 6,
             "critical_low": 3,
+            "critical_high": null,
             "label": "支援への期待",
-            "description": "専門職や社会資源への期待感"
+            "description": "専門職や社会資源への期待・信頼",
+            "scenario_specific_description": "訪問看護・リハ、ケアマネへの期待。一方で、夫が専門職を拒否することへの不安。デイサービス利用により、妻の負担が軽減されることへの期待。",
+            "behavior_anchors": {
+              "plus_2": [
+                "専門職が妻の負担を理解し、具体的な支援策を提示した",
+                "デイサービス利用が実現し、妻が「助かった」と実感した"
+              ],
+              "plus_1": [
+                "専門職が妻の話を傾聴し、共感を示した",
+                "訪問看護・リハが妻の負担軽減につながった"
+              ],
+              "minus_1": [
+                "専門職が妻の負担を軽視した",
+                "夫が専門職を拒否し、妻の期待が裏切られた"
+              ],
+              "minus_2": [
+                "専門職が妻の訴えを無視し、孤立感が強まった",
+                "支援が得られず、妻が「もう誰も助けてくれない」と絶望した"
+              ],
+              "zero_principle": "迷ったら変更しない"
+            }
           },
           {
             "type": "psychological_distress",
             "initial": 6,
+            "critical_low": null,
             "critical_high": 8,
             "label": "心理的苦痛",
-            "description": "不安、恐怖、孤立感"
+            "description": "不安、抑うつ、孤立感",
+            "scenario_specific_description": "夫の依存と希死念慮への不安、引きこもりの息子への悩み、自分が倒れたらどうなるかという恐怖。誰にも相談できない孤立感。",
+            "behavior_anchors": {
+              "plus_2": [
+                "妻が抑うつ状態に陥る、または「もう限界」と訴える",
+                "妻が介護を放棄する、または自身の健康を害する"
+              ],
+              "plus_1": [
+                "妻の不安が続き、孤立感が強まる",
+                "夫の希死念慮が続き、妻の心理的負担が増す"
+              ],
+              "minus_1": [
+                "専門職が妻の不安に共感し、安心感を与えた",
+                "夫の状態が安定し、妻の不安が軽減された"
+              ],
+              "minus_2": [
+                "専門職が妻の悩みを傾聴し、具体的な支援策を提示した",
+                "妻が「話を聞いてもらえて楽になった」と実感した"
+              ],
+              "zero_principle": "迷ったら変更しない"
+            }
           }
         ]
       }
     },
     {
-      "relationship": "長女",
-      "age": 52,
-      "gender": "female",
-      "involvement_level": "secondary",
-      "availability": "月1-2回訪問（車で2時間）",
-      "capabilities": [
-        "情報収集",
-        "意思決定支援",
-        "経済的援助（限定的）"
-      ],
+      "relationship": "長男",
+      "age": null,
+      "gender": "male",
+      "involvement_level": "minimal",
+      "availability": "同居しているが、引きこもりで介護力はない",
+      "capabilities": [],
       "limitations": [
-        "遠方居住",
-        "仕事あり",
-        "頻繁な訪問困難"
+        "引きこもりで社会との接点がない",
+        "家族との関係が希薄",
+        "介護に参加できない"
       ],
       "concerns": [
-        "両親の健康",
-        "母の介護負担",
-        "兄の引きこもり"
+        "家族が長男について話したがらない",
+        "長男の存在が家族の負担になっている可能性"
       ],
       "status_config": {
-        "enabled": true,
-        "status_types": [
-          {
-            "type": "psychological_distress",
-            "initial": 5,
-            "critical_high": 7,
-            "label": "心理的苦痛",
-            "description": "両親への心配、兄への懸念"
-          },
-          {
-            "type": "information_needs",
-            "initial": 7,
-            "critical_low": 4,
-            "label": "情報ニーズ",
-            "description": "両親の状況を知りたい"
-          }
-        ]
+        "enabled": false
+      }
+    },
+    {
+      "relationship": "娘",
+      "age": null,
+      "gender": "female",
+      "involvement_level": "distant",
+      "availability": "車で2時間の距離に別居、緊急時のみ対応可能",
+      "capabilities": [
+        "緊急時の駆けつけ",
+        "経済的支援（必要に応じて）"
+      ],
+      "limitations": [
+        "距離が遠く、日常的な支援は困難",
+        "自身の生活もあり、頻繁に訪問できない"
+      ],
+      "concerns": [
+        "両親の介護負担",
+        "引きこもりの兄への心配"
+      ],
+      "status_config": {
+        "enabled": false
       }
     }
   ],
   "family_as_role": true,
   "initial_situation": {
-    "trigger_event": "心不全増悪による3週間の入院治療後、退院調整開始。医師は在宅酸素療法を強く推奨するが、本人は「こんな姿を見られたくない」と強く拒否。退院期限が迫る中、多職種カンファレンスを開催。",
+    "trigger_event": "心不全増悪による緊急入院から退院、在宅生活の再開",
     "current_services": [
       {
-        "service_type": "入院治療",
-        "provider": "急性期病院",
-        "frequency": "3週間",
-        "effectiveness": "effective"
+        "service_type": "訪問診療",
+        "provider": "新規の訪問医（病院主治医からの引き継ぎ）",
+        "frequency": "月2回",
+        "effectiveness": "unknown"
+      },
+      {
+        "service_type": "訪問看護",
+        "provider": "訪問看護ステーション（初見）",
+        "frequency": "週2回（体調確認、入浴介助）",
+        "effectiveness": "unknown"
+      },
+      {
+        "service_type": "訪問リハビリ",
+        "provider": "訪問看護ステーション（初見、看護師と同じステーション）",
+        "frequency": "週2回（残存機能の維持・向上）",
+        "effectiveness": "unknown"
       }
     ],
     "immediate_concerns": [
-      "退院期限が迫っている（3日〜2週間）",
-      "本人の在宅酸素への強い拒否",
-      "妻の介護負担が限界に近い",
-      "本人の希死念慮を示唆する発言",
-      "長男の引きこもりという家族の秘密"
+      "在宅酸素を拒否しており、SpO2低下時の対応が不明確",
+      "訪問看護師・PTへの明確な拒否があり、関係性構築が困難",
+      "入浴拒否（「怖いから無理」）、清拭での対応が必要",
+      "妻への依存が強く、妻の介護負担が大きい",
+      "ネガティブな発言（希死念慮）が繰り返される",
+      "社会的孤立（「誰にも会いたくない」）",
+      "ケアマネとの関係性が構築できていない"
     ],
     "available_resources": [
-      "訪問診療医（月2回が限度）",
-      "訪問看護（週2-3回、制約により異なる）",
-      "訪問薬剤管理（月2回まで）",
-      "訪問リハビリ（週1-2回、制約により異なる）",
-      "訪問介護（週2回、30分、制約により異なる）",
-      "デイサービス（空きあり、本人拒否）",
-      "要介護2（限度額19,705単位/月）"
+      "訪問診療、訪問看護、訪問リハビリ",
+      "介護保険（要介護2）の範囲内でサービス追加可能",
+      "デイサービス（将来的な利用候補）",
+      "病院時代の顔馴染みの医療者との関係性"
     ],
     "environmental_factors": [
-      "下町の閑静な住宅街",
-      "古い戸建て住宅、手すり設置済み",
-      "近所との関係は疎遠になりつつある",
-      "元職場（病院）との交流あり"
+      "戸建ての古い家、手すり設置済み",
+      "下町の閑静な住宅街、町内会活動あり",
+      "妻と長男（引きこもり）と同居",
+      "娘は車で2時間の距離に別居"
     ]
   },
   "learning_objectives": {
     "primary_objectives": [
-      "医学的必要性と本人の価値観の対立を体験し、自己決定権の尊重と安全確保のバランスを考える",
-      "家族の秘密（長男の引きこもり）が支援計画に与える影響を理解し、家族システム全体への視点を獲得する",
-      "時間的制約の中で多職種が協働し、持続可能な在宅療養計画を立案する"
+      "患者の意思（在宅酸素拒否、外出拒否）と医学的必要性のバランスを体験する",
+      "家族負担（妻への依存）と患者の尊厳のジレンマを理解する",
+      "職種間の見解の相違（ケアマネの慎重姿勢 vs 看護師の積極的提案）を調整する"
     ],
     "secondary_objectives": [
-      "希死念慮を示唆する発言への多職種での対応を学ぶ",
-      "介護者の限界を見極め、適切な介入タイミングを判断する",
-      "職種間の優先順位の違いを理解し、共通目標を見出す"
+      "社会的孤立への多職種アプローチを体験する",
+      "関係性構築の重要性（拒否から受容へのプロセス）を学ぶ"
     ],
     "target_tags": [
-      "safety",
       "patient_preference",
       "family_burden",
-      "time",
+      "safety",
+      "function",
       "coordination"
     ],
     "competencies": [
       "patient_centered_care",
       "family_engagement",
-      "shared_decision_making",
       "conflict_resolution",
+      "communication",
       "collaboration"
     ]
   },
   "profession_cards_config": {
-    "physician": {
+    "nurse": {
       "known_info_override": [
-        "COPD、陳旧性心筋梗塞、高血圧症",
-        "心不全増悪で入院、人工呼吸器使用歴あり",
-        "立位SpO2 88%、安静時92-93%",
-        "BNP軽度上昇、心エコーEF45%",
-        "在宅酸素療法の医学的適応あり",
-        "服薬アドヒアランス良好"
+        "患者は訪問看護師に当初明確な拒否を示していた",
+        "入浴拒否（「怖いから無理」）があり、清拭で対応中",
+        "妻が介護負担に疲弊している様子が観察される",
+        "患者のネガティブな発言（「早く桶に入りたい」）が繰り返される"
       ],
       "objectives": {
-        "primary_goal": "医学的に必要な在宅酸素療法を導入し、心肺機能の悪化を防ぐ",
+        "primary_goal": "患者との信頼関係を構築し、安全な在宅生活を支援する。妻の介護負担を軽減し、患者の社会参加を促す。",
         "success_criteria": [
-          "在宅酸素療法の導入、または医学的に妥当な代替案の合意",
-          "急変時対応プロトコルの確立",
-          "心不全管理の継続体制の構築",
-          "本人・家族が治療方針を理解し納得している",
-          "退院後の医療体制が整っている"
+          "患者が訪問看護を受け入れ、入浴介助が可能になる",
+          "妻の介護負担が軽減される（デイサービス利用など）",
+          "患者の心理的安寧が向上する（ネガティブな発言が減る）",
+          "患者の社会的つながりが回復する（外出、デイサービス利用）"
         ],
         "engagement_triggers": [
-          "在宅酸素療法の必要性を説明する場面",
-          "本人の拒否に対して医学的リスクを伝える場面",
-          "代替案を提示する場面",
-          "急変リスクについて議論する場面",
-          "他職種から医学的判断を求められる場面"
+          "患者が拒否的な態度を示したとき",
+          "妻が介護負担を訴えたとき",
+          "患者のネガティブな発言（希死念慮）が聞かれたとき",
+          "SpO2低下時の対応が議論されるとき",
+          "デイサービス利用が提案されるとき",
+          "他職種（特にケアマネ）との見解の相違が生じたとき"
         ],
         "status_tracking": {
           "enabled": true,
           "status_types": [
             {
               "type": "patient_safety_assurance",
-              "initial": 4,
-              "target": 8,
-              "label": "患者安全確保"
+              "initial": 5,
+              "target": 7,
+              "label": "患者安全確保",
+              "scenario_specific_description": "SpO2低下時の対応、転倒予防、在宅酸素拒否への対応。患者の安全を確保しながら、本人の意思を尊重するバランスを取る。"
             },
             {
-              "type": "symptom_management",
+              "type": "family_advocacy",
               "initial": 5,
               "target": 8,
-              "label": "症状管理"
+              "label": "家族代弁",
+              "scenario_specific_description": "妻の介護負担を観察し、チームに報告する。妻の気持ちを代弁し、デイサービス利用など具体的な支援策を提案する。"
             },
-            {
-              "type": "collaboration_effectiveness",
-              "initial": 5,
-              "target": 8,
-              "label": "連携効果"
-            }
-          ]
-        }
-      },
-      "special_concerns": [
-        "在宅酸素なしでの生命予後への懸念",
-        "心不全悪化のリスク",
-        "急変時の対応体制"
-      ],
-      "constraints_override": [
-        "訪問診療は月2回が限度",
-        "退院期限が迫っている"
-      ]
-    },
-    "nurse": {
-      "known_info_override": [
-        "入院中の観察で本人の心理状態を把握",
-        "入浴への強い恐怖心",
-        "妻への依存が強い",
-        "「早く楽になりたい」という発言",
-        "元病院警備員としてのプライド",
-        "妻の介護負担が大きい"
-      ],
-      "objectives": {
-        "primary_goal": "本人の心理的ケアと妻の負担軽減を実現し、安心して在宅療養できる環境を整える",
-        "success_criteria": [
-          "本人の不安や恐怖心が軽減されている",
-          "妻の介護負担が軽減される具体策が決まっている",
-          "本人・家族が安心感を持てている",
-          "希死念慮への対応が計画に含まれている",
-          "訪問看護の役割が明確になっている"
-        ],
-        "engagement_triggers": [
-          "本人の心理状態について報告する場面",
-          "妻の介護負担について発言する場面",
-          "入浴の恐怖心について説明する場面",
-          "希死念慮への対応を提案する場面",
-          "医師の医学的判断と本人の気持ちの間で調整する場面"
-        ],
-        "status_tracking": {
-          "enabled": true,
-          "status_types": [
             {
               "type": "psychosocial_support",
               "initial": 5,
               "target": 8,
-              "label": "心理社会的支援"
-            },
-            {
-              "type": "family_advocacy",
-              "initial": 6,
-              "target": 8,
-              "label": "家族代弁"
+              "label": "心理社会的支援",
+              "scenario_specific_description": "患者のネガティブな発言（希死念慮）への対応、社会的孤立への支援。患者の本心（本当は外に出たい）を引き出し、デイサービス利用につなげる。"
             },
             {
               "type": "collaboration_effectiveness",
               "initial": 5,
-              "target": 8,
-              "label": "連携効果"
+              "target": 7,
+              "label": "連携効果",
+              "scenario_specific_description": "PT、医師、ケアマネとの情報共有と役割分担。特にケアマネとの見解の相違を調整し、患者の利益を最優先にする。"
             }
+          ]
+        },
+        "peer_evaluation_guide": {
+          "self_declaration_template": "私の『家族代弁』について評価をお願いします。今回のループで、妻の介護負担を観察し、チームに報告しました。また、デイサービス利用を提案しました。",
+          "evaluation_examples": [
+            "妻の介護負担を観察し、具体的にチームに報告した → +1に賛成",
+            "妻の気持ちを代弁し、デイサービス利用など具体的な支援策を提案した → +1に賛成",
+            "妻の潜在的なニーズ（自分の時間が欲しい）を発見し、適切な支援を実現した → +2に賛成",
+            "妻の負担を見逃した、または代弁が不十分だった → -1に賛成",
+            "妻の限界を見極められず、妻が崩壊寸前になった → -2に賛成"
+          ],
+          "evaluation_focus_points": [
+            "妻の非言語的サイン（疲労、不安）への気づき",
+            "妻の負担を具体的にチームに伝える力",
+            "妻の潜在的なニーズ（自分の時間、休息）を引き出す力"
           ]
         }
       },
       "special_concerns": [
-        "本人の希死念慮",
-        "妻の限界",
-        "入浴の安全性"
-      ],
-      "constraints_override": [
-        "訪問看護は週2-3回が限度",
-        "医療処置のみ、生活援助不可"
-      ]
-    },
-    "pharmacist": {
-      "known_info_override": [
-        "服薬アドヒアランス良好",
-        "吸入手技も問題なし",
-        "フロセミド使用中（電解質管理必要）",
-        "スピリーバ吸入、アムロジピン服用中",
-        "加齢性難聴あり"
-      ],
-      "objectives": {
-        "primary_goal": "服薬管理を継続し、副作用モニタリング体制を構築する",
-        "success_criteria": [
-          "訪問薬剤管理の体制が整っている",
-          "電解質管理の計画が立てられている",
-          "副作用モニタリングの役割分担が明確",
-          "本人・家族が服薬の重要性を理解している",
-          "吸入手技の継続確認体制が決まっている"
-        ],
-        "engagement_triggers": [
-          "服薬管理について説明する場面",
-          "電解質管理の重要性を伝える場面",
-          "副作用モニタリングの役割を提案する場面",
-          "在宅酸素と薬物療法の関係を説明する場面"
-        ],
-        "status_tracking": {
-          "enabled": true,
-          "status_types": [
-            {
-              "type": "medication_optimization",
-              "initial": 7,
-              "target": 8,
-              "label": "服薬最適化"
-            },
-            {
-              "type": "patient_safety_assurance",
-              "initial": 6,
-              "target": 8,
-              "label": "患者安全確保"
-            },
-            {
-              "type": "collaboration_effectiveness",
-              "initial": 5,
-              "target": 8,
-              "label": "連携効果"
-            }
-          ]
-        }
-      },
-      "special_concerns": [
-        "利尿剤による電解質異常",
-        "多剤併用のリスク"
-      ],
-      "constraints_override": [
-        "訪問薬剤管理は月2回まで"
+        "患者の拒否的態度への対応",
+        "妻の介護負担の軽減",
+        "ケアマネとの見解の相違"
       ]
     },
     "pt": {
       "known_info_override": [
-        "立位でSpO2 88%まで低下",
-        "歩行時の息切れ著明",
-        "入浴への強い恐怖心",
-        "ADL 85点、IADL 60点",
-        "転倒リスクあり"
+        "患者は訪問リハビリに当初明確な拒否を示していた",
+        "労作時の息切れが激しく、SpO2が88-92%まで低下する",
+        "歩行は可能だが、立ち上がるだけで息切れがある",
+        "心肺機能の代償能力が低く、SpO2回復に時間がかかる"
       ],
       "objectives": {
-        "primary_goal": "呼吸リハビリと歩行訓練により、活動性を維持・向上させる",
+        "primary_goal": "患者の残存機能を維持・向上させ、安全な在宅生活を支援する。患者との信頼関係を構築し、リハビリを受け入れてもらう。",
         "success_criteria": [
-          "訪問リハビリの頻度・内容が決まっている",
-          "運動時SpO2モニタリングの計画がある",
-          "転倒予防策が講じられている",
-          "本人が無理なく取り組める運動プログラムが提案されている",
-          "活動性向上の具体的目標が設定されている"
+          "患者がリハビリを受け入れ、関係性が構築される",
+          "心肺機能の代償能力が向上する（SpO2回復時間の短縮）",
+          "ADLが維持・向上する（自宅内や外のポストまで歩ける）",
+          "患者の状態が安定し、将来的なデイサービス移行の可能性を検討できる"
         ],
         "engagement_triggers": [
-          "呼吸リハビリの重要性を説明する場面",
-          "運動時のSpO2低下について報告する場面",
-          "転倒リスクについて発言する場面",
-          "在宅酸素とリハビリの関係を説明する場面",
-          "本人の恐怖心に配慮したプログラムを提案する場面"
+          "患者が拒否的な態度を示したとき",
+          "SpO2低下時の対応が議論されるとき",
+          "リハビリの目標達成が議論されるとき",
+          "デイサービス移行が提案されるとき",
+          "ケアマネが訪問リハビリの継続を主張したとき"
         ],
         "status_tracking": {
           "enabled": true,
@@ -477,329 +566,125 @@
             {
               "type": "rehabilitation_progress",
               "initial": 5,
+              "target": 8,
+              "label": "リハビリ進捗",
+              "scenario_specific_description": "心肺機能の代償能力の向上、SpO2回復時間の短縮、ADLの維持・向上を目指す。退院直後で患者は拒否的だが、関係性を構築しながらリハビリを進め、段階的に機能改善を図る。"
+            },
+            {
+              "type": "patient_safety_assurance",
+              "initial": 5,
               "target": 7,
-              "label": "リハビリ進捗"
+              "label": "患者安全確保",
+              "scenario_specific_description": "リハビリ中のSpO2モニタリング、転倒予防、過負荷の回避。患者の安全を確保しながら、適切な負荷でリハビリを進める。"
+            },
+            {
+              "type": "information_provision",
+              "initial": 5,
+              "target": 7,
+              "label": "情報提供",
+              "scenario_specific_description": "リハビリの目的・効果を患者・家族にわかりやすく説明する。デイサービス移行のメリットを伝え、理解を促す。"
+            },
+            {
+              "type": "collaboration_effectiveness",
+              "initial": 5,
+              "target": 7,
+              "label": "連携効果",
+              "scenario_specific_description": "看護師、医師、ケアマネとの情報共有と役割分担。特にケアマネとの見解の相違（訪問リハビリ継続 vs デイサービス移行）を調整する。"
+            }
+          ]
+        },
+        "peer_evaluation_guide": {
+          "self_declaration_template": "私の『リハビリ進捗』について評価をお願いします。今回のループで、患者の心肺機能の代償能力が向上し、SpO2回復時間が短縮しました。また、デイサービス移行を提案しました。",
+          "evaluation_examples": [
+            "患者の心肺機能の代償能力が向上し、SpO2回復時間が短縮した → +1に賛成",
+            "ADLが維持・向上し、患者が自宅内や外のポストまで歩けるようになった → +1に賛成",
+            "リハビリの目標をほぼ達成し、デイサービス移行を適切に提案した → +2に賛成",
+            "リハビリの進捗が遅れた、または効果が不十分だった → -1に賛成",
+            "過負荷により患者の状態が悪化した、またはリハビリが中断した → -2に賛成"
+          ],
+          "evaluation_focus_points": [
+            "心肺機能の代償能力向上への貢献",
+            "リハビリの目標達成度の適切な評価",
+            "デイサービス移行の適切なタイミングの判断"
+          ]
+        }
+      },
+      "special_concerns": [
+        "患者の拒否的態度への対応",
+        "リハビリ目標達成後の撤退時期",
+        "ケアマネとの見解の相違"
+      ]
+    },
+    "physician": {
+      "known_info_override": [
+        "患者は在宅酸素導入を強く拒否している",
+        "心不全増悪により緊急入院、人工呼吸器から離脱した",
+        "BNPは少し高い程度で、心機能の検査上は大きな問題はない",
+        "労作時のSpO2低下が顕著で、在宅酸素なしでの生命予後に懸念がある"
+      ],
+      "objectives": {
+        "primary_goal": "患者の生命予後を守りながら、本人の意思を尊重する。在宅酸素導入の必要性を説明し、理解を促す。",
+        "success_criteria": [
+          "在宅酸素導入の必要性を患者・家族に理解してもらう",
+          "患者の安全を確保しながら、本人の意思を尊重する",
+          "心不全の再増悪を予防する（再入院を避ける）",
+          "患者のQOL（社会参加、心理的安寧）を向上させる"
+        ],
+        "engagement_triggers": [
+          "在宅酸素導入が議論されるとき",
+          "SpO2低下時の対応が議論されるとき",
+          "患者の安全と本人の意思のバランスが問題になるとき",
+          "デイサービス利用が提案されるとき（医学的安全性の確認）",
+          "患者のネガティブな発言（希死念慮）が聞かれたとき"
+        ],
+        "status_tracking": {
+          "enabled": true,
+          "status_types": [
+            {
+              "type": "symptom_management",
+              "initial": 5,
+              "target": 7,
+              "label": "症状管理",
+              "scenario_specific_description": "呼吸困難、SpO2低下、心不全の管理。在宅酸素導入の判断、処方調整（利尿剤、気管支拡張薬）。患者の安全を確保しながら、本人の意思を尊重する。"
             },
             {
               "type": "patient_safety_assurance",
               "initial": 5,
               "target": 8,
-              "label": "患者安全確保"
+              "label": "患者安全確保",
+              "scenario_specific_description": "在宅酸素なしでの生命予後への懸念、SpO2低下時の対応、心不全再増悪の予防。患者の安全を最優先にしながら、本人の意思を尊重するバランスを取る。"
+            },
+            {
+              "type": "information_provision",
+              "initial": 5,
+              "target": 7,
+              "label": "情報提供",
+              "scenario_specific_description": "在宅酸素導入の必要性、SpO2低下のリスク、心不全再増悪の可能性を患者・家族にわかりやすく説明する。一方的な説明ではなく、患者の不安や疑問に丁寧に答える。"
             },
             {
               "type": "collaboration_effectiveness",
               "initial": 5,
-              "target": 8,
-              "label": "連携効果"
+              "target": 7,
+              "label": "連携効果",
+              "scenario_specific_description": "看護師、PT、ケアマネとの情報共有と役割分担。特に在宅酸素導入やデイサービス利用について、医学的見地から助言する。"
             }
+          ]
+        },
+        "peer_evaluation_guide": {
+          "self_declaration_template": "私の『症状管理』について評価をお願いします。今回のループで、患者の呼吸状態を評価し、在宅酸素導入の必要性を説明しました。また、処方調整を提案しました。",
+          "evaluation_examples": [
+            "患者の呼吸状態を適切に評価し、在宅酸素導入の必要性を説明した → +1に賛成",
+            "処方調整により、患者の症状が安定した → +1に賛成",
+            "患者の安全を確保しながら、本人の意思を尊重するバランスを取った → +2に賛成",
+            "在宅酸素導入の説明が一方的で、患者の不安を軽視した → -1に賛成",
+            "患者の安全を無視し、本人の意思のみを尊重した（または逆） → -2に賛成"
+          ],
+          "evaluation_focus_points": [
+            "在宅酸素導入の必要性の説明の適切性",
+            "患者の安全と本人の意思のバランスの取り方",
+            "患者・家族への情報提供のわかりやすさ"
           ]
         }
       },
       "special_concerns": [
-        "運動時のSpO2低下",
-        "転倒リスク",
-        "本人の恐怖心"
-      ],
-      "constraints_override": [
-        "訪問リハビリは週1-2回が限度"
-      ]
-    },
-    "care_manager": {
-      "known_info_override": [
-        "要介護2（限度額19,705単位/月）",
-        "区分変更申請は却下済み（再申請は6ヶ月後）",
-        "年金収入のみ（150,000円/月）",
-        "デイサービスに空きあり（本人拒否）",
-        "土日のサービス提供不可"
-      ],
-      "objectives": {
-        "primary_goal": "介護保険制度内で持続可能なサービス体制を構築する",
-        "success_criteria": [
-          "限度額内でサービスが調整されている",
-          "本人・家族が納得できるサービス内容",
-          "妻の負担軽減につながるサービスが組み込まれている",
-          "緊急時の対応体制が整っている",
-          "退院後3日以内にサービス開始できる"
-        ],
-        "engagement_triggers": [
-          "介護保険の限度額について説明する場面",
-          "サービス調整の現実的な制約を伝える場面",
-          "デイサービス利用を提案する場面",
-          "妻のレスパイトについて発言する場面",
-          "他職種の提案と制度の整合性を調整する場面"
-        ],
-        "status_tracking": {
-          "enabled": true,
-          "status_types": [
-            {
-              "type": "resource_coordination",
-              "initial": 5,
-              "target": 8,
-              "label": "資源調整"
-            },
-            {
-              "type": "system_navigation",
-              "initial": 6,
-              "target": 8,
-              "label": "制度活用支援"
-            },
-            {
-              "type": "collaboration_effectiveness",
-              "initial": 5,
-              "target": 8,
-              "label": "連携効果"
-            }
-          ]
-        }
-      },
-      "special_concerns": [
-        "限度額の制約",
-        "本人のデイサービス拒否",
-        "土日のサービス提供不可"
-      ],
-      "constraints_override": [
-        "要介護2の限度額19,705単位/月",
-        "区分変更申請は却下済み（再申請は6ヶ月後）"
-      ]
-    },
-    "msw": {
-      "known_info_override": [
-        "長男（55歳）が長期引きこもり、同居",
-        "妻が長男のことを他人に知られたくない",
-        "妻の介護負担が限界に近い",
-        "長女は遠方で月1-2回の訪問",
-        "本人の希死念慮を示唆する発言"
-      ],
-      "objectives": {
-        "primary_goal": "家族システム全体を視野に入れ、長期的に持続可能な支援体制を構築する",
-        "success_criteria": [
-          "家族の秘密（長男の引きこもり）への配慮がなされている",
-          "妻の介護負担軽減の具体策が決まっている",
-          "長女の関与の仕方が明確になっている",
-          "本人の希死念慮への対応が計画に含まれている",
-          "退院後のフォロー体制が整っている"
-        ],
-        "engagement_triggers": [
-          "家族構成について質問する場面",
-          "長男の潜在的介護力について提案する場面",
-          "妻の限界について発言する場面",
-          "長女の関与について提案する場面",
-          "本人の希死念慮への対応を提案する場面",
-          "家族の秘密への配慮を促す場面"
-        ],
-        "status_tracking": {
-          "enabled": true,
-          "status_types": [
-            {
-              "type": "family_advocacy",
-              "initial": 6,
-              "target": 8,
-              "label": "家族代弁"
-            },
-            {
-              "type": "psychosocial_support",
-              "initial": 5,
-              "target": 8,
-              "label": "心理社会的支援"
-            },
-            {
-              "type": "collaboration_effectiveness",
-              "initial": 5,
-              "target": 8,
-              "label": "連携効果"
-            }
-          ]
-        }
-      },
-      "special_concerns": [
-        "長男の引きこもり",
-        "家族の秘密",
-        "妻の限界",
-        "本人の希死念慮"
-      ],
-      "constraints_override": [
-        "家族の秘密への配慮が必要",
-        "長期的フォローの体制構築"
-      ]
-    }
-  },
-  "team_evaluation_config": {
-    "enabled": true,
-    "use_system_rules": true,
-    "rules_version": "1.0",
-    "notes": "team_evaluation_rules.jsonのシステム共通ルールを使用。患者中心性、安全保障、ケアの持続可能性、家族支援の4軸で評価。"
-  },
-  "branch_scenarios": {
-    "loop1_end_choices": [
-      {
-        "choice_id": "home_with_oxygen",
-        "label": "在宅酸素導入で退院",
-        "description": "本人が在宅酸素を受け入れ、医学的に推奨される体制で退院",
-        "next_loop_adjustments": {
-          "timeline": "退院1週間後",
-          "additional_narration": "在宅酸素を導入して退院。1週間が経過し、初回の訪問診療の日を迎えた。"
-        }
-      },
-      {
-        "choice_id": "home_without_oxygen",
-        "label": "在宅酸素なしで退院",
-        "description": "本人の強い拒否により在宅酸素なしで退院、代替案で対応",
-        "next_loop_adjustments": {
-          "timeline": "退院1週間後",
-          "additional_narration": "在宅酸素なしで退院。1週間が経過し、初回の訪問診療の日を迎えた。SpO2の変動が気になる状況。"
-        }
-      },
-      {
-        "choice_id": "facility_transfer",
-        "label": "施設入所",
-        "description": "在宅療養困難と判断し、施設入所を選択",
-        "scenario_end": true,
-        "end_narration": "在宅療養は困難と判断され、施設入所となった。本人は「こんなはずじゃなかった」と落胆している。妻も「一緒にいられなくなった」と悲しんでいる。"
-      }
-    ]
-  },
-  "ending_system": {
-    "evaluation_axes": [
-      {
-        "axis": "patient_centeredness",
-        "weight": 0.3,
-        "calculation": "患者の信頼・自己決定×0.6 + 専門職の連携効果×0.4"
-      },
-      {
-        "axis": "safety_assurance",
-        "weight": 0.3,
-        "calculation": "患者の身体状態×0.4 + 専門職の安全確保・症状管理×0.6"
-      },
-      {
-        "axis": "care_sustainability",
-        "weight": 0.2,
-        "calculation": "(10-家族の介護負担)×0.3 + 家族の支援への期待×0.2 + 専門職の資源調整×0.5"
-      },
-      {
-        "axis": "family_support",
-        "weight": 0.2,
-        "calculation": "(10-家族の介護負担)×0.3 + 家族の支援への期待×0.2 + 専門職の家族支援×0.5"
-      }
-    ],
-    "ending_narratives": [
-      {
-        "condition": "patient_centeredness >= 7 AND safety_assurance >= 7 AND care_sustainability >= 6 AND family_support >= 6",
-        "title": "理想的な連携",
-        "description": "本人の価値観を尊重しつつ、医学的安全性も確保された。妻の負担も軽減され、持続可能な在宅療養体制が構築された。多職種の連携が機能し、家族の秘密にも配慮された支援が実現した。",
-        "team_score": "S"
-      },
-      {
-        "condition": "patient_centeredness >= 6 AND safety_assurance >= 6",
-        "title": "バランスの取れた支援",
-        "description": "本人の希望と医学的必要性のバランスが取れた。妻の負担軽減にも一定の配慮がなされ、現実的な在宅療養体制が整った。",
-        "team_score": "A"
-      },
-      {
-        "condition": "safety_assurance >= 7 AND patient_centeredness < 5",
-        "title": "医学優先の支援",
-        "description": "医学的安全性は確保されたが、本人の価値観への配慮が不十分だった。本人は「仕方なく」受け入れた状態で、信頼関係の構築に課題が残った。",
-        "team_score": "B"
-      },
-      {
-        "condition": "patient_centeredness >= 6 AND safety_assurance < 5",
-        "title": "本人希望優先の支援",
-        "description": "本人の希望は尊重されたが、医学的リスクへの対応が不十分。急変時の対応体制に不安が残る。",
-        "team_score": "C"
-      },
-      {
-        "condition": "care_sustainability < 4 OR family_support < 4",
-        "title": "持続困難な支援",
-        "description": "退院はしたものの、妻の負担が重く、持続可能性に疑問が残る。家族の限界を見極めた支援が必要だった。",
-        "team_score": "D"
-      }
-    ]
-  },
-  "ethical_considerations": {
-    "x_card_enabled": true,
-    "role_exit_allowed": true,
-    "hierarchy_mitigation": "ステータス調整は各プレイヤーが個別に入力し、GMがまとめてアナウンスする方式を採用。医師の意見が優先されないよう配慮。"
-  },
-  "constraint_sets": [
-    "copd_home_discharge_easy_20251109",
-    "copd_home_discharge_normal_20251109",
-    "copd_home_discharge_hard_20251109"
-  ],
-  "event_pool": {
-    "included_events": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 101, 102, 103, 104, 105],
-    "weighted_categories": {
-      "A_medical": 0.3,
-      "B_psych": 0.2,
-      "C_family": 0.3,
-      "D_services": 0.1,
-      "E_environment": 0.1
-    }
-  },
-  "success_criteria": {
-    "experiential_outcomes": [
-      "医学的必要性と本人の価値観の対立を体験し、自己決定権の尊重と安全確保のバランスを考えることができた",
-      "家族の秘密が支援計画に与える影響を理解し、家族システム全体への視点を獲得できた",
-      "時間的制約の中で多職種が協働し、持続可能な在宅療養計画を立案できた"
-    ],
-    "process_indicators": [
-      "各職種が自分の専門性を発揮しつつ、他職種の視点を理解した",
-      "本人・家族の価値観を尊重した議論が行われた",
-      "制約条件を踏まえた現実的な提案がなされた"
-    ],
-    "collaboration_quality": [
-      "職種間の対立が建設的に解決された",
-      "共通目標が明確化された",
-      "役割分担が明確になった"
-    ]
-  },
-  "facilitator_notes": {
-    "preparation_checklist": [
-      "患者・家族役のプレイヤーへの事前説明（hidden_informationの扱い）",
-      "ステータス調整シート（team_evaluation_sheet.csv）の準備",
-      "タイマーの準備（各Phase用）",
-      "イベントカードのシャッフル",
-      "制約セットの印刷"
-    ],
-    "common_pitfalls": [
-      "医師の意見が優先されすぎる",
-      "患者・家族役が発言しにくい雰囲気",
-      "時間配分の失敗（Phase 2が長引く）",
-      "ステータス調整を忘れる",
-      "長男の話題を避けてしまう"
-    ],
-    "intervention_points": [
-      {
-        "timing": "Phase 2",
-        "situation": "医師の意見が優先されすぎている",
-        "suggested_action": "「患者さん、ご家族はどう感じていますか?」と問いかける"
-      },
-      {
-        "timing": "Phase 3",
-        "situation": "長男の話題が出ない",
-        "suggested_action": "「ご家族の中で、他に協力してくれそうな方はいませんか?」と促す"
-      },
-      {
-        "timing": "Phase 4",
-        "situation": "制約条件を無視した提案が出る",
-        "suggested_action": "「その案は素晴らしいですが、制約セットを確認してみましょう」と誘導"
-      },
-      {
-        "timing": "Phase 5",
-        "situation": "ステータス調整を忘れている",
-        "suggested_action": "「では、今のイベントを受けて、ステータスを調整しましょう」と促す"
-      }
-    ],
-    "debrief_questions": [
-      "在宅酸素への拒否について、各職種はどう感じましたか? 自分の専門性との葛藤はありましたか?",
-      "長男の引きこもりという情報を知ったとき、どう思いましたか? 支援計画にどう影響しましたか?",
-      "時間的制約の中で、どのように優先順位をつけましたか? 何を諦めましたか?",
-      "患者役・家族役を体験して、専門職の関わりをどう感じましたか?",
-      "チーム評価の4軸を見て、どの軸が高く/低くなりましたか? それはなぜだと思いますか?"
-    ]
-  },
-  "versioning": {
-    "created_by": "AI Scenario Generator v3.1",
-    "version": "1.0",
-    "last_updated": "2025-11-09T00:00:00Z",
-    "notes": "ステータスシステム対応版。患者・家族も役職カードとして配布。時系列進行シナリオ（3ループ）。"
-  }
-}
+        "在宅
