@@ -113,7 +113,7 @@
           "physical_condition": 4,
           "trust_and_acceptance": 5,
           "autonomy_satisfaction": 3,
-          "psychological_wellbeing": 3
+          "psychological_distress": 7
         },
         "family": [
           {
@@ -447,11 +447,11 @@
           "trajectory": [3],
           "turning_points": []
         },
-        "psychological_wellbeing": {
-          "initial": 3,
+        "psychological_distress": {
+          "initial": 7,
           "final": null,
           "total_change": 0,
-          "trajectory": [3],
+          "trajectory": [7],
           "turning_points": []
         }
       },
