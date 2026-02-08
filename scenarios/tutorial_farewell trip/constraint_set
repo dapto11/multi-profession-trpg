@@ -1,0 +1,113 @@
+[
+  {
+    "constraint_set_id": "tutorial_farewell_trip_normal",
+    "name_ja": "タケシ送別旅行 - 通常制約",
+    "description_ja": "友人タケシの送別旅行企画における予算・日程・移動手段の制約。チュートリアル用のためNormalレベルのみ。",
+    "setting": "other",
+    "play_difficulty": "normal",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "タケシの引っ越しまであと5週間。旅行は来月中に実施しなければならない。",
+          "value": "5週間以内",
+          "severity": "firm",
+          "rationale": "転職先への着任日が確定しており、変更不可。"
+        },
+        {
+          "type": "duration_limit",
+          "description_ja": "全員の休みが合うのは金土日の2泊3日が上限。",
+          "value": "2泊3日",
+          "severity": "firm",
+          "rationale": "参加者全員の勤務シフトを考慮した最大日程。"
+        }
+      ],
+      "economic": [
+        {
+          "type": "budget_limit",
+          "description_ja": "旅行積立金は1人あたり3万円。超過分は各自の自費負担となる。",
+          "amount": 30000,
+          "currency": "JPY",
+          "period": "one_time",
+          "flexibility": "negotiable",
+          "rationale": "これまでの月々の積立額から算出。自費追加は個人判断。"
+        },
+        {
+          "type": "cost_sharing",
+          "description_ja": "ヨウコさん（タケシの母親）の旅費をどうするか未定。タケシが出すか、割り勘か、ヨウコさん自費か。",
+          "amount": 0,
+          "currency": "JPY",
+          "period": "one_time",
+          "flexibility": "negotiable",
+          "rationale": "母親の参加は後から決まったため、積立に含まれていない。"
+        }
+      ],
+      "resources": [
+        {
+          "type": "transport",
+          "description_ja": "飛行機利用の場合、直近の便は1人4万円超で予算オーバー。新幹線・特急なら予算内だが移動時間が長い。フェリーは安いが乗り物酔いリスクあり。",
+          "quantity": "limited",
+          "unit": "移動手段の選択肢",
+          "availability_schedule": "三連休と重なる場合、飛行機の空席はさらに減少",
+          "waiting_time": "予約は早い者勝ち"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "人気の宿は三連休に重なると満室の可能性が高い。早めの予約が必要。",
+          "quantity": "limited",
+          "unit": "宿泊施設の空室",
+          "availability_schedule": "候補日が三連休と重なる場合は特に競争が激しい"
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "さて、皆さんの旅行計画にはいくつかの制約があります。まず予算、1人3万円の積立があります。超過分は自腹です。日程は金土日の2泊3日が上限。タケシの引っ越しまであと5週間なので来月中に行く必要があります。飛行機は1人4万円超で予算オーバー、近場なら予算内です。さあ、この条件でどんな旅行を企画しますか？",
+      "visual_aids": [
+        {
+          "type": "budget_breakdown",
+          "content": "| 移動手段 | 1人あたり費用 | 予算内？ |\n|---------|-------------|--------|\n| 飛行機（沖縄） | 約4.5万円 | ✗ 超過 |\n| 新幹線（箱根・伊豆） | 約1.5万円 | ✓ 余裕あり |\n| フェリー（離島） | 約1万円 | ✓ 余裕あり |\n| レンタカー（近場温泉） | 約0.5万円 | ✓ 余裕あり |"
+        },
+        {
+          "type": "timeline",
+          "content": "| 週 | イベント |\n|---|--------|\n| 今週 | 旅行計画会議（今ここ） |\n| 2週目 | 予約期限（人気の宿はここまで） |\n| 3〜4週目 | 旅行実施の候補期間 |\n| 5週目 | タケシ引っ越し |"
+        }
+      ],
+      "emphasis_points": [
+        "予算1人3万円は『積立分』であり、超過は各自判断",
+        "ヨウコさんの旅費の出どころが未定",
+        "日程は2泊3日が上限、延長不可"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "予算の自費追加（1人いくらまで出せるかは個人差）",
+        "ヨウコさんの旅費負担方法",
+        "旅行の候補日（5週間以内であれば調整可能）"
+      ],
+      "emergency_overrides": [
+        "タケシの腰が悪化した場合、旅行自体の延期・中止もあり得る"
+      ]
+    },
+    "tags_affected": ["resources", "time", "family_burden", "coordination"],
+    "flavor_text": "積立金の通帳を見つめる幹事。3万円でどこまでできるか。タケシの笑顔とヨウコさんの安心、両方を叶えるプランはあるのか。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "遠方（沖縄）は予算オーバーになる",
+        "近場（温泉）は予算内だがタケシの希望と合わない",
+        "中間案（格安離島プラン等）の模索が必要"
+      ],
+      "discussion_triggers": [
+        "予算を超えてでもタケシの希望を叶えるか",
+        "ヨウコさんの旅費を誰が負担するか",
+        "日程が三連休と被った場合のコスト増にどう対応するか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2 - Tutorial Edition",
+      "version": "1.0",
+      "last_updated": "2026-02-08T00:00:00Z",
+      "notes": "チュートリアル用制約セット。Normalレベルのみ。"
+    }
+  }
+]
