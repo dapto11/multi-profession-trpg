@@ -1,0 +1,604 @@
+{
+  "scenario_id": "tutorial_farewell_trip_01",
+  "title_ja": "院長の送別旅行…ではなく、友人タケシの送別旅行を企画せよ！",
+  "description_ja": "共通の友人タケシ（36歳）が転職で遠方に引っ越す。最後の思い出にみんなで旅行に行こう！…と思ったら、タケシの体調、母親の心配、予算の壁、それぞれの専門職としての『癖』が止まらない。15分で旅行先を決められるか？",
+  "setting": "other",
+  "scenario_complexity": "intermediate",
+  "difficulty_hint": "normal",
+  "duration_minutes": 15,
+  "target_participants": ["physician", "nurse", "pharmacist", "pt", "care_manager", "msw"],
+  "phase_flow": [1, 2, 3, 4, 5],
+  "patient": {
+    "basic_info": {
+      "age": 36,
+      "gender": "male",
+      "name": "タケシ",
+      "living_situation": "alone",
+      "residence_type": "apartment",
+      "mobility": "independent"
+    },
+    "medical_condition": {
+      "primary_diagnosis": "急性腰痛症（ぎっくり腰）発症後2週間",
+      "secondary_diagnoses": [
+        "肝機能障害（γ-GTP 98 U/L）"
+      ],
+      "current_medications": [
+        {
+          "name": "ロキソプロフェン",
+          "dosage": "60mg",
+          "frequency": "疼痛時頓用",
+          "adherence_issues": false
+        }
+      ],
+      "functional_status": {
+        "adl_score": 95,
+        "iadl_score": 90,
+        "cognitive_status": "normal"
+      },
+      "recent_changes": [
+        "2週間前にぎっくり腰を発症",
+        "健康診断で肝機能障害を指摘された",
+        "本人は『もう治った』と主張している"
+      ]
+    },
+    "psychosocial": {
+      "personality_traits": [
+        "楽観的",
+        "負けず嫌い",
+        "心配されるのが嫌い",
+        "仲間思い"
+      ],
+      "values_preferences": [
+        "最後の旅行だから全力で楽しみたい",
+        "アクティブな体験がしたい",
+        "みんなで盛大に飲みたい"
+      ],
+      "concerns_fears": [
+        "転職先での新生活への漠然とした不安",
+        "仲間と離れることへの寂しさ"
+      ],
+      "goals_wishes": [
+        "沖縄でダイビングやシュノーケリングがしたい",
+        "最後の夜は皆で朝まで飲みたい"
+      ]
+    },
+    "status_config": {
+      "enabled": true,
+      "status_types": [
+        {
+          "type": "trust_and_acceptance",
+          "initial": 5,
+          "critical_low": null,
+          "critical_high": null,
+          "label": "タケシの満足度",
+          "description": "旅行計画に対するタケシの納得感・ワクワク度",
+          "scenario_specific_description": "自分の希望（沖縄・アクティビティ・宴会）がどれだけ反映されているか。専門職たちに心配されすぎると下がり、希望を汲んでもらえると上がる。"
+        }
+      ]
+    }
+  },
+  "patient_as_role": true,
+  "patient_role_card": {
+    "known_information": [
+      "来月転職で遠方に引っ越す",
+      "旅行をとても楽しみにしている",
+      "最近ちょっと腰が痛いらしい"
+    ],
+    "hidden_information": [
+      "2週間前にぎっくり腰をやった（本人は『もう治った』と思っている）",
+      "健康診断でγ-GTP 98を指摘されたが気にしていない",
+      "本当は沖縄でダイビング・シュノーケリングがしたい",
+      "最後だから盛大に飲み明かしたい"
+    ],
+    "values": [
+      "最後の旅行だから全力で楽しみたい",
+      "心配されるのが嫌、自分は大丈夫だと思っている",
+      "仲間との時間を大切にしたい"
+    ],
+    "engagement_triggers": [
+      "『タケシはどこに行きたいの？』と直接聞かれたら少しずつ本音を出す",
+      "安全面ばかり強調されると不機嫌になる（『大丈夫だって！』）",
+      "沖縄やアクティビティの話題が出ると目を輝かせる",
+      "お酒を控えるよう言われると反発する"
+    ]
+  },
+  "family_caregivers": [
+    {
+      "relationship": "母親",
+      "age": 63,
+      "gender": "female",
+      "involvement_level": "primary",
+      "availability": "旅行に同行予定",
+      "capabilities": [
+        "息子の生活習慣をよく知っている",
+        "旅行の準備を手伝う気がある"
+      ],
+      "limitations": [
+        "乗り物酔いがひどい",
+        "息子に口うるさく言えない"
+      ],
+      "concerns": [
+        "息子の飲酒量が増えていること",
+        "ぎっくり腰が本当に治ったのか",
+        "旅行費用をあまりかけてほしくない"
+      ],
+      "status_config": {
+        "enabled": true,
+        "status_types": [
+          {
+            "type": "caregiver_burden",
+            "initial": 5,
+            "critical_low": null,
+            "critical_high": null,
+            "label": "ヨウコの負担感",
+            "description": "旅行計画に対するヨウコの心配・負担の度合い",
+            "scenario_specific_description": "息子の健康リスクが放置されると上がる。息子の希望と自分の不安の板挟み。長距離移動・高額出費も負担を感じる。安心材料があると下がる。"
+          }
+        ]
+      }
+    }
+  ],
+  "family_as_role": true,
+  "family_role_card": {
+    "known_information": [
+      "タケシの母親、63歳",
+      "息子の引っ越しを寂しがっている",
+      "旅行に同行する予定"
+    ],
+    "hidden_information": [
+      "息子の酒量が最近増えていることを心配している",
+      "ぎっくり腰のことは聞いたが『もう治った』と言われた（半信半疑）",
+      "実は乗り物酔いがひどい（特に長時間の移動）",
+      "旅行費用をあまりかけてほしくないと思っている"
+    ],
+    "values": [
+      "息子に無理してほしくない",
+      "口うるさく言うと嫌がられるから黙っていたい",
+      "できれば近場でゆっくりしたい"
+    ],
+    "engagement_triggers": [
+      "飛行機や長距離バスの話題が出ると表情が曇る",
+      "予算が膨らむ話になると口を挟む",
+      "誰かが息子の健康を気遣ってくれると安心して本音を出す",
+      "『お母さんはどう思いますか？』と聞かれると嬉しそうに話す"
+    ]
+  },
+  "initial_situation": {
+    "trigger_event": "共通の友人タケシが来月転職で遠方に引っ越すことになった。最後の思い出に旅行を企画しよう、とグループLINEで話がまとまった。今日はその計画会議である。",
+    "current_services": [],
+    "immediate_concerns": [
+      "旅行先がまだ決まっていない",
+      "タケシの体調面での不安要素がある",
+      "母親ヨウコも同行するが、本人たちの希望が食い違いそう",
+      "予算と日程に限りがある"
+    ],
+    "available_resources": [
+      "旅行積立金：1人3万円",
+      "日程：金土日の2泊3日",
+      "参加者全員のスマホ（情報検索可能）"
+    ],
+    "environmental_factors": [
+      "旅行は来月を予定",
+      "タケシの引っ越しまであと5週間"
+    ]
+  },
+  "learning_objectives": {
+    "primary_objectives": [
+      "Phase 1〜5の流れを体験し、ゲームの進行を理解する",
+      "役職カードによる情報の非対称性を体感する",
+      "ステータスとイベントカードの関係性を理解する"
+    ],
+    "secondary_objectives": [
+      "他者評価方式によるステータス調整を体験する",
+      "争点タグの概念を理解する"
+    ],
+    "target_tags": ["safety", "resources", "patient_preference", "family_burden", "coordination"],
+    "competencies": ["communication", "collaboration", "shared_decision_making", "patient_centered_care"]
+  },
+  "profession_cards_config": {
+    "physician": {
+      "known_info_override": [
+        "タケシの健康診断結果の概要を知っている",
+        "γ-GTP 98 U/L（基準値超え）、AST・ALTもやや高め",
+        "血圧やや高め（138/88）、BMI 26"
+      ],
+      "unknown_info_override": [
+        "タケシのぎっくり腰の詳細（PTが知っている）",
+        "タケシの本当の希望（看護師が聞いている）",
+        "母親の心配事（MSWが知っている）"
+      ],
+      "objectives": {
+        "primary_goal": "タケシの健康リスクを踏まえた旅行プランへの医学的助言を行う",
+        "success_criteria": [
+          "肝機能障害に関する情報をチームに適切に共有できた",
+          "飲酒リスクについて本人にわかりやすく説明できた"
+        ],
+        "engagement_triggers": [
+          "飲酒の話題が出たとき",
+          "健康診断の結果について聞かれたとき",
+          "旅先でのアクティビティのリスクが議論されたとき"
+        ],
+        "status_tracking": {
+          "enabled": true,
+          "status_types": [
+            {
+              "type": "information_provision",
+              "initial": 5,
+              "target": 7,
+              "label": "情報提供",
+              "scenario_specific_description": "タケシの肝機能データを踏まえた健康リスクの説明、飲酒と鎮痛薬の相互作用リスクの共有"
+            },
+            {
+              "type": "collaboration_effectiveness",
+              "initial": 5,
+              "target": 7,
+              "label": "連携効果",
+              "scenario_specific_description": "他職種の情報を聞いたうえで総合的な判断を提供できたか"
+            }
+          ]
+        }
+      },
+      "peer_evaluation_guide": {
+        "self_declaration_template": "私の『情報提供』について評価をお願いします。今回、タケシの肝機能のリスクについてチームに説明しました。",
+        "evaluation_examples": [
+          "肝機能のリスクをわかりやすく説明した → +1に賛成",
+          "タケシにも伝わるよう配慮した説明だった → +2に賛成",
+          "専門用語ばかりで伝わらなかった → -1に賛成",
+          "重要な情報を共有しなかった → -2に賛成"
+        ],
+        "evaluation_focus_points": [
+          "医学情報の正確さとわかりやすさ",
+          "他職種の情報を踏まえた総合判断",
+          "タケシ・ヨウコへの配慮ある伝え方"
+        ]
+      }
+    },
+    "nurse": {
+      "known_info_override": [
+        "タケシが最近『腰がちょっと張る』とこぼしていた",
+        "タケシと時々飲みに行く仲"
+      ],
+      "unknown_info_override": [
+        "肝機能の具体的な数値（医師が知っている）",
+        "鎮痛薬の詳細リスク（薬剤師が知っている）",
+        "予算の詳細（ケアマネが知っている）"
+      ],
+      "objectives": {
+        "primary_goal": "タケシの安全を確保しつつ、本人の希望も大切にするバランスを取る",
+        "success_criteria": [
+          "タケシの身体的リスクをチームに報告できた",
+          "本人の希望（沖縄・アクティビティ）をチームに伝えられた"
+        ],
+        "engagement_triggers": [
+          "旅行先の安全性が議論されたとき",
+          "タケシの本音を知っている情報を出すタイミング",
+          "飲み会でのタケシの様子を共有するとき"
+        ],
+        "status_tracking": {
+          "enabled": true,
+          "status_types": [
+            {
+              "type": "patient_safety_assurance",
+              "initial": 5,
+              "target": 7,
+              "label": "安全確保",
+              "scenario_specific_description": "ぎっくり腰の再発リスクや飲酒量の多さをチームに共有し、安全な旅行プラン策定に貢献できたか"
+            },
+            {
+              "type": "collaboration_effectiveness",
+              "initial": 5,
+              "target": 7,
+              "label": "連携効果",
+              "scenario_specific_description": "タケシの希望と安全のバランスについて他職種と協力して調整できたか"
+            }
+          ]
+        }
+      },
+      "peer_evaluation_guide": {
+        "self_declaration_template": "私の『安全確保』について評価をお願いします。今回、タケシの腰のリスクと飲酒の様子をチームに共有しました。",
+        "evaluation_examples": [
+          "安全面のリスクを的確に報告した → +1に賛成",
+          "タケシの希望も同時に代弁してバランスを取った → +2に賛成",
+          "リスクを過剰に強調して議論を止めた → -1に賛成",
+          "知っている情報を出さなかった → -2に賛成"
+        ],
+        "evaluation_focus_points": [
+          "リスク情報の共有タイミングと伝え方",
+          "タケシの希望と安全のバランス感覚",
+          "他職種への情報提供の積極性"
+        ]
+      }
+    },
+    "pharmacist": {
+      "known_info_override": [
+        "タケシが最近ドラッグストアでロキソプロフェンを購入した",
+        "ロキソプロフェンの添付文書情報（肝機能障害者への注意）"
+      ],
+      "unknown_info_override": [
+        "タケシの肝機能の具体的数値（医師が知っている）",
+        "ぎっくり腰の機能的評価（PTが知っている）",
+        "母親の心配事（MSWが知っている）"
+      ],
+      "objectives": {
+        "primary_goal": "旅行中の服薬リスクと飲酒の相互作用について情報提供する",
+        "success_criteria": [
+          "鎮痛薬と飲酒の相互作用リスクをチームに説明できた",
+          "旅行中の安全な鎮痛方法を提案できた"
+        ],
+        "engagement_triggers": [
+          "鎮痛薬や薬の話題が出たとき",
+          "宴会・飲酒の計画が議論されたとき",
+          "タケシが『痛くなったらロキソニン飲めばいい』と言ったとき"
+        ],
+        "status_tracking": {
+          "enabled": true,
+          "status_types": [
+            {
+              "type": "medication_optimization",
+              "initial": 5,
+              "target": 7,
+              "label": "服薬最適化",
+              "scenario_specific_description": "ロキソプロフェンと飲酒の相互作用リスク、肝機能障害下での鎮痛薬選択について適切に情報提供できたか"
+            },
+            {
+              "type": "collaboration_effectiveness",
+              "initial": 5,
+              "target": 7,
+              "label": "連携効果",
+              "scenario_specific_description": "医師の肝機能データやPTの腰の評価と連携して総合的な助言ができたか"
+            }
+          ]
+        }
+      },
+      "peer_evaluation_guide": {
+        "self_declaration_template": "私の『服薬最適化』について評価をお願いします。今回、鎮痛薬と飲酒の相互作用リスクについて説明しました。",
+        "evaluation_examples": [
+          "薬のリスクをわかりやすく説明した → +1に賛成",
+          "代替の鎮痛方法まで提案した → +2に賛成",
+          "専門的すぎて誰も理解できなかった → -1に賛成",
+          "重要なリスク情報を出さなかった → -2に賛成"
+        ],
+        "evaluation_focus_points": [
+          "薬学情報の正確さとわかりやすさ",
+          "医師やPTの情報との連携",
+          "タケシが納得できる代替案の提案"
+        ]
+      }
+    },
+    "pt": {
+      "known_info_override": [
+        "タケシとジムで会ったことがあり、体の動かし方の癖を知っている",
+        "タケシの体力レベルは同年代の平均よりやや上"
+      ],
+      "unknown_info_override": [
+        "肝機能の数値（医師が知っている）",
+        "鎮痛薬の購入歴（薬剤師が知っている）",
+        "タケシの本当の希望（看護師が聞いている）"
+      ],
+      "objectives": {
+        "primary_goal": "ぎっくり腰の回復状況を踏まえた活動レベルの助言を行う",
+        "success_criteria": [
+          "腰の機能的リスクをチームに共有できた",
+          "可能なアクティビティと避けるべきアクティビティを提案できた"
+        ],
+        "engagement_triggers": [
+          "旅行先のアクティビティが議論されたとき",
+          "タケシが『腰はもう大丈夫』と言ったとき",
+          "移動手段や歩行距離の話題が出たとき"
+        ],
+        "status_tracking": {
+          "enabled": true,
+          "status_types": [
+            {
+              "type": "rehabilitation_progress",
+              "initial": 5,
+              "target": 7,
+              "label": "身体機能評価",
+              "scenario_specific_description": "ぎっくり腰から2週間の回復状況の見立て、ダイビング・シュノーケリング等の腰への負荷評価、安全に楽しめるアクティビティの提案"
+            },
+            {
+              "type": "collaboration_effectiveness",
+              "initial": 5,
+              "target": 7,
+              "label": "連携効果",
+              "scenario_specific_description": "医師・薬剤師の情報と合わせて身体面の総合判断を提供できたか"
+            }
+          ]
+        }
+      },
+      "peer_evaluation_guide": {
+        "self_declaration_template": "私の『身体機能評価』について評価をお願いします。今回、タケシの腰の状態からできるアクティビティを提案しました。",
+        "evaluation_examples": [
+          "腰の回復状況を踏まえた具体的な助言をした → +1に賛成",
+          "タケシが楽しめる代替アクティビティまで提案した → +2に賛成",
+          "リスクを伝えるだけで代替案がなかった → -1に賛成",
+          "腰の問題を軽視した → -2に賛成"
+        ],
+        "evaluation_focus_points": [
+          "身体機能評価の具体性",
+          "『できない』ではなく『こうすればできる』の提案力",
+          "タケシの気持ちへの配慮"
+        ]
+      }
+    },
+    "care_manager": {
+      "known_info_override": [
+        "旅行の幹事を任されている",
+        "旅行積立金は1人3万円",
+        "日程は金土日の2泊3日が上限"
+      ],
+      "unknown_info_override": [
+        "タケシの健康状態の詳細（医師・看護師が知っている）",
+        "タケシの本当の希望（看護師が聞いている）",
+        "ヨウコの心配事の詳細（MSWが知っている）"
+      ],
+      "objectives": {
+        "primary_goal": "予算と日程の制約内で全員が納得できる旅行プランを調整する",
+        "success_criteria": [
+          "予算と日程の制約を全員に明確に共有できた",
+          "複数の選択肢を提示してチームの合意形成を支援できた"
+        ],
+        "engagement_triggers": [
+          "旅行先の費用が議論されたとき",
+          "日程や移動手段の調整が必要なとき",
+          "意見が対立して調整が必要なとき"
+        ],
+        "status_tracking": {
+          "enabled": true,
+          "status_types": [
+            {
+              "type": "resource_coordination",
+              "initial": 5,
+              "target": 7,
+              "label": "資源調整",
+              "scenario_specific_description": "予算3万円/人の制約内での旅行プラン調整、沖縄便の予算超過問題、近場温泉との比較検討"
+            },
+            {
+              "type": "collaboration_effectiveness",
+              "initial": 5,
+              "target": 7,
+              "label": "連携効果",
+              "scenario_specific_description": "各職種の意見や健康面の情報を統合して現実的なプランに落とし込めたか"
+            }
+          ]
+        }
+      },
+      "peer_evaluation_guide": {
+        "self_declaration_template": "私の『資源調整』について評価をお願いします。今回、予算と日程を踏まえた旅行プランの選択肢を提示しました。",
+        "evaluation_examples": [
+          "予算・日程の制約を明確に共有した → +1に賛成",
+          "複数の選択肢を比較提示して合意形成を促した → +2に賛成",
+          "制約ばかり言って選択肢を出さなかった → -1に賛成",
+          "予算を無視したプランを推した → -2に賛成"
+        ],
+        "evaluation_focus_points": [
+          "制約の明確な共有と選択肢の提示",
+          "全員の希望を踏まえた調整力",
+          "現実的かつ創造的なプラン提案"
+        ]
+      }
+    },
+    "msw": {
+      "known_info_override": [
+        "タケシと母親ヨウコの両方と親しい",
+        "タケシの転職の経緯を知っている"
+      ],
+      "unknown_info_override": [
+        "タケシの健康診断の数値（医師が知っている）",
+        "ぎっくり腰の機能的評価（PTが知っている）",
+        "鎮痛薬の詳細リスク（薬剤師が知っている）"
+      ],
+      "objectives": {
+        "primary_goal": "タケシと母親ヨウコの気持ちを橋渡しし、両者が満足できる旅行を実現する",
+        "success_criteria": [
+          "ヨウコの隠れた不安をチームに適切に伝えられた",
+          "タケシにとってこの旅行が持つ意味をチームに共有できた"
+        ],
+        "engagement_triggers": [
+          "タケシと母親の意見が食い違ったとき",
+          "母親が黙っているとき",
+          "タケシの転職・引っ越しの意味が議論されたとき"
+        ],
+        "status_tracking": {
+          "enabled": true,
+          "status_types": [
+            {
+              "type": "psychosocial_support",
+              "initial": 5,
+              "target": 7,
+              "label": "心理社会的支援",
+              "scenario_specific_description": "ヨウコの『口出しすると怒られる』という気持ちの代弁、タケシの転職不安と旅行への思い入れの共有"
+            },
+            {
+              "type": "collaboration_effectiveness",
+              "initial": 5,
+              "target": 7,
+              "label": "連携効果",
+              "scenario_specific_description": "タケシとヨウコの気持ちを踏まえて他職種の提案を橋渡しできたか"
+            }
+          ]
+        }
+      },
+      "peer_evaluation_guide": {
+        "self_declaration_template": "私の『心理社会的支援』について評価をお願いします。今回、ヨウコさんの気持ちとタケシの本当の思いをチームに伝えました。",
+        "evaluation_examples": [
+          "ヨウコの気持ちを適切に代弁した → +1に賛成",
+          "タケシとヨウコ双方の思いを橋渡しして合意に導いた → +2に賛成",
+          "片方の気持ちしか伝えなかった → -1に賛成",
+          "当事者の気持ちを無視して話を進めた → -2に賛成"
+        ],
+        "evaluation_focus_points": [
+          "タケシとヨウコ双方への理解と代弁",
+          "旅行の心理的意味の共有",
+          "対立場面での橋渡し"
+        ]
+      }
+    }
+  },
+  "team_evaluation_config": {
+    "enabled": true,
+    "use_system_rules": true,
+    "rules_version": "1.0",
+    "notes": "チュートリアル用。team_evaluation_rules.jsonを参照。チュートリアルではチーム評価の計算は省略可。"
+  },
+  "ethical_considerations": {
+    "x_card_enabled": true,
+    "role_exit_allowed": true,
+    "hierarchy_mitigation": "チュートリアルのため軽い題材を使用。職種間ヒエラルキーの影響を最小化。"
+  },
+  "facilitator_notes": {
+    "preparation_checklist": [
+      "役職カードを人数分印刷する（専門職は人数に応じて選択）",
+      "患者カード（タケシ）と家族カード（ヨウコ）を印刷する",
+      "イベントカード5枚を印刷し山札にする",
+      "制約セットカードを印刷する",
+      "ステータストラッカー（紙またはホワイトボード）を準備する",
+      "タイマーを用意する（各Phase用）"
+    ],
+    "common_pitfalls": [
+      "Phase 1で情報を出し惜しみして時間切れになる → 『知っていることは全部出してOK』と声かけ",
+      "タケシ役が最初から全部バラしてしまう → 『聞かれたら答えるスタンスで』と事前に伝える",
+      "Phase 3で一人が話しすぎる → タイマーで1人1分を目安にする",
+      "Phase 5の他者評価で遠慮しすぎる → 『練習なので気軽に±1つけてみよう』と促す"
+    ],
+    "intervention_points": [
+      {
+        "timing": "Phase 1 開始時",
+        "situation": "プレイヤーが何を話せばいいかわからない",
+        "suggested_action": "『カードに書いてある公開情報から順番に読み上げてみましょう』と促す"
+      },
+      {
+        "timing": "Phase 2",
+        "situation": "争点タグの概念がわからない",
+        "suggested_action": "『今出た話題は、安全の問題？お金の問題？本人の希望の問題？どれだと思いますか？』と問いかける"
+      },
+      {
+        "timing": "Phase 3",
+        "situation": "意見が出ない",
+        "suggested_action": "『あなたの職種として、この旅行で一番心配なことは何ですか？』と個別に振る"
+      },
+      {
+        "timing": "Phase 4",
+        "situation": "まとまらない",
+        "suggested_action": "『15分のチュートリアルなので、全員一致でなくてOK。多数決でもいいですよ』と伝える"
+      },
+      {
+        "timing": "Phase 5",
+        "situation": "他者評価の仕方がわからない",
+        "suggested_action": "GMが1人目の評価をデモンストレーションする"
+      }
+    ],
+    "debrief_questions": [
+      "自分のカードに書いてある情報と、他の人の情報を合わせて、見え方が変わった瞬間はありましたか？",
+      "タケシの希望と安全のバランス、難しかったですか？",
+      "これが実際の患者さんだったら、どう感じますか？"
+    ]
+  },
+  "versioning": {
+    "created_by": "AI Scenario Generator v3.2 - Tutorial Edition",
+    "version": "1.0",
+    "last_updated": "2026-02-08T00:00:00Z",
+    "playtested": false,
+    "feedback_incorporated": []
+  }
+}
