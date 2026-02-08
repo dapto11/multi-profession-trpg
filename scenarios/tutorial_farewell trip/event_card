@@ -1,0 +1,288 @@
+[
+  {
+    "event_id": 1,
+    "category": "E_environment",
+    "subcategory": "local_life",
+    "title_ja": "希望の日程が連休と被っていた",
+    "body_ja": "幹事が旅行サイトを確認したところ、候補の週末が三連休と重なっていることが判明。宿泊費が通常の約1.5倍、飛行機は軒並み満席に近い。予算内で収めるにはプランの大幅な見直しが必要かもしれない。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["other"],
+    "actors_primary": ["care_manager"],
+    "actors_secondary": ["physician", "nurse", "pharmacist", "pt", "msw"],
+    "tags": {
+      "primary": "resources",
+      "secondary": ["time", "coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.care_manager.resource_coordination",
+        "change": -1,
+        "reason": "予算調整の難易度が上がり、幹事としてのプレッシャーが増した"
+      }
+    ],
+    "flavor_text": "スマホの画面を見た幹事の顔が曇る。「えっ、この週って三連休じゃん…」。旅行サイトには無慈悲な価格が並んでいた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "宿泊費が1.5倍に上昇（1人あたり予算圧迫）",
+        "飛行機の空席がほぼない"
+      ],
+      "discussion_triggers": [
+        "日程を変更するか、予算オーバーを受け入れるか",
+        "近場に変更すれば予算内だが、タケシの希望は叶うか",
+        "自費負担を増やすことへの各自の温度差"
+      ],
+      "constraint_modifiers": {
+        "economic": "宿泊費が1.5倍に上昇",
+        "time": "日程変更の場合、タケシの引っ越しまでの残り期間が制約に"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2 - Tutorial Edition",
+      "version": "1.0",
+      "last_updated": "2026-02-08T00:00:00Z",
+      "notes": "チュートリアル用イベントカード"
+    }
+  },
+  {
+    "event_id": 2,
+    "category": "C_family",
+    "subcategory": "challenge_event",
+    "title_ja": "タケシ、SNSで『腰もう完全復活！』と高らかに宣言",
+    "body_ja": "タケシがグループLINEに「腰まじで全然平気になった！沖縄でジェットスキーとかやりたい！！」と投稿。スタンプ連打で盛り上がるグループチャット。しかし、タケシの腰の状態を知る者たちは画面の前で微妙な表情を浮かべている。",
+    "direction": "negative",
+    "urgency": "low",
+    "duration": "short_term",
+    "settings": ["other"],
+    "actors_primary": ["pt", "nurse"],
+    "actors_secondary": ["physician", "family"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["safety"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": 1,
+        "reason": "自分の希望を堂々と表明でき、テンションが上がっている"
+      },
+      {
+        "target": "profession.nurse.patient_safety_assurance",
+        "change": -1,
+        "reason": "本人が聞く耳を持たなくなり、安全面の助言がしにくくなった"
+      }
+    ],
+    "flavor_text": "グループLINEが鳴り止まない。タケシのテンションは天井知らず。「ジェットスキー！！」「パラセーリング！！」「朝まで飲む！！」——既読スルーする指が震える。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "タケシの希望が公になり、本人のテンションが上がる",
+        "安全面の指摘がしにくい雰囲気になる"
+      ],
+      "discussion_triggers": [
+        "本人が大丈夫と言っているのに、どこまで止めるべきか",
+        "楽しみにしている本人の気持ちをどう尊重するか",
+        "グループの空気と専門的判断の板挟み"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2 - Tutorial Edition",
+      "version": "1.0",
+      "last_updated": "2026-02-08T00:00:00Z",
+      "notes": "チュートリアル用イベントカード"
+    }
+  },
+  {
+    "event_id": 3,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "ヨウコさん、旅行雑誌の温泉特集にふせんを貼っていた",
+    "body_ja": "MSWがヨウコさんの家を訪ねたとき、リビングのテーブルに旅行雑誌が置いてあった。「箱根特集」と「伊豆の名湯10選」のページにふせんがびっしり。ヨウコさんは「あら、見ちゃった？」と少しバツが悪そうに笑った。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "short_term",
+    "settings": ["other"],
+    "actors_primary": ["msw", "care_manager"],
+    "actors_secondary": ["family", "patient"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["patient_preference", "resources"]
+    },
+    "status_effects": [
+      {
+        "target": "family_0.caregiver_burden",
+        "change": -1,
+        "reason": "母親の希望が可視化され、配慮される余地が生まれた"
+      },
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": -1,
+        "reason": "温泉はタケシの希望（沖縄・アクティビティ）とは方向が違い、不安を感じる"
+      }
+    ],
+    "flavor_text": "色とりどりのふせんが貼られた旅行雑誌。『露天風呂から富士山を望む』のページには赤いハートマークまで。ヨウコさんの小さな夢が、そこにあった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "母親の希望（近場の温泉）が明らかになる",
+        "タケシの希望（沖縄）との乖離が顕在化する"
+      ],
+      "discussion_triggers": [
+        "母親の希望をどこまで旅行プランに反映するか",
+        "タケシの希望と母親の希望を両立できるプランはあるか",
+        "母親が本当に望んでいるのは温泉か、それとも息子と安全に過ごす時間か"
+      ],
+      "constraint_modifiers": {
+        "resources": "近場温泉なら予算内に収まる可能性が高い"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2 - Tutorial Edition",
+      "version": "1.0",
+      "last_updated": "2026-02-08T00:00:00Z",
+      "notes": "チュートリアル用イベントカード"
+    }
+  },
+  {
+    "event_id": 4,
+    "category": "A_medical",
+    "subcategory": "disease_generic",
+    "title_ja": "タケシの同僚から耳打ち：「あいつ最近マジで飲みすぎ」",
+    "body_ja": "タケシの同僚とたまたま会った際、「最近タケシやばいよ、転職のストレスなのか毎晩ビール{{beer_cans}}本は空けてるらしい。この前も二日酔いで午前半休してた」という情報が入った。肝機能の数値と合わせると、少し心配な状況だ。",
+    "direction": "mixed",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["other"],
+    "actors_primary": ["physician", "pharmacist"],
+    "actors_secondary": ["nurse", "msw"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference", "coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": -1,
+        "reason": "自分の知らないところで健康問題が話題になり、プライバシーへの不快感"
+      },
+      {
+        "target": "profession.physician.information_provision",
+        "change": 1,
+        "reason": "新しい臨床情報が加わり、より正確な助言が可能になった"
+      }
+    ],
+    "parameters": [
+      {
+        "name": "beer_cans",
+        "type": "integer",
+        "unit": "本",
+        "min": 3,
+        "max": 6,
+        "examples": [4, 5]
+      }
+    ],
+    "flavor_text": "「いや俺も心配してさ、でも本人に言っても『ストレス発散だから』って聞かないんだよ」——同僚は困った顔でそう言った。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "タケシの飲酒量が具体的に判明する",
+        "肝機能データと合わせて健康リスクの解像度が上がる"
+      ],
+      "discussion_triggers": [
+        "旅行先での飲酒をどう扱うか（禁止？制限？本人に任せる？）",
+        "本人に直接伝えるべきか、旅行プランで間接的にコントロールするか",
+        "転職ストレスが飲酒増加の背景にあるとすれば、旅行の意味が変わる"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2 - Tutorial Edition",
+      "version": "1.0",
+      "last_updated": "2026-02-08T00:00:00Z",
+      "notes": "チュートリアル用イベントカード"
+    }
+  },
+  {
+    "event_id": 5,
+    "category": "D_services",
+    "subcategory": "science_option",
+    "title_ja": "旅行会社から格安離島プランの案内が届く",
+    "body_ja": "ケアマネのもとに旅行会社からメールが届いた。「{{island_name}}2泊3日アクティビティ付きプラン、通常1人{{normal_price}}万円のところ期間限定で1人{{discount_price}}万円！ シュノーケリング・グラスボート・星空ツアー込み」。予算内でアクティビティが楽しめるが、離島へのアクセスはフェリー{{ferry_hours}}時間。",
+    "direction": "positive",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["other"],
+    "actors_primary": ["care_manager", "pt"],
+    "actors_secondary": ["nurse", "physician", "family"],
+    "tags": {
+      "primary": "resources",
+      "secondary": ["patient_preference", "safety"]
+    },
+    "status_effects": [
+      {
+        "target": "patient.trust_and_acceptance",
+        "change": 1,
+        "reason": "アクティビティ付きプランにタケシのテンションが上がる"
+      },
+      {
+        "target": "profession.care_manager.resource_coordination",
+        "change": 1,
+        "reason": "予算内で希望を叶える選択肢が増えた"
+      }
+    ],
+    "parameters": [
+      {
+        "name": "island_name",
+        "type": "string",
+        "examples": ["屋久島", "奄美大島", "久米島"]
+      },
+      {
+        "name": "normal_price",
+        "type": "number",
+        "unit": "万円",
+        "min": 4,
+        "max": 6,
+        "examples": [5]
+      },
+      {
+        "name": "discount_price",
+        "type": "number",
+        "unit": "万円",
+        "min": 2.5,
+        "max": 3,
+        "examples": [2.8]
+      },
+      {
+        "name": "ferry_hours",
+        "type": "number",
+        "unit": "時間",
+        "min": 2,
+        "max": 4,
+        "examples": [3]
+      }
+    ],
+    "flavor_text": "「お、これいいじゃん！」とタケシが食いつく。シュノーケリングに星空ツアー、魅力的なプランだ。ただ、フェリー{{ferry_hours}}時間という文字を見たヨウコさんの顔色が少し変わった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "予算内でアクティビティ付き旅行が可能になる",
+        "タケシの希望に近いプランが出現する",
+        "ただしフェリー移動が長い（ヨウコの乗り物酔い問題）"
+      ],
+      "discussion_triggers": [
+        "予算内だがフェリー移動がヨウコにとって厳しい",
+        "シュノーケリングはタケシの腰に影響するか（PTの判断が問われる）",
+        "離島でのアルコール入手は容易か（飲酒コントロールの観点）",
+        "これがベストな妥協点か、それともまだ他の選択肢を探すべきか"
+      ],
+      "constraint_modifiers": {
+        "economic": "格安プランにより予算問題が緩和",
+        "resources": "アクティビティの選択肢が増加"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2 - Tutorial Edition",
+      "version": "1.0",
+      "last_updated": "2026-02-08T00:00:00Z",
+      "notes": "チュートリアル用イベントカード"
+    }
+  }
+]
