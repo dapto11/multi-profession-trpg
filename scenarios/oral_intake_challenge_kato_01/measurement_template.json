@@ -1,0 +1,593 @@
+{
+  "session_id": "",
+  "scenario_id": "oral_intake_challenge_kato_01",
+  "setting": "chronic_ward",
+  "started_at": "",
+  "ended_at": "",
+  "play_difficulty": "normal",
+  "participants": [
+    {
+      "player_id": "P0",
+      "role": "physician",
+      "experience_level": ""
+    },
+    {
+      "player_id": "P1",
+      "role": "nurse",
+      "experience_level": ""
+    },
+    {
+      "player_id": "P2",
+      "role": "st",
+      "experience_level": ""
+    },
+    {
+      "player_id": "P3",
+      "role": "msw",
+      "experience_level": ""
+    }
+  ],
+  "loops": [
+    {
+      "loop_id": 1,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "notes": "情報共有：転院情報、自己抜去の報告、前院サマリーの情報不足"
+        },
+        {
+          "phase_number": 2,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "notes": "争点マーキング：前院判断の踏襲 vs 再評価、自己抜去の解釈、情報不足への対応"
+        },
+        {
+          "phase_number": 3,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "notes": "価値観表明：安全 vs 可能性の探索、看取りの意味、情報不足の中での判断"
+        },
+        {
+          "phase_number": 4,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "notes": "方針決定：再評価するか看取り継続か、STへの依頼、前院への追加情報要求"
+        },
+        {
+          "phase_number": 5,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "notes": "イベント・結果確認＋他者評価。職種ステータスの調整。"
+        }
+      ],
+      "status_snapshot": {
+        "professions": {
+          "physician": {
+            "symptom_management": null,
+            "patient_safety_assurance": null,
+            "information_provision": null,
+            "collaboration_effectiveness": null
+          },
+          "nurse": {
+            "patient_safety_assurance": null,
+            "psychosocial_support": null,
+            "family_advocacy": null,
+            "collaboration_effectiveness": null
+          },
+          "st": {
+            "rehabilitation_progress": null,
+            "professional_contribution": null,
+            "information_provision": null,
+            "collaboration_effectiveness": null
+          },
+          "msw": {
+            "resource_coordination": null,
+            "family_advocacy": null,
+            "system_navigation": null,
+            "collaboration_effectiveness": null
+          }
+        }
+      },
+      "status_changes": [],
+      "threshold_events_occurred": [],
+      "events_drawn": [],
+      "decision": {
+        "status": null,
+        "options_considered": null,
+        "time_to_decide_sec": null,
+        "summary_ja": ""
+      },
+      "metrics": {
+        "phase_timing_adherence": {
+          "on_time_phases": null,
+          "over_time_phases": null
+        }
+      }
+    },
+    {
+      "loop_id": 2,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "notes": "情報共有：2回目の自己抜去、「食べたい？」へのうなずき、新情報の共有"
+        },
+        {
+          "phase_number": 2,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "notes": "争点マーキング：うなずきの解釈、VF検査の実施可否、経口摂取への移行判断"
+        },
+        {
+          "phase_number": 3,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "notes": "価値観表明：安全性 vs 本人の意思、「食べたい」の重み、リスクの許容度"
+        },
+        {
+          "phase_number": 4,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "notes": "方針決定：VF検査の実施、経口摂取移行の条件、退院調整の開始時期"
+        },
+        {
+          "phase_number": 5,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "notes": "イベント・結果確認＋他者評価。職種ステータスの調整。"
+        }
+      ],
+      "status_snapshot": {
+        "professions": {
+          "physician": {
+            "symptom_management": null,
+            "patient_safety_assurance": null,
+            "information_provision": null,
+            "collaboration_effectiveness": null
+          },
+          "nurse": {
+            "patient_safety_assurance": null,
+            "psychosocial_support": null,
+            "family_advocacy": null,
+            "collaboration_effectiveness": null
+          },
+          "st": {
+            "rehabilitation_progress": null,
+            "professional_contribution": null,
+            "information_provision": null,
+            "collaboration_effectiveness": null
+          },
+          "msw": {
+            "resource_coordination": null,
+            "family_advocacy": null,
+            "system_navigation": null,
+            "collaboration_effectiveness": null
+          }
+        }
+      },
+      "status_changes": [],
+      "threshold_events_occurred": [],
+      "events_drawn": [],
+      "decision": {
+        "status": null,
+        "options_considered": null,
+        "time_to_decide_sec": null,
+        "summary_ja": ""
+      },
+      "metrics": {
+        "phase_timing_adherence": {
+          "on_time_phases": null,
+          "over_time_phases": null
+        }
+      }
+    },
+    {
+      "loop_id": 3,
+      "phases": [
+        {
+          "phase_number": 1,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "notes": "情報共有：経口摂取成功、誤嚥性肺炎発症、息子の在宅希望、嫁の不安"
+        },
+        {
+          "phase_number": 2,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 360,
+          "time_actual_sec": null,
+          "notes": "争点マーキング：経口摂取中止 vs 継続、在宅移行 vs 入院継続、家族内の温度差"
+        },
+        {
+          "phase_number": 3,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "notes": "価値観表明：結果論 vs プロセスの正当性、安全 vs 尊厳の再判断、家族の現実"
+        },
+        {
+          "phase_number": 4,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 420,
+          "time_actual_sec": null,
+          "notes": "方針決定：肺炎治療方針、経口摂取再開の条件、退院計画の再検討"
+        },
+        {
+          "phase_number": 5,
+          "started_at": "",
+          "ended_at": "",
+          "time_allocated_sec": 480,
+          "time_actual_sec": null,
+          "notes": "最終評価。職種ステータスの最終調整。デブリーフィングへ。"
+        }
+      ],
+      "status_snapshot": {
+        "professions": {
+          "physician": {
+            "symptom_management": null,
+            "patient_safety_assurance": null,
+            "information_provision": null,
+            "collaboration_effectiveness": null
+          },
+          "nurse": {
+            "patient_safety_assurance": null,
+            "psychosocial_support": null,
+            "family_advocacy": null,
+            "collaboration_effectiveness": null
+          },
+          "st": {
+            "rehabilitation_progress": null,
+            "professional_contribution": null,
+            "information_provision": null,
+            "collaboration_effectiveness": null
+          },
+          "msw": {
+            "resource_coordination": null,
+            "family_advocacy": null,
+            "system_navigation": null,
+            "collaboration_effectiveness": null
+          }
+        }
+      },
+      "status_changes": [],
+      "threshold_events_occurred": [],
+      "events_drawn": [],
+      "decision": {
+        "status": null,
+        "options_considered": null,
+        "time_to_decide_sec": null,
+        "summary_ja": ""
+      },
+      "metrics": {
+        "phase_timing_adherence": {
+          "on_time_phases": null,
+          "over_time_phases": null
+        }
+      }
+    }
+  ],
+  "session_metrics": {
+    "total_loops": 3,
+    "status_trajectories": {
+      "professions": {
+        "physician": {
+          "symptom_management": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "patient_safety_assurance": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "information_provision": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          }
+        },
+        "nurse": {
+          "patient_safety_assurance": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "psychosocial_support": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "family_advocacy": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          }
+        },
+        "st": {
+          "rehabilitation_progress": {
+            "initial": 3,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "professional_contribution": {
+            "initial": 4,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "information_provision": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          }
+        },
+        "msw": {
+          "resource_coordination": {
+            "initial": 4,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "family_advocacy": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "system_navigation": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          },
+          "collaboration_effectiveness": {
+            "initial": 5,
+            "final": null,
+            "total_change": null,
+            "trajectory": []
+          }
+        }
+      }
+    },
+    "threshold_events_summary": {
+      "total_occurrences": 0,
+      "by_condition": {}
+    },
+    "peer_evaluation_sessions": {
+      "total_evaluations": 0,
+      "by_method": {
+        "consensus": 0,
+        "majority": 0,
+        "no_objection": 0
+      },
+      "avg_evaluation_time_sec": null,
+      "disagreement_rate": null
+    }
+  },
+  "qualitative_feedback": {
+    "debrief_responses": {
+      "profession_goal_achievement": [
+        {
+          "player_id": "P0",
+          "role": "physician",
+          "primary_goal": "患者の嚥下機能を適切に再評価し、安全と尊厳のバランスの取れた栄養管理方針を確立する",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "嚥下評価の必要性を判断し、STと連携して評価計画を立てた",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            },
+            {
+              "criterion": "経口摂取のリスクとベネフィットを家族にわかりやすく説明した",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            },
+            {
+              "criterion": "チームの意見を統合した栄養管理方針を提示した",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P1",
+          "role": "nurse",
+          "primary_goal": "日常の観察から患者の意思と状態変化を読み取り、チームに共有する。安全な経口摂取環境を整える",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "自己抜去の意味を多角的に解釈し、チームに報告した",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            },
+            {
+              "criterion": "本人の非言語的な反応を記録し、カンファレンスで共有した",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            },
+            {
+              "criterion": "経口摂取移行時の観察ポイントを明確にし、実施した",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P2",
+          "role": "st",
+          "primary_goal": "嚥下機能を専門的に評価し、経口摂取の可能性を科学的根拠に基づいて提示する。安全な経口摂取プログラムを設計・実行する",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "嚥下機能の評価を実施し、結果をチームに共有した",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            },
+            {
+              "criterion": "経口摂取の可能性と条件を具体的に提示した",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            },
+            {
+              "criterion": "安全な食形態とリハビリプログラムを設計した",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            }
+          ]
+        },
+        {
+          "player_id": "P3",
+          "role": "msw",
+          "primary_goal": "前院との情報連携の窓口として不足情報を収集し、退院後の生活を見据えた支援体制を構築する",
+          "success_criteria_evaluation": [
+            {
+              "criterion": "前院の連携室から必要な追加情報を取得した",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            },
+            {
+              "criterion": "家族の介護力・意向・経済状況を正確にアセスメントした",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            },
+            {
+              "criterion": "退院先の選択肢を具体的に提示し、チームで検討した",
+              "achieved": null,
+              "achievement_level": null,
+              "evidence": ""
+            }
+          ]
+        }
+      ]
+    },
+    "perspective_shifts": [],
+    "professional_blind_spots": [],
+    "conflict_attitude_changes": [],
+    "future_intentions": [],
+    "experience_intensity": []
+  },
+  "debrief": {
+    "key_takeaways": [],
+    "collective_insights": [],
+    "what_went_well": [],
+    "to_improve": [],
+    "group_dynamics_quality": null,
+    "scenario_specific_questions": [
+      {
+        "question": "前院の「経口摂取不可」という判断を聞いたとき、あなたはどう感じましたか？",
+        "target_insight": "前医の判断を鵜呑みにすることへの気づき",
+        "related_tags": ["coordination", "safety"]
+      },
+      {
+        "question": "自己抜去を「事故」と見るか「意思表示」と見るかで、チームの方針はどう変わりましたか？",
+        "target_insight": "非言語的意思表示の解釈の多様性",
+        "related_tags": ["patient_preference", "coordination"]
+      },
+      {
+        "question": "経口摂取に挑戦する決断は、誰のための決断でしたか？",
+        "target_insight": "患者中心の意思決定と専門職の価値観の混在",
+        "related_tags": ["patient_preference", "safety"]
+      },
+      {
+        "question": "誤嚥性肺炎が起きたとき、あなたの中にどんな感情が湧きましたか？",
+        "target_insight": "結果論とプロセスの正当性の区別",
+        "related_tags": ["safety", "patient_preference"]
+      },
+      {
+        "question": "この経験を、明日からの現場でどう活かせそうですか？",
+        "target_insight": "ゲーム体験の現場への転移可能性",
+        "related_tags": ["coordination", "patient_preference", "safety"]
+      }
+    ],
+    "expected_perspective_shifts": [
+      "「経口摂取不可」は絶対的な判断ではなく、再評価の余地がある",
+      "非言語的な意思表示（自己抜去、うなずき）も重要な意思決定の根拠になりうる",
+      "「食べる」ことの意味は医学的リスク管理だけでなく、人間の尊厳に関わる",
+      "家族の中にも温度差があり、声の大きい家族だけの意向で進めてはならない",
+      "情報がない場面では「待つ」のではなく「自ら取りに行く」姿勢が重要"
+    ],
+    "target_blind_spots": [
+      "医師：前院の判断を権威として無批判に受け入れてしまう傾向",
+      "看護師：「安全」を最優先するあまり、患者の意思表示を「問題行動」として処理してしまう傾向",
+      "ST：嚥下機能の評価に集中するあまり、患者の全体像（心理面、家族状況）を見落とす傾向",
+      "MSW：情報が来るのを待ってしまい、能動的に取りに行く姿勢が不足する傾向",
+      "全職種共通：「92歳」という年齢だけで可能性を閉ざしてしまうエイジズムの無自覚"
+    ],
+    "followup_focus_areas": [
+      "テストプレイ後：4人で議論が回ったか、Phase別の時間配分は適切だったか",
+      "テストプレイ後：他者評価方式は機能したか（評価にかかった時間、議論の質）",
+      "テストプレイ後：パズルピース方式で生成したシナリオのリアリティは十分だったか",
+      "テストプレイ後：イベントカードの内容は議論を促進したか、阻害したか",
+      "テストプレイ後：GMが1人で2グループ管理できたか、ボトルネックは何だったか"
+    ]
+  },
+  "versioning": {
+    "created_by": "AI Scenario Generator v3.2",
+    "version": "0.9-testplay",
+    "last_updated": "2026-02-13T00:00:00Z",
+    "notes": "テストプレイ版。患者・家族ステータスの追跡は省略。職種ステータスの他者評価と、テストプレイの検証項目に特化した簡易版。"
+  }
+}
