@@ -1,0 +1,453 @@
+[
+  {
+    "constraint_set_id": "oral_intake_kato_easy",
+    "name_ja": "経口摂取チャレンジ（易）——時間と資源に余裕あり",
+    "description_ja": "転院後の経過に比較的余裕があり、検査体制や在宅サービスにも空きがある設定。初学者が方針決定のプロセスに集中できるよう、制約を緩和している。",
+    "setting": "chronic_ward",
+    "play_difficulty": "easy",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "地域包括病棟の入院期限（60日）まで残り45日",
+          "value": "45日",
+          "severity": "flexible",
+          "rationale": "地域包括ケア病棟の入院料算定上限は60日。転院から15日経過の想定で、再評価・リハビリに十分な時間がある。"
+        },
+        {
+          "type": "availability",
+          "description_ja": "VF検査は週2回実施可能（火曜・木曜の午前）",
+          "value": "週2回",
+          "severity": "firm",
+          "rationale": "放射線技師の勤務体制による。Easyでは週2回確保されている。"
+        }
+      ],
+      "economic": [
+        {
+          "type": "insurance_coverage",
+          "description_ja": "後期高齢者医療制度、1割負担",
+          "amount": null,
+          "period": "monthly",
+          "flexibility": "fixed",
+          "rationale": "92歳、後期高齢者医療制度の対象。高額療養費制度の適用あり。"
+        },
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険：要介護4相当を想定、区分支給限度額 約309,380円/月",
+          "amount": 309380,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed",
+          "rationale": "要介護4の区分支給限度基準額（2024年度）。退院後の在宅サービス設計の上限。"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "ST（言語聴覚士）は週5日勤務、嚥下リハに1日1回対応可能",
+          "quantity": 5,
+          "unit": "回/週",
+          "availability_schedule": "月〜金 9:00-17:00",
+          "rationale": "Easyでは常勤STが安定的に対応可能な設定。"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護に空きあり（2箇所中1箇所に週2回の枠）",
+          "quantity": 2,
+          "unit": "回/週",
+          "availability_schedule": "調整可能",
+          "rationale": "退院後の在宅サービス。Easyでは比較的確保しやすい。"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "ヘルパーに空きあり（3箇所中2箇所で対応可能）",
+          "quantity": 2,
+          "unit": "事業所",
+          "rationale": "Easyでは複数事業所が対応可能。"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "地域包括ケア病棟入院料の算定上限60日",
+          "authority": "診療報酬制度（厚生労働省）",
+          "exceptions": [
+            "療養病棟への転棟は可能（算定上限なし）"
+          ],
+          "rationale": "入院期間の基本的な制約。療養病棟への転棟で回避可能。"
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "制約の確認です。地域包括病棟の入院期限まで残り45日あります。VF検査は週2回可能です。退院後の在宅サービスにも比較的空きがあります。時間的にはある程度余裕がありますが、無限ではありません。",
+      "emphasis_points": [
+        "検査や再評価に使える時間は十分にある",
+        "在宅サービスの確保は比較的容易",
+        "ただし地域包括病棟の60日上限は存在する"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "訪問看護の回数は交渉次第で増やせる可能性あり",
+        "法人内の老健への転所も選択肢として検討可能"
+      ],
+      "emergency_overrides": [
+        "誤嚥性肺炎など急性増悪時は療養病棟での継続入院が可能"
+      ]
+    },
+    "tags_affected": ["time", "resources", "safety"],
+    "flavor_text": "山あいの病院に、冬の柔らかな日差しが差し込んでいる。時間はある。問題は、その時間をどう使うかだ。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "プレイヤーは比較的落ち着いて方針を検討できる",
+        "VF検査の実施が現実的な選択肢として提示される"
+      ],
+      "discussion_triggers": [
+        "時間に余裕がある分、「そもそも再評価すべきか」の議論に時間をかけられる",
+        "在宅サービスの空きがあるため、退院計画の議論が具体的になりやすい"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "テストプレイ版。加藤病院の実情を反映。"
+    }
+  },
+  {
+    "constraint_set_id": "oral_intake_kato_normal",
+    "name_ja": "経口摂取チャレンジ（標準）——現実的な制約の中で",
+    "description_ja": "加藤病院の実際の状況に近い設定。検査体制に制限があり、在宅サービスの空きも限定的。現実的な制約の中での意思決定を体験する。",
+    "setting": "chronic_ward",
+    "play_difficulty": "normal",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "地域包括病棟の入院期限（60日）まで残り30日",
+          "value": "30日",
+          "severity": "firm",
+          "rationale": "転院から30日経過。再評価とリハビリに使える時間は限られている。療養病棟への転棟は可能だが、積極的なリハビリ体制は地域包括病棟の方が充実している。"
+        },
+        {
+          "type": "availability",
+          "description_ja": "VF検査は週1回のみ実施可能（木曜午前）",
+          "value": "週1回",
+          "severity": "firm",
+          "rationale": "放射線技師の勤務体制と他の検査との兼ね合い。予約は1週間前に必要。"
+        },
+        {
+          "type": "availability",
+          "description_ja": "大学医局からの派遣医は週2〜3日のみ在院",
+          "value": "週2〜3日",
+          "severity": "firm",
+          "rationale": "常勤医のみでは嚥下造影の立ち会いや治療方針の決定に限界がある場合がある。"
+        }
+      ],
+      "economic": [
+        {
+          "type": "insurance_coverage",
+          "description_ja": "後期高齢者医療制度、1割負担。高額療養費の上限あり",
+          "amount": null,
+          "period": "monthly",
+          "flexibility": "fixed",
+          "rationale": "92歳、後期高齢者医療制度の対象。"
+        },
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険：要介護4相当を想定、区分支給限度額 約309,380円/月。ただし自己負担分の支払い能力に不安あり（年金生活）",
+          "amount": 309380,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "negotiable",
+          "rationale": "息子夫婦は年金生活。在宅サービスを限度額まで使うと自己負担が大きい。"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "ST（言語聴覚士）は週5日勤務だが、他の患者も担当しており嚥下リハは週3回が限度",
+          "quantity": 3,
+          "unit": "回/週",
+          "availability_schedule": "月・水・金 午前中",
+          "rationale": "常勤ST 1名で複数患者を担当。嚥下リハに割ける時間は限られる。"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護は2箇所中1箇所のみ空きあり（週1回）",
+          "quantity": 1,
+          "unit": "回/週",
+          "availability_schedule": "水曜のみ",
+          "waiting_time": "即日利用可能",
+          "rationale": "郡内の訪問看護ステーション2箇所のうち、1箇所は満員。もう1箇所に水曜のみ空きあり。"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "ヘルパーは3箇所中1箇所のみ新規受入可能",
+          "quantity": 1,
+          "unit": "事業所",
+          "waiting_time": "調整に2週間程度",
+          "rationale": "利用者は減少傾向だが、スタッフの高齢化もあり新規受入に慎重な事業所が多い。"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "法人内の老健（36床）に空きベッド2床",
+          "quantity": 2,
+          "unit": "床",
+          "rationale": "在宅移行が困難な場合の退院先候補。ただしミキサー食対応の可否は要確認。"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "地域包括ケア病棟入院料の算定上限60日",
+          "authority": "診療報酬制度（厚生労働省）",
+          "exceptions": [
+            "療養病棟への転棟は可能"
+          ],
+          "rationale": "残り30日。再評価・リハビリ・退院調整を30日以内に行う必要がある。"
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "経口摂取への移行には医師の指示書が必要。VF検査結果に基づく評価が院内ルール",
+          "authority": "加藤病院 栄養管理委員会",
+          "rationale": "安全管理のため、経口摂取移行には客観的な嚥下評価が必須。"
+        },
+        {
+          "type": "professional_scope",
+          "description_ja": "STの嚥下評価は医師の指示のもとで実施",
+          "authority": "言語聴覚士法",
+          "rationale": "STが単独で嚥下評価を開始することはできない。医師のオーダーが必要。"
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "制約の確認です。地域包括病棟の入院期限まで残り30日です。VF検査は週1回、木曜午前のみ。STの嚥下リハは週3回が限度です。退院後の訪問看護は週1回、ヘルパーは1事業所のみ受入可能で調整に2週間かかります。法人内の老健には空きが2床あります。時間も資源も限られています。どう優先順位をつけますか。",
+      "visual_aids": [
+        {
+          "type": "timeline",
+          "content": "| 経過日数 | 残日数 | 主なイベント |\n|---------|--------|-------------|\n| 転院0日 | 60日 | 入棟 |\n| 15日目 | 45日 | 自己抜去1回目 |\n| 30日目（現在）| 30日 | 自己抜去2回目・うなずき |\n| 37日目 | 23日 | VF検査（最短） |\n| 44日目 | 16日 | 経口摂取開始（最短） |\n| 60日目 | 0日 | 地域包括病棟期限 |"
+        },
+        {
+          "type": "resource_map",
+          "content": "| 資源 | 状況 |\n|------|------|\n| VF検査 | 週1回（木曜AM） |\n| STリハ | 週3回 |\n| 訪問看護 | 週1回（水曜のみ） |\n| ヘルパー | 1事業所、調整2週間 |\n| 老健 | 空き2床 |"
+        }
+      ],
+      "emphasis_points": [
+        "VF検査は週1回しかない——タイミングを逃すと1週間遅れる",
+        "STリハは週3回が限度——段階的移行に時間がかかる",
+        "在宅サービスの確保は早めに動かないと間に合わない",
+        "30日という期限の中で、評価・リハビリ・退院調整を並行して進める必要がある"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "療養病棟への転棟で入院期間を延長できるが、リハビリ体制は弱くなる",
+        "訪問看護の回数は事業所との交渉次第で週2回に増やせる可能性がある",
+        "ヘルパーの調整期間は事業所の事情次第で短縮される可能性もある"
+      ],
+      "emergency_overrides": [
+        "誤嚥性肺炎など急性増悪時は地域包括病棟での継続管理が可能",
+        "急変時の急性期病院への転院搬送は可能（車で40分）"
+      ]
+    },
+    "tags_affected": ["time", "resources", "safety", "coordination"],
+    "flavor_text": "カレンダーの日付が、静かに減っていく。検査は週に一度。スタッフの手は限られている。この30日で、何ができるか。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "時間制約がプレイヤーの意思決定を急かす",
+        "VF検査のタイミングが戦略的な判断を要求する",
+        "在宅サービスの限界が退院計画に影響する"
+      ],
+      "discussion_triggers": [
+        "VF検査を来週やるか再来週やるかで1週間のロスが生じる",
+        "療養病棟に転棟すれば時間は稼げるがリハビリ体制が弱まるジレンマ",
+        "在宅サービスの調整を並行して進めるか、経口摂取の成否を見てからにするか"
+      ],
+      "constraint_modifiers": {
+        "誤嚥性肺炎発症時": "経口摂取中止期間分、退院調整が遅れる。地域包括病棟の残日数がさらに減少する。"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "テストプレイ版。加藤病院の実情を反映。明日のテストプレイではこのNormalを使用。"
+    }
+  },
+  {
+    "constraint_set_id": "oral_intake_kato_hard",
+    "name_ja": "経口摂取チャレンジ（難）——時間切れと資源枯渇の中で",
+    "description_ja": "入院期限が迫り、在宅サービスにほぼ空きがない状況。冬季の交通事情も加わり、すべての判断にタイムプレッシャーがかかる。経験者向け。",
+    "setting": "chronic_ward",
+    "play_difficulty": "hard",
+    "constraints": {
+      "time": [
+        {
+          "type": "deadline",
+          "description_ja": "地域包括病棟の入院期限（60日）まで残り15日",
+          "value": "15日",
+          "severity": "absolute",
+          "rationale": "転院から45日経過。嚥下評価・リハビリ・退院調整をすべて15日以内に完了する必要がある。"
+        },
+        {
+          "type": "availability",
+          "description_ja": "VF検査は今週の木曜が今月最後の枠",
+          "value": "残り1回",
+          "severity": "absolute",
+          "rationale": "放射線技師が来月から産休に入るため、来月以降のVF検査は未定。"
+        },
+        {
+          "type": "availability",
+          "description_ja": "大学医局からの派遣医は年末年始で2週間不在",
+          "value": "2週間不在",
+          "severity": "absolute",
+          "rationale": "常勤医のみで対応する期間。治療方針の変更には常勤医の判断が必要。"
+        },
+        {
+          "type": "duration_limit",
+          "description_ja": "冬季の路面凍結により、救急搬送に通常の1.5倍の時間がかかる",
+          "value": "搬送60分（通常40分）",
+          "severity": "firm",
+          "rationale": "12月〜2月の山間部の交通事情。急変時の搬送リスクが上昇。"
+        }
+      ],
+      "economic": [
+        {
+          "type": "insurance_coverage",
+          "description_ja": "後期高齢者医療制度、1割負担",
+          "amount": null,
+          "period": "monthly",
+          "flexibility": "fixed",
+          "rationale": "基本的な保険制度は同一。"
+        },
+        {
+          "type": "budget_limit",
+          "description_ja": "介護保険：要介護4相当を想定だが、認定結果が要介護3で出た場合、区分支給限度額は約270,480円/月に減少",
+          "amount": 270480,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "negotiable",
+          "rationale": "認定調査の結果次第で使えるサービス量が変わる。区分変更申請は可能だが時間がかかる。"
+        },
+        {
+          "type": "copayment",
+          "description_ja": "息子夫婦の年金収入では、在宅サービスの自己負担が月3万円を超えると家計が厳しい",
+          "amount": 30000,
+          "currency": "JPY",
+          "period": "monthly",
+          "flexibility": "fixed",
+          "rationale": "具体的な経済的制約。サービスの取捨選択が必要になる。"
+        }
+      ],
+      "resources": [
+        {
+          "type": "staff_availability",
+          "description_ja": "STが体調不良で週2回の対応が限度",
+          "quantity": 2,
+          "unit": "回/週",
+          "availability_schedule": "水・金 午前中",
+          "rationale": "常勤ST 1名体制のため、体調不良時の代替がない。"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "訪問看護は2箇所とも満員、新規受入は1ヶ月待ち",
+          "quantity": "unavailable",
+          "waiting_time": "1ヶ月",
+          "rationale": "年末年始は既存利用者の対応で手一杯。新規は年明け以降。"
+        },
+        {
+          "type": "staff_availability",
+          "description_ja": "ヘルパーは3箇所中、年末年始に対応可能な事業所なし",
+          "quantity": "unavailable",
+          "waiting_time": "年明け以降",
+          "rationale": "スタッフの高齢化と年末年始の休業。"
+        },
+        {
+          "type": "facility_access",
+          "description_ja": "法人内の老健は満床。空きの見込みは1ヶ月後",
+          "quantity": 0,
+          "unit": "床",
+          "waiting_time": "1ヶ月",
+          "rationale": "冬季は入所者の入退所が減り、空きが出にくい。"
+        }
+      ],
+      "legal_policy": [
+        {
+          "type": "insurance_rule",
+          "description_ja": "地域包括ケア病棟入院料の算定上限60日、残り15日",
+          "authority": "診療報酬制度（厚生労働省）",
+          "exceptions": [
+            "療養病棟への転棟は可能だが、リハビリの体制は大幅に縮小"
+          ],
+          "rationale": "15日以内に退院先を確定させるか、療養病棟に転棟するかの判断が必要。"
+        },
+        {
+          "type": "institutional_policy",
+          "description_ja": "経口摂取への移行には医師の指示書とVF検査結果が必要（院内ルール）",
+          "authority": "加藤病院 栄養管理委員会",
+          "rationale": "VF検査が今月最後の枠であるため、ここを逃すと経口摂取移行の根拠が得られない。"
+        },
+        {
+          "type": "professional_scope",
+          "description_ja": "STの嚥下評価は医師の指示のもとで実施。派遣医不在時は常勤医のオーダーが必要",
+          "authority": "言語聴覚士法",
+          "rationale": "派遣医の不在期間中にSTの評価を進めるには、常勤医の理解と協力が不可欠。"
+        }
+      ]
+    },
+    "presentation": {
+      "gm_script": "制約の確認です。入院期限まで残り15日。VF検査は今週木曜が今月最後のチャンスです。STは体調不良で週2回しか対応できません。派遣医は年末年始で2週間不在。退院先の訪問看護もヘルパーも空きなし。老健も満床。路面凍結で搬送にも時間がかかる。使えるカードは極めて限られています。何を優先しますか。",
+      "visual_aids": [
+        {
+          "type": "timeline",
+          "content": "| 日付 | 残日数 | 制約 |\n|------|--------|------|\n| 今日 | 15日 | 方針決定期限 |\n| 木曜 | 13日 | VF検査（最後の枠）|\n| 来週〜 | 8日 | 派遣医不在開始 |\n| 期限日 | 0日 | 地域包括病棟退棟 |"
+        }
+      ],
+      "emphasis_points": [
+        "VF検査は今週を逃すと来月以降未定——これが最後のチャンス",
+        "派遣医が不在になる前に方針を固める必要がある",
+        "退院先の在宅サービスは年明けまで利用不能",
+        "療養病棟に転棟すれば時間は稼げるが、リハビリ体制は大幅に縮小",
+        "すべてを15日で完了することは現実的に不可能——何を諦めるかの判断が必要"
+      ]
+    },
+    "flexibility": {
+      "negotiable_constraints": [
+        "療養病棟への転棟で入院自体は継続可能",
+        "隣町の訪問看護ステーションに打診できる可能性（通常は対象外エリア）",
+        "介護保険の区分変更申請は可能だが結果まで1ヶ月以上"
+      ],
+      "emergency_overrides": [
+        "急変時は急性期病院へ搬送（60分）",
+        "路面凍結が解消すれば搬送時間は通常に戻る"
+      ]
+    },
+    "tags_affected": ["time", "resources", "safety", "coordination", "family_burden"],
+    "flavor_text": "窓の外には雪が積もり始めている。カレンダーの残りは15日。検査の枠は1つ。帰る場所もまだない。それでも、この人は食べたいとうなずいた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "すべての判断にタイムプレッシャーがかかる",
+        "VF検査を受けるかどうかの判断が最初の重大な分岐点になる",
+        "退院先がないため、方針決定に「どこに行くか」という根本問題が加わる"
+      ],
+      "discussion_triggers": [
+        "VF検査の最後の枠を使うか、別の患者に譲るかの倫理的判断",
+        "在宅サービスがない中で在宅退院を目指すことの是非",
+        "療養病棟への転棟は「逃げ」か「現実的判断」か",
+        "年末年始を病院で過ごすことの意味"
+      ],
+      "constraint_modifiers": {
+        "誤嚥性肺炎発症時": "15日の期限内での治療完了は困難。療養病棟への転棟がほぼ確定する。",
+        "VF検査見送り時": "経口摂取移行の医学的根拠が得られず、STリハの開始根拠も失われる。"
+      }
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "テストプレイ版。加藤病院の実情を反映。経験者向けの高難度設定。"
+    }
+  }
+]
