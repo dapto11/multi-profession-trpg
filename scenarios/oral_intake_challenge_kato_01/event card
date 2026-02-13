@@ -1,0 +1,975 @@
+[
+  {
+    "event_id": 1,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "前院からの追加情報が得られない",
+    "body_ja": "前院の連携室に嚥下造影の詳細データを問い合わせたところ、「担当医が異動しており、カルテの開示には時間がかかる。2週間ほどお待ちください」との回答だった。看護サマリー以上の情報は当面得られない見込みである。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["msw", "physician"],
+    "actors_secondary": ["nurse", "st"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["time"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.msw.resource_coordination",
+        "change": -1,
+        "reason": "情報連携の壁に直面。前院からの情報取得が困難。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "電話口の向こうで、事務的な声が響く。「担当医が異動しまして……」。受話器を置いたMSWの手元には、薄い看護サマリーだけが残されている。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "前院のデータなしで嚥下機能の再評価を判断する必要が生じる",
+        "「情報がないなら自分たちで評価する」か「情報を待つ」かの選択を迫られる"
+      ],
+      "discussion_triggers": [
+        "前院の判断を信じるか、自施設で独自に評価するか",
+        "情報不足の中で意思決定することのリスクと必要性"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-1, S-2 を活用"
+    }
+  },
+  {
+    "event_id": 2,
+    "category": "C_family",
+    "subcategory": "complaint",
+    "title_ja": "外来看護師の一言——「この歳じゃ、もう無理よ」",
+    "body_ja": "息子が外来で会計を待っている際、外来の看護師が「92歳でしょう？ この歳じゃ、もう口から食べるのは無理よ。管で栄養入れてるんだから、それでいいじゃない」と声をかけた。息子は黙って帰ったが、次の面会時にMSWに「あの看護師さんの言ったことは本当ですか」と尋ねてきた。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["nurse", "msw"],
+    "actors_secondary": ["physician"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.nurse.collaboration_effectiveness",
+        "change": -1,
+        "reason": "外来看護師の発言が病棟チームと家族の信頼関係に影響。院内連携の課題が浮上。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "待合室の長椅子に座った息子の目が、少し赤くなっていた。「あの看護師さんが言ったこと……母は本当にもう食べられないんですか」",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "家族の信頼が揺らぐ",
+        "外来と病棟の情報・方針の不一致が露呈する"
+      ],
+      "discussion_triggers": [
+        "外来看護師の発言にどう対応するか（個人の問題か、組織の問題か）",
+        "家族への説明の一貫性をどう確保するか",
+        "「年齢」で可能性を閉ざすことの問題"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-2, E-4, 候補B構造を活用"
+    }
+  },
+  {
+    "event_id": 3,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "経管栄養投与中のむせ込みと痰の増加",
+    "body_ja": "経鼻経管栄養の投与中に、村上ハルさんがむせ込む場面が観察された。吸引で痰を引くと、やや黄色味がかった粘稠度の高い痰が引けた。体温は{{body_temp}}℃。SpO2は{{spo2}}%。経管栄養の逆流による誤嚥の可能性がある。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "transient",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["nurse", "physician"],
+    "actors_secondary": ["st"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["time"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.physician.patient_safety_assurance",
+        "change": -1,
+        "reason": "経管栄養中の誤嚥リスクが顕在化。安全管理体制の見直しが必要。"
+      }
+    ],
+    "parameters": [
+      {
+        "name": "body_temp",
+        "type": "number",
+        "unit": "℃",
+        "min": 36.5,
+        "max": 37.8,
+        "examples": [37.2]
+      },
+      {
+        "name": "spo2",
+        "type": "integer",
+        "unit": "%",
+        "min": 92,
+        "max": 97,
+        "examples": [94]
+      }
+    ],
+    "flavor_text": "ゴボッ、という音に看護師が振り向く。経管栄養のチューブが揺れている。ハルさんの顔が苦しそうに歪む。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "経管栄養投与中の体位管理の見直しが必要",
+        "経管栄養そのものの安全性に疑問が生じる"
+      ],
+      "discussion_triggers": [
+        "経管栄養も完全に安全ではないという認識",
+        "「経口摂取はリスクが高い」vs「経管栄養にもリスクはある」",
+        "体位管理、注入速度、チューブ位置の確認体制"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "経管栄養のリスクを可視化し、「経管＝安全」の前提を揺さぶるイベント"
+    }
+  },
+  {
+    "event_id": 4,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "病棟看護師の反発——「看取りなのに、なぜSTを入れるの？」",
+    "body_ja": "STへの嚥下評価依頼が話題になった際、ベテランの病棟看護師が「この方は看取りで転院してきたのに、なぜ今さらSTを入れるんですか。家族に期待を持たせて、結局ダメだった時にどうするんですか」と強い口調で意見した。他のスタッフは黙っている。",
+    "direction": "negative",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["nurse", "st"],
+    "actors_secondary": ["physician", "msw"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["safety", "patient_preference"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.st.collaboration_effectiveness",
+        "change": -1,
+        "reason": "病棟看護師の反発により、ST介入の院内合意形成が困難に。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "ナースステーションの空気が張り詰める。「看取りって聞いてますけど」——ベテラン看護師の視線が、STの方に向けられた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "チーム内に「看取り継続派」と「再評価派」の対立が可視化される",
+        "STが孤立するリスク"
+      ],
+      "discussion_triggers": [
+        "「看取り方向」は誰が決めたのか——前院の判断をどこまで踏襲するか",
+        "再評価することのリスクと、しないことのリスク",
+        "スタッフ間の意見の相違をどう扱うか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-2変形。院内の意見対立を可視化するイベント。"
+    }
+  },
+  {
+    "event_id": 5,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "大学医局の派遣医——「前院の先生の判断を尊重すべきでは」",
+    "body_ja": "嚥下機能の再評価について相談した際、大学医局からの派遣医が「前院でも嚥下造影は行っているはずです。経口摂取不可という判断はそれなりの根拠があるのでしょう。前院の先生の判断を尊重すべきではないですか」と回答した。VF検査のオーダーを出すかどうか、判断が宙に浮いている。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["physician", "st"],
+    "actors_secondary": ["nurse"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["safety"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.physician.symptom_management",
+        "change": -1,
+        "reason": "派遣医の消極的姿勢により、嚥下再評価の判断が遅延。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "派遣医は眼鏡を押し上げながら、淡々と言った。「前の先生も、それなりの根拠があったはずですよ」。カルテには、その根拠は一行も書かれていないのだが。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "VF検査のオーダーが出ない状態が続く",
+        "常勤医が独自に判断するか、派遣医の意見に従うかの選択"
+      ],
+      "discussion_triggers": [
+        "派遣医と常勤医の関係性——誰がオーダーを出すのか",
+        "「前院の判断を尊重する」ことの意味——根拠が不明でも尊重するのか",
+        "医師以外の職種がどうこの状況を動かせるか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-1。大学医局の構造的問題を反映。"
+    }
+  },
+  {
+    "event_id": 6,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "本人の涙——理由は語られない",
+    "body_ja": "朝の清拭の際、看護師が村上ハルさんの顔を拭いていると、目の端から涙がこぼれた。「どうしました？ どこか痛いですか？」と尋ねても、首を横に振るだけ。痛みではないようだが、理由はわからない。その後、しばらく目を閉じたまま動かなかった。",
+    "direction": "negative",
+    "urgency": "low",
+    "duration": "transient",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["nurse", "msw"],
+    "actors_secondary": ["physician"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": -1,
+        "reason": "患者の心理的苦痛の存在が示唆されるが、原因を把握できていない。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "温かいタオルが頬に触れた瞬間、涙がひと筋。「痛い？」——首が横に振られる。じゃあ、なぜ。その問いに答える言葉を、ハルさんは持っていない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の内面世界への関心が高まる",
+        "「この人は何を感じているのか」という問いがチームに投げかけられる"
+      ],
+      "discussion_triggers": [
+        "涙の理由は何か——管の不快か、孤独か、諦めか、家族を思ってか",
+        "言葉にできない患者の気持ちをどう汲み取るか",
+        "心理的ケアの必要性と、現在のチーム体制でできること"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "患者の内面世界を可視化するイベント。候補G構造（表出されない意思）を反映。"
+    }
+  },
+  {
+    "event_id": 7,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "介護保険の認定結果——想定より軽度",
+    "body_ja": "MSWが申請していた介護保険の認定結果が届いた。想定では要介護4だったが、結果は要介護3。区分支給限度額が約4万円少なくなり、使えるサービスの量が制限される。区分変更申請は可能だが、結果が出るまで1ヶ月以上かかる。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["msw", "nurse"],
+    "actors_secondary": ["physician"],
+    "tags": {
+      "primary": "resources",
+      "secondary": ["legal_policy"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.msw.system_navigation",
+        "change": -1,
+        "reason": "想定外の認定結果により、退院後のサービス計画の見直しが必要。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "封筒を開けたMSWの表情が曇る。「要介護3……」。計算していた在宅サービスの組み合わせが、一つずつ崩れていく。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "退院後のサービス計画の見直しが必要",
+        "区分変更申請をするか、現状の認定で計画を立て直すかの判断"
+      ],
+      "discussion_triggers": [
+        "限られたサービス枠をどう配分するか（訪問看護 vs ヘルパー vs デイサービス）",
+        "家族の自己負担との兼ね合い",
+        "在宅移行の実現可能性への影響"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-21。制度の壁を体験させるイベント。"
+    }
+  },
+  {
+    "event_id": 8,
+    "category": "E_environment",
+    "subcategory": "weather_disaster",
+    "title_ja": "路面凍結——面会も搬送も困難に",
+    "body_ja": "今朝から気温が急激に下がり、病院周辺の道路が凍結している。息子からは「今日は道が危なくて面会に行けません」と電話があった。また、万が一の急変時、最寄りの急性期病院までの搬送に通常の1.5倍の時間がかかる見込みである。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "short_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["msw", "physician"],
+    "actors_secondary": ["nurse"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["family_burden", "time"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.physician.patient_safety_assurance",
+        "change": -1,
+        "reason": "急変時の搬送リスクが上昇。院内での急変対応力の確認が必要。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "窓の外は一面の白。道路の除雪車がゆっくり進んでいく。息子の声が電話口で「すみません、今日はちょっと……」と途切れた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "家族との面会・意思確認ができない",
+        "急変時の搬送時間が延長",
+        "退院後の在宅生活でも同様の問題が起きることの示唆"
+      ],
+      "discussion_triggers": [
+        "冬季の在宅療養のリスク——急変時に搬送できない可能性",
+        "山間部の地理的制約を退院計画にどう織り込むか",
+        "家族の面会頻度と介護力評価の関係"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-22。山間部の環境制約を体験させるイベント。"
+    }
+  },
+  {
+    "event_id": 9,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "嫁の本音——「本当に家で看られるんでしょうか」",
+    "body_ja": "面会に来た嫁が、息子がトイレに立った隙にMSWに声をかけた。「あの……主人は『家で看る』って言ってるんですけど、私は正直不安で。主人は腰も悪いし、私は介護の経験もないし。でも主人の前では言えなくて……。本当に家で看られるんでしょうか」",
+    "direction": "negative",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["msw", "nurse"],
+    "actors_secondary": ["physician"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["patient_preference", "resources"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.msw.family_advocacy",
+        "change": +1,
+        "reason": "嫁の隠れたニーズを把握する機会が生まれた。家族代弁の起点。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "廊下の片隅で、小声で話しかけてきた嫁の手が、かすかに震えていた。「主人の前では言えないんですけど……」",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "家族内の意見の不一致が明らかになる",
+        "嫁の不安をチームにどう共有するかの判断が必要"
+      ],
+      "discussion_triggers": [
+        "息子と嫁の温度差をどう扱うか",
+        "「介護力がある」と「継続的に介護できる」は違うという認識",
+        "家族全員の意向をどう統合するか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-23変形。家族内の温度差を可視化。"
+    }
+  },
+  {
+    "event_id": 10,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "前院の看護サマリーにとろみの段階が未記載",
+    "body_ja": "STが嚥下評価の準備として前院の記録を精査したところ、看護サマリーに記載されている情報は「経口摂取不可」のみで、以前にどの段階の食形態まで摂取できていたか、とろみの濃度はどうだったか、いつから経口摂取不可になったかの時系列情報が一切記載されていないことが判明した。学会分類に基づく食形態の記載もない。",
+    "direction": "negative",
+    "urgency": "low",
+    "duration": "short_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["st", "nurse"],
+    "actors_secondary": ["msw"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["safety"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.st.rehabilitation_progress",
+        "change": -1,
+        "reason": "ベースライン情報がなく、リハビリプログラムの設計が困難。ゼロからの評価が必要。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "サマリーのページをめくるSTの手が止まる。「とろみの段階は……書いてない。いつから食べられなくなったかも……書いてない」。白紙のような記録が、評価の出発点をどこに置くかという問いを突きつける。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "嚥下評価のベースラインが不明",
+        "前院でどこまで評価されていたかもわからない",
+        "STがゼロから評価を組み立てる必要がある"
+      ],
+      "discussion_triggers": [
+        "施設間の情報連携の現状と課題",
+        "看護サマリーに何が記載されるべきか",
+        "情報がない中で、どう評価を進めるか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-9, E-10。栄養科からのエピソードを反映。"
+    }
+  },
+  {
+    "event_id": 11,
+    "category": "D_services",
+    "subcategory": "policy_system",
+    "title_ja": "派遣医の交代——新しい先生は検査に前向き",
+    "body_ja": "大学医局からの派遣医が今月から交代した。新しい派遣医は嚥下評価に理解があり、「前院のデータがないなら、うちで評価し直しましょう。VFのオーダーを出します」と前向きな姿勢を示した。ただし、新しい派遣医は加藤病院の事情にまだ不慣れで、院内のルールや看護体制を十分に把握していない。",
+    "direction": "mixed",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["physician", "st"],
+    "actors_secondary": ["nurse", "msw"],
+    "tags": {
+      "primary": "coordination",
+      "secondary": ["safety"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.physician.symptom_management",
+        "change": +1,
+        "reason": "嚥下再評価への道が開けた。"
+      },
+      {
+        "target": "profession.physician.collaboration_effectiveness",
+        "change": -1,
+        "reason": "新しい派遣医が院内事情を把握しておらず、連携体制の再構築が必要。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "「前院のデータがない？ じゃあ自分たちで見ましょう」。新しい派遣医の言葉は頼もしかったが、ナースステーションの掲示板も、吸引器の場所も、まだ知らないようだった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "VF検査のオーダーが出る可能性が高まる",
+        "ただし新しい派遣医との関係構築が必要"
+      ],
+      "discussion_triggers": [
+        "検査を進められるチャンスだが、新しい医師との方針のすり合わせが必要",
+        "派遣医の交代による方針の継続性の問題",
+        "「前の先生は反対だったのに」というスタッフの戸惑い"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-3変形。偶発的な好転だが、新たな課題も伴うミックスイベント。"
+    }
+  },
+  {
+    "event_id": 12,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "息子の思い出語り——「母の煮物が一番うまかった」",
+    "body_ja": "面会に来た息子が、病室でハルさんの手を握りながら語り始めた。「母は料理が得意でした。特に煮物がうまくて……近所にも配ってたんです。味見って言って、少しずつ食べさせてくれたのが嬉しくてね」。ハルさんの目が、わずかに潤んだように見えた。息子は看護師に「母にもう一度、何か食べさせてやれませんか」と尋ねた。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["nurse", "physician"],
+    "actors_secondary": ["st", "msw"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["family_burden"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": +1,
+        "reason": "患者の人生の文脈を知ることで、ケアの方向性に新たな視点が加わった。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "「煮物がねぇ、一番うまかったんですよ」。息子の声が少し震える。ハルさんの指が、握られた手の中で、かすかに動いた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "「食べる」ことの意味が、医学的な問題から人間的な問題に拡張される",
+        "家族の期待が高まる"
+      ],
+      "discussion_triggers": [
+        "食べることの医学的リスクと、人間としての意味のバランス",
+        "家族の期待をどう受け止め、どう現実と折り合いをつけるか",
+        "「もう一度食べさせたい」は誰の願いか——息子のか、ハルさんのか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-12, E-13変形。感情面から議論を揺さぶるミックスイベント。"
+    }
+  },
+  {
+    "event_id": 13,
+    "category": "A_medical",
+    "subcategory": "disease_generic",
+    "title_ja": "隣のベッドの患者が経口摂取に成功した話",
+    "body_ja": "療養病棟の隣のベッドの患者が、STリハを経て経口摂取に移行し、先日退院した。病棟スタッフの間で「あの人も最初は無理だと思ったけど、食べられるようになったよね」という話題が出ている。息子も看護師からこの話を耳にし、「母もそうなれるかもしれない」と期待を膨らませている。",
+    "direction": "mixed",
+    "urgency": "low",
+    "duration": "transient",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["st", "nurse"],
+    "actors_secondary": ["physician", "msw"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["safety"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.st.professional_contribution",
+        "change": +1,
+        "reason": "STの専門性が経口摂取を実現した成功事例として認知された。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "「隣のベッドの方、食べられるようになって帰られたんですよ」。看護師の何気ない一言が、息子の目に光を灯した。——ただし、疾患も状態も、同じではない。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "経口摂取への期待が高まる",
+        "ただし個別性を無視した楽観にもつながりうる"
+      ],
+      "discussion_triggers": [
+        "成功事例と今回のケースの違い",
+        "期待を持つことの意味と、安易な楽観のリスク",
+        "「前例がある」ことが判断にどう影響するか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース E-12変形。希望と楽観のバランスを問うミックスイベント。"
+    }
+  },
+  {
+    "event_id": 14,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "ハルさんの「ありがとう」",
+    "body_ja": "口腔ケアの後、看護師がハルさんの口元を拭いた際、ハルさんが小さな声で「……ありがとう」と言った。転院以来、自発的に言葉を発したのはこれが初めてである。看護師は思わず手を止めた。",
+    "direction": "positive",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["nurse", "st"],
+    "actors_secondary": ["physician", "msw"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": +1,
+        "reason": "患者との信頼関係の進展。本人の自発的な言語表出。"
+      },
+      {
+        "target": "profession.st.rehabilitation_progress",
+        "change": +1,
+        "reason": "発語能力の残存を示す所見。嚥下機能にも残存能力がある可能性を示唆。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "口腔ケアのスポンジを外した瞬間、かすれた声が聞こえた。「……ありがとう」。看護師の手が止まる。ハルさんの目が、まっすぐこちらを見ていた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "患者の言語能力と意思表出力が予想以上に残存していることが示唆される",
+        "チームの「この人はもう何も伝えられない」という前提が覆る"
+      ],
+      "discussion_triggers": [
+        "この「ありがとう」は何を意味するか",
+        "言語機能が残っているなら、嚥下機能にも可能性があるか",
+        "本人の意思をもっと引き出せる方法はないか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース S-7変形。信頼関係の進展と可能性の発見を示すポジティブイベント。"
+    }
+  },
+  {
+    "event_id": 15,
+    "category": "D_services",
+    "subcategory": "science_option",
+    "title_ja": "訪問リハビリ事業所に空きが出る",
+    "body_ja": "MSWが退院後の在宅サービスを調整していたところ、郡内の訪問リハビリ事業所から「来月から1枠空きが出ます。嚥下リハの継続が必要であれば、STの訪問リハも対応可能です」との連絡があった。在宅での嚥下リハ継続という選択肢が生まれた。",
+    "direction": "positive",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["msw", "st"],
+    "actors_secondary": ["physician", "nurse"],
+    "tags": {
+      "primary": "resources",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.msw.resource_coordination",
+        "change": +1,
+        "reason": "在宅での嚥下リハ継続という新たな選択肢が確保された。"
+      }
+    ],
+    "parameters": [],
+    "flavor_text": "電話を切ったMSWの顔が明るくなる。「訪問リハに空きが出るそうです。STさんの訪問も可能だと」。パズルの一つのピースが、カチリとはまった音がした。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "在宅移行後の嚥下リハ継続が現実的な選択肢になる",
+        "退院計画の具体性が増す"
+      ],
+      "discussion_triggers": [
+        "この資源をどう活用するか",
+        "在宅での嚥下リハは病院と同等の安全管理ができるか",
+        "退院のタイミングとサービス開始のタイミングの調整"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "パズルピース C-5。在宅移行の可能性を広げるポジティブイベント。"
+    }
+  },
+  {
+    "event_id": 101,
+    "category": "B_psych",
+    "subcategory": "problem_behavior",
+    "title_ja": "【閾値】ハルさんが口を閉ざす——関わりの全面拒否",
+    "body_ja": "村上ハルさんがスタッフとの関わりを全面的に拒否し始めた。声かけに反応せず、目を閉じたまま動かない。口腔ケアも拒否するように口を固く閉じている。経管栄養の注入時も不穏が見られる。スタッフは「何か嫌なことがあったのだろうか」と困惑している。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["nurse", "physician"],
+    "actors_secondary": ["st", "msw"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["safety", "coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": -2,
+        "reason": "患者との信頼関係が崩壊。ケアの提供自体が困難に。"
+      },
+      {
+        "target": "profession.st.rehabilitation_progress",
+        "change": -2,
+        "reason": "口腔ケアやリハビリが全くできない状態。進捗が完全に停止。"
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "patient.trust_and_acceptance <= 2",
+      "auto_occurrence": false,
+      "forced_discussion_minutes": 5,
+      "recovery_condition": "patient.trust_and_acceptance >= 4",
+      "recovery_event_id": 102,
+      "cooldown_loops": 1,
+      "max_occurrences_per_session": 1
+    },
+    "parameters": [],
+    "flavor_text": "ハルさんの目は閉じたまま。声をかけても、手を握っても、反応がない。口は固く結ばれ、何も受け入れないという意思だけが、静かに、しかし明確に伝わってくる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "すべてのケア・リハビリが停止",
+        "チームは「なぜこうなったのか」を緊急で振り返る必要がある"
+      ],
+      "discussion_triggers": [
+        "信頼を失った原因は何か",
+        "本人の意思を無視した場面はなかったか",
+        "ここから信頼を取り戻すために何ができるか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "閾値イベント。テストプレイ版ではGMの手動投入。auto_occurrence: false。"
+    }
+  },
+  {
+    "event_id": 102,
+    "category": "B_psych",
+    "subcategory": "mental",
+    "title_ja": "【閾値回復】ハルさんの小さな反応——手を握り返す",
+    "body_ja": "しばらく関わりを拒否していたハルさんだが、夜勤の看護師が静かに手を握り、何も言わずにそばにいたところ、指先がかすかに動き、握り返してきた。翌日の日勤帯で再度声をかけると、目を開けてスタッフの顔を見た。回復の兆しが見えた。",
+    "direction": "positive",
+    "urgency": "low",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["nurse", "st"],
+    "actors_secondary": ["physician", "msw"],
+    "tags": {
+      "primary": "patient_preference",
+      "secondary": ["coordination"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.nurse.psychosocial_support",
+        "change": +2,
+        "reason": "言葉ではなく「そばにいる」ことで信頼が回復し始めた。"
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "patient.trust_and_acceptance >= 4",
+      "auto_occurrence": false,
+      "forced_discussion_minutes": 0,
+      "recovery_condition": null,
+      "recovery_event_id": null,
+      "cooldown_loops": 0,
+      "max_occurrences_per_session": 1
+    },
+    "parameters": [],
+    "flavor_text": "夜の病室で、看護師はただ手を握っていた。何も言わず、何も求めず。長い沈黙の後、ハルさんの指が、かすかに握り返してきた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "信頼回復の糸口が見つかる",
+        "口腔ケアやリハビリの再開が可能になる可能性"
+      ],
+      "discussion_triggers": [
+        "信頼回復に何が効いたのか",
+        "「治療する」のではなく「そばにいる」ことの意味",
+        "ここから先、同じ失敗を繰り返さないために何をするか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "閾値イベント101の回復イベント。GMの手動投入。"
+    }
+  },
+  {
+    "event_id": 103,
+    "category": "C_family",
+    "subcategory": "caregiver_family",
+    "title_ja": "【閾値】息子の腰痛悪化——「すみません、しばらく来られません」",
+    "body_ja": "息子から病院に電話があった。「腰痛がひどくなって、整形外科に行ったらしばらく安静にするよう言われました。面会にもしばらく行けそうにありません。母のことは皆さんにお任せするしかなくて、すみません」。在宅移行を希望していた主介護者が、一時的に離脱する事態となった。",
+    "direction": "negative",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["msw", "nurse"],
+    "actors_secondary": ["physician"],
+    "tags": {
+      "primary": "family_burden",
+      "secondary": ["resources", "time"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.msw.family_advocacy",
+        "change": -2,
+        "reason": "主介護者が離脱。退院計画の根幹が揺らぐ。家族支援体制の再構築が必要。"
+      },
+      {
+        "target": "profession.msw.resource_coordination",
+        "change": -2,
+        "reason": "在宅移行計画の全面的な見直しが必要。"
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "family_0.caregiver_burden >= 8",
+      "auto_occurrence": false,
+      "forced_discussion_minutes": 5,
+      "recovery_condition": "family_0.caregiver_burden <= 5",
+      "recovery_event_id": null,
+      "cooldown_loops": 1,
+      "max_occurrences_per_session": 1
+    },
+    "parameters": [],
+    "flavor_text": "電話口の向こうで、息子の声が沈んでいる。「腰が……すみません」。母を家で看ると言った人の、背中が折れた。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "在宅移行計画が白紙に近い状態に",
+        "代替の退院先を急遽検討する必要がある",
+        "家族の面会・意思確認ができなくなる"
+      ],
+      "discussion_triggers": [
+        "在宅移行は本当に可能か——プランBの検討",
+        "息子一人に依存した退院計画の脆弱性",
+        "嫁の介護力をどう評価するか",
+        "法人内の老健・施設への退院先変更の検討"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "閾値イベント。テストプレイ版ではGMの手動投入。auto_occurrence: false。"
+    }
+  },
+  {
+    "event_id": 104,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "【閾値】誤嚥性肺炎の重症化——SpO2低下、酸素投与開始",
+    "body_ja": "誤嚥性肺炎が重症化し、SpO2が88%まで低下。酸素投与を開始した。抗菌薬の点滴投与を行っているが、改善に時間がかかっている。経口摂取は完全に中止。意識レベルもやや低下し、呼びかけへの反応が鈍くなっている。急性期病院への転院搬送も視野に入る状況だが、路面状況により搬送時間が読めない。",
+    "direction": "negative",
+    "urgency": "high",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["physician", "nurse"],
+    "actors_secondary": ["st", "msw"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["time", "resources"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.physician.patient_safety_assurance",
+        "change": -2,
+        "reason": "肺炎の重症化。院内での管理限界の判断が必要。"
+      },
+      {
+        "target": "profession.nurse.patient_safety_assurance",
+        "change": -2,
+        "reason": "バイタル管理の強化、酸素管理、急変対応の体制が求められる。"
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "patient.physical_condition <= 2",
+      "auto_occurrence": false,
+      "forced_discussion_minutes": 5,
+      "recovery_condition": "patient.physical_condition >= 4",
+      "recovery_event_id": 105,
+      "cooldown_loops": 1,
+      "max_occurrences_per_session": 1
+    },
+    "parameters": [],
+    "flavor_text": "モニターのアラームが鳴り響く。SpO2: 88。酸素マスクが装着される。ハルさんの呼吸は浅く、速い。「食べたい」と言ったあの日の小さなうなずきが、遠い記憶のように感じられる。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "経口摂取は完全に中止",
+        "急性期病院への転院搬送の判断が迫られる",
+        "「経口摂取に挑戦したことは正しかったのか」という問いが浮上する"
+      ],
+      "discussion_triggers": [
+        "この病院で対応可能な範囲はどこまでか",
+        "急性期病院への搬送のリスク（路面凍結、搬送時間）",
+        "経口摂取の再開はもうないのか",
+        "結果論で判断するのか、プロセスの正当性を考えるのか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "閾値イベント。テストプレイ版ではGMの手動投入。auto_occurrence: false。"
+    }
+  },
+  {
+    "event_id": 105,
+    "category": "A_medical",
+    "subcategory": "respiratory",
+    "title_ja": "【閾値回復】肺炎の改善——抗菌薬が奏功",
+    "body_ja": "抗菌薬投与から5日が経過し、炎症反応が改善傾向にある。酸素投与は中止でき、SpO2は96%に回復。意識レベルも元に戻った。食事の配膳車が通ると、再び目で追う仕草が見られる。経口摂取を再開するかどうか、改めてチームでの判断が求められる。",
+    "direction": "positive",
+    "urgency": "medium",
+    "duration": "long_term",
+    "settings": ["chronic_ward"],
+    "actors_primary": ["physician", "st"],
+    "actors_secondary": ["nurse", "msw"],
+    "tags": {
+      "primary": "safety",
+      "secondary": ["patient_preference"]
+    },
+    "status_effects": [
+      {
+        "target": "profession.physician.symptom_management",
+        "change": +2,
+        "reason": "肺炎の治療が奏功。回復に伴い、再び経口摂取の判断が可能に。"
+      }
+    ],
+    "threshold_trigger": {
+      "condition": "patient.physical_condition >= 4",
+      "auto_occurrence": false,
+      "forced_discussion_minutes": 0,
+      "recovery_condition": null,
+      "recovery_event_id": null,
+      "cooldown_loops": 0,
+      "max_occurrences_per_session": 1
+    },
+    "parameters": [],
+    "flavor_text": "モニターの数値が安定している。SpO2: 96。ハルさんの目が開き、配膳車の音に反応する。あの日のうなずきと同じ眼差しが、もう一度、こちらを見つめている。「食べたい」の意思は、まだ消えていなかった。",
+    "gm_effect_guide": {
+      "immediate_effects": [
+        "経口摂取再開の判断が再び議題に上がる",
+        "「もう一度挑戦するか」の決断を迫られる"
+      ],
+      "discussion_triggers": [
+        "一度肺炎を起こした後で、再び経口摂取に挑戦するのか",
+        "食形態やペース、体位管理の見直し",
+        "「結果が悪かったから間違いだった」のか、「プロセスは正しかったので条件を変えて再挑戦する」のか",
+        "本人の意思は変わっていない——これをどう受け止めるか"
+      ],
+      "constraint_modifiers": {}
+    },
+    "versioning": {
+      "created_by": "AI Scenario Generator v3.2",
+      "version": "0.9-testplay",
+      "last_updated": "2026-02-13T00:00:00Z",
+      "notes": "閾値イベント104の回復イベント。GMの手動投入。"
+    }
+  }
+]
